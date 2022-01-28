@@ -27,6 +27,6 @@ dependencies {
     //Or something.
     implementation("fabric-loom:fabric-loom.gradle.plugin:0.10-SNAPSHOT")
     implementation("org.spongepowered.gradle.vanilla:org.spongepowered.gradle.vanilla.gradle.plugin:0.2.1-SNAPSHOT")
-    //Forgegradle is weird
     implementation("net.minecraftforge.gradle:ForgeGradle:5.1.+")
+    implementation("org.spongepowered:mixingradle:0.7-SNAPSHOT")
 }

@@ -3,6 +3,13 @@ plugins {
     id("fabric-loom")
 }
 
+loom {
+    mixin {
+        val refmapFileName: String by project
+        defaultRefmapName.set(refmapFileName)
+    }
+}
+
 dependencies {
     val minecraftVersion: String by project
 
