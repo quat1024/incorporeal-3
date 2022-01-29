@@ -13,8 +13,8 @@ base {
 loom {
     //Set the refmap filename. In cursed multiloader projects, Loom isn't very good at picking a nice filename for the refmap.
     mixin {
-        val refmapFileName: String by project
-        defaultRefmapName.set(refmapFileName)
+        val modId: String by project
+        defaultRefmapName.set("$modId.refmap.json")
     }
 }
 

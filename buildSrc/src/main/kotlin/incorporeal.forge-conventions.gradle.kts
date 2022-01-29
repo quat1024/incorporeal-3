@@ -16,11 +16,10 @@ base {
 
 mixin {
     //Tell MixinGradle the refmap filename I want to use.
-    val refmapFileName: String by project
-    add(sourceSets["main"], refmapFileName)
+    val modId: String by project
+    add(sourceSets["main"], "$modId.refmap.json")
 
     //Also tell it about my mixin.jsons
-    val modId: String by project
     config("$modId.mixin.common.json")
     config("$modId.mixin.forge.json")
 }
