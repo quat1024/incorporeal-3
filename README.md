@@ -7,8 +7,6 @@ Currently this is little more than a hellish Gradle dreamscape. No content.
 
 # Build information
 
-**Fabric build is broken RN because botania-fabric is not jenkinsifying**, -fabric-snapshot is much older than botania-xplat. In theory this buildscript should work but the artifacts are just not in the right place yet. Stay tuned...
-
 Ok so, this is by far the most cursed buildscript i've had the pleasure of messing with.
 
 See:
@@ -22,7 +20,7 @@ Keep in mind:
 * It's currently open-season for Botania API breaks, and the `1.18.1-428-SNAPSHOT` version I'm depending on right now is literally just `HEAD`.
   * Builds are not reproducible and may break at any time.
   * Life on the edge! ;)
-* I prefer to develop on Fabric first and fix Forge later (although rn Forge works better for the afmorementioned reason)
+* I prefer to develop on Fabric first and fix Forge later.
 
 ## things i need to add
 
