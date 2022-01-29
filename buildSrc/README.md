@@ -27,19 +27,19 @@ The goal of this layout is to, as cleanly as possible, delineate:
 * Gradle scaffolding for the general process of writing a multi-loader mod
 * Gradle scaffolding for writing a releasable Java 17 project
 
-## `build.gradle.kts`
-
-Naturally the `buildSrc` folder is itself a Gradle project, so the `build.gradle.kts` and `settings.gradle.kts` files adjacent to this `README` refer to the process of compiling this build script. It's turtles all the way down.
-
-Here is where I specify Maven coordinates for VanillaGradle, ForgeGradle, and Loom, so that I can apply and configure them from the Gradle plugins in this folder.
-
 ## `incorporeal.repositories.gradle.kts`
 
-Literally just a huge `repositories { }` block that I include in `java-conventions`, which gets included in every project, so I don't have ten of these blocks scattered all over the place.
+Literally just a huge `repositories { }` block that gets included in everything, so I don't have half a dozen `repositories` blocks scattered all over the place. Each one is configured with `includeGroup`, filtering it to the things that actually come out of that repository.
+
+The only other `repositories` block is in `build.gradle.kts`, used to fetch VanillaGradle/Loom/ForgeGradle itself.
+
+## `build.gradle.kts`
+
+Naturally the `buildSrc` folder is itself a Gradle project, so the `build.gradle.kts` and `settings.gradle.kts` files adjacent to this `README` refer to the process of compiling this build script. It's turtles all the way down. Here is where I specify Maven coordinates for VanillaGradle, ForgeGradle, and Loom, so that I can apply and configure them from the Gradle plugins in this folder.
 
 ## `incorporeal.java-conventions.gradle.kts`
 
-Things in here are inherited by the other `-conventions` buildscripts, so its definitions apply to all three subprojects. Here is where I set up a few things that apply to all Java sources and Java artifacts.
+Things in here are inherited by the other `-conventions` buildscripts, so its definitions apply to all three subprojects. Here is where I set up a few things that apply to all Java sources and Java artifacts. I also include `incorporeal.repositories` in this file.
 
 If I used a code style plugin, this would probably be a good place to configure it. Would also a good place to stick things like jetbrains/findbugs annotations. might get to that eventually.
 

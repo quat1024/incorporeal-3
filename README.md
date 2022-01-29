@@ -3,6 +3,8 @@ Incorporeal 3
 
 (Old dragon yells at corporea spark.)
 
+Currently this is little more than a hellish Gradle dreamscape. No content.
+
 # Build information
 
 Ok so, this is by far the most cursed buildscript i've had the pleasure of messing with.

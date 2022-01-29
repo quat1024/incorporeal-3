@@ -3,23 +3,34 @@ plugins {
 }
 
 repositories {
-    gradlePluginPortal()
-
     maven {
         name = "Fabric"
         url = uri("https://maven.fabricmc.net/")
+        content {
+            includeGroup("fabric-loom")
+            includeGroupByRegex("^net\\.fabricmc")
+        }
     }
 
     maven {
         name = "Sponge / Mixin"
         url = uri("https://repo.spongepowered.org/repository/maven-public/")
-        //todo: why does includeGroup break this
+        content {
+            includeGroup("org.spongepowered.gradle.vanilla")
+            includeGroup("org.spongepowered")
+        }
     }
 
     maven {
         name = "MinecraftForge"
         url = uri("https://maven.minecraftforge.net")
+        content {
+            //language=RegExp
+            includeGroupByRegex("^net\\.minecraftforge.*")
+        }
     }
+
+    gradlePluginPortal() //This one is not includeGroup allowlisted, just because there's so MUCH downloaded from it lmao
 }
 
 dependencies {
