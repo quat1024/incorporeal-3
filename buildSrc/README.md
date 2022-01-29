@@ -32,7 +32,7 @@ Naturally the `buildSrc` folder is itself a Gradle project, one that builds Grad
 
 Things in here are inherited by the other `-conventions` buildscripts, so its definitions apply to all three subprojects.
 
-Here is where I set up a few things that apply to all Java sources and artifacts I want to build, like the artifact version number, language level, and a few other odds and ends. If I used a code style plugin, this would be a good place to configure it. Would also a good place to stick things like jetbrains/findbugs annotation deps.
+Here is where I set up a few things that apply to all Java sources and artifacts I want to build, like the artifact version number, language level, and a few other odds and ends like the Jetbrains annotations package. If I used a code style plugin, this would be a good place to configure it.
 
 ## `incorporeal.common-conventions.gradle.kts`
 

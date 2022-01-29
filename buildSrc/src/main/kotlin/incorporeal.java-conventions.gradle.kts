@@ -21,6 +21,12 @@ java {
     }
 }
 
+dependencies {
+    //Jetbrains annotations. You know, @Nullable and stuff.
+    //Included here so they are available in all Java projects.
+    implementation("org.jetbrains:annotations:16.0.2")
+}
+
 tasks.jar {
     //Random things that might get left around if I'm sloppy.
     exclude("**/*.bat", "**/*.psd", "**/*.exe", "**/*.kra")
