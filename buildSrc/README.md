@@ -18,7 +18,7 @@ AFAIK [this is a concept pioneered by Jared and Darkhax](https://github.com/jare
 
 This is a `buildSrc` folder; my understanding is that Gradle compiles the contents of this folder first, then makes it available to the other buildscripts in the parent repo as pluigns.  Things in `src/main/(groovy|kotlin)` can be applied as `plugins` to like, sort of inherit from them or bring their definitions into scope? This is called a "precompiled script plugin" I think.
 
-So here I declare four Gradle plugins. `java-conventions` is the root, and `common-`, `fabric-` and `forge-conventions` each apply that one, inheriting its definitions. The `Common`, `Fabric`, and `Forge` subprojects apply each of these plugins respectively.
+So here I declare ~~four~~ five Gradle plugins. `java-conventions` is the root, and `common-`, `fabric-` and `forge-conventions` each apply that one, inheriting its definitions. The `Common`, `Fabric`, and `Forge` subprojects apply each of these plugins respectively.
 
 The goal of this layout is to, as cleanly as possible, delineate:
 
