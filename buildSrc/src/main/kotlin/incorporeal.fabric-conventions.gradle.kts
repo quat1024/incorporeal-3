@@ -41,7 +41,8 @@ tasks.processResources {
     from(project(":Common").extensions.getByType(SourceSetContainer::class)["main"].resources)
     
     //Substitute the artifact version into fabric.mod.json.
-    filesMatching("fabric.mod.json") {
+    //I dont know how to use gradle btw surely one of these matchers will get it
+    filesMatching(listOf("fabric.mod.json", ".*fabric.mod.json", "**/fabric.mod.json")) {
         expand("version" to project.version)
     }
 }

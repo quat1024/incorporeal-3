@@ -40,7 +40,8 @@ tasks.processResources {
     from(project(":Common").extensions.getByType(SourceSetContainer::class)["main"].resources)
 
     //Substitute the artifact version into mods.toml.
-    filesMatching("mods.toml") {
+    //Uhh.. surely at least one of these substutions will catch it
+    filesMatching(listOf("mods.toml", ".*mods.toml", "**/mods.toml")) {
         expand("version" to project.version)
     }
 }
