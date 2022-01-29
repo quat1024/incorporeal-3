@@ -36,8 +36,8 @@ repositories {
 dependencies {
     //buildSrc project needs to depend on all the plugins that will be passed onto the subprojects?
     //Or something.
-    implementation("fabric-loom:fabric-loom.gradle.plugin:0.10-SNAPSHOT")
-    implementation("org.spongepowered.gradle.vanilla:org.spongepowered.gradle.vanilla.gradle.plugin:0.2.1-SNAPSHOT")
-    implementation("net.minecraftforge.gradle:ForgeGradle:5.1.+")
-    implementation("org.spongepowered:mixingradle:0.7-SNAPSHOT")
+    implementation(group = "fabric-loom"                     , name = "fabric-loom.gradle.plugin"                     , version = "0.10-SNAPSHOT")
+    implementation(group = "org.spongepowered.gradle.vanilla", name = "org.spongepowered.gradle.vanilla.gradle.plugin", version = "0.2.1-SNAPSHOT")
+    implementation(group = "net.minecraftforge.gradle"       , name = "ForgeGradle"                                   , version = "5.1.+")
+    implementation(group = "org.spongepowered"               , name = "mixingradle"                                   , version = "0.7-SNAPSHOT")
 }
