@@ -7,7 +7,7 @@ base {
     //Set the archives name. (nee "archivesBaseName", which will be removed in Gradle 8 apparently?)
     //Note that the common .jar is not distributed to end users, but still has some utility as
     //like, a Maven artifact.
-    archivesName.set("$name-common")
+    archivesName.set("${rootProject.name}-common")
 }
 
 minecraft {

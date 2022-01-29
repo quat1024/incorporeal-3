@@ -8,7 +8,7 @@ plugins {
 
 base {
     //Set the archives name.
-    archivesName.set("$name-forge")
+    archivesName.set("${rootProject.name}-forge")
 }
 
 mixin {

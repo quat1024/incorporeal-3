@@ -5,7 +5,7 @@ plugins {
 
 base {
     //Set the archives name. (nee "archivesBaseName", which will be removed in Gradle 8 apparently)
-    archivesName.set("$name-fabric")
+    archivesName.set("${rootProject.name}-fabric")
 }
 
 loom {
