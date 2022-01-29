@@ -9,11 +9,11 @@ dependencies {
     modImplementation(group = "net.fabricmc.fabric-api", name = "fabric-api", version = "0.44.0+1.18")
     modImplementation(group = "vazkii.botania"         , name = "Botania"   , version = "1.18.1-428-FABRIC-SNAPSHOT")
     
-    //HACK:
+    //Hack to get this subproject to compile. It doesn't run atm.
+    //Basically botania-fabric-snapshot is a little outdated compared to botania-xplat, due to a jenkins issue.
+    //This whole setup is about writing code in :Common against -xplat, but compiling it here against :Fabric,
+    //so understandably one of these artifacts getting outdated will cause an issue.
     compileOnly(group = "vazkii.botania", name = "Botania-xplat", version = "1.18.1-428-SNAPSHOT")
-    //ideally, since this project depends on :Common (through fabric-conventions), this dep should get picked up on.
-    //but it's not on the compilation classpath. will have to investigate that.
-    //This might not be needed once fabric-snapshot jenkins gets fixed idk. Check later
     
     //botania-fabric's transitive dependencies as of Jan 29, 2022; https://github.com/VazkiiMods/Botania/blob/1b16b5672fd7c59f4fa0e5e235f9b8120b84dcb2/Fabric/build.gradle
     //Due to reasons, Botania does not (currently) publish transitive dependency information for its artifacts.
