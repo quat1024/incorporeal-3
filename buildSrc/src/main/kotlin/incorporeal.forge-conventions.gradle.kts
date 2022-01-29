@@ -21,6 +21,9 @@ dependencies {
     //Declare a dependency on Minecraft, or rather on Forge's patched version of it.
     val minecraftVersion: String by project
     minecraft("net.minecraftforge:forge:$minecraftVersion-39.0.58")
+    
+    //Use the Mixin annotation processor
+    annotationProcessor(group = "org.spongepowered", name = "mixin", version = "0.8.5", classifier = "processor")
 }
 
 configure<net.minecraftforge.gradle.userdev.UserDevExtension> {

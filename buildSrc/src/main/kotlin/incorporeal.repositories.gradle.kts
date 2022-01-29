@@ -64,4 +64,22 @@ repositories {
             includeGroup("dev.architectury")
         }
     }
+    
+    //JEI
+    maven {
+        name = "progwml6"
+        url = uri("https://dvs1.progwml6.com/files/maven")
+        content {
+            includeGroup("mezz.jei")
+        }
+    }
+    
+    //Curios
+    maven {
+        name = "theillusivec4"
+        url = uri("https://maven.theillusivec4.top/")
+        content {
+            includeGroup("top.theillusicec4.curios")
+        }
+    }
 }
