@@ -24,9 +24,13 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"agency.highlysuspect.incorporeal.platform.fabric.FabricInit"
+			"agency.highlysuspect.incorporeal.platform.fabric.IncFabric"
 		]
 	},
+	
+	"mixins": [
+		"incorporeal.mixin.common.json"
+	],
 	
 	"depends": {
 		"fabricloader": "*",

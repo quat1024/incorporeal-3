@@ -18,3 +18,8 @@ minecraft {
     val minecraftVersion: String by project
     version(minecraftVersion)
 }
+
+dependencies {
+    //Declare a dependency on Mixin, so they can be written in the common source set.
+    compileOnly(group = "org.spongepowered", name = "mixin", version = "0.8.5")
+}

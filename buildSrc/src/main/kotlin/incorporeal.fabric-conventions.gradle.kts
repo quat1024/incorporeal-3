@@ -23,6 +23,9 @@ dependencies {
     val minecraftVersion: String by project
     minecraft("com.mojang:minecraft:$minecraftVersion")
     
+    //Declare a dependency on the common source set.
+    compileOnly(project(":Common"))
+    
     //Use official Mojang mappings.
     mappings(loom.officialMojangMappings())
     
