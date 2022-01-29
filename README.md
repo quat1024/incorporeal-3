@@ -24,6 +24,8 @@ things i need to add
   * figure out where the fabric run configs went lol
 * a place for generated resources to go, if i end up using a data gen 
 * TEST IT MORE, test remapping, test refmaps, test test
+* `processResources` replacing the mod version isn't working, smhhhhhh what's up with that
+* non-`Common` `-sources` jars don't contain `Common` sources (hubry said this happens to patchy and botania too)
 
 #### Why are you using kotlin buildscripts
 
