@@ -11,8 +11,8 @@ dependencies {
     implementation(fgDeobf(group = "vazkii.patchouli"        , name = "Patchouli"   , version = "1.18.1-64"                         ))
     compileOnly   (fgDeobf(group = "mezz.jei"                , name = "jei-1.18.1"  , version = "9.1.0.44"      , classifier = "api"))
     runtimeOnly   (fgDeobf(group = "mezz.jei"                , name = "jei-1.18.1"  , version = "9.1.0.44"                          ))
-    compileOnly   (fgDeobf(group = "top.theillusicec4.curios", name = "curios-forge", version = "1.18.1-5.0.5.1", classifier = "api"))
-    runtimeOnly   (fgDeobf(group = "top.theillusicec4.curios", name = "curios-forge", version = "1.18.1-5.0.5.1"                    ))
+    compileOnly   (fgDeobf(group = "top.theillusivec4.curios", name = "curios-forge", version = "1.18.1-5.0.5.1", classifier = "api"))
+    runtimeOnly   (fgDeobf(group = "top.theillusivec4.curios", name = "curios-forge", version = "1.18.1-5.0.5.1"                    ))
 }
 
 //Let me have my fun, ok? fg.deobf only supports the ugly one-string form
