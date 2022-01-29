@@ -33,6 +33,10 @@ Naturally the `buildSrc` folder is itself a Gradle project, so the `build.gradle
 
 Here is where I specify Maven coordinates for VanillaGradle, ForgeGradle, and Loom, so that I can apply and configure them from the Gradle plugins in this folder.
 
+## `incorporeal.repositories.gradle.kts`
+
+Literally just a huge `repositories { }` block that I include in `java-conventions`, which gets included in every project, so I don't have ten of these blocks scattered all over the place.
+
 ## `incorporeal.java-conventions.gradle.kts`
 
 Things in here are inherited by the other `-conventions` buildscripts, so its definitions apply to all three subprojects. Here is where I set up a few things that apply to all Java sources and Java artifacts.

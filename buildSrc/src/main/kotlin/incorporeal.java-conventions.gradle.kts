@@ -1,6 +1,7 @@
 //Apply the Java plugin.
 plugins {
     java
+    id("incorporeal.repositories")
 }
 
 //Set the artifact's version.
@@ -9,19 +10,9 @@ val minecraftVersion: String by project
 val buildNumber: String by project
 version = "$minecraftVersion-$buildNumber"
 
-//TODO: Try commenting this repositories block out, I think it's not needed here?
-repositories {
-    mavenCentral()
-    
-    maven {
-        name = "Sponge / Mixin"
-        url = uri("https://repo.spongepowered.org/repository/maven-public/")
-    }
-}
-
 java {
     //Declare that Java artifacts should have a sources jar published alongside them.
-    //I don't use Maven publication but if I did this would be handy.
+    //I don't use Maven publication atm but if I did this would be handy.
     withSourcesJar()
     
     //Use Java version 17 for compilation and building tasks.
