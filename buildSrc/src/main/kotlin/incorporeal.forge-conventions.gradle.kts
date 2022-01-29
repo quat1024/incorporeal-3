@@ -1,3 +1,5 @@
+import gradle.kotlin.dsl.accessors._22a1ac937b0d3843d97d89c3b79657a3.compileOnly
+
 plugins {
     //Inherit from java-conventions.
     id("incorporeal.java-conventions")
@@ -16,21 +18,48 @@ mixin {
     //Tell MixinGradle the refmap filename I want to use.
     val refmapFileName: String by project
     add(sourceSets["main"], refmapFileName)
+
+    //Also tell it about my mixin.jsons
+    val modId: String by project
+    config("$modId.mixin.common.json")
+    config("$modId.mixin.forge.json")
 }
 
 dependencies {
     //Declare a dependency on Minecraft, or rather on Forge's patched version of it.
     val minecraftVersion: String by project
     minecraft("net.minecraftforge:forge:$minecraftVersion-39.0.58")
+
+    //Declare a dependency on the common source set.
+    compileOnly(project(":Common"))
     
     //Use the Mixin annotation processor
     annotationProcessor(group = "org.spongepowered", name = "mixin", version = "0.8.5", classifier = "processor")
 }
 
-configure<net.minecraftforge.gradle.userdev.UserDevExtension> {
+minecraft {
     //Use official Mojang mappings.
     val minecraftVersion: String by project
     mappings("official", minecraftVersion)
+    
+    //Add some run configurations!
+    //TODO add a server run config lol, shouldnt be too hard look at Crafttweaker
+    runs {
+        val modId: String by project
+        create("client") {
+            taskName("Client")
+            workingDirectory(project.file("run"))
+            ideaModule("${rootProject.name}.${project.name}.main")
+            mods {
+                create(modId) {
+                    source(sourceSets.main.get())
+                    source(project(":Common").sourceSets.main.get())
+                }
+            }
+        }
+        
+        
+    }
 }
 
 tasks.withType<JavaCompile>().configureEach {
