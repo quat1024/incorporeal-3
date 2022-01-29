@@ -1,5 +1,7 @@
 plugins {
+    //Inherit from java-conventions.
     id("incorporeal.java-conventions")
+    //get VanillaGradle.
     id("org.spongepowered.gradle.vanilla")
 }
 

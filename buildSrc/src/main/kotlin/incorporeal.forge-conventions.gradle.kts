@@ -1,6 +1,9 @@
 plugins {
+    //Inherit from java-conventions.
     id("incorporeal.java-conventions")
+    //get ForgeGradle.
     id("net.minecraftforge.gradle")
+    //get MixinGradle.
     id("org.spongepowered.mixin")
 }
 

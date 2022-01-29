@@ -1,5 +1,7 @@
 plugins {
+    //Inherit java-conventions.
     id("incorporeal.java-conventions")
+    //get Fabric Loom.
     id("fabric-loom")
 }
 

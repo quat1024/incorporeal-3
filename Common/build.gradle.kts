@@ -1,6 +1,7 @@
 plugins {
-    // Apply the common-conventions plugin declared in buildSrc.
+    //Apply the common-conventions plugin declared in buildSrc.
     id("incorporeal.common-conventions")
+    //Bring a bunch of maven repositories into scope.
     id("incorporeal.repositories")
 }
 

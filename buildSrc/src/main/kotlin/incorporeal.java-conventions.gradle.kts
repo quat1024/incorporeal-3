@@ -1,7 +1,6 @@
-//Apply the Java plugin.
 plugins {
+    //Apply the Java plugin.
     java
-    id("incorporeal.repositories")
 }
 
 //Set the artifact's version.

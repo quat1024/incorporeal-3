@@ -1,6 +1,8 @@
 plugins {
-    // Apply the forge-conventions plugin declared in buildSrc.
+    //Apply the forge-conventions plugin declared in buildSrc.
     id("incorporeal.forge-conventions")
+    //Bring a bunch of maven repositories into scope.
+    id("incorporeal.repositories")
 }
 
 dependencies {
