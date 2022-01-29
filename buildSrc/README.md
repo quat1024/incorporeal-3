@@ -54,3 +54,6 @@ Here is where I apply and configure the Loom and ForgeGradle plugins. In each ec
 * declare a dependency on Minecraft
 * choose to use the official Mojang mappings
 * instruct the Mixin plugin to use a particular refmap filename (Loom tends to do a bad job automatically picking the filename in multiloader projects, defaulting to the same name as the produced `.jar` + `.refmap.json` which is a very silly name, and Forge requires you to choose the refmap filename explicitly through MixinGradle anyways)
+* include the Common source set onto the compile classpath, and the Common resources into the resources
+
+In fabric-conventions I get fabric-loader. In forge-conventions I set up MixinGradle.
