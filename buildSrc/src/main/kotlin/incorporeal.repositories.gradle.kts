@@ -79,7 +79,7 @@ repositories {
         name = "theillusivec4"
         url = uri("https://maven.theillusivec4.top/")
         content {
-            includeGroup("top.theillusicec4.curios")
+            includeGroup("top.theillusivec4.curios")
         }
     }
 }
