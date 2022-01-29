@@ -1,0 +1,67 @@
+repositories {
+    //botania-xplat, botania-fabric, patchouli
+    maven {
+        name = "Jared"
+        url = uri("https://maven.blamejared.com/")
+        content {
+            includeGroup("vazkii.botania")
+            includeGroup("vazkii.patchouli")
+        }
+    }
+    
+    //Fiber
+    maven {
+        name = "modmuss50"
+        url = uri("https://maven.modmuss50.me")
+        content {
+            includeGroup("me.zeroeightsix")
+        }
+    }
+    
+    //Cardinal Components
+    maven {
+        name = "Ladysnake"
+        url = uri("https://ladysnake.jfrog.io/artifactory/mods")
+        content {
+            includeGroup("io.github.onyxstudios.Cardinal-Components-API")
+        }
+    }
+    
+    //Trinkets
+    maven {
+        name = "Terraformers"
+        url = uri("https://maven.terraformersmc.com/")
+        content {
+            includeGroup("dev.emi")
+        }
+    }
+    
+    //Reach Entity Attributes
+    maven {
+        name = "jamieswhiteshirt"
+        url = uri("https://maven.jamieswhiteshirt.com/libs-release/")
+        content {
+            includeGroup("com.jamieswhiteshirt")
+        }
+    }
+    
+    //Step Height Entity Attribute
+    maven {
+        name = "jitpack :("
+        url = uri("https://jitpack.io")
+        content {
+            includeGroup("com.github.emilyploszaj")
+        }
+    }
+    
+    //Roughly Enough Items and friends (someone includes this transitively)
+    maven {
+        name = "shedaniel"
+        url = uri("https://maven.shedaniel.me")
+        content {
+            includeGroup("me.shedaniel")
+            includeGroup("me.shedaniel.cloth")
+            includeGroup("dev.architectury")
+        }
+    }
+}

@@ -9,7 +9,7 @@ val minecraftVersion: String by project
 val buildNumber: String by project
 version = "$minecraftVersion-$buildNumber"
 
-//TODO: Try commenting this stuff out, I think it's not needed here?
+//TODO: Try commenting this repositories block out, I think it's not needed here?
 repositories {
     mavenCentral()
     
@@ -48,7 +48,7 @@ tasks.withType<JavaCompile>().configureEach {
 //I *believe* that the purpose of this bit is because projects like Loom and FG use a lot of magic (that you're
 //really not supposed to be able to do with Gradle) to generate a remapped version of any mods you depend on,
 //but gradle publishing tasks have no idea that this "botania-remapped-kasdklsjkdj" dependency should actually
-//correspond to a dependency on only "botania" for anyone consuming the library.
+//correspond to a dependency on only "botania" for anyone consuming the artifact.
 //I don't think this can really be fixed in a not-fragile not-horrible way, so we simply instruct Gradle
 //to not publish any data about transitive dependencies at all. Consumers will need to redeclare these
 //dependencies in their projects if they want to be able to run the game, which sucks, but isn't the end of the world.
