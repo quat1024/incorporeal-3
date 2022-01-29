@@ -1,0 +1,16 @@
+modLoader = "javafml"
+loaderVersion = "[39,)"
+license = "LGPL-3.0-or-later"
+
+[[mods]]
+modId = "incorporeal"
+version = "${version}"
+displayName = "Incorporeal 3"
+description = "Addon to a magic mod. More toys for Botania corporea dorks."
+authors = "quaternary"
+credits = "the Artemis System, Dudblockman, SnazzGass, jaredlll08, Darkhax, all the Botania nerds, and everyone who puts up with me"
+
+[[dependencies.incorporeal]]
+modId="forge"
+mandatory=true
+versionRange="[39.0.44,)"

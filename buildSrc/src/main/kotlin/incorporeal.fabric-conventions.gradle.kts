@@ -9,8 +9,7 @@ base {
 }
 
 loom {
-    //Set the refmap filename. In cursed multiloader projects,
-    //Loom isn't very good at picking a nice filenme for the refmap.
+    //Set the refmap filename. In cursed multiloader projects, Loom isn't very good at picking a nice filename for the refmap.
     mixin {
         val refmapFileName: String by project
         defaultRefmapName.set(refmapFileName)
@@ -24,6 +23,9 @@ dependencies {
     
     //Use official Mojang mappings.
     mappings(loom.officialMojangMappings())
+    
+    //Get fabric-loader.
+    modImplementation("net.fabricmc:fabric-loader:0.12.8")
 }
 
 tasks.withType<JavaCompile>().configureEach {
