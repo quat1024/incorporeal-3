@@ -1,12 +1,15 @@
+//Apply the Java plugin.
 plugins {
     java
 }
 
-//Declare a Maven group.
-val mavenGroup: String by project;
-group = mavenGroup
+//Set the artifact's version.
+//Here I use the Botania convention of "1.18.1-0", which is not actually Semver or anything. Sue me.
+val minecraftVersion: String by project
+val buildNumber: String by project
+version = "$minecraftVersion-$buildNumber"
 
-//TODO: Try commenting this stuff out, I think it's not needed here.
+//TODO: Try commenting this stuff out, I think it's not needed here?
 repositories {
     mavenCentral()
     

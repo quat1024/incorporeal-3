@@ -3,6 +3,11 @@ plugins {
     id("fabric-loom")
 }
 
+base {
+    //Set the archives name. (nee "archivesBaseName", which will be removed in Gradle 8 apparently)
+    archivesName.set("$name-fabric")
+}
+
 loom {
     //Set the refmap filename. In cursed multiloader projects,
     //Loom isn't very good at picking a nice filenme for the refmap.
@@ -19,6 +24,22 @@ dependencies {
     
     //Use official Mojang mappings.
     mappings(loom.officialMojangMappings())
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    //Add the contents of :Common's main source set to this project's compilation classpath.
+    //Btw, with Groovy gradle scripts it looks like this: source(project(":Common").sourceSets.main.allSource)
+    //Kotlin just has to be tricky about type-safe extensions. I think this is managed by the Java plugin
+    //and isn't really part of Gradle proper.
+    source(project(":Common").extensions.getByType(SourceSetContainer::class)["main"].allSource)
+}
+
+tasks.processResources {
+    //Add the contents of :Common's resources to this project's resources.
+    from(project(":Common").extensions.getByType(SourceSetContainer::class)["main"].resources)
     
-    implementation(project(":Common"))
+    //Substitute the artifact version into fabric.mod.json.
+    filesMatching("fabric.mod.json") {
+        expand("version" to project.version)
+    }
 }
