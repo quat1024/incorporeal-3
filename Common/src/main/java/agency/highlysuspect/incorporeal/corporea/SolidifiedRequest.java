@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.corporea.CorporeaHelper;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -17,8 +18,16 @@ import java.util.Optional;
  * Can be thought of as "the thing a corporea retainer holds" minus the information about where the request came from.
  * Note that requests for nothing with non-zero count, and requests for something with zero count, are both valid SolidifiedRequests.
  */
-public record SolidifiedRequest(@NotNull ICorporeaRequestMatcher matcher, int count) {
+@SuppressWarnings("ClassCanBeRecord") //I want a private constructor.
+public final class SolidifiedRequest {
 	public static final SolidifiedRequest EMPTY = new SolidifiedRequest(EmptyCorporeaRequestMatcher.INSTANCE, 0);
+	private final @NotNull ICorporeaRequestMatcher matcher;
+	private final int count;
+	
+	private SolidifiedRequest(@NotNull ICorporeaRequestMatcher matcher, int count) {
+		this.matcher = matcher;
+		this.count = count;
+	}
 	
 	public static SolidifiedRequest create(@Nullable ICorporeaRequestMatcher matcher, int count) {
 		//Try to avoid using vanilla bota's dummy matcher, it doesn't have an ID via CorporeaHelper#registerRequestMatcher.
@@ -26,7 +35,7 @@ public record SolidifiedRequest(@NotNull ICorporeaRequestMatcher matcher, int co
 		return new SolidifiedRequest(matcher2, count);
 	}
 	
-	//Convenience. For most gameplay purposes (i.e. not the corporea keybind) vanilla bota always uses matchNbt: true when making requests from itemstacks.
+	//Convenience. For most gameplay purposes (i.e. not the corporea keybind), vanilla bota always uses matchNbt: true when making requests from itemstacks.
 	public static SolidifiedRequest create(ItemStack stack, int count) {
 		ICorporeaRequestMatcher matcher = stack.isEmpty() ? EmptyCorporeaRequestMatcher.INSTANCE : CorporeaHelper.instance().createMatcher(stack, true);
 		return new SolidifiedRequest(matcher, count);
@@ -68,5 +77,34 @@ public record SolidifiedRequest(@NotNull ICorporeaRequestMatcher matcher, int co
 	
 	public SolidifiedRequest withCount(int newCount) {
 		return new SolidifiedRequest(matcher, newCount);
+	}
+	
+	// (auto-converted record to class)
+	
+	public @NotNull ICorporeaRequestMatcher matcher() {
+		return matcher;
+	}
+	
+	public int count() {
+		return count;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == this) return true;
+		if(obj == null || obj.getClass() != this.getClass()) return false;
+		var that = (SolidifiedRequest) obj;
+		return Objects.equals(this.matcher, that.matcher) &&
+			this.count == that.count;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(matcher, count);
+	}
+	
+	@Override
+	public String toString() {
+		return "SolidifiedRequest[" + "matcher=" + matcher + ", " + "count=" + count + ']';
 	}
 }

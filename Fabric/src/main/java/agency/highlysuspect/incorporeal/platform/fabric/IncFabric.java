@@ -1,7 +1,7 @@
 package agency.highlysuspect.incorporeal.platform.fabric;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.IncBlocks;
+import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.IncItems;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.Registry;
