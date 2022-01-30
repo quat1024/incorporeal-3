@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "incorporeal:block/corporea_retainer_evaporator/side",
+    "end": "incorporeal:block/corporea_retainer_evaporator/top_bottom"
+  }
+}

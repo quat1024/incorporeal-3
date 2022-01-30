@@ -1,0 +1,7 @@
+{
+	"parent": "incorporeal:block/natural_devices/short_cross_with_hat",
+	"textures": {
+		"hat": "incorporeal:block/natural_devices/top/growing_5",
+		"cross": "incorporeal:block/natural_devices/cross/large"
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"variants": {
+		"age=0": {
+			"model": "incorporeal:block/natural_devices/crop_0"
+		},
+		"age=1": {
+			"model": "incorporeal:block/natural_devices/crop_1"
+		},
+		"age=2": {
+			"model": "incorporeal:block/natural_devices/crop_2"
+		},
+		"age=3": {
+			"model": "incorporeal:block/natural_devices/crop_3"
+		},
+		"age=4": {
+			"model": "incorporeal:block/natural_devices/crop_4"
+		},
+		"age=5": {
+			"model": "incorporeal:block/natural_devices/crop_5"
+		},
+		"age=6": {
+			"model": "incorporeal:block/natural_devices/crop_6"
+		}
+	}
+}

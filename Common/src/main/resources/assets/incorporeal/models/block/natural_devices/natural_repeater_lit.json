@@ -1,0 +1,7 @@
+{
+	"parent": "incorporeal:block/natural_devices/natural_repeater",
+	"textures": {
+		"top": "incorporeal:block/natural_devices/top/repeater_lit",
+		"torch": "incorporeal:block/natural_devices/torch_lit"
+	}
+}

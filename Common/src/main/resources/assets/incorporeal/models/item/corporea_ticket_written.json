@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "incorporeal:item/corporea_ticket/written"
+	}
+}

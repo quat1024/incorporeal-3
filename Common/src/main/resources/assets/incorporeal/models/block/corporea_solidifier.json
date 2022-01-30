@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "incorporeal:block/corporea_solidifier/side",
+    "end": "incorporeal:block/corporea_solidifier/top_bottom"
+  }
+}

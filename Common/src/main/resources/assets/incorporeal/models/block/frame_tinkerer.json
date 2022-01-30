@@ -1,0 +1,8 @@
+{
+  "parent": "botania:block/shapes/three_high_bottom_top",
+  "textures": {
+    "bottom": "incorporeal:block/frame_tinkerer/bottom",
+    "top": "incorporeal:block/frame_tinkerer/top",
+    "side": "incorporeal:block/frame_tinkerer/side"
+  }
+}

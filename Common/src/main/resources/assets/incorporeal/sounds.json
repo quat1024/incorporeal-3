@@ -1,0 +1,7 @@
+{
+	"unstable": {
+		"sounds": ["incorporeal:unstable"],
+		"pitch": 1,
+		"subtitle": "incorporeal.subtitle.unstable"
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "incorporeal:item/corporea_ticket/blank"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"incorporeal:written_ticket": 1
+			},
+			"model": "incorporeal:item/corporea_ticket_written"
+		}
+	]
+}

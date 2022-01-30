@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "incorporeal:block/red_string_liar",
+      "x": 90
+    },
+    "facing=up": {
+      "model": "incorporeal:block/red_string_liar",
+      "x": 270
+    },
+    "facing=north": {
+      "model": "incorporeal:block/red_string_liar"
+    },
+    "facing=south": {
+      "model": "incorporeal:block/red_string_liar",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "incorporeal:block/red_string_liar",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "incorporeal:block/red_string_liar",
+      "y": 90
+    }
+  }
+}

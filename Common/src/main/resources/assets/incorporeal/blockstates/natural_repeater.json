@@ -1,0 +1,36 @@
+{
+	"variants": {
+		"facing=north,powered=false": {
+			"model": "incorporeal:block/natural_devices/natural_repeater_unlit",
+			"y": 180
+		},
+		"facing=east,powered=false": {
+			"model": "incorporeal:block/natural_devices/natural_repeater_unlit",
+			"y": 270
+		},
+		"facing=south,powered=false": {
+			"model": "incorporeal:block/natural_devices/natural_repeater_unlit",
+			"y": 0
+		},
+		"facing=west,powered=false": {
+			"model": "incorporeal:block/natural_devices/natural_repeater_unlit",
+			"y": 90
+		},
+		"facing=north,powered=true": {
+			"model": "incorporeal:block/natural_devices/natural_repeater_lit",
+			"y": 180
+		},
+		"facing=east,powered=true": {
+			"model": "incorporeal:block/natural_devices/natural_repeater_lit",
+			"y": 270
+		},
+		"facing=south,powered=true": {
+			"model": "incorporeal:block/natural_devices/natural_repeater_lit",
+			"y": 0
+		},
+		"facing=west,powered=true": {
+			"model": "incorporeal:block/natural_devices/natural_repeater_lit",
+			"y": 90
+		}
+	}
+}

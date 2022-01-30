@@ -31,6 +31,7 @@ Keep in mind:
 * TEST IT MORE, test remapping, test refmaps, test test
 * non-`Common` `-sources` jars don't contain `Common` sources - hubry said this happens to patchy and botania too
 * What's the difference between depending on :Common and adding its source set to the compilation classpath. do you need to do both
+* Data generators would be nice to have, rn i merged everything into the regular assets folder
 
 ### Why are you using kotlin buildscripts
 

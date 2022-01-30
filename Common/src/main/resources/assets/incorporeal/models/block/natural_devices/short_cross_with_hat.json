@@ -1,0 +1,66 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"particle": "#hat"
+	},
+	"elements": [
+		{
+			"name": "cross2",
+			"from": [5, -1, 11],
+			"to": [11, 2, 11],
+			"rotation": {
+				"angle": 45,
+				"axis": "y",
+				"origin": [5, -1, 11],
+				"rescale": true
+			},
+			"faces": {
+				"north": {
+					"uv": [4, 13, 12, 16],
+					"texture": "#cross"
+				},
+				"south": {
+					"uv": [4, 13, 12, 16],
+					"texture": "#cross"
+				}
+			}
+		},
+		{
+			"name": "cross1",
+			"from": [5, -1, 5],
+			"to": [11, 2, 5],
+			"rotation": {
+				"angle": -45,
+				"axis": "y",
+				"origin": [5, -1, 5],
+				"rescale": true
+			},
+			"faces": {
+				"north": {
+					"uv": [4, 13, 12, 16],
+					"texture": "#cross"
+				},
+				"south": {
+					"uv": [4, 13, 12, 16],
+					"texture": "#cross"
+				}
+			}
+		},
+		{
+			"name": "top",
+			"from": [0, 2, 0],
+			"to": [16, 2, 16],
+			"faces": {
+				"up": {
+					"uv": [0, 0, 16, 16],
+					"texture": "#hat"
+				},
+				"down": {
+					"uv": [0, 0, 16, 16],
+					"texture": "#hat"
+				}
+			}
+		}
+	]
+}
