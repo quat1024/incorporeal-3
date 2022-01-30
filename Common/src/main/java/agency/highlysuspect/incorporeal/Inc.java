@@ -8,6 +8,9 @@ import org.apache.logging.log4j.Logger;
 import vazkii.botania.api.corporea.CorporeaHelper;
 import vazkii.botania.common.integration.corporea.CorporeaNodeDetectors;
 
+import java.util.List;
+import java.util.Random;
+
 /**
  * Main entrypoint for the mod, or, as close as you can get in the multiloader world.
  */
@@ -22,5 +25,9 @@ public class Inc {
 	
 	public static ResourceLocation id(String path) {
 		return new ResourceLocation(MODID, path);
+	}
+	
+	public static <T> T choose(List<T> list, Random random) {
+		return list.get(random.nextInt(list.size()));
 	}
 }

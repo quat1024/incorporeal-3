@@ -15,6 +15,7 @@ public class IncItems {
 	
 	public static final BlockItem CORPOREA_SOLIDIFIER = new BlockItem(IncBlocks.CORPOREA_SOLIDIFIER, props());
 	public static final BlockItem RED_STRING_LIAR = new BlockItem(IncBlocks.RED_STRING_LIAR, props());
+	public static final BlockItem FRAME_TINKERER = new BlockItem(IncBlocks.FRAME_TINKERER, props());
 	public static final BlockItem CORPOREA_RETAINER_EVAPORATOR = new BlockItem(IncBlocks.CORPOREA_RETAINER_EVAPORATOR, props());
 	
 	private static Item.Properties props() {
@@ -30,6 +31,7 @@ public class IncItems {
 		
 		blockItem(r, CORPOREA_SOLIDIFIER);
 		blockItem(r, RED_STRING_LIAR);
+		blockItem(r, FRAME_TINKERER);
 		blockItem(r, CORPOREA_RETAINER_EVAPORATOR);
 	}
 	

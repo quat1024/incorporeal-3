@@ -6,7 +6,8 @@
 	"mixins": [
 		"TileCorporeaRetainerMixin",
 		"TileCorporeaRetainerAccessor",
-		"TileCorporeaInterceptorMixin"
+		"TileCorporeaInterceptorMixin",
+		"ItemFrameAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1
