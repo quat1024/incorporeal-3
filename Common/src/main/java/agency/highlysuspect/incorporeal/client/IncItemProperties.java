@@ -1,7 +1,7 @@
 package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.IncItems;
+import agency.highlysuspect.incorporeal.item.IncItems;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;

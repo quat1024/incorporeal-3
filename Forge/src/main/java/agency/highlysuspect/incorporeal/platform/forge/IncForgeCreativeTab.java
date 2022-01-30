@@ -1,7 +1,7 @@
 package agency.highlysuspect.incorporeal.platform.forge;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.IncItems;
+import agency.highlysuspect.incorporeal.item.IncItems;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 

@@ -1,7 +1,7 @@
 package agency.highlysuspect.incorporeal.platform.fabric;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.IncItems;
+import agency.highlysuspect.incorporeal.item.IncItems;
 import net.fabricmc.fabric.impl.item.group.ItemGroupExtensions;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
