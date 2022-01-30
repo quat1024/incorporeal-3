@@ -11,7 +11,7 @@ import java.util.function.BiConsumer;
 public class IncBlocks {
 	public static final CorporeaSolidifierBlock CORPOREA_SOLIDIFIER = new CorporeaSolidifierBlock(BlockBehaviour.Properties.copy(ModBlocks.corporeaRetainer));
 	
-	public static void registerBlocks(BiConsumer<Block, ResourceLocation> r) {
+	public static void register(BiConsumer<Block, ResourceLocation> r) {
 		r.accept(CORPOREA_SOLIDIFIER, Inc.id("corporea_solidifier"));
 	}
 }

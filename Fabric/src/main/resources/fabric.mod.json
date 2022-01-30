@@ -25,6 +25,9 @@
 	"entrypoints": {
 		"main": [
 			"agency.highlysuspect.incorporeal.platform.fabric.IncFabric"
+		],
+		"client": [
+			"agency.highlysuspect.incorporeal.platform.fabric.IncFabricClient"
 		]
 	},
 	

@@ -19,7 +19,7 @@ public class IncItems {
 		return IncXplat.INSTANCE.defaultItemProperties();
 	}
 	
-	public static void registerItems(BiConsumer<Item, ResourceLocation> r) {
+	public static void register(BiConsumer<Item, ResourceLocation> r) {
 		r.accept(CORPOREA_TICKET, Inc.id("corporea_ticket"));
 		
 		blockItem(r, CORPOREA_SOLIDIFIER);

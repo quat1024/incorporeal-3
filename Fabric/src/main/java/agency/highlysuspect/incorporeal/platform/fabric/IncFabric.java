@@ -11,7 +11,7 @@ public class IncFabric implements ModInitializer {
 	public void onInitialize() {
 		Inc.init();
 		
-		IncBlocks.registerBlocks((block, name) -> Registry.register(Registry.BLOCK, name, block));
-		IncItems.registerItems((item, name) -> Registry.register(Registry.ITEM, name, item));
+		IncBlocks.register((block, name) -> Registry.register(Registry.BLOCK, name, block));
+		IncItems.register((item, name) -> Registry.register(Registry.ITEM, name, item));
 	}
 }
