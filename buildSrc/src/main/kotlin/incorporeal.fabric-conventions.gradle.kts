@@ -16,6 +16,13 @@ loom {
         val modId: String by project
         defaultRefmapName.set("$modId.refmap.json")
     }
+    
+    //Loom doesn't generate run configs by default in subprojects.
+    runs {
+        configureEach {
+            ideConfigGenerated(true)
+        }
+    }
 }
 
 dependencies {
