@@ -1,9 +1,7 @@
 Incorporeal 3
 =============
 
-(Old dragon yells at corporea spark.)
-
-Currently this is little more than a hellish Gradle dreamscape. No content.
+Old dragon yells at corporea spark.
 
 # Build information
 
@@ -35,7 +33,7 @@ Keep in mind:
 
 ### Why are you using kotlin buildscripts
 
-Just to feel something.
+~~Just to feel something.~~ To personally spite Eclipse users. (I heard turning off the Kotlin integration and letting buildship treat it as a black-box might help?)
 
 I also wanted to learn a little more about Gradle, and the additional type-safety and go-to-definition support sometimes helps to understand what is actually happening.
 
