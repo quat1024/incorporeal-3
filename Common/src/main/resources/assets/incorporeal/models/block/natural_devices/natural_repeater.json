@@ -10,51 +10,9 @@
 	},
 	"elements": [
 		{
-			"name": "cross2",
-			"from": [5, -1, 11],
-			"to": [11, 2, 11],
-			"rotation": {
-				"angle": 45,
-				"axis": "y",
-				"origin": [5, -1, 11],
-				"rescale": true
-			},
-			"faces": {
-				"north": {
-					"uv": [4, 13, 12, 16],
-					"texture": "#cross"
-				},
-				"south": {
-					"uv": [4, 13, 12, 16],
-					"texture": "#cross"
-				}
-			}
-		},
-		{
-			"name": "cross1",
-			"from": [5, -1, 5],
-			"to": [11, 2, 5],
-			"rotation": {
-				"angle": -45,
-				"axis": "y",
-				"origin": [5, -1, 5],
-				"rescale": true
-			},
-			"faces": {
-				"north": {
-					"uv": [4, 13, 12, 16],
-					"texture": "#cross"
-				},
-				"south": {
-					"uv": [4, 13, 12, 16],
-					"texture": "#cross"
-				}
-			}
-		},
-		{
 			"name": "top",
-			"from": [0, 2, 0],
-			"to": [16, 4, 16],
+			"from": [0, 0, 0],
+			"to": [16, 2, 16],
 			"faces": {
 				"north": {
 					"uv": [0, 0, 16, 2],
@@ -84,12 +42,12 @@
 		},
 		{
 			"name": "torch",
-			"from": [7, 3, 1],
-			"to": [9, 11, 3],
+			"from": [7, 1, 1],
+			"to": [9, 9, 3],
 			"rotation": {
 				"angle": 22.5,
 				"axis": "x",
-				"origin": [8, 3, 2]
+				"origin": [8, 1, 2]
 			},
 			"faces": {
 				"north": {
@@ -116,12 +74,12 @@
 		},
 		{
 			"name": "torch",
-			"from": [8, 3, 12],
-			"to": [10, 7, 14],
+			"from": [8, 1, 12],
+			"to": [10, 5, 14],
 			"rotation": {
 				"angle": 22.5,
 				"axis": "z",
-				"origin": [9, 3, 13]
+				"origin": [9, 1, 13]
 			},
 			"faces": {
 				"north": {
