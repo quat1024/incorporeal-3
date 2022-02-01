@@ -6,13 +6,16 @@ import net.fabricmc.fabric.impl.item.group.ItemGroupExtensions;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
+/**
+ * Using this instead of FabricItemGroupBuilder because I want the opportunity to change the background texture.
+ */
 public class IncFabricCreativeTab extends CreativeModeTab {
 	public static final IncFabricCreativeTab INSTANCE = new IncFabricCreativeTab();
 	
 	public IncFabricCreativeTab() {
 		super(computeIndex(), Inc.MODID);
 		hideTitle();
-		setBackgroundSuffix("incorporeal.png");
+		setBackgroundSuffix("incorporeal.png"); //This thing.
 	}
 	
 	private static int computeIndex() {
@@ -24,4 +27,6 @@ public class IncFabricCreativeTab extends CreativeModeTab {
 	public ItemStack makeIcon() {
 		return new ItemStack(IncItems.CORPOREA_TICKET);
 	}
+	
+	//No search bar rip
 }

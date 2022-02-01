@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.client;
 
+import agency.highlysuspect.incorporeal.IncSounds;
 import agency.highlysuspect.incorporeal.block.UnstableCubeBlock;
 import agency.highlysuspect.incorporeal.block.entity.UnstableCubeBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -18,7 +19,7 @@ public class UnstableCubeClientTicker {
 		self.angle %= 360f;
 		if(self.speed > 1f) self.speed *= 0.96;
 		
-		self.bump *= 0.8f;
+		self.bump *= self.bumpDecay;
 		
 		if(level.getGameTime() >= self.nextLightningTick) {
 			//add ligtning particle
@@ -34,9 +35,9 @@ public class UnstableCubeClientTicker {
 			IProxy.INSTANCE.lightningFX(start, end, 0.5f, colorPacked, colorDarker);
 			
 			//set the time until the next one
-			self.nextLightningTick = level.getGameTime() + self.speed > 1.1f ?
+			self.nextLightningTick = level.getGameTime() + (self.speed > 1.1f ?
 				(int) (60 - Math.min(60, self.speed)) + 3 :
-				level.random.nextInt(60) + 50;
+				level.random.nextInt(60) + 50);
 			
 			//play a sound
 			float volume = self.speed > 1.1f ? self.speed / 170f : 0.1f;
@@ -46,7 +47,7 @@ public class UnstableCubeClientTicker {
 			
 			level.playLocalSound(
 				pos.getX() + .5, pos.getY() + .5, pos.getZ() + .5,
-				SoundEvents.COW_AMBIENT, SoundSource.BLOCKS,
+				IncSounds.UNSTABLE, SoundSource.BLOCKS,
 				volume, pitch, false);
 		}
 	}

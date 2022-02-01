@@ -3,6 +3,34 @@ Incorporeal 3
 
 Old dragon yells at corporea spark.
 
+## Things that have been ported
+
+* corporea solidifier
+* corporea ticket
+* corporea retainer evaporator
+* red string liar
+* item frame tinkerer
+
+## Things left to port
+
+* Sanvocalia
+* The funny
+* soul cores (ender/corporea/potion soul core)
+* ticket conjurer
+* rod of the fractured space
+* unstable cubes
+* the datapack (for now i will probably cut and paste it from 1.16)
+* the lexicon (same)
+* natural redstone circuitry / plantable redstone roots
+
+## Things that will not be ported
+
+* frame screw
+  * I don't like it and didn't port it for 1.16 either
+* Rhododendrite
+  * I want to go in a different direction
+  * will be integrated into the main addon, and not its own thing
+
 # Build information
 
 Ok so, this is by far the most cursed buildscript i've had the pleasure of messing with.

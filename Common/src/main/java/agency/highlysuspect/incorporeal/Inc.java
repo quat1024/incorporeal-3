@@ -3,13 +3,13 @@ package agency.highlysuspect.incorporeal;
 import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
 import agency.highlysuspect.incorporeal.corporea.EmptyCorporeaRequestMatcher;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.DyeColor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vazkii.botania.api.corporea.CorporeaHelper;
 import vazkii.botania.common.integration.corporea.CorporeaNodeDetectors;
 
-import java.util.Collection;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +41,14 @@ public class Inc {
 		float x = (value - low1) / (high1 - low1);
 		//The value goes from 0..1, remap that range to low2..high2
 		return x * (high2 - low2) + low2;
+	}
+	
+	public static float sinDegrees(float in) {
+		return Mth.sin((in % 360) * (float) (Math.PI / 180));
+	}
+	
+	public static float cosDegrees(float in) {
+		return Mth.cos((in % 360) * (float) (Math.PI / 180));
 	}
 	
 	public static <T> Map<DyeColor, T> sixteenColors(Function<DyeColor, T> maker) {

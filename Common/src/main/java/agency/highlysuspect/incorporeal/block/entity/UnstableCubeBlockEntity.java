@@ -10,6 +10,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,8 +19,8 @@ import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.block.IWandable;
 
 public class UnstableCubeBlockEntity extends BlockEntity implements IWandable {
-	public UnstableCubeBlockEntity(BlockPos pos, BlockState state) {
-		super(IncBlockEntityTypes.UNSTABLE_CUBE, pos, state);
+	public UnstableCubeBlockEntity(DyeColor color, BlockPos pos, BlockState state) {
+		super(IncBlockEntityTypes.UNSTABLE_CUBES.get(color), pos, state);
 	}
 	
 	private float serverSpeed; //Synced to clients (other than the puncher's client) when someone punches the unstable cube.
@@ -29,6 +30,7 @@ public class UnstableCubeBlockEntity extends BlockEntity implements IWandable {
 	public float angle;
 	public float speed;
 	public float bump;
+	public final float bumpDecay = 0.8f;
 	public long nextLightningTick = 0;
 	
 	public static void serverTick(Level level, BlockPos pos, BlockState state, UnstableCubeBlockEntity self) {
@@ -53,15 +55,15 @@ public class UnstableCubeBlockEntity extends BlockEntity implements IWandable {
 	}
 	
 	public void punch(@Nullable Player puncher) {
-		serverSpeed = Mth.clamp(serverSpeed + 15, 0, 200);
-		setChanged();
-		
 		if(level == null) return;
 		
 		if(level.isClientSide()) {
+			speed = Mth.clamp(speed + 15, 0, 200);
 			bump = 1;
 			nextLightningTick = level.getGameTime();
 		} else {
+			serverSpeed = Mth.clamp(serverSpeed + 15, 0, 200);
+			setChanged();
 			NotVanillaPacketDispatcher.dispatchToNearbyPlayersExcept(this, puncher);
 		}
 	}
@@ -79,7 +81,7 @@ public class UnstableCubeBlockEntity extends BlockEntity implements IWandable {
 	
 	@Override
 	public void load(CompoundTag tag) {
-		//Also set the client speed, since this gets called thru getUpdatePacket.
+		//Also set the client speed, since this gets called thru getUpdatePacket on the client.
 		serverSpeed = speed = tag.getFloat("speed");
 	}
 	

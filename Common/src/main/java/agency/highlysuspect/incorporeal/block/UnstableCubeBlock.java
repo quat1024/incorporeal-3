@@ -77,13 +77,13 @@ public class UnstableCubeBlock extends BlockModWaterloggable implements EntityBl
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return IncBlockEntityTypes.UNSTABLE_CUBE.create(pos, state);
+		return IncBlockEntityTypes.UNSTABLE_CUBES.get(color).create(pos, state);
 	}
 	
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, IncBlockEntityTypes.UNSTABLE_CUBE,
+		return createTickerHelper(type, IncBlockEntityTypes.UNSTABLE_CUBES.get(color),
 			level.isClientSide() ? UnstableCubeClientTicker::clientTick : UnstableCubeBlockEntity::serverTick);
 	}
 }

@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.platform.forge;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.IncSounds;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.item.IncItems;
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
@@ -21,19 +22,26 @@ import java.util.function.Consumer;
 @Mod("incorporeal")
 public class IncForge {
 	public IncForge() {
+		//blocks
 		bind(ForgeRegistries.BLOCKS, IncBlocks::register);
+		
+		//items
 		bind(ForgeRegistries.ITEMS, IncItems::register);
+		
+		//block entity types
 		bind(ForgeRegistries.BLOCK_ENTITIES, IncBlockEntityTypes::register);
 		
-		//forge gib client entrypoint pls
+		//sound events
+		bind(ForgeRegistries.SOUND_EVENTS, IncSounds::register);
+		
+		//I gotta admit. Fabric's "client entrypoint" scheme is a lot nicer than forge's "proxy" pattern
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> IncForgeClient::init);
 		
-		FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> {
-			Inc.registerExtraThings();
-		});
+		//some other stuff (not different between loaders)
+		FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> Inc.registerExtraThings());
 	}
 	
-	//Botania copypasterino
+	//botania copypasterino !
 	private static <T extends IForgeRegistryEntry<T>> void bind(IForgeRegistry<T> registry, Consumer<BiConsumer<T, ResourceLocation>> source) {
 		FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(registry.getRegistrySuperType(),
 			(RegistryEvent.Register<T> event) -> {
