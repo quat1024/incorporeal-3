@@ -3,15 +3,14 @@ package agency.highlysuspect.incorporeal.block;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.HopperBlockEntity;
-import vazkii.botania.common.block.tile.corporea.TileCorporeaFunnel;
 import vazkii.botania.common.helper.InventoryHelper;
+import vazkii.botania.xplat.IXplatAbstractions;
+
+import javax.annotation.Nullable;
 
 /**
  * A block that kinda acts like a corporea retainer, but spits its requests out as corporea ticket items, instead of storing them.
@@ -25,36 +24,35 @@ public class CorporeaSolidifierBlock extends Block {
 	public void receiveRequest(Level level, BlockPos pos, SolidifiedRequest request) {
 		if(level == null || level.isClientSide()) return;
 		
-		ItemStack ticket = request.toTicket();
-		Container inv = getInv(level, pos);
+		//Based on copy and paste from TileCorporeaFunnel
 		
-		//Copy and paste from TileCorporeaFunnel
-		if (inv != null && InventoryHelper.simulateTransfer(inv, ticket, Direction.UP).isEmpty()) {
-			HopperBlockEntity.addItem(null, inv, ticket, Direction.UP);
+		ItemStack ticket = request.toTicket();
+		BlockPos invPos = getInvPos(level, pos);
+		if (invPos != null
+			&& IXplatAbstractions.INSTANCE.insertToInventory(level, invPos, Direction.UP, ticket, true).isEmpty()) {
+			InventoryHelper.checkEmpty(
+				IXplatAbstractions.INSTANCE.insertToInventory(level, invPos, Direction.UP, ticket, false)
+			);
 		} else {
-			ItemEntity item = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, ticket);
+			//Corporea funnel does this:
+			//ItemEntity item = new ItemEntity(level, spark.entity().getX(), spark.entity().getY(), spark.entity().getZ(), reqStack);
+			//I'm not sparked though, so I'll spawn the item in the same place as a spark would be, 1.25 blocks up
+			ItemEntity item = new ItemEntity(level, pos.getX() + .5, pos.getY() + 1.25, pos.getZ() + .5, ticket);
 			level.addFreshEntity(item);
 		}
 	}
 	
-	//Copy and paste from TileCorporeaFunnel
-	private Container getInv(Level level, BlockPos worldPosition) {
-		BlockEntity te = level.getBlockEntity(worldPosition.below());
-		Container ret = InventoryHelper.getInventory(level, worldPosition.below(), Direction.UP);
-		if (ret == null) {
-			ret = InventoryHelper.getInventory(level, worldPosition.below(), null);
-		}
-		if (ret != null && !(te instanceof TileCorporeaFunnel)) {
-			return ret;
+	//Based on copy and paste from TileCorporeaFunnel
+	@Nullable
+	private BlockPos getInvPos(Level level, BlockPos worldPosition) {
+		BlockPos downOne = worldPosition.below();
+		if (IXplatAbstractions.INSTANCE.hasInventory(level, downOne, Direction.UP)) {
+			return downOne;
 		}
 		
-		te = level.getBlockEntity(worldPosition.below(2));
-		ret = InventoryHelper.getInventory(level, worldPosition.below(2), Direction.UP);
-		if (ret == null) {
-			ret = InventoryHelper.getInventory(level, worldPosition.below(2), null);
-		}
-		if (ret != null && !(te instanceof TileCorporeaFunnel)) {
-			return ret;
+		BlockPos downTwo = worldPosition.below(2);
+		if (IXplatAbstractions.INSTANCE.hasInventory(level, downTwo, Direction.UP)) {
+			return downTwo;
 		}
 		
 		return null;
