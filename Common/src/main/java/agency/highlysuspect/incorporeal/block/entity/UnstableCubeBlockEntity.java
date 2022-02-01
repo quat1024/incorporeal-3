@@ -43,6 +43,7 @@ public class UnstableCubeBlockEntity extends BlockEntity implements IWandable {
 		int newPower = Mth.clamp(Mth.floor(Inc.rangeRemap(self.serverSpeed, 0, 90, 0, 15)), 0, 15);
 		if(self.power != newPower) {
 			self.power = newPower;
+			level.updateNeighborsAt(pos, state.getBlock());
 			self.setChanged();
 		}
 	}
