@@ -10,6 +10,7 @@ Old dragon yells at corporea spark.
 * corporea retainer evaporator
 * red string liar
 * item frame tinkerer
+* unstable cubes
 
 ## Things left to port
 
@@ -18,7 +19,6 @@ Old dragon yells at corporea spark.
 * soul cores (ender/corporea/potion soul core)
 * ticket conjurer
 * rod of the fractured space
-* unstable cubes
 * the datapack (for now i will probably cut and paste it from 1.16)
 * the lexicon (same)
 * natural redstone circuitry / plantable redstone roots
