@@ -1,13 +1,18 @@
 package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.Material;
+import vazkii.botania.common.block.BlockFloatingSpecialFlower;
+import vazkii.botania.common.block.BlockSpecialFlower;
 import vazkii.botania.common.block.ModBlocks;
+import vazkii.botania.common.block.ModSubtiles;
 
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -17,6 +22,19 @@ public class IncBlocks {
 	public static final RedStringLiarBlock RED_STRING_LIAR = new RedStringLiarBlock(Properties.copy(ModBlocks.livingrock));
 	public static final FrameTinkererBlock FRAME_TINKERER = new FrameTinkererBlock(Properties.copy(Blocks.OAK_PLANKS));
 	public static final CorporeaRetainerEvaporatorBlock CORPOREA_RETAINER_EVAPORATOR = new CorporeaRetainerEvaporatorBlock(Properties.copy(ModBlocks.corporeaRetainer));
+	
+	private static final Properties flowerProps = Properties.copy(ModSubtiles.agricarnation);
+	private static final Properties floatingProps = Properties.copy(ModSubtiles.agricarnationFloating);
+	
+	public static final BlockSpecialFlower SANVOCALIA = new BlockSpecialFlower(MobEffects.GLOWING, 20, flowerProps, () -> IncBlockEntityTypes.SANVOCALIA_BIG);
+	public static final BlockSpecialFlower SANVOCALIA_SMALL = new BlockSpecialFlower(MobEffects.GLOWING, 5 , flowerProps, () -> IncBlockEntityTypes.SANVOCALIA_SMALL);
+	public static final BlockFloatingSpecialFlower FLOATING_SANVOCALIA = new BlockFloatingSpecialFlower(floatingProps, () -> IncBlockEntityTypes.SANVOCALIA_BIG);
+	public static final BlockFloatingSpecialFlower FLOATING_SANVOCALIA_SMALL = new BlockFloatingSpecialFlower(floatingProps, () -> IncBlockEntityTypes.SANVOCALIA_SMALL);
+	
+	public static final BlockSpecialFlower FUNNY = new BlockSpecialFlower(MobEffects.GLOWING, 20, flowerProps, () -> IncBlockEntityTypes.FUNNY_BIG);
+	public static final BlockSpecialFlower FUNNY_SMALL = new BlockSpecialFlower(MobEffects.GLOWING, 5 , flowerProps, () -> IncBlockEntityTypes.FUNNY_SMALL);
+	public static final BlockFloatingSpecialFlower FLOATING_FUNNY = new BlockFloatingSpecialFlower(floatingProps, () -> IncBlockEntityTypes.FUNNY_BIG);
+	public static final BlockFloatingSpecialFlower FLOATING_FUNNY_SMALL = new BlockFloatingSpecialFlower(floatingProps, () -> IncBlockEntityTypes.FUNNY_SMALL);
 	
 	public static final Map<DyeColor, UnstableCubeBlock> UNSTABLE_CUBES = Inc.sixteenColors(color ->
 		new UnstableCubeBlock(color, Properties.of(Material.METAL, color.getMaterialColor())
@@ -28,6 +46,16 @@ public class IncBlocks {
 		r.accept(RED_STRING_LIAR, Inc.id("red_string_liar"));
 		r.accept(FRAME_TINKERER, Inc.id("frame_tinkerer"));
 		r.accept(CORPOREA_RETAINER_EVAPORATOR, Inc.id("corporea_retainer_evaporator"));
+		
+		r.accept(SANVOCALIA, Inc.id("sanvocalia"));
+		r.accept(SANVOCALIA_SMALL, Inc.id("sanvocalia_chibi"));
+		r.accept(FLOATING_SANVOCALIA, Inc.id("floating_sanvocalia"));
+		r.accept(FLOATING_SANVOCALIA_SMALL, Inc.id("floating_sanvocalia_chibi"));
+		
+		r.accept(FUNNY, Inc.id("funny"));
+		r.accept(FUNNY_SMALL, Inc.id("funny_chibi"));
+		r.accept(FLOATING_FUNNY, Inc.id("floating_funny"));
+		r.accept(FLOATING_FUNNY_SMALL, Inc.id("floating_funny_chibi"));
 		
 		UNSTABLE_CUBES.forEach((color, block) -> r.accept(block, Inc.id(color.getName() + "_unstable_cube")));
 	}

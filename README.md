@@ -11,11 +11,12 @@ Old dragon yells at corporea spark.
 * red string liar
 * item frame tinkerer
 * unstable cubes
+* Sanvocalia
+* The funny
 
 ## Things left to port
 
-* Sanvocalia
-* The funny
+* Fix flowers so theyre not turbo janky
 * soul cores (ender/corporea/potion soul core)
 * ticket conjurer
 * rod of the fractured space
