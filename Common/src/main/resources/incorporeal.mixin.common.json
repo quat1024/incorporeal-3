@@ -8,6 +8,7 @@
 		"TileCorporeaRetainerAccessor",
 		"TileCorporeaInterceptorMixin",
 		"TileCorporeaIndexAccessor",
+		"ModSubtilesMixin",
 		"ItemFrameAccessor"
 	],
 	"injectors": {

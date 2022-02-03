@@ -1,8 +1,9 @@
 package agency.highlysuspect.incorporeal.platform.forge;
 
-import agency.highlysuspect.incorporeal.client.IncBlockEntityRenderers;
-import agency.highlysuspect.incorporeal.client.IncItemProperties;
-import agency.highlysuspect.incorporeal.client.model.IncModelDefinitions;
+import agency.highlysuspect.incorporeal.client.IncClientBlockProperties;
+import agency.highlysuspect.incorporeal.client.IncClientItemProperties;
+import agency.highlysuspect.incorporeal.client.IncClientModelDefinitions;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -14,15 +15,16 @@ public class IncForgeClient {
 		IEventBus yes = FMLJavaModLoadingContext.get().getModEventBus();
 		
 		yes.addListener((ModelRegistryEvent e) -> {
-			IncItemProperties.register((item, id, prop) -> ItemProperties.register(item.asItem(), id, prop));
+			IncClientItemProperties.registerPropertyOverrides((item, id, prop) -> ItemProperties.register(item.asItem(), id, prop));
+			IncClientBlockProperties.registerRenderTypes(ItemBlockRenderTypes::setRenderLayer);
 		});
 		
 		yes.addListener((EntityRenderersEvent.RegisterRenderers e) -> {
-			IncBlockEntityRenderers.register(e::registerBlockEntityRenderer);
+			IncClientBlockProperties.registerBlockEntityRenderers(e::registerBlockEntityRenderer);
 		});
 		
 		yes.addListener((EntityRenderersEvent.RegisterLayerDefinitions e) -> {
-			IncModelDefinitions.register(e::registerLayerDefinition);
+			IncClientModelDefinitions.register(e::registerLayerDefinition);
 		});
 	}
 }

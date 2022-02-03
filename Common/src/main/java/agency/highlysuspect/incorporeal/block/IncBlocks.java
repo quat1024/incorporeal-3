@@ -27,12 +27,13 @@ public class IncBlocks {
 	private static final Properties floatingProps = Properties.copy(ModSubtiles.agricarnationFloating);
 	
 	public static final BlockSpecialFlower SANVOCALIA = new BlockSpecialFlower(MobEffects.GLOWING, 20, flowerProps, () -> IncBlockEntityTypes.SANVOCALIA_BIG);
-	public static final BlockSpecialFlower SANVOCALIA_SMALL = new BlockSpecialFlower(MobEffects.GLOWING, 5 , flowerProps, () -> IncBlockEntityTypes.SANVOCALIA_SMALL);
+	public static final BlockSpecialFlower SANVOCALIA_SMALL = new BlockSpecialFlower(MobEffects.GLOWING, 5, flowerProps, () -> IncBlockEntityTypes.SANVOCALIA_SMALL);
 	public static final BlockFloatingSpecialFlower FLOATING_SANVOCALIA = new BlockFloatingSpecialFlower(floatingProps, () -> IncBlockEntityTypes.SANVOCALIA_BIG);
 	public static final BlockFloatingSpecialFlower FLOATING_SANVOCALIA_SMALL = new BlockFloatingSpecialFlower(floatingProps, () -> IncBlockEntityTypes.SANVOCALIA_SMALL);
 	
-	public static final BlockSpecialFlower FUNNY = new BlockSpecialFlower(MobEffects.GLOWING, 20, flowerProps, () -> IncBlockEntityTypes.FUNNY_BIG);
-	public static final BlockSpecialFlower FUNNY_SMALL = new BlockSpecialFlower(MobEffects.GLOWING, 5 , flowerProps, () -> IncBlockEntityTypes.FUNNY_SMALL);
+	//I am aware that this sussy stew potion effect is a terrible idea, but i'm doing it anyway because it's funny as hell.
+	public static final BlockSpecialFlower FUNNY = new BlockSpecialFlower(MobEffects.BAD_OMEN, 20, flowerProps, () -> IncBlockEntityTypes.FUNNY_BIG);
+	public static final BlockSpecialFlower FUNNY_SMALL = new BlockSpecialFlower(MobEffects.BAD_OMEN, 5, flowerProps, () -> IncBlockEntityTypes.FUNNY_SMALL);
 	public static final BlockFloatingSpecialFlower FLOATING_FUNNY = new BlockFloatingSpecialFlower(floatingProps, () -> IncBlockEntityTypes.FUNNY_BIG);
 	public static final BlockFloatingSpecialFlower FLOATING_FUNNY_SMALL = new BlockFloatingSpecialFlower(floatingProps, () -> IncBlockEntityTypes.FUNNY_SMALL);
 	

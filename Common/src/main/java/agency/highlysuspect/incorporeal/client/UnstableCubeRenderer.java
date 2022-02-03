@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.client.model;
+package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.entity.UnstableCubeBlockEntity;
@@ -16,7 +16,7 @@ import vazkii.botania.client.core.handler.ClientTickHandler;
 
 public class UnstableCubeRenderer implements BlockEntityRenderer<UnstableCubeBlockEntity> {
 	public UnstableCubeRenderer(DyeColor color, BlockEntityRendererProvider.Context ctx) {
-		model = new UnstableCubeModel(ctx.bakeLayer(IncModelLayers.UNSTABLE_CUBE));
+		model = new UnstableCubeModel(ctx.bakeLayer(IncClientModelLayers.UNSTABLE_CUBE));
 		
 		int colorPacked = color.getFireworkColor();
 		red = ((colorPacked & 0xFF0000) >> 16) / 255f;
