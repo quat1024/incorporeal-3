@@ -1,7 +1,7 @@
 package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.block.IncBlocks;
-import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.block.IncBlockEntityTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
 import vazkii.botania.client.render.entity.EntityRenderers;
@@ -32,6 +32,6 @@ public class IncClientBlockProperties {
 		r.register(IncBlockEntityTypes.FUNNY_SMALL, RenderTileSpecialFlower::new);
 		
 		IncBlockEntityTypes.UNSTABLE_CUBES.forEach((color, type) ->
-			r.register(type, context -> new UnstableCubeRenderer(color, context)));
+			r.register(type, context -> new UnstableCubeBlockEntityRenderer(color, context)));
 	}
 }

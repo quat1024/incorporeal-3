@@ -20,6 +20,17 @@ import java.util.List;
 
 @Mixin(TileCorporeaInterceptor.class)
 public class TileCorporeaInterceptorMixin {
+	/**
+	 * This method is called when the Corporea Interceptor is about to intercept a request. I need to be aware
+	 * of this, so I can tell nearby Corporea Solidifiers about this request.
+	 * 
+	 * This is a somewhat sloppy mixin, Botania already does this exact iteration when finding corporea retainers.
+	 * But I figured instead of trying to target the inside of a loop, which is a nasty local-capture injection,
+	 * it's not so bad if I just go around the loop again.
+	 * 
+	 * TileCorporeaInterceptor simply checks `instanceof TileCorporeaRetainer` to do its insertion, but the solidifier
+	 * is not a corporea retainer, so here we are. 
+	 */
 	@Inject(
 		method = "interceptRequestLast",
 		at = @At(
@@ -31,13 +42,6 @@ public class TileCorporeaInterceptorMixin {
 		Level level = ((TileCorporeaInterceptor) (Object) this).getLevel();
 		assert level != null;
 		BlockPos pos = ((TileCorporeaInterceptor) (Object) this).getBlockPos();
-		
-		//This is a somewhat sloppy mixin, Botania already does this exact iteration. But I figured instead of trying to target the
-		//inside of a loop, which means a nasty local-capture injection, it's not so bad if I just loop again.
-		
-		//The reason this uses a mixin in the first place is because TileCorporeaInterceptor checks instanceof TileCorporeaRetainer,
-		//and ever since they added BlockEntityTypes it's not possible to extend blockentities, so I needed to do something different
-		//with the Corporea Solidifier. At least it doesn't actually have to be a BlockEntity, like I did in 1.12.
 		
 		for(Direction dir : Direction.values()) {
 			BlockPos solidifierPos = pos.relative(dir);

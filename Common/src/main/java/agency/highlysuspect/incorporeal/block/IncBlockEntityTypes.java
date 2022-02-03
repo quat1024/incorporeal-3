@@ -1,7 +1,6 @@
-package agency.highlysuspect.incorporeal.block.entity;
+package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.block.IncBlocks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.entity.BlockEntityType;

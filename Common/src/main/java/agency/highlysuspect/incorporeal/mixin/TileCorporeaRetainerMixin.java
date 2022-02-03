@@ -11,6 +11,11 @@ import vazkii.botania.common.block.tile.corporea.TileCorporeaRetainer;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+/**
+ * Augments the Corporea Retainer with getters/setters for reading and writing its ICorporeaRequestMatcher
+ * and its request count. It should correctly update the comparator signal when writing the request count,
+ * but I haven't really tested.
+ */
 @Mixin(TileCorporeaRetainer.class)
 public abstract class TileCorporeaRetainerMixin implements RetainerDuck {
 	@Shadow(remap = false) @Nullable private ICorporeaRequestMatcher request;

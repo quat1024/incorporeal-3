@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.block.entity;
+package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncConfig;
@@ -37,6 +37,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * The Sanvocalia. It reads Corporea Tickets off of nearby dropped items and relays their contents to
+ * nearby Corporea Indices. If there are none nearby, it dumps the message into chat instead, as a
+ * nod to when people do that on accident.
+ */
 public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 	public SanvocaliaBlockEntity(int radius, BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -73,6 +78,7 @@ public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 		
 		BlockPos pos = getEffectivePos();
 		
+		//Find nearby Corporea Tickets
 		AABB itemDetectionBox = new AABB(pos.offset(-radius, 0, -radius), pos.offset(radius + 1, 1, radius + 1));
 		List<ItemEntity> nearbyTicketEnts = level.getEntitiesOfClass(ItemEntity.class, itemDetectionBox, ent -> {
 			if(ent == null || !ent.isAlive()) return false;
@@ -86,10 +92,11 @@ public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 		@SuppressWarnings("OptionalGetWithoutIsPresent") //Checked above
 		SolidifiedRequest request = IncItems.CORPOREA_TICKET.tryGetRequest(ticketEnt.getItem()).get();
 		
+		//Find nearby Corporea Indices
 		List<TileCorporeaIndex> nearbyIndices = IndexFinder.findNearBlock(level, pos, radius);
 		
 		if(nearbyIndices.isEmpty()) {
-			//Nod to when people accidentally talk in chat while being too far from a corporea index
+			//Yammer in chat
 			MinecraftServer server = level.getServer();
 			if(server != null && getMana() >= CHAT_COST) {
 				Component msg = new TranslatableComponent("chat.type.text",
@@ -111,6 +118,7 @@ public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 				sync();
 			}
 		} else {
+			//Make requests to nearby Corporea Indices
 			boolean didAnything = false;
 			Set<BlockPos> indexPositions = new HashSet<>();
 			for(TileCorporeaIndex index : nearbyIndices) {

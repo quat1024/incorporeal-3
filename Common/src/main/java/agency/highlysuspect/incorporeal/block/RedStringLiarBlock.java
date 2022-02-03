@@ -1,6 +1,5 @@
 package agency.highlysuspect.incorporeal.block;
 
-import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -11,6 +10,9 @@ import org.jetbrains.annotations.Nullable;
 import vazkii.botania.common.block.string.BlockRedString;
 import vazkii.botania.common.block.tile.string.TileRedString;
 
+/**
+ * The Red String Liar.
+ */
 public class RedStringLiarBlock extends BlockRedString {
 	public RedStringLiarBlock(Properties props) {
 		super(props);

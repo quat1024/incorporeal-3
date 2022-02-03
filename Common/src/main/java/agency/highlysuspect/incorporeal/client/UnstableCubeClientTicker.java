@@ -2,9 +2,8 @@ package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.IncSounds;
 import agency.highlysuspect.incorporeal.block.UnstableCubeBlock;
-import agency.highlysuspect.incorporeal.block.entity.UnstableCubeBlockEntity;
+import agency.highlysuspect.incorporeal.block.UnstableCubeBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.Level;
@@ -12,6 +11,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import vazkii.botania.common.proxy.IProxy;
 
+/**
+ * You know how as of 1.17, you can register separate block entity tickers for the client and server?
+ * This is the Unstable Cube's clientside ticker. It's in charge of summoning lightning particles,
+ * making noise, updating the rotation angle of the cube depending on how fast it's spinning, things like that.
+ */
 public class UnstableCubeClientTicker {
 	public static void clientTick(Level level, BlockPos pos, BlockState state, UnstableCubeBlockEntity self) {
 		if(self.speed == 0) self.speed = 8;

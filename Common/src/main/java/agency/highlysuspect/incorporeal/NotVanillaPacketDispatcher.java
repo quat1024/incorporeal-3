@@ -8,6 +8,9 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * See the Unstable Cube for more information on what this is all about.
+ */
 public class NotVanillaPacketDispatcher {
 	public static void dispatchToNearbyPlayersExcept(BlockEntity be, @Nullable Player skip) {
 		if(be.getLevel() instanceof ServerLevel serverLevel) {

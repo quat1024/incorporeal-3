@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * A corporea matcher + item count pair. "5x stone", "dozen all", that sort of thing.
+ * A corporea matcher + item count pair. "5x stone", "dozen *", that sort of thing.
  * Can be thought of as "the thing a corporea retainer holds" minus the information about where the request came from.
  * Note that requests for nothing with non-zero count, and requests for something with zero count, are both valid SolidifiedRequests.
  */
@@ -35,7 +35,8 @@ public final class SolidifiedRequest {
 		return new SolidifiedRequest(matcher2, count);
 	}
 	
-	//Convenience. For most gameplay purposes (i.e. not the corporea keybind), vanilla bota always uses matchNbt: true when making requests from itemstacks.
+	//Convenience.
+	//For most gameplay purposes (i.e. not the corporea keybind), vanilla bota always uses matchNbt: true when making requests from itemstacks.
 	public static SolidifiedRequest create(ItemStack stack, int count) {
 		ICorporeaRequestMatcher matcher = stack.isEmpty() ? EmptyCorporeaRequestMatcher.INSTANCE : CorporeaHelper.instance().createMatcher(stack, true);
 		return new SolidifiedRequest(matcher, count);
@@ -79,7 +80,7 @@ public final class SolidifiedRequest {
 		return new SolidifiedRequest(matcher, newCount);
 	}
 	
-	// (auto-converted record to class)
+	// (auto-converted record to class - i wanted a private constructor, so couldn't use a record)
 	
 	public @NotNull ICorporeaRequestMatcher matcher() {
 		return matcher;

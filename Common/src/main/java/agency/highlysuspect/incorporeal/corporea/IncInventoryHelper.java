@@ -15,6 +15,12 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * More utilities for working with inventories.
+ * 
+ * Named after Botania's InventoryHelper. The name is a bit of an anachronism, because currently Botania
+ * works in terms of Containers, so I do the same to match.
+ */
 public class IncInventoryHelper {
 	public static @Nullable Container getSidedContainerAt(Level level, BlockPos pos, Direction direction) {
 		//Copy from VanillaNodeDetector from Botania, which itself copies a bit from hoppers

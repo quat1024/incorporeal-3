@@ -2,7 +2,7 @@ package agency.highlysuspect.incorporeal.platform.forge;
 
 import agency.highlysuspect.incorporeal.client.IncClientBlockProperties;
 import agency.highlysuspect.incorporeal.client.IncClientItemProperties;
-import agency.highlysuspect.incorporeal.client.IncClientModelDefinitions;
+import agency.highlysuspect.incorporeal.client.IncClientLayerDefinitions;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -24,7 +24,7 @@ public class IncForgeClient {
 		});
 		
 		yes.addListener((EntityRenderersEvent.RegisterLayerDefinitions e) -> {
-			IncClientModelDefinitions.register(e::registerLayerDefinition);
+			IncClientLayerDefinitions.register(e::registerLayerDefinition);
 		});
 	}
 }

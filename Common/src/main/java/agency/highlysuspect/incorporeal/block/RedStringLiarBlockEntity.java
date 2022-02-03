@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.block.entity;
+package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.corporea.FrameReader;
 import agency.highlysuspect.incorporeal.corporea.IncInventoryHelper;
@@ -16,6 +16,9 @@ import vazkii.botania.api.corporea.ICorporeaSpark;
 import vazkii.botania.common.block.tile.string.TileRedString;
 import vazkii.botania.common.impl.corporea.DummyCorporeaNode;
 
+/**
+ * The Red String Liar. It exposes a Container to the corporea network as if it was a container full of something else.
+ */
 public class RedStringLiarBlockEntity extends TileRedString {
 	public RedStringLiarBlockEntity(BlockPos pos, BlockState state) {
 		super(IncBlockEntityTypes.RED_STRING_LIAR, pos, state);

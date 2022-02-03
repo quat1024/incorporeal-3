@@ -8,8 +8,11 @@ import vazkii.botania.common.helper.MathHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
+/**
+ * Finds Corporea Indices near a particular block.
+ * Regular Botania utilities are only about finding corporea indices near a Player.
+ */
 public class IndexFinder {
 	//TileCorporeaIndex#isInRangeOfIndex only accepts a Player argument
 	public static List<TileCorporeaIndex> findNearBlock(Level level, BlockPos pos, int radius) {

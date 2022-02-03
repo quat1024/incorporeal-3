@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.block.entity;
+package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.NotVanillaPacketDispatcher;
@@ -18,6 +18,24 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.block.IWandable;
 
+/**
+ * The Unstable Cube block entity. This is a bit of a strange one, mainly because of how syncing the speed works.
+ * 
+ * Clearly, when a player clicks the Unstable Cube, it should start to spin. Other players should be able to see
+ * the spinning cube, and I should also know the speed on the server side, so it can emit a redstone signal. The
+ * trick here is in how that data is synced.
+ * 
+ * In order to produce a spinning animation, I could simply send the angle of the cube to every player in the area
+ * every tick, but that is super pointless, wastes a bunch of bandwidth and creates a crappy looking animation over
+ * networked MP. Instead, I keep track of the cube's rotational speed on the server and client separately.
+ * 
+ * Additionally I don't want the cube to suddenly snap from one angle to another if I can avoid it, which means I
+ * want to avoid the server ever telling the client the exact angle of the cube. Instead I only ever sync its rotational
+ * speed. And finally I don't bother syncing it to the player who did click the cube, and let their own client
+ * take care of it, to avoid a round-trip.
+ * 
+ * This is a lot of effort put into a block that mayyyybe 10 people will place in their world, ever.
+ */
 public class UnstableCubeBlockEntity extends BlockEntity implements IWandable {
 	public UnstableCubeBlockEntity(DyeColor color, BlockPos pos, BlockState state) {
 		super(IncBlockEntityTypes.UNSTABLE_CUBES.get(color), pos, state);
@@ -26,7 +44,7 @@ public class UnstableCubeBlockEntity extends BlockEntity implements IWandable {
 	private float serverSpeed; //Synced to clients (other than the puncher's client) when someone punches the unstable cube.
 	private int power; //redstone power
 	
-	//Used on client only.
+	//Used on client only, fields exist on the server too for code simplicity I guess.
 	public float angle;
 	public float speed;
 	public float bump;
@@ -37,7 +55,9 @@ public class UnstableCubeBlockEntity extends BlockEntity implements IWandable {
 		if(self.serverSpeed == 0) self.serverSpeed = 8;
 		if(self.serverSpeed > 1f) {
 			self.serverSpeed *= 0.96;
-			level.blockEntityChanged(pos); //setChanged(), without the comparator update
+			//setChanged() without a comparator update.
+			//This method gets called pretty much every tick, so there's no need to send a million comparator updates.
+			level.blockEntityChanged(pos);
 		}
 		
 		int newPower = Mth.clamp(Mth.floor(Inc.rangeRemap(self.serverSpeed, 0, 90, 0, 15)), 0, 15);
@@ -82,7 +102,7 @@ public class UnstableCubeBlockEntity extends BlockEntity implements IWandable {
 	
 	@Override
 	public void load(CompoundTag tag) {
-		//Also set the client speed, since this gets called thru getUpdatePacket on the client.
+		//Also set the client speed, since this gets called thru ClientboundBlockEntityDataPacket on the client.
 		serverSpeed = speed = tag.getFloat("speed");
 	}
 	

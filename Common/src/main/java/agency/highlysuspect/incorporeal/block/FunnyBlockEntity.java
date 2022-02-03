@@ -1,18 +1,15 @@
-package agency.highlysuspect.incorporeal.block.entity;
+package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.Bigfunny;
 import com.mojang.datafixers.util.Pair;
-import com.mojang.math.Vector3d;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.phys.Vec3;
-import org.apache.commons.lang3.NotImplementedException;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.subtile.RadiusDescriptor;
 import vazkii.botania.api.subtile.TileEntityFunctionalFlower;
@@ -22,6 +19,16 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * "If this shit post gets 50 :HYPERJOKE: reactions I will create a functional flower that plays
+ * noteblock midi despacito and put it in incorporeal" - quat, Aug 8 2018, unaware it's about
+ * to make the biggest mistake of its life.
+ * 
+ * It's been fucking years. This flower isn't even funny anymore.
+ * 
+ * All Botania flowers are required by intergalactic law to be named after a shitty pun off a
+ * real life flower, and the Sweet Alexum is named after the Sweet Alyssum.
+ */
 public class FunnyBlockEntity extends TileEntityFunctionalFlower {
 	public FunnyBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int range, int ticksBetweenNotes, int pitchShift, double sparkleHeight) {
 		super(type, pos, state);

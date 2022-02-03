@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 
 /**
  * Incorporeal-specific cross-loader abstractions.
+ * 
+ * In the built mod, this `platform` package contains more platform-specific implementation details, such as
+ * an implementation of IncXplat for the particular platform, and the main mod entrypoint.
  */
 public interface IncXplat {
 	IncXplat INSTANCE = get();

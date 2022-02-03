@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal;
 
-import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
+import agency.highlysuspect.incorporeal.block.RedStringLiarBlockEntity;
 import agency.highlysuspect.incorporeal.corporea.EmptyCorporeaRequestMatcher;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -17,14 +17,20 @@ import java.util.Random;
 import java.util.function.Function;
 
 /**
- * Main entrypoint for the mod, or, as close as you can get in the multiloader world.
+ * Main entrypoint for the mod, or, as close as you can get in the multiloader world I guess.
+ * 
+ * Also contains random bits of utility crap. Noone will spot your haphazard "util" package if you
+ * throw them all in here. How's that.
  */
 public class Inc {
 	public static final String MODID = "incorporeal";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 	
 	public static void registerExtraThings() {
+		//Register the empty corporea request matcher (matches no items)
 		CorporeaHelper.instance().registerRequestMatcher(id("empty"), EmptyCorporeaRequestMatcher.class, __ -> EmptyCorporeaRequestMatcher.INSTANCE);
+		
+		//Register Red String Liar corporea node detector
 		CorporeaNodeDetectors.register(new RedStringLiarBlockEntity.NodeDetector());
 	}
 	

@@ -4,6 +4,10 @@ import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 
 import javax.annotation.Nullable;
 
+/**
+ * Duck interface for my getters/setters for the corporea retainer.
+ * See `TileCorporeaRetainerMixin`.
+ */
 public interface RetainerDuck {
 	@Nullable ICorporeaRequestMatcher inc$getMatcher();
 	void inc$setMatcher(@Nullable ICorporeaRequestMatcher matcher);

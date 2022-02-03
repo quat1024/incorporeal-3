@@ -14,9 +14,12 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * A block that decrements the request size in nearby Corporea Retainers.
- * Kind of a holdover from before I came up with the whole cygnus idea
- * because you can do the same thing with that.
+ * A block that decrements the request size in nearby Corporea Retainers. Kind of a holdover from
+ * before I came up with the whole cygnus idea, because you can do the same thing with that.
+ * 
+ * Hey, did you know Corporea Interceptors emit their request to *all* adjacent Retainers, so even
+ * if you evaporate one until it's empty, you can still have an untouched request in a different
+ * Retainer? Now you do.
  */
 public class CorporeaRetainerEvaporatorBlock extends Block {
 	public CorporeaRetainerEvaporatorBlock(Properties props) {

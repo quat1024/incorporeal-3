@@ -10,6 +10,10 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
 
+/**
+ * The model, that the Unstable Cube's block entity renderer will rotate at a weird angle, tint, and draw.
+ * Yes, it's just a cube.
+ */
 public class UnstableCubeModel extends Model {
 	public UnstableCubeModel(ModelPart root) {
 		super(RenderType::entityCutoutNoCull);
@@ -19,7 +23,6 @@ public class UnstableCubeModel extends Model {
 	private final ModelPart cube;
 	
 	public static MeshDefinition createMesh() {
-		//No idea what this is all about, but 99% sure it means mojang is working on json entity models lol
 		MeshDefinition mesh = new MeshDefinition();
 		PartDefinition part = mesh.getRoot();
 		

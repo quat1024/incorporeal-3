@@ -14,6 +14,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The corporea node for the Red String Liar.
+ * 
+ * Takes a list of "spoof stacks" as input. The node does a very specific thing:
+ * - When counting items inside the Container, always reports them as copies of the spoof stacks.
+ * - When actually extracting items from the Container, extracts the real items.
+ */
 public class LyingContainerCorporeaNode extends VanillaCorporeaNode {
 	public LyingContainerCorporeaNode(Level world, BlockPos pos, ICorporeaSpark spark, Container wrappedContainer, List<ItemStack> spoofStacks) {
 		super(world, pos, wrappedContainer, spark);

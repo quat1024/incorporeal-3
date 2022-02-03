@@ -7,8 +7,8 @@ import net.minecraft.world.item.ItemStack;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 
 /**
- * Corporea request matcher that matches everything.
- * Implementation detail of LyingContainerCorporeaNode at the moment.
+ * A corporea request matcher that matches everything.
+ * Currently, an implementation detail of LyingContainerCorporeaNode.
  */
 public class WildcardCorporeaRequestMatcher implements ICorporeaRequestMatcher {
 	public static final WildcardCorporeaRequestMatcher INSTANCE = new WildcardCorporeaRequestMatcher();

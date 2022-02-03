@@ -1,7 +1,7 @@
 package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.block.entity.UnstableCubeBlockEntity;
+import agency.highlysuspect.incorporeal.block.UnstableCubeBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
@@ -14,8 +14,14 @@ import net.minecraft.world.item.DyeColor;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.client.core.handler.ClientTickHandler;
 
-public class UnstableCubeRenderer implements BlockEntityRenderer<UnstableCubeBlockEntity> {
-	public UnstableCubeRenderer(DyeColor color, BlockEntityRendererProvider.Context ctx) {
+/**
+ * The BlockEntityRenderer for the Unstable Cube. In charge of rotating at a weird angle, tinting it, etc.
+ * Note that it takes an additional DyeColor parameter, for the color of the cube to draw.
+ * Botania's TEISR machinery passes a `null` BlockEntity in the item renderer, but I still need to know what color
+ * to make the unstable cube model.
+ */
+public class UnstableCubeBlockEntityRenderer implements BlockEntityRenderer<UnstableCubeBlockEntity> {
+	public UnstableCubeBlockEntityRenderer(DyeColor color, BlockEntityRendererProvider.Context ctx) {
 		model = new UnstableCubeModel(ctx.bakeLayer(IncClientModelLayers.UNSTABLE_CUBE));
 		
 		int colorPacked = color.getFireworkColor();
