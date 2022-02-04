@@ -21,6 +21,9 @@ public class IncItems {
 	public static final BlockItem FRAME_TINKERER = new BlockItem(IncBlocks.FRAME_TINKERER, props());
 	public static final BlockItem CORPOREA_RETAINER_EVAPORATOR = new BlockItem(IncBlocks.CORPOREA_RETAINER_EVAPORATOR, props());
 	
+	public static final BlockItem NATURAL_REPEATER = new BlockItem(IncBlocks.NATURAL_REPEATER, props());
+	public static final BlockItem NATURAL_COMPARATOR = new BlockItem(IncBlocks.NATURAL_COMPARATOR, props());
+	
 	public static final ItemBlockSpecialFlower SANVOCALIA = new ItemBlockSpecialFlower(IncBlocks.SANVOCALIA, props());
 	public static final ItemBlockSpecialFlower SANVOCALIA_SMALL = new ItemBlockSpecialFlower(IncBlocks.SANVOCALIA_SMALL, props());
 	public static final ItemBlockSpecialFlower FLOATING_SANVOCALIA = new ItemBlockSpecialFlower(IncBlocks.FLOATING_SANVOCALIA, props());
@@ -39,10 +42,9 @@ public class IncItems {
 		r.accept(CORPOREA_TICKET, Inc.id("corporea_ticket"));
 		
 		//blockitems
-		registerBlockItem(r, CORPOREA_SOLIDIFIER);
-		registerBlockItem(r, RED_STRING_LIAR);
-		registerBlockItem(r, FRAME_TINKERER);
-		registerBlockItem(r, CORPOREA_RETAINER_EVAPORATOR);
+		registerBlockItems(r,
+			CORPOREA_SOLIDIFIER, RED_STRING_LIAR, FRAME_TINKERER, CORPOREA_RETAINER_EVAPORATOR,
+			NATURAL_REPEATER, NATURAL_COMPARATOR);
 		
 		//flowers
 		r.accept(SANVOCALIA, Inc.id("sanvocalia"));
@@ -57,6 +59,10 @@ public class IncItems {
 		
 		//unstable cubes
 		UNSTABLE_CUBES.values().forEach(item -> registerBlockItem(r, item));
+	}
+	
+	private static void registerBlockItems(BiConsumer<Item, ResourceLocation> r, BlockItem... bis) {
+		for(BlockItem bi : bis) registerBlockItem(r, bi);
 	}
 	
 	private static void registerBlockItem(BiConsumer<Item, ResourceLocation> r, BlockItem bi) {

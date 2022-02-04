@@ -28,5 +28,6 @@ public interface IncXplat {
 		}
 	}
 	
+	//Item.Properties with a creative tab set, basically
 	Item.Properties defaultItemProperties();
 }

@@ -12,15 +12,20 @@ import java.util.function.BiConsumer;
 
 public class IncClientBlockProperties {
 	public static void registerRenderTypes(BiConsumer<Block, RenderType> r) {
-		r.accept(IncBlocks.SANVOCALIA, RenderType.cutout());
-		r.accept(IncBlocks.SANVOCALIA_SMALL, RenderType.cutout());
-		r.accept(IncBlocks.FLOATING_SANVOCALIA, RenderType.cutout());
-		r.accept(IncBlocks.FLOATING_SANVOCALIA_SMALL, RenderType.cutout());
+		RenderType cutout = RenderType.cutout();
 		
-		r.accept(IncBlocks.FUNNY, RenderType.cutout());
-		r.accept(IncBlocks.FUNNY_SMALL, RenderType.cutout());
-		r.accept(IncBlocks.FLOATING_FUNNY, RenderType.cutout());
-		r.accept(IncBlocks.FLOATING_FUNNY_SMALL, RenderType.cutout());
+		r.accept(IncBlocks.NATURAL_REPEATER, cutout);
+		r.accept(IncBlocks.NATURAL_COMPARATOR, cutout);
+		
+		r.accept(IncBlocks.SANVOCALIA, cutout);
+		r.accept(IncBlocks.SANVOCALIA_SMALL, cutout);
+		r.accept(IncBlocks.FLOATING_SANVOCALIA, cutout);
+		r.accept(IncBlocks.FLOATING_SANVOCALIA_SMALL, cutout);
+		
+		r.accept(IncBlocks.FUNNY, cutout);
+		r.accept(IncBlocks.FUNNY_SMALL, cutout);
+		r.accept(IncBlocks.FLOATING_FUNNY, cutout);
+		r.accept(IncBlocks.FLOATING_FUNNY_SMALL, cutout);
 	}
 	
 	public static void registerBlockEntityRenderers(EntityRenderers.BERConsumer r) {
