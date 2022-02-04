@@ -32,7 +32,8 @@
 	},
 	
 	"mixins": [
-		"incorporeal.mixin.common.json"
+		"incorporeal.mixin.common.json",
+		"incorporeal.mixin.fabric.json"
 	],
 	
 	"depends": {

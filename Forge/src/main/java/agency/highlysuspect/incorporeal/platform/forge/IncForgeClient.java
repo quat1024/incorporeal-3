@@ -1,7 +1,6 @@
 package agency.highlysuspect.incorporeal.platform.forge;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.block.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.client.IncClientBlockProperties;
 import agency.highlysuspect.incorporeal.client.IncClientItemProperties;
 import agency.highlysuspect.incorporeal.client.IncClientLayerDefinitions;
@@ -63,7 +62,7 @@ public class IncForgeClient {
 	//Lazily copy pasted from Botania as usual
 	private static final Supplier<Map<BlockEntityType<?>, Function<BlockEntity, IWandHUD>>> incWandHuds = Suppliers.memoize(() -> {
 		Map<BlockEntityType<?>, Function<BlockEntity, IWandHUD>> map = new IdentityHashMap<>();
-		IncBlockEntityTypes.registerWandHudCaps((factory, types) -> {
+		IncClientBlockProperties.registerWandHudCaps((factory, types) -> {
 			for(BlockEntityType<?> type : types) {
 				map.put(type, factory);
 			}

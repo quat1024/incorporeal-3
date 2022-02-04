@@ -1,12 +1,16 @@
 package agency.highlysuspect.incorporeal.client;
 
+import agency.highlysuspect.incorporeal.block.AbstractSoulCoreBlockEntity;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.block.IncBlockEntityTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
+import vazkii.botania.api.block.IWandHUD;
+import vazkii.botania.api.subtile.TileEntityFunctionalFlower;
 import vazkii.botania.client.render.entity.EntityRenderers;
 import vazkii.botania.client.render.tile.RenderTileRedString;
 import vazkii.botania.client.render.tile.RenderTileSpecialFlower;
+import vazkii.botania.common.block.tile.ModTiles;
 
 import java.util.function.BiConsumer;
 
@@ -38,5 +42,16 @@ public class IncClientBlockProperties {
 		
 		IncBlockEntityTypes.UNSTABLE_CUBES.forEach((color, type) ->
 			r.register(type, context -> new UnstableCubeBlockEntityRenderer(color, context)));
+	}
+	
+	public static void registerWandHudCaps(ModTiles.BECapConsumer<IWandHUD> r) {
+		r.accept(be -> new AbstractSoulCoreBlockEntity.WandHud((AbstractSoulCoreBlockEntity) be),
+			IncBlockEntityTypes.ENDER_SOUL_CORE);
+		
+		r.accept(be -> new TileEntityFunctionalFlower.FunctionalWandHud<>((TileEntityFunctionalFlower) be), 
+			IncBlockEntityTypes.SANVOCALIA_BIG,
+			IncBlockEntityTypes.SANVOCALIA_SMALL,
+			IncBlockEntityTypes.FUNNY_BIG,
+			IncBlockEntityTypes.FUNNY_SMALL);
 	}
 }

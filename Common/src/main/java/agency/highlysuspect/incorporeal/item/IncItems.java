@@ -21,6 +21,8 @@ public class IncItems {
 	public static final BlockItem FRAME_TINKERER = new BlockItem(IncBlocks.FRAME_TINKERER, props());
 	public static final BlockItem CORPOREA_RETAINER_EVAPORATOR = new BlockItem(IncBlocks.CORPOREA_RETAINER_EVAPORATOR, props());
 	
+	public static final BlockItem ENDER_SOUL_CORE = new IncBlockItemWithTEISR(IncBlocks.ENDER_SOUL_CORE, props());
+	
 	public static final BlockItem NATURAL_REPEATER = new BlockItem(IncBlocks.NATURAL_REPEATER, props());
 	public static final BlockItem NATURAL_COMPARATOR = new BlockItem(IncBlocks.NATURAL_COMPARATOR, props());
 	
@@ -44,6 +46,7 @@ public class IncItems {
 		//blockitems
 		registerBlockItems(r,
 			CORPOREA_SOLIDIFIER, RED_STRING_LIAR, FRAME_TINKERER, CORPOREA_RETAINER_EVAPORATOR,
+			ENDER_SOUL_CORE,
 			NATURAL_REPEATER, NATURAL_COMPARATOR);
 		
 		//flowers

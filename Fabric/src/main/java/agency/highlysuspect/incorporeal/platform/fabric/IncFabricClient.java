@@ -1,6 +1,5 @@
 package agency.highlysuspect.incorporeal.platform.fabric;
 
-import agency.highlysuspect.incorporeal.block.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.client.IncClientBlockProperties;
 import agency.highlysuspect.incorporeal.client.IncClientItemProperties;
 import agency.highlysuspect.incorporeal.client.IncClientLayerDefinitions;
@@ -34,6 +33,6 @@ public class IncFabricClient implements ClientModInitializer {
 		});
 		
 		//wand HUD capability
-		IncBlockEntityTypes.registerWandHudCaps((factory, types) -> BotaniaFabricClientCapabilities.WAND_HUD.registerForBlockEntities((be, c) -> factory.apply(be), types));
+		IncClientBlockProperties.registerWandHudCaps((factory, types) -> BotaniaFabricClientCapabilities.WAND_HUD.registerForBlockEntities((be, c) -> factory.apply(be), types));
 	}
 }

@@ -23,6 +23,9 @@ public class IncBlocks {
 	public static final FrameTinkererBlock FRAME_TINKERER = new FrameTinkererBlock(Properties.copy(Blocks.OAK_PLANKS));
 	public static final CorporeaRetainerEvaporatorBlock CORPOREA_RETAINER_EVAPORATOR = new CorporeaRetainerEvaporatorBlock(Properties.copy(ModBlocks.corporeaRetainer));
 	
+	private static final Properties soulCoreProps = Properties.of(Material.NETHER_WOOD).sound(SoundType.NETHER_SPROUTS).strength(1f).isSuffocating((__, ___, ____) -> false).noOcclusion();
+	public static final SoulCoreBlock ENDER_SOUL_CORE = new SoulCoreBlock(() -> IncBlockEntityTypes.ENDER_SOUL_CORE, soulCoreProps);
+	
 	private static final Properties naturalDeviceProps = Properties.of(Material.DECORATION).instabreak().sound(SoundType.CROP).noOcclusion();
 	public static final CrappyRepeaterBlock NATURAL_REPEATER = new CrappyRepeaterBlock(naturalDeviceProps);
 	public static final CrappyComparatorBlock NATURAL_COMPARATOR = new CrappyComparatorBlock(naturalDeviceProps);

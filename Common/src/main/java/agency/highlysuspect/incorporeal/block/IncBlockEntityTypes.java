@@ -4,9 +4,6 @@ import agency.highlysuspect.incorporeal.Inc;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import vazkii.botania.api.block.IWandHUD;
-import vazkii.botania.api.subtile.TileEntityFunctionalFlower;
-import vazkii.botania.common.block.tile.ModTiles;
 import vazkii.botania.xplat.IXplatAbstractions;
 
 import java.util.Map;
@@ -15,6 +12,9 @@ import java.util.function.BiConsumer;
 public class IncBlockEntityTypes {
 	public static final BlockEntityType<RedStringLiarBlockEntity> RED_STRING_LIAR =
 		IXplatAbstractions.INSTANCE.createBlockEntityType(RedStringLiarBlockEntity::new, IncBlocks.RED_STRING_LIAR);
+	
+	public static final BlockEntityType<EnderSoulCoreBlockEntity> ENDER_SOUL_CORE = 
+		IXplatAbstractions.INSTANCE.createBlockEntityType(EnderSoulCoreBlockEntity::new, IncBlocks.ENDER_SOUL_CORE);
 	
 	public static final BlockEntityType<SanvocaliaBlockEntity> SANVOCALIA_BIG =
 		IXplatAbstractions.INSTANCE.createBlockEntityType(SanvocaliaBlockEntity::big, IncBlocks.SANVOCALIA, IncBlocks.FLOATING_SANVOCALIA);
@@ -44,8 +44,4 @@ public class IncBlockEntityTypes {
 		UNSTABLE_CUBES.forEach((color, type) -> r.accept(type, Inc.id(color.getName() + "_unstable_cube")));
 	}
 	
-	public static void registerWandHudCaps(ModTiles.BECapConsumer<IWandHUD> r) {
-		r.accept(be -> new TileEntityFunctionalFlower.FunctionalWandHud<>((TileEntityFunctionalFlower) be), 
-			SANVOCALIA_BIG, SANVOCALIA_SMALL, FUNNY_BIG, FUNNY_SMALL);
-	}
 }

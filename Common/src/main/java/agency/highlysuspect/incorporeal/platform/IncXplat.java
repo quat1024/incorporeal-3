@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.platform;
 
 import agency.highlysuspect.incorporeal.Inc;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.Item;
 
 import java.util.List;
@@ -30,4 +31,7 @@ public interface IncXplat {
 	
 	//Item.Properties with a creative tab set, basically
 	Item.Properties defaultItemProperties();
+	
+	//Constructor requires an accessor on Fabric
+	DamageSource newDamageSource(String name);
 }
