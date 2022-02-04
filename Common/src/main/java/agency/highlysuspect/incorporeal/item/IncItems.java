@@ -32,7 +32,7 @@ public class IncItems {
 	public static final ItemBlockSpecialFlower FLOATING_FUNNY_SMALL = new ItemBlockSpecialFlower(IncBlocks.FLOATING_FUNNY_SMALL, props());
 	
 	public static final Map<DyeColor, BlockItem> UNSTABLE_CUBES = Inc.sixteenColors(
-		color -> new BlockItem(IncBlocks.UNSTABLE_CUBES.get(color), props()));
+		color -> new IncBlockItemWithTEISR(IncBlocks.UNSTABLE_CUBES.get(color), props()));
 	
 	public static void register(BiConsumer<Item, ResourceLocation> r) {
 		//items
