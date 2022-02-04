@@ -16,7 +16,6 @@ Old dragon yells at corporea spark.
 
 ## Things left to port
 
-* Fix flowers so theyre not turbo janky
 * soul cores (ender/corporea/potion soul core)
 * ticket conjurer
 * rod of the fractured space

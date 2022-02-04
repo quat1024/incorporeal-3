@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vazkii.botania.api.corporea.CorporeaHelper;
 import vazkii.botania.common.integration.corporea.CorporeaNodeDetectors;
+import vazkii.botania.common.lib.LibMisc;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -36,6 +37,10 @@ public class Inc {
 	
 	public static ResourceLocation id(String path) {
 		return new ResourceLocation(MODID, path);
+	}
+	
+	public static ResourceLocation botaniaId(String path) {
+		return new ResourceLocation(LibMisc.MOD_ID, path);
 	}
 	
 	public static <T> T choose(List<T> list, Random random) {
