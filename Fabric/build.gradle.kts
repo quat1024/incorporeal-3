@@ -7,7 +7,7 @@ plugins {
 
 dependencies {
     modImplementation(group = "net.fabricmc.fabric-api", name = "fabric-api", version = "0.44.0+1.18")
-    modImplementation(group = "vazkii.botania"         , name = "Botania"   , version = "1.18.1-428-FABRIC-SNAPSHOT")
+    modImplementation(group = "vazkii.botania"         , name = "Botania"   , version = "1.18.1-428-FABRIC-SNAPSHOT").isChanging = true
     
     //botania-fabric's transitive dependencies as of Jan 29, 2022; https://github.com/VazkiiMods/Botania/blob/1b16b5672fd7c59f4fa0e5e235f9b8120b84dcb2/Fabric/build.gradle
     //Due to reasons, Botania does not (currently) publish transitive dependency information for its artifacts.

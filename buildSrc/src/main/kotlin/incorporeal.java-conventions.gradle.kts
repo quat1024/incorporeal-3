@@ -12,13 +12,19 @@ version = "$minecraftVersion-$buildNumber"
 
 java {
     //Declare that Java artifacts should have a sources jar published alongside them.
-    //I don't use Maven publication atm but if I did this would be handy.
+    //I don't use Maven publication atm, but if I did this would be handy.
     withSourcesJar()
     
     //Use Java version 17 for compilation and building tasks.
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
     }
+}
+
+configurations.all {
+    //In this project, Botania is declared as a `changing` module, because it's based off active HEAD.
+    //Tell Gradle to update it every time I sit down at my computer so I don't have to manually use refreshDependencies.
+    resolutionStrategy.cacheChangingModulesFor(12, "hours")
 }
 
 dependencies {

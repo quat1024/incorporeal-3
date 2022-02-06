@@ -6,7 +6,8 @@ plugins {
 }
 
 dependencies {
-    implementation(fgDeobf(group = "vazkii.botania", name = "Botania", version = "1.18.1-428-SNAPSHOT"))
+    val botania = implementation(fgDeobf(group = "vazkii.botania", name = "Botania", version = "1.18.1-428-SNAPSHOT"))
+    if(botania is ExternalModuleDependency) botania.isChanging = true
     
     //botania-forge's transitive dependencies as of Jan 29, 2022; https://github.com/VazkiiMods/Botania/blob/1b16b5672fd7c59f4fa0e5e235f9b8120b84dcb2/Forge/build.gradle
     //Due to reasons, Botania does not (currently) publish transitive dependency information for its artifacts.
