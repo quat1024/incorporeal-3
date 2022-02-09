@@ -16,7 +16,7 @@ jobs:
         uses: gradle/gradle-build-action@v2  
         
       - name: Build with Gradle™
-        run: ./gradlew --info build
+        run: ./gradlew build
         
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
