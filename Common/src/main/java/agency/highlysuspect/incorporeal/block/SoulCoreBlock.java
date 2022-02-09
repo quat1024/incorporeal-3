@@ -57,6 +57,7 @@ public class SoulCoreBlock extends BlockMod implements EntityBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, typeS.get(), AbstractSoulCoreBlockEntity::serverTick);
+		if(level.isClientSide()) return null;
+		else return createTickerHelper(type, typeS.get(), AbstractSoulCoreBlockEntity::serverTick);
 	}
 }

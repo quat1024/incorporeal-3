@@ -35,9 +35,10 @@ public class IncBlockEntityTypes {
 	public static void register(BiConsumer<BlockEntityType<?>, ResourceLocation> r) {
 		r.accept(RED_STRING_LIAR, Inc.id("red_string_liar"));
 		
+		r.accept(ENDER_SOUL_CORE, Inc.id("ender_soul_core"));
+		
 		r.accept(SANVOCALIA_BIG, Inc.id("sanvocalia"));
 		r.accept(SANVOCALIA_SMALL, Inc.id("sanvocalia_small"));
-		
 		r.accept(FUNNY_BIG, Inc.id("funny"));
 		r.accept(FUNNY_SMALL, Inc.id("funny_small"));
 		

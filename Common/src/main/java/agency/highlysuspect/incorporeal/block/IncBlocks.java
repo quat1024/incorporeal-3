@@ -55,6 +55,8 @@ public class IncBlocks {
 		r.accept(FRAME_TINKERER, Inc.id("frame_tinkerer"));
 		r.accept(CORPOREA_RETAINER_EVAPORATOR, Inc.id("corporea_retainer_evaporator"));
 		
+		r.accept(ENDER_SOUL_CORE, Inc.id("ender_soul_core"));
+		
 		r.accept(NATURAL_REPEATER, Inc.id("natural_repeater"));
 		r.accept(NATURAL_COMPARATOR, Inc.id("natural_comparator"));
 		
