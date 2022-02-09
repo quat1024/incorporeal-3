@@ -1,0 +1,38 @@
+name: the real
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Check out
+        uses: actions/checkout@v2
+      - name: make sure nobody is acting SUSSY........
+        uses: gradle/wrapper-validation-action@v1
+      - name: Actually don't think i still need to do this
+        run: chmod +x ./gradlew
+      - name: Cache setup i pasted from botania
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ./.gradle/loom-cache/remapped-mods
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle', '**/gradle-wrapper.properties') }}
+      - name: Build with Gradle™
+        run: ./gradlew build
+      - name: pour salt on the gradle demon
+        run: ./gradlew --stop
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artifacts
+          path: |
+            fabric/build/libs/
+            forge/build/libs/
