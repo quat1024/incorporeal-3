@@ -1,0 +1,27 @@
+{
+  "type": "botania:runic_altar",
+  "output": {
+    "item": "incorporeal:ender_soul_core"
+  },
+  "mana": 24000,
+  "ingredients": [
+    {
+      "item": "incorporeal:soul_core_frame"
+    },
+    {
+      "tag": "forge:gems/dragonstone"
+    },
+    {
+      "tag": "forge:gems/dragonstone"
+    },
+    {
+      "item": "botania:manaweave_cloth"
+    },
+    {
+      "item": "botania:manaweave_cloth"
+    },
+    {
+      "item": "botania:ender_hand"
+    }
+  ]
+}

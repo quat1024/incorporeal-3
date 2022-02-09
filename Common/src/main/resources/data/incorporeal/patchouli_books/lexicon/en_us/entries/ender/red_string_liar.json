@@ -1,0 +1,26 @@
+{
+	"name": "block.incorporeal.red_string_liar",
+	"category": "botania:ender",
+	"icon": "incorporeal:red_string_liar",
+	"entry_color": "194a5c",
+	"advancement": "botania:main/elf_lexicon_pickup",
+	"pages": [
+		{
+			"type": "text",
+			"text": "incorporeal.entry.red_string_liar0"
+		},
+		{
+			"type": "text",
+			"text": "incorporeal.entry.red_string_liar1"
+		},
+		{
+			"type": "text",
+			"text": "incorporeal.entry.red_string_liar2"
+		},
+		{
+			"type": "crafting",
+			"text": "incorporeal.entry.red_string_liar.flavor",
+			"recipe": "incorporeal:red_string_liar"
+		}
+	]
+}

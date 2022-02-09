@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:ticket_conjurer"
+    ]
+  },
+  "criteria": {
+    "ingots/manasteel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/manasteel"
+          }
+        ]
+      }
+    },
+    "ingots/elementium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/elementium"
+          }
+        ]
+      }
+    },
+    "corporea_index": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "botania:corporea_index"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:ticket_conjurer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ingots/manasteel",
+      "ingots/elementium",
+      "corporea_index",
+      "has_the_recipe"
+    ]
+  ]
+}

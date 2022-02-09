@@ -1,0 +1,71 @@
+{
+	"type": "minecraft:block",
+	"pools": [
+		{
+			"rolls": 1.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "botania:redstone_root"
+				}
+			]
+		},
+		{
+			"rolls": 1.0,
+			"conditions": [
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "incorporeal:redstone_root_crop",
+					"properties": {
+						"age": 6
+					}
+				}
+			],
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "botania:redstone_root",
+					"functions": [
+						{
+							"function": "minecraft:apply_bonus",
+							"enchantment": "minecraft:fortune",
+							"formula": "minecraft:uniform_bonus_count",
+							"parameters": {
+								"bonusMultiplier": 1
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"rolls": 1.0,
+			"conditions": [
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "incorporeal:redstone_root_crop",
+					"properties": {
+						"age": 6
+					}
+				}
+			],
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "incorporeal:natural_repeater",
+					"weight": 80
+				},
+				{
+					"type": "minecraft:item",
+					"name": "incorporeal:natural_comparator",
+					"weight": 20
+				}
+			]
+		}
+	],
+	"functions": [
+		{
+			"function": "minecraft:explosion_decay"
+		}
+	]
+}

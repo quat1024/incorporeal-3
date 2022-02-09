@@ -1,0 +1,39 @@
+{
+  "type": "botania:runic_altar",
+  "output": {
+    "item": "incorporeal:soul_core_frame"
+  },
+  "mana": 12000,
+  "ingredients": [
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "item": "botania:pixie_dust"
+    },
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "item": "botania:pixie_dust"
+    }
+  ]
+}

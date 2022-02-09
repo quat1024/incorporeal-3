@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " EG",
+    " TE",
+    "T  "
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "G": {
+      "item": "botania:life_essence"
+    },
+    "T": {
+      "item": "botania:dreamwood_twig"
+    }
+  },
+  "result": {
+    "item": "incorporeal:fractured_space_rod"
+  }
+}

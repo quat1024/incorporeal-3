@@ -1,0 +1,24 @@
+{
+	"name": "block.incorporeal.funny",
+	"category": "botania:functional_flowers",
+	"icon": "incorporeal:funny",
+	"entry_color": "194a5c",
+	"pages": [
+		{
+			"type": "text",
+			"text": "incorporeal.entry.funny0"
+		},
+		{
+			"type": "text",
+			"text": "incorporeal.entry.funny1"
+		},
+		{
+			"type": "botania:petal_apothecary",
+			"text": "incorporeal.entry.funny.flavor",
+			"recipe": "incorporeal:funny"
+		}
+	],
+	"extra_recipe_mappings": {
+		"incorporeal:floating_funny": 1
+	}
+}

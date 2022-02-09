@@ -1,0 +1,29 @@
+{
+  "type": "botania:petal_apothecary",
+  "output": {
+    "item": "incorporeal:sanvocalia"
+  },
+  "ingredients": [
+    {
+      "tag": "botania:petals/white"
+    },
+    {
+      "tag": "botania:petals/orange"
+    },
+    {
+      "tag": "botania:petals/orange"
+    },
+    {
+      "tag": "botania:petals/red"
+    },
+    {
+      "tag": "botania:runes/lust"
+    },
+    {
+      "item": "botania:pixie_dust"
+    },
+    {
+      "item": "botania:redstone_root"
+    }
+  ]
+}

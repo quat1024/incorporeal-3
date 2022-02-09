@@ -13,10 +13,10 @@ jobs:
           java-version: '17'
       - name: Check out
         uses: actions/checkout@v2
+        # this next task is known to fail sometimes b/c the cdn gradle uses is a little flaky
+        # there is `continue-on-error`, but given the nature of this task, well...
       - name: make sure nobody is acting SUSSY........
         uses: gradle/wrapper-validation-action@v1
-      - name: Actually don't think i still need to do this
-        run: chmod +x ./gradlew
       - name: Cache setup i pasted from botania
         uses: actions/cache@v2
         with:
@@ -27,6 +27,8 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle', '**/gradle-wrapper.properties') }}
       - name: Build with Gradle™
         run: ./gradlew build
+        # Assorted Gradle familiars such as banshees and daemons must be stopped, to allow actions/cache to work
+        # see https://github.com/actions/cache/blob/main/examples.md#java---gradle
       - name: pour salt on the gradle demon
         run: ./gradlew --stop
       - name: Upload artifacts

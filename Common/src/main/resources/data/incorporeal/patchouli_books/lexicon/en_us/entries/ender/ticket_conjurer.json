@@ -1,0 +1,22 @@
+{
+	"name": "item.incorporeal.ticket_conjurer",
+	"category": "botania:ender",
+	"icon": "incorporeal:ticket_conjurer",
+	"entry_color": "194a5c",
+	"advancement": "botania:main/elf_lexicon_pickup",
+	"pages": [
+		{
+			"type": "text",
+			"text": "incorporeal.entry.ticket_conjurer0"
+		},
+		{
+			"type": "text",
+			"text": "incorporeal.entry.ticket_conjurer1"
+		},
+		{
+			"type": "crafting",
+			"text": "incorporeal.entry.ticket_conjurer.flavor",
+			"recipe": "incorporeal:ticket_conjurer"
+		}
+	]
+}

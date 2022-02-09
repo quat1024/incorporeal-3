@@ -1,0 +1,22 @@
+{
+	"name": "block.incorporeal.corporea_retainer_evaporator",
+	"category": "botania:ender",
+	"icon": "incorporeal:corporea_retainer_evaporator",
+	"entry_color": "194a5c",
+	"advancement": "botania:main/elf_lexicon_pickup",
+	"pages": [
+		{
+			"type": "text",
+			"text": "incorporeal.entry.corporea_retainer_evaporator0"
+		},
+		{
+			"type": "text",
+			"text": "incorporeal.entry.corporea_retainer_evaporator1"
+		},
+		{
+			"type": "crafting",
+			"text": "incorporeal.entry.corporea_retainer_evaporator.flavor",
+			"recipe": "incorporeal:corporea_retainer_evaporator"
+		}
+	]
+}

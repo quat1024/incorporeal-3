@@ -1,0 +1,34 @@
+{
+	"name": "incorporeal.entry.unstable_cube",
+	"category": "botania:misc",
+	"icon": "incorporeal:red_unstable_cube",
+	"entry_color": "194a5c",
+	"pages": [
+		{
+			"type": "text",
+			"text": "incorporeal.entry.unstable_cube0"
+		},
+		{
+			"type": "botania:crafting_multi",
+			"text": "incorporeal.entry.unstable_cube.flavor",
+			"recipes": [
+				"incorporeal:black_unstable_cube",
+				"incorporeal:red_unstable_cube",
+				"incorporeal:green_unstable_cube",
+				"incorporeal:brown_unstable_cube",
+				"incorporeal:blue_unstable_cube",
+				"incorporeal:purple_unstable_cube",
+				"incorporeal:cyan_unstable_cube",
+				"incorporeal:light_gray_unstable_cube",
+				"incorporeal:gray_unstable_cube",
+				"incorporeal:pink_unstable_cube",
+				"incorporeal:lime_unstable_cube",
+				"incorporeal:yellow_unstable_cube",
+				"incorporeal:light_blue_unstable_cube",
+				"incorporeal:magenta_unstable_cube",
+				"incorporeal:orange_unstable_cube",
+				"incorporeal:white_unstable_cube"
+			]
+		}
+	]
+}

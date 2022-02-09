@@ -1,0 +1,17 @@
+{
+	"name": "block.incorporeal.frame_tinkerer",
+	"category": "botania:devices",
+	"icon": "incorporeal:frame_tinkerer",
+	"entry_color": "194a5c",
+	"pages": [
+		{
+			"type": "text",
+			"text": "incorporeal.entry.frame_tinkerer0"
+		},
+		{
+			"type": "crafting",
+			"text": "incorporeal.entry.frame_tinkerer.flavor",
+			"recipe": "incorporeal:frame_tinkerer"
+		}
+	]
+}

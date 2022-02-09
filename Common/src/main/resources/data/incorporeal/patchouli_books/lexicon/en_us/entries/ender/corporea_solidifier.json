@@ -1,0 +1,22 @@
+{
+	"name": "block.incorporeal.corporea_solidifier",
+	"category": "botania:ender",
+	"icon": "incorporeal:corporea_solidifier",
+	"entry_color": "194a5c",
+	"advancement": "botania:main/elf_lexicon_pickup",
+	"pages": [
+		{
+			"type": "text",
+			"text": "incorporeal.entry.corporea_solidifier0"
+		},
+		{
+			"type": "text",
+			"text": "incorporeal.entry.corporea_solidifier1"
+		},
+		{
+			"type": "crafting",
+			"text": "incorporeal.entry.corporea_solidifier.flavor",
+			"recipe": "incorporeal:corporea_solidifier"
+		}
+	]
+}

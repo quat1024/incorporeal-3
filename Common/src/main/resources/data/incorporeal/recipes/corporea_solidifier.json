@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "EFE",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "F": {
+      "item": "botania:corporea_funnel"
+    },
+    "E": {
+      "tag": "forge:ingots/elementium"
+    }
+  },
+  "result": {
+    "item": "incorporeal:corporea_solidifier"
+  }
+}

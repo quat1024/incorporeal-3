@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:corporea_solidifier"
+    ]
+  },
+  "criteria": {
+    "paper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:paper"
+          }
+        ]
+      }
+    },
+    "corporea_funnel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "botania:corporea_funnel"
+          }
+        ]
+      }
+    },
+    "ingots/elementium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/elementium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:corporea_solidifier"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "paper",
+      "corporea_funnel",
+      "ingots/elementium",
+      "has_the_recipe"
+    ]
+  ]
+}

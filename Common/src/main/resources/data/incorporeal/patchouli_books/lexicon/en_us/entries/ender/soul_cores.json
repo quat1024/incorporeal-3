@@ -1,0 +1,53 @@
+{
+	"name": "incorporeal.entry.soul_cores",
+	"category": "botania:ender",
+	"icon": "incorporeal:soul_core_frame",
+	"entry_color": "194a5c",
+	"advancement": "botania:main/elf_lexicon_pickup",
+	"pages": [
+		{
+			"type": "text",
+			"text": "incorporeal.entry.soul_cores0"
+		},
+		{
+			"type": "text",
+			"text": "incorporeal.entry.soul_cores1"
+		},
+		{
+			"type": "text",
+			"text": "incorporeal.entry.soul_cores2"
+		},
+		{
+			"type": "botania:runic_altar",
+			"recipe": "incorporeal:soul_core_frame",
+			"text": "incorporeal.entry.soul_cores.flavor"
+		},
+		{
+			"type": "text",
+			"text": "incorporeal.entry.soul_cores.ender"
+		},
+		{
+			"type": "botania:runic_altar",
+			"recipe": "incorporeal:ender_soul_core",
+			"text": "incorporeal.entry.soul_cores.ender.flavor"
+		},
+		{
+			"type": "text",
+			"text": "incorporeal.entry.soul_cores.corporea"
+		},
+		{
+			"type": "botania:runic_altar",
+			"recipe": "incorporeal:corporea_soul_core",
+			"text": "incorporeal.entry.soul_cores.corporea.flavor"
+		},
+		{
+			"type": "text",
+			"text": "incorporeal.entry.soul_cores.potion"
+		},
+		{
+			"type": "botania:runic_altar",
+			"recipe": "incorporeal:potion_soul_core",
+			"text": "incorporeal.entry.soul_cores.potion.flavor"
+		}
+	]
+}

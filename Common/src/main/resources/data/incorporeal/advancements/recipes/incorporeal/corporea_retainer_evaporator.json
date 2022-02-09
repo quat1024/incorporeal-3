@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:corporea_retainer_evaporator"
+    ]
+  },
+  "criteria": {
+    "blue_pavement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "botania:blue_pavement"
+          }
+        ]
+      }
+    },
+    "corporea_spark": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "botania:corporea_spark"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:corporea_retainer_evaporator"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "blue_pavement",
+      "corporea_spark",
+      "has_the_recipe"
+    ]
+  ]
+}

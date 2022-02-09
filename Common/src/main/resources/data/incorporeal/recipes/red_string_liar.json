@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "RCS",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "tag": "botania:livingrock"
+    },
+    "S": {
+      "item": "botania:red_string"
+    },
+    "C": {
+      "item": "botania:forest_eye"
+    }
+  },
+  "result": {
+    "item": "incorporeal:red_string_liar"
+  }
+}

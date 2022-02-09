@@ -1,0 +1,21 @@
+{
+	"name": "block.incorporeal.sanvocalia",
+	"category": "botania:functional_flowers",
+	"icon": "incorporeal:sanvocalia",
+	"entry_color": "194a5c",
+	"advancement": "botania:main/elf_lexicon_pickup",
+	"pages": [
+		{
+			"type": "text",
+			"text": "incorporeal.entry.sanvocalia0"
+		},
+		{
+			"type": "botania:petal_apothecary",
+			"text": "incorporeal.entry.sanvocalia.flavor",
+			"recipe": "incorporeal:sanvocalia"
+		}
+	],
+	"extra_recipe_mappings": {
+		"incorporeal:floating_sanvocalia": 1
+	}
+}

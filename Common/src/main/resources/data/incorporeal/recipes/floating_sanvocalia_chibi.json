@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "botania:floating_flowers"
+    },
+    {
+      "item": "incorporeal:sanvocalia_chibi"
+    }
+  ],
+  "result": {
+    "item": "incorporeal:floating_sanvocalia_chibi"
+  }
+}

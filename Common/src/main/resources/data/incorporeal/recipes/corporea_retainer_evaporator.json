@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "P P",
+    "PCP",
+    "P P"
+  ],
+  "key": {
+    "P": {
+      "item": "botania:blue_pavement"
+    },
+    "C": {
+      "item": "botania:corporea_spark"
+    }
+  },
+  "result": {
+    "item": "incorporeal:corporea_retainer_evaporator"
+  }
+}

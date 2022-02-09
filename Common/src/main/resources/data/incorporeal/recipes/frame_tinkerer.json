@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SLS",
+    "LFL"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:ingots/manasteel"
+    },
+    "L": {
+      "tag": "botania:livingrock"
+    },
+    "F": {
+      "item": "minecraft:item_frame"
+    }
+  },
+  "result": {
+    "item": "incorporeal:frame_tinkerer"
+  }
+}

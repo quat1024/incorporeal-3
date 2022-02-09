@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "unstable_cube",
+  "pattern": [
+    "OPO",
+    "PEP",
+    "OPO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "P": {
+      "item": "botania:light_blue_petal"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "result": {
+    "item": "incorporeal:light_blue_unstable_cube",
+    "count": 2
+  }
+}

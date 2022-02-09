@@ -22,7 +22,7 @@ Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-f
 
 * potion soul core
 * ticket conjurer (item, chat mixin, overlay)
-* rod of the fractured space (item, entity)
+* rod of the fractured space (item, entity) (remember the botania rods tag)
 * the datapack and lexicon, probably to be cut and paste from 1.16
 * redstone root plant
   * maybe change natural circuits to be stonecut from redstone roots instead of dropping
