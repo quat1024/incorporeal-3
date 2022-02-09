@@ -8,7 +8,15 @@ plugins {
 //You could also set "version" directly in gradle.properties, but i like having the mc version thrown in there too.
 val minecraftVersion: String by project
 val buildNumber: String by project
-version = "$minecraftVersion-$buildNumber"
+var v = "$minecraftVersion-$buildNumber"
+
+//Set in github actions ci
+val sha: String? = System.getenv("GITHUB_SHA");
+if(sha != null) {
+    v += "-SNAPSHOT-${sha.substring(0, 8)}"
+}
+
+version = v
 
 java {
     //Declare that Java artifacts should have a sources jar published alongside them.
