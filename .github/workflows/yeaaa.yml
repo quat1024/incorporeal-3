@@ -34,5 +34,5 @@ jobs:
         with:
           name: Artifacts
           path: |
-            fabric/build/libs/
-            forge/build/libs/
+            Fabric/build/libs/
+            Forge/build/libs/
