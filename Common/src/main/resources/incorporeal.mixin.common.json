@@ -8,7 +8,8 @@
 		"TileCorporeaRetainerAccessor",
 		"TileCorporeaInterceptorMixin",
 		"TileCorporeaIndexAccessor",
-		"ItemFrameAccessor"
+		"ItemFrameAccessor",
+		"ModItemsMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

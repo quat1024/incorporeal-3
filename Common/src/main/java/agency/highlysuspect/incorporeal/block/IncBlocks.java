@@ -7,6 +7,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.Material;
 import vazkii.botania.common.block.BlockFloatingSpecialFlower;
@@ -29,6 +30,7 @@ public class IncBlocks {
 	private static final Properties naturalDeviceProps = Properties.of(Material.DECORATION).instabreak().sound(SoundType.CROP).noOcclusion();
 	public static final CrappyRepeaterBlock NATURAL_REPEATER = new CrappyRepeaterBlock(naturalDeviceProps);
 	public static final CrappyComparatorBlock NATURAL_COMPARATOR = new CrappyComparatorBlock(naturalDeviceProps);
+	public static final RedstoneRootCropBlock REDSTONE_ROOT_CROP = new RedstoneRootCropBlock(Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP));
 	
 	private static final Properties flowerProps = Properties.copy(ModSubtiles.agricarnation);
 	private static final Properties floatingProps = Properties.copy(ModSubtiles.agricarnationFloating);
@@ -59,6 +61,7 @@ public class IncBlocks {
 		
 		r.accept(NATURAL_REPEATER, Inc.id("natural_repeater"));
 		r.accept(NATURAL_COMPARATOR, Inc.id("natural_comparator"));
+		r.accept(REDSTONE_ROOT_CROP, Inc.id("redstone_root_crop"));
 		
 		r.accept(SANVOCALIA, Inc.id("sanvocalia"));
 		r.accept(SANVOCALIA_SMALL, Inc.id("sanvocalia_chibi"));

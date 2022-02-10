@@ -20,6 +20,7 @@ public class IncClientBlockProperties {
 		
 		r.accept(IncBlocks.NATURAL_REPEATER, cutout);
 		r.accept(IncBlocks.NATURAL_COMPARATOR, cutout);
+		r.accept(IncBlocks.REDSTONE_ROOT_CROP, cutout);
 		
 		r.accept(IncBlocks.SANVOCALIA, cutout);
 		r.accept(IncBlocks.SANVOCALIA_SMALL, cutout);
