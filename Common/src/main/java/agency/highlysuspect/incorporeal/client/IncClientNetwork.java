@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.net.FunnyEffect;
+import agency.highlysuspect.incorporeal.net.SanvocaliaEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.NoteParticle;
 import net.minecraft.core.BlockPos;
@@ -42,6 +43,16 @@ public class IncClientNetwork {
 						level.addParticle(ParticleTypes.NOTE, dst.x + 0.2, dst.y + 0.7, dst.z, notes[1] / 24d, 0, 0);
 					}
 				}
+			});
+		});
+		
+		handlers.put("sanvo", (mc, buf) -> {
+			SanvocaliaEffect effect = SanvocaliaEffect.unpack(buf);
+			
+			mc.doRunTask(() -> {
+				Level level = mc.level;
+				if(level == null) return;
+				for(BlockPos dst : effect.ends()) ItemTwigWand.doParticleBeam(level, effect.start(), Vec3.atCenterOf(dst));
 			});
 		});
 	}

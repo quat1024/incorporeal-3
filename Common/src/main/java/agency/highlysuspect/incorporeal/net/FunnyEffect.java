@@ -2,7 +2,6 @@ package agency.highlysuspect.incorporeal.net;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,13 +45,13 @@ public record FunnyEffect(BlockPos src, double sparkleHeight, List<Line> lines) 
 	public void pack(FriendlyByteBuf buf) {
 		buf.writeBlockPos(src);
 		buf.writeDouble(sparkleHeight);
-		IncNetwork.writeList(buf, lines, Line::pack);
+		IncNetwork.writeCollection(buf, lines, Line::pack);
 	}
 	
 	public static FunnyEffect unpack(FriendlyByteBuf buf) {
 		BlockPos src = buf.readBlockPos();
 		double sparkleHeight = buf.readDouble();
-		List<Line> lines = IncNetwork.readList(buf, Line::unpack);
+		List<Line> lines = IncNetwork.readCollection(buf, ArrayList::new, Line::unpack);
 		return new FunnyEffect(src, sparkleHeight, lines);
 	}
 }

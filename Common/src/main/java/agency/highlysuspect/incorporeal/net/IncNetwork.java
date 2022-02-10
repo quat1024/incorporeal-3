@@ -11,9 +11,12 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * Because networking apis are very different across loaders, this is an attempt to
@@ -54,7 +57,8 @@ public class IncNetwork {
 		}
 	}
 	
-	//helpers
+	//helpers. Forgive the mess.
+	
 	static void writeVec3(FriendlyByteBuf buf, Vec3 vec) {
 		buf.writeDouble(vec.x);
 		buf.writeDouble(vec.y);
@@ -65,7 +69,7 @@ public class IncNetwork {
 		return new Vec3(buf.readDouble(), buf.readDouble(), buf.readDouble());
 	}
 	
-	static <T> void writeList(FriendlyByteBuf buf, Collection<T> things, BiConsumer<T, FriendlyByteBuf> packer) {
+	static <T> void writeCollection(FriendlyByteBuf buf, Collection<T> things, BiConsumer<T, FriendlyByteBuf> packer) {
 		if(things.size() > Byte.MAX_VALUE) throw new IllegalStateException("too many things!");
 		buf.writeByte(things.size());
 		for(T thing : things) {
@@ -73,12 +77,12 @@ public class IncNetwork {
 		}
 	}
 	
-	static <T> List<T> readList(FriendlyByteBuf buf, Function<FriendlyByteBuf, T> unpacker) {
+	static <T, C extends Collection<T>> C readCollection(FriendlyByteBuf buf, Supplier<C> collectionMaker, Function<FriendlyByteBuf, T> unpacker) {
 		byte howMany = buf.readByte();
-		ArrayList<T> list = new ArrayList<>();
+		C c = collectionMaker.get();
 		for(byte i = 0; i < howMany; i++) {
-			list.add(unpacker.apply(buf));
+			c.add(unpacker.apply(buf));
 		}
-		return list;
+		return c;
 	}
 }

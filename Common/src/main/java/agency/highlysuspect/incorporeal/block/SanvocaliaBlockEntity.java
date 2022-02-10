@@ -5,6 +5,7 @@ import agency.highlysuspect.incorporeal.IncConfig;
 import agency.highlysuspect.incorporeal.corporea.IndexFinder;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import agency.highlysuspect.incorporeal.item.IncItems;
+import agency.highlysuspect.incorporeal.net.SanvocaliaEffect;
 import com.google.common.base.Preconditions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -31,7 +32,6 @@ import vazkii.botania.api.subtile.RadiusDescriptor;
 import vazkii.botania.api.subtile.TileEntityFunctionalFlower;
 import vazkii.botania.common.block.tile.corporea.TileCorporeaIndex;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -140,7 +140,7 @@ public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 	}
 	
 	@SuppressWarnings("unused") //Working on it
-	private void consumeTicket(ItemEntity ticket, @Nullable Collection<BlockPos> indexPositions) {
+	private void consumeTicket(ItemEntity ticket, @Nullable Set<BlockPos> indexPositions) {
 		Preconditions.checkNotNull(level);
 		Preconditions.checkArgument(!level.isClientSide(), "call on server level only pls.");
 		ServerLevel levelS = (ServerLevel) level;
@@ -155,7 +155,9 @@ public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 		levelS.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, ticket.getItem()), ticket.getX(), ticket.getY(), ticket.getZ(), 1, 0, 0.1, 0, 0.03);
 		
 		//Show sparkle lines
-		//TODO
+		if(indexPositions != null && !indexPositions.isEmpty()) {
+			new SanvocaliaEffect(ticket.position(), indexPositions).sendToAllWatching(levelS, pos);
+		}
 		
 		//Shrink itemstack
 		if(ticket.getItem().getCount() > 1) {
