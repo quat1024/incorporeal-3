@@ -23,6 +23,7 @@ public class RedstoneRootCropBlock extends CropBlock {
 		registerDefaultState(defaultBlockState().setValue(AGE, 0));
 	}
 	
+	//The default age prop goes to 7 so tbh i should bite the bullet and just draw another sprite lol
 	public static final int MAX_AGE = 6;
 	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, MAX_AGE);
 	public static final VoxelShape[] SHAPES = Util.make(new VoxelShape[MAX_AGE + 1], arr -> {
@@ -66,6 +67,7 @@ public class RedstoneRootCropBlock extends CropBlock {
 		return this;
 	}
 	
+	//(super illegal)
 	@Override
 	public String getDescriptionId() {
 		return "item.botania.redstone_root";

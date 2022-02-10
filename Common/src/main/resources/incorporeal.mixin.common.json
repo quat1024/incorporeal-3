@@ -9,7 +9,8 @@
 		"TileCorporeaInterceptorMixin",
 		"TileCorporeaIndexAccessor",
 		"ItemFrameAccessor",
-		"ModItemsMixin"
+		"ModItemsMixin",
+		"FarmBlockMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
