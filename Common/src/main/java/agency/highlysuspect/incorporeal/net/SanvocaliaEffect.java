@@ -9,8 +9,8 @@ import java.util.Set;
 
 public record SanvocaliaEffect(Vec3 start, Set<BlockPos> ends) implements IncNetwork.Packable {
 	@Override
-	public String packId() {
-		return "sanvo";
+	public byte packId() {
+		return IncNetwork.Ids.SANVOCALIA;
 	}
 	
 	@Override

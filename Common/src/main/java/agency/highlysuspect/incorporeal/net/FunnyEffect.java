@@ -37,8 +37,8 @@ public record FunnyEffect(BlockPos src, double sparkleHeight, List<Line> lines) 
 	}
 	
 	@Override
-	public String packId() {
-		return "funny";
+	public byte packId() {
+		return IncNetwork.Ids.FUNNY;
 	}
 	
 	@Override

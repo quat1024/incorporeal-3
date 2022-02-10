@@ -1,9 +1,11 @@
 package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.net.FunnyEffect;
+import agency.highlysuspect.incorporeal.net.IncNetwork;
 import agency.highlysuspect.incorporeal.net.SanvocaliaEffect;
+import it.unimi.dsi.fastutil.bytes.Byte2ObjectMap;
+import it.unimi.dsi.fastutil.bytes.Byte2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.NoteParticle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
@@ -11,15 +13,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import vazkii.botania.common.item.ItemTwigWand;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class IncClientNetwork {
-	public static Map<String, BiConsumer<Minecraft, FriendlyByteBuf>> handlers = new HashMap<>();
+	//a flat array would probably be better lol.
+	public static Byte2ObjectMap<BiConsumer<Minecraft, FriendlyByteBuf>> handlers = new Byte2ObjectOpenHashMap<>();
 	
 	static {
-		handlers.put("funny", (mc, buf) -> {
+		handlers.put(IncNetwork.Ids.FUNNY, (mc, buf) -> {
 			FunnyEffect effect = FunnyEffect.unpack(buf);
 			
 			mc.doRunTask(() -> {
@@ -46,7 +47,7 @@ public class IncClientNetwork {
 			});
 		});
 		
-		handlers.put("sanvo", (mc, buf) -> {
+		handlers.put(IncNetwork.Ids.SANVOCALIA, (mc, buf) -> {
 			SanvocaliaEffect effect = SanvocaliaEffect.unpack(buf);
 			
 			mc.doRunTask(() -> {
@@ -63,7 +64,7 @@ public class IncClientNetwork {
 	
 	//called on the network thread - Watch out
 	public static void handle(Minecraft client, FriendlyByteBuf buf) {
-		String which = buf.readUtf();
+		byte which = buf.readByte();
 		BiConsumer<Minecraft, FriendlyByteBuf> handler = handlers.get(which);
 		if(handler != null) {
 			//give it the rest of the buf

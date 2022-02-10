@@ -9,11 +9,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -38,13 +34,13 @@ public class IncNetwork {
 	
 	public static FriendlyByteBuf pack(Packable data) {
 		FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-		buf.writeUtf(data.packId());
+		buf.writeByte(data.packId());
 		data.pack(buf);
 		return buf;
 	}
 	
 	interface Packable {
-		String packId();
+		byte packId();
 		void pack(FriendlyByteBuf buf);
 		
 		//conveniences
@@ -84,5 +80,10 @@ public class IncNetwork {
 			c.add(unpacker.apply(buf));
 		}
 		return c;
+	}
+	
+	public static class Ids {
+		public static final byte FUNNY = 0;
+		public static final byte SANVOCALIA = 1;
 	}
 }
