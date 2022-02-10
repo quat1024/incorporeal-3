@@ -1,37 +1,36 @@
 package agency.highlysuspect.incorporeal.net;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public record FunnyEffect(List<Line> lines) implements IncNetwork.Packable {
-	public FunnyEffect() {
-		this(new ArrayList<>());
+public record FunnyEffect(BlockPos src, double sparkleHeight, List<Line> lines) implements IncNetwork.Packable {
+	public FunnyEffect(BlockPos src, double sparkleHeight) {
+		this(src, sparkleHeight, new ArrayList<>());
 	}
 	
-	public static record Line(Vec3 start, Vec3 end, byte[] notes) {
+	public static record Line(BlockPos dst, byte[] notes) {
 		void pack(FriendlyByteBuf buf) {
-			IncNetwork.writeVec3(buf, start);
-			IncNetwork.writeVec3(buf, end);
+			buf.writeBlockPos(dst);
 			buf.writeByteArray(notes);
 		}
 		
 		static Line unpack(FriendlyByteBuf buf) {
 			return new Line(
-				IncNetwork.readVec3(buf),
-				IncNetwork.readVec3(buf),
+				buf.readBlockPos(),
 				buf.readByteArray(5)
 			);
 		}
 	}
 	
 	//mutable record :yeefyeef:
-	public void addLine(Vec3 start, Vec3 end, byte[] notes) {
+	public void addLineTo(BlockPos end, byte[] notes) {
 		if(lines.size() > Byte.MAX_VALUE) throw new IllegalStateException("too many lines!");
 		if(notes.length > 5) throw new IllegalStateException("too many notes!");
-		lines.add(new Line(start, end, notes));
+		lines.add(new Line(end, notes));
 	}
 	
 	public boolean isEmpty() {
@@ -45,10 +44,15 @@ public record FunnyEffect(List<Line> lines) implements IncNetwork.Packable {
 	
 	@Override
 	public void pack(FriendlyByteBuf buf) {
+		buf.writeBlockPos(src);
+		buf.writeDouble(sparkleHeight);
 		IncNetwork.writeList(buf, lines, Line::pack);
 	}
 	
 	public static FunnyEffect unpack(FriendlyByteBuf buf) {
-		return new FunnyEffect(IncNetwork.readList(buf, Line::unpack));
+		BlockPos src = buf.readBlockPos();
+		double sparkleHeight = buf.readDouble();
+		List<Line> lines = IncNetwork.readList(buf, Line::unpack);
+		return new FunnyEffect(src, sparkleHeight, lines);
 	}
 }

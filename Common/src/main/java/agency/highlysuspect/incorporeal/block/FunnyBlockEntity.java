@@ -2,8 +2,6 @@ package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.Bigfunny;
 import agency.highlysuspect.incorporeal.net.FunnyEffect;
-import agency.highlysuspect.incorporeal.net.IncNetwork;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -12,14 +10,11 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.subtile.RadiusDescriptor;
 import vazkii.botania.api.subtile.TileEntityFunctionalFlower;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -88,15 +83,14 @@ public class FunnyBlockEntity extends TileEntityFunctionalFlower {
 		Map<NoteBlockInstrument, BlockPos> insts = findInsts(pos);
 		
 		//play music and draw particle effect
-		FunnyEffect effect = new FunnyEffect();
-		Vec3 particleSrc = level.getBlockState(pos).getOffset(level, pos).add(pos.getX() + .5, pos.getY() + sparkleHeight, pos.getZ() + .5);
+		FunnyEffect effect = new FunnyEffect(pos, sparkleHeight);
 		
 		boolean dirtyMana = false;
 		//noinspection ConstantConditions
-		dirtyMana |= doIt(tick, particleSrc, effect, insts, NoteBlockInstrument.FLUTE);
-		dirtyMana |= doIt(tick, particleSrc, effect, insts, NoteBlockInstrument.SNARE);
-		dirtyMana |= doIt(tick, particleSrc, effect, insts, NoteBlockInstrument.BASEDRUM);
-		dirtyMana |= doIt(tick, particleSrc, effect, insts, NoteBlockInstrument.BASS);
+		dirtyMana |= doIt(tick, effect, insts, NoteBlockInstrument.FLUTE);
+		dirtyMana |= doIt(tick, effect, insts, NoteBlockInstrument.SNARE);
+		dirtyMana |= doIt(tick, effect, insts, NoteBlockInstrument.BASEDRUM);
+		dirtyMana |= doIt(tick, effect, insts, NoteBlockInstrument.BASS);
 		
 		if(dirtyMana) sync();
 		if(!effect.isEmpty() && level instanceof ServerLevel slevel) {
@@ -119,7 +113,7 @@ public class FunnyBlockEntity extends TileEntityFunctionalFlower {
 	}
 	
 	//returns whether the mana level changed, requiring a sync
-	private boolean doIt(int tick, Vec3 particleSrc, FunnyEffect sparkleData, Map<NoteBlockInstrument, BlockPos> insts, NoteBlockInstrument inst) {
+	private boolean doIt(int tick, FunnyEffect sparkleData, Map<NoteBlockInstrument, BlockPos> insts, NoteBlockInstrument inst) {
 		assert level != null;
 		if(getMana() < NOTE_MANA_COST) return false;
 		
@@ -130,7 +124,7 @@ public class FunnyBlockEntity extends TileEntityFunctionalFlower {
 		byte[] notes = Bigfunny.notesForTick(tick, inst);
 		if(notes == null) return false;
 		
-		sparkleData.addLine(particleSrc, Vec3.atCenterOf(noteblockPos), notes);
+		sparkleData.addLineTo(noteblockPos, notes);
 		
 		for(int note : notes) {
 			if(getMana() > NOTE_MANA_COST) {
