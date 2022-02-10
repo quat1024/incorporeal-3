@@ -1,9 +1,12 @@
 package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.Bigfunny;
+import agency.highlysuspect.incorporeal.net.FunnyEffect;
+import agency.highlysuspect.incorporeal.net.IncNetwork;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -58,15 +61,16 @@ public class FunnyBlockEntity extends TileEntityFunctionalFlower {
 	@Override
 	public void tickFlower() {
 		super.tickFlower();
+		
 		assert level != null;
+		if(level.isClientSide()) return;
 		
 		BlockPos pos = getEffectivePos();
 		
-		//todo: sounds like shit in multiplayer (Kind of a feature tho :flushed:)
-		if(level.isClientSide()) return;
-		
-		if(redstoneSignal == 15) clock = -1;
-		else if(redstoneSignal > 0 || getMaxMana() < NOTE_MANA_COST) {
+		if(redstoneSignal == 15) {
+			if(clock != -1) setChanged();
+			clock = -1; return;
+		} else if(redstoneSignal > 0 || getMana() < NOTE_MANA_COST) {
 			return;
 		}
 		
@@ -84,18 +88,19 @@ public class FunnyBlockEntity extends TileEntityFunctionalFlower {
 		Map<NoteBlockInstrument, BlockPos> insts = findInsts(pos);
 		
 		//play music and draw particle effect
-		List<Pair<Object, byte[]>> sparkleData = new ArrayList<>(); //TODO
+		FunnyEffect effect = new FunnyEffect();
 		Vec3 particleSrc = level.getBlockState(pos).getOffset(level, pos).add(pos.getX() + .5, pos.getY() + sparkleHeight, pos.getZ() + .5);
 		
 		boolean dirtyMana = false;
-		dirtyMana |= doIt(pos, tick, particleSrc, sparkleData, insts, NoteBlockInstrument.FLUTE);
-		dirtyMana |= doIt(pos, tick, particleSrc, sparkleData, insts, NoteBlockInstrument.SNARE);
-		dirtyMana |= doIt(pos, tick, particleSrc, sparkleData, insts, NoteBlockInstrument.BASEDRUM);
-		dirtyMana |= doIt(pos, tick, particleSrc, sparkleData, insts, NoteBlockInstrument.BASS);
+		//noinspection ConstantConditions
+		dirtyMana |= doIt(tick, particleSrc, effect, insts, NoteBlockInstrument.FLUTE);
+		dirtyMana |= doIt(tick, particleSrc, effect, insts, NoteBlockInstrument.SNARE);
+		dirtyMana |= doIt(tick, particleSrc, effect, insts, NoteBlockInstrument.BASEDRUM);
+		dirtyMana |= doIt(tick, particleSrc, effect, insts, NoteBlockInstrument.BASS);
 		
 		if(dirtyMana) sync();
-		if(!sparkleData.isEmpty()) {
-			//TODO
+		if(!effect.isEmpty() && level instanceof ServerLevel slevel) {
+			effect.sendToAllWatching(slevel, pos);
 		}
 	}
 	
@@ -114,7 +119,7 @@ public class FunnyBlockEntity extends TileEntityFunctionalFlower {
 	}
 	
 	//returns whether the mana level changed, requiring a sync
-	private boolean doIt(BlockPos pos, int tick, Vec3 particleSrc, List<Pair<Object, byte[]>> sparkleData, Map<NoteBlockInstrument, BlockPos> insts, NoteBlockInstrument inst) {
+	private boolean doIt(int tick, Vec3 particleSrc, FunnyEffect sparkleData, Map<NoteBlockInstrument, BlockPos> insts, NoteBlockInstrument inst) {
 		assert level != null;
 		if(getMana() < NOTE_MANA_COST) return false;
 		
@@ -125,9 +130,8 @@ public class FunnyBlockEntity extends TileEntityFunctionalFlower {
 		byte[] notes = Bigfunny.notesForTick(tick, inst);
 		if(notes == null) return false;
 		
-		//todo sparkle line
-		//sparkleLines.add(Pair.of(new IncNetwork.SparkleLine(particleSrc, Vector3d.copyCentered(noteblockPos), 2, 1f), notes));
-		sparkleData.add(Pair.of(new Object(), notes));
+		sparkleData.addLine(particleSrc, Vec3.atCenterOf(noteblockPos), notes);
+		
 		for(int note : notes) {
 			if(getMana() > NOTE_MANA_COST) {
 				addMana(-NOTE_MANA_COST);
@@ -147,13 +151,13 @@ public class FunnyBlockEntity extends TileEntityFunctionalFlower {
 	@Override
 	public void readFromPacketNBT(CompoundTag tag) {
 		super.readFromPacketNBT(tag);
-		tag.putInt("Clock", clock);
+		clock = tag.getInt("Clock");
 	}
 	
 	@Override
 	public void writeToPacketNBT(CompoundTag tag) {
 		super.writeToPacketNBT(tag);
-		clock = tag.getInt("Clock");
+		tag.putInt("Clock", clock);
 	}
 	
 	@Override

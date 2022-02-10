@@ -22,6 +22,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.ticks.TickPriority;
 import org.jetbrains.annotations.Nullable;
+import vazkii.botania.common.annotations.SoftImplement;
 
 import java.util.List;
 import java.util.Random;
@@ -171,16 +172,16 @@ public class CrappyComparatorBlock extends CrappyDiodeBlock {
 		refreshOutputState(level, pos, state);
 	}
 	
-	////////////////////////////////////////////////////////////////////////////////////////
-	//TODO SUPER FRAGILE: Weird Forge extensions with removed @Override annotations Lmaooo//
-	////////////////////////////////////////////////////////////////////////////////////////
+	//Weird Forge extensions
 	@SuppressWarnings("unused")
+	@SoftImplement("IForgeBlock")
 	public boolean getWeakChanges(BlockState state, net.minecraft.world.level.LevelReader world, BlockPos pos) {
 		//return state.is(Blocks.COMPARATOR);
 		return true;
 	}
 	
 	@SuppressWarnings("unused")
+	@SoftImplement("IForgeBlock")
 	public void onNeighborChange(BlockState state, net.minecraft.world.level.LevelReader world, BlockPos pos, BlockPos neighbor) {
 		if (pos.getY() == neighbor.getY() && world instanceof Level && !((Level)world).isClientSide()) {
 			state.neighborChanged((Level)world, pos, world.getBlockState(neighbor).getBlock(), neighbor, false);

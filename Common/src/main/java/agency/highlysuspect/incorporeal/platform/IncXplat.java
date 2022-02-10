@@ -1,6 +1,8 @@
 package agency.highlysuspect.incorporeal.platform;
 
 import agency.highlysuspect.incorporeal.Inc;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.Item;
 
@@ -34,4 +36,7 @@ public interface IncXplat {
 	
 	//Constructor requires an accessor on Fabric
 	DamageSource newDamageSource(String name);
+	
+	//Send a block of data from server to client, using the incorporeal packet abstraction
+	void sendTo(FriendlyByteBuf buf, ServerPlayer player);
 }

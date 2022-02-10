@@ -7,8 +7,11 @@ import agency.highlysuspect.incorporeal.item.IncItems;
 import agency.highlysuspect.incorporeal.block.IncBlockEntityTypes;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 
 public class IncFabric implements ModInitializer {
+	public static final ResourceLocation NETWORK_ID = new ResourceLocation(Inc.MODID, "net");
+	
 	@Override
 	public void onInitialize() {
 		//blocks

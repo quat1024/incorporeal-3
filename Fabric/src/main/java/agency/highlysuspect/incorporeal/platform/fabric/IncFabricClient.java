@@ -3,8 +3,10 @@ package agency.highlysuspect.incorporeal.platform.fabric;
 import agency.highlysuspect.incorporeal.client.IncClientBlockProperties;
 import agency.highlysuspect.incorporeal.client.IncClientItemProperties;
 import agency.highlysuspect.incorporeal.client.IncClientLayerDefinitions;
+import agency.highlysuspect.incorporeal.client.IncClientNetwork;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
@@ -34,5 +36,9 @@ public class IncFabricClient implements ClientModInitializer {
 		
 		//wand HUD capability
 		IncClientBlockProperties.registerWandHudCaps((factory, types) -> BotaniaFabricClientCapabilities.WAND_HUD.registerForBlockEntities((be, c) -> factory.apply(be), types));
+		
+		//client half of the network channel
+		ClientPlayNetworking.registerGlobalReceiver(IncFabric.NETWORK_ID, (client, handler, buf, responseSender) -> IncClientNetwork.handle(client, buf));
+		IncClientNetwork.initialize();
 	}
 }
