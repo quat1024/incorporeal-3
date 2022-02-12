@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "incorporeal:funny",
     "incorporeal:funny_chibi",
@@ -8,6 +9,5 @@
     "incorporeal:sanvocalia_chibi",
     "incorporeal:floating_sanvocalia",
     "incorporeal:floating_sanvocalia_chibi"
-  ],
-  "replace": false
+  ]
 }

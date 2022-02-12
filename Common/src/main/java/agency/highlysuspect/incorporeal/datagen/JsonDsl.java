@@ -18,10 +18,10 @@ import net.minecraft.world.level.block.Block;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -116,7 +116,7 @@ public class JsonDsl {
 	 */
 	public static record JObject(Map<String, JValue<?>> values) implements JValue<JsonObject> {
 		public JObject() {
-			this(new HashMap<>());
+			this(new TreeMap<>());
 		}
 		
 		@Override
