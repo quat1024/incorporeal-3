@@ -46,6 +46,9 @@
 	"block.incorporeal.floating_funny": "Floating Sweet Alexum",
 	"block.incorporeal.floating_funny_chibi": "Floating Sweet Alexum Petite",
 	
+	"block.incorporeal.clearly": "clearly",
+	"block.incorporeal.clearly.fryer": "You do not own an air fryer",
+	
 	"incorporeal.solidified_request": "%sx %s",
 	"incorporeal.solidified_request.count_only": "%sx ",
 	"incorporeal.request.anything": "Anything",

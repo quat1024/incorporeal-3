@@ -39,6 +39,8 @@ public class IncItems {
 	public static final Map<DyeColor, BlockItem> UNSTABLE_CUBES = Inc.sixteenColors(
 		color -> new IncBlockItemWithTEISR(IncBlocks.UNSTABLE_CUBES.get(color), props()));
 	
+	public static final BlockItem CLEARLY = new BlockItem(IncBlocks.CLEARLY, props());
+	
 	public static void register(BiConsumer<Item, ResourceLocation> r) {
 		//items
 		r.accept(CORPOREA_TICKET, Inc.id("corporea_ticket"));
@@ -62,6 +64,9 @@ public class IncItems {
 		
 		//unstable cubes
 		UNSTABLE_CUBES.values().forEach(item -> registerBlockItem(r, item));
+		
+		//clearly
+		registerBlockItem(r, CLEARLY);
 	}
 	
 	private static void registerBlockItems(BiConsumer<Item, ResourceLocation> r, BlockItem... bis) {

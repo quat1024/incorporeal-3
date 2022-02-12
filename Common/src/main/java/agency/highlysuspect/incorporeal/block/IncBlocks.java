@@ -51,18 +51,24 @@ public class IncBlocks {
 			.strength(5f)
 			.noOcclusion()));
 	
+	public static final Block CLEARLY = new ClearlyBlock(Properties.of(Material.METAL).sound(SoundType.NETHER_SPROUTS).strength(1f));
+	
 	public static void register(BiConsumer<Block, ResourceLocation> r) {
+		//assorted corporea devices
 		r.accept(CORPOREA_SOLIDIFIER, Inc.id("corporea_solidifier"));
 		r.accept(RED_STRING_LIAR, Inc.id("red_string_liar"));
 		r.accept(FRAME_TINKERER, Inc.id("frame_tinkerer"));
 		r.accept(CORPOREA_RETAINER_EVAPORATOR, Inc.id("corporea_retainer_evaporator"));
 		
+		//soul cores
 		r.accept(ENDER_SOUL_CORE, Inc.id("ender_soul_core"));
 		
+		//natural devices
 		r.accept(NATURAL_REPEATER, Inc.id("natural_repeater"));
 		r.accept(NATURAL_COMPARATOR, Inc.id("natural_comparator"));
 		r.accept(REDSTONE_ROOT_CROP, Inc.id("redstone_root_crop"));
 		
+		//flowers
 		r.accept(SANVOCALIA, Inc.id("sanvocalia"));
 		r.accept(SANVOCALIA_SMALL, Inc.id("sanvocalia_chibi"));
 		r.accept(FLOATING_SANVOCALIA, Inc.id("floating_sanvocalia"));
@@ -73,6 +79,10 @@ public class IncBlocks {
 		r.accept(FLOATING_FUNNY, Inc.id("floating_funny"));
 		r.accept(FLOATING_FUNNY_SMALL, Inc.id("floating_funny_chibi"));
 		
+		//unstable cubes
 		UNSTABLE_CUBES.forEach((color, block) -> r.accept(block, Inc.id(color.getName() + "_unstable_cube")));
+		
+		//clearly
+		r.accept(CLEARLY, Inc.id("clearly"));
 	}
 }
