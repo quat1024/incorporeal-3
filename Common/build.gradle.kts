@@ -9,3 +9,8 @@ dependencies {
     //botania-xplat - Multiloader Botania code
     implementation(group = "vazkii.botania", name = "Botania-xplat", version = "1.18.1-428-SNAPSHOT").isChanging = true
 }
+
+sourceSets["main"].resources {
+    //Include generated resources
+    srcDir("src/generated/resources")
+}

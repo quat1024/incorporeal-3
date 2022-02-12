@@ -28,6 +28,9 @@
 		],
 		"client": [
 			"agency.highlysuspect.incorporeal.platform.fabric.IncFabricClient"
+		],
+		"fabric-datagen": [
+			"agency.highlysuspect.incorporeal.platform.fabric.IncFabricDatagen"
 		]
 	},
 	

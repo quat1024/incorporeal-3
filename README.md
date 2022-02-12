@@ -77,10 +77,6 @@ If you're using Eclipse:
 ## things i need to add to the buildscript
 
 * forge server run configuration
-* Data generators!
-  * right now i've basically pasted old datagenned resources from 1.16 into the main tree
-  * need a place for generated resources to go as well (i like using a separate source set)
-  * i can use vanilla datagen. I don't HAVE to overengineer it. I can just use vanilla datagen. I will probably overengineer it
 * TEST IT MORE, test remapping, test refmaps in prod, test test !!
 * non-`Common` `-sources` jars don't contain `Common` sources - hubry said this happens to patchy and botania too. why?
 * figure out what's the difference between depending on `:Common` and adding its source set to the compilation classpath, and if you need to do both

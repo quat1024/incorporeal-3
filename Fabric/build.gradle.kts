@@ -19,3 +19,24 @@ dependencies {
     modImplementation(group = "com.jamieswhiteshirt"                         , name = "reach-entity-attributes"     , version = "2.1.1")
     modImplementation(group = "com.github.emilyploszaj"                      , name = "step-height-entity-attribute", version = "v1.0.1")
 }
+
+loom {
+    runs {
+        //Common Datagen. One loader has to be the one in charge of it, and it'll be fabric.
+        create("common-datagen") {
+            client()
+            vmArg("-Dbotania.xplat_datagen=1")
+            vmArg("-Dfabric-api.datagen")
+            vmArg("-Dfabric-api.datagen.modid=incorporeal")
+            //Doesn't work lol
+            //vmArg("-Dfabric-api.datagen.output-dir=${project(":Common").relativePath("./src/generated/resources")}")
+            vmArg("-Dfabric-api.datagen.output-dir=${file("../Common/src/generated/resources")}")
+        }
+
+        //Loom doesn't generate run configs by default in subprojects.
+        configureEach {
+            runDir("./run/datagen_work")
+            ideConfigGenerated(true)
+        }
+    }
+}
