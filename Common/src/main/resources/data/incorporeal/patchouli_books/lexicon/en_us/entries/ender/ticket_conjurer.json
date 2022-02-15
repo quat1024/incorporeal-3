@@ -6,17 +6,23 @@
 	"advancement": "botania:main/elf_lexicon_pickup",
 	"pages": [
 		{
-			"type": "text",
+			"type": "patchouli:text",
 			"text": "The $(item)Ticket Conjurer$(0) assists in the creation of arbitrary $(item)Corporea Tickets$(0), for use with the $(item)Sanvocalia$(0) flower. Other than the fact that it's an item, not a block, it acts identically to a $(item)Corporea Index$(0). Simply hold it in either hand, speak a $(thing)Corporea Request$(0), and a $(item)Corporea Ticket$(0) will be created for it."
 		},
 		{
-			"type": "text",
+			"type": "patchouli:text",
 			"text": "The only other difference between it and a $(item)Corporea Index$(0) is in the behavior of the word \"this\", which will refer to the item in your off-hand when you hold the $(item)Ticket Conjurer$(0) in your main hand, and vice versa."
 		},
 		{
-			"type": "crafting",
+			"type": "patchouli:crafting",
 			"recipe": "incorporeal:ticket_conjurer",
 			"text": "Dying Breath of Stokesia"
+		},
+		{
+			"type": "patchouli:relations",
+			"entries": [
+				"incorporeal:functional_flowers/sanvocalia"
+			]
 		}
 	]
 }

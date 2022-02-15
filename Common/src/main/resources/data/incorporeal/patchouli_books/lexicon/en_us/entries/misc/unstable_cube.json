@@ -5,7 +5,7 @@
 	"entry_color": "194a5c",
 	"pages": [
 		{
-			"type": "text",
+			"type": "patchouli:text",
 			"text": "$(item)Unstable Cubes$(0) are curious little critters. They crackle pleasantly and spin in a satisfying way when touched, but other than emitting a $(thing)redstone signal$(0) when that happens, don't seem to do anything useful."
 		},
 		{

@@ -6,15 +6,15 @@
 	"advancement": "botania:main/elf_lexicon_pickup",
 	"pages": [
 		{
-			"type": "text",
+			"type": "patchouli:text",
 			"text": "The $(item)Rod of the Fractured Space$(0) has the unique ability to, albeit briefly, open a small wormhole between two points in space. Only $(item)Items$(0) seem to be small and light enough to fit.$(br)Right click on an $(item)Open Crate$(0) to set the destination location."
 		},
 		{
-			"type": "text",
+			"type": "patchouli:text",
 			"text": "Then, any time you right click on the ground, all $(item)Items$(0) nearby will be sucked in to the wormhole and dropped out of the $(item)Open Crate$(0), no matter where they are. The process consumes more $(item)Mana$(0) when more items are sent at once; perhaps packaging them up into something like a $(item)Shulker Box$(0) first would be beneficial?"
 		},
 		{
-			"type": "crafting",
+			"type": "patchouli:crafting",
 			"recipe": "incorporeal:fractured_space_rod",
 			"text": "- thread of fate manipulator -"
 		}
