@@ -1,0 +1,25 @@
+{
+	"name": "Corporea Access Control",
+	"category": "botania:misc",
+	"icon": "minecraft:player_head",
+	"entry_color": "194a5c",
+	"advancement": "botania:main/elf_lexicon_pickup",
+	"pages": [
+		{
+			"type": "patchouli:text",
+			"text": "With Incorporeal installed, you can place $(thing)Corporea Sparks$(0) onto $(thing)Player Heads$(0). This acts as a simple security system for a $(thing)Corporea Network$(0) - any $(thing)Players$(0) who do not have their head on the network cannot use any $(item)Corporea Indices$(0)."
+		},
+		{
+			"type": "patchouli:relations",
+			"entries": [
+				"botania:misc/head_creating",
+				"botania:ender/corporea_index"
+			],
+			"text": "Now let me see you $(2)DANCE$(0)"
+		},
+		{
+			"type": "patchouli:text",
+			"text": "$(8)This supplants the \"Corporea Soul Core\" block from previous versions - I figured the mechanic should be cheaper.$(0)"
+		}
+	]
+}

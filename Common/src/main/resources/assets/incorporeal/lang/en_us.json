@@ -103,21 +103,6 @@
 	"incorporeal.entry.corporea_retainer_evaporator1": "Note that this process is destructive; powering the $(item)Corporea Retainer$(0) after decrementing its request size will cause it to perform a request of the new size. Using multiple retainers off of the same $(item)Corporea Interceptor$(0) could prove useful.",
 	"incorporeal.entry.corporea_retainer_evaporator.flavor": "But enough about me, let's kill You!!",
 	
-	"incorporeal.entry.soul_cores": "Soul Cores",
-	"incorporeal.entry.soul_cores0": "$(item)Soul Cores$(0) surround and envelop a $(thing)Player's Soul$(0) in a light $(thing)Mana$(0) solution, ever-so-slightly reanimating it. While the extracted $(thing)Soul$(0) isn't capable of too much independent thought, as long as the the real, live $(thing)Player$(0) is present in the $(thing)Dimension$(0), they are somewhat entangled.",
-	"incorporeal.entry.soul_cores1": "To inform a $(item)Soul Core$(0) of your presence, right click it. This process has been known to sting a bit.<br><br>If a $(item)Soul Core$(0) ever runs out of mana, it will violently close the link to the $(thing)Soul$(0) it's bound to; right clicking again will re-establish it.",
-	"incorporeal.entry.soul_cores2": "All $(item)Soul Cores$(0) work off the principles of the $(item)Soul Core Frame$(0):",
-	"incorporeal.entry.soul_cores.flavor": "Show me your worth, Mortals",
-	
-	"incorporeal.entry.soul_cores.ender": "The $(item)Ender Soul Core$(0) provides block-level access to the $(item)Ender Chest$(0) inventory of the bound $(thing)Player$(0). As long as the $(thing)Player$(0) is present in the dimension, the $(item)Ender Soul Core$(0)'s inventory will mirror their $(item)Ender Chest$(0).<br><br>The usual interactions work; hoppers, corporea sparks... Measuring is free, but adding and removing items uses $(thing)Mana$(0).",
-	"incorporeal.entry.soul_cores.ender.flavor": "Driven Drop",
-	
-	"incorporeal.entry.soul_cores.corporea": "The $(item)Corporea Soul Core$(0) is a simple security system for $(thing)Corporea Networks$(0). When a $(thing)Corporea Network$(0) has at least one $(item)Corporea Soul Core$(0), any $(thing)Players$(0) who do not have one on the network cannot use any $(item)Corporea Indices$(0).<br><br>It does not drain $(thing)Mana$(0).",
-	"incorporeal.entry.soul_cores.corporea.flavor": "Now let me see you $(2)DANCE$(0)",
-	
-	"incorporeal.entry.soul_cores.potion": "The $(item)Blood Soul Core$(0), at the cost of $(thing)Mana$(0), injects all potion effects received via $(item)Splash Potions$(0) into the bloodstream of the bound $(thing)Player$(0).<br><br>Since the $(thing)Soul$(0) suspended in a $(item)Soul Core$(0) is technically undead, this process will cause the usual effect inversions to occur (for example, $(thing)Instant Health$(0) will damage the bound $(item)Player$(0)).",
-	"incorporeal.entry.soul_cores.potion.flavor": "A heart-to-heart",
-	
 	"incorporeal.entry.sanvocalia0": "The $(item)Sanvocalia$(0) is a flower especially attuned to corporetic frequencies. When this flower has $(item)Mana$(0) available and is near a $(item)Corporea Index$(0), it will whisper the requests written on nearby $(item)Corporea Tickets$(0) to the $(item)Index$(0).<br><br>Tickets can be created with a $(item)Corporea Solidifier$(0) or a $(item)Ticker Conjurer$(0).",
 	"incorporeal.entry.sanvocalia.flavor": "Do you still remember?",
 	

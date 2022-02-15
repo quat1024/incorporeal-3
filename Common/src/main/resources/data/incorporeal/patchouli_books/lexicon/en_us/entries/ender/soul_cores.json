@@ -1,53 +1,50 @@
 {
-	"name": "incorporeal.entry.soul_cores",
+	"name": "Soul Cores",
 	"category": "botania:ender",
 	"icon": "incorporeal:soul_core_frame",
 	"entry_color": "194a5c",
 	"advancement": "botania:main/elf_lexicon_pickup",
 	"pages": [
 		{
-			"type": "text",
-			"text": "incorporeal.entry.soul_cores0"
+			"type": "patchouli:text",
+			"text": "$(item)Soul Cores$(0) surround and envelop a $(thing)Player's Soul$(0) in a light $(thing)Mana$(0) solution, ever-so-slightly reanimating it. While the extracted $(thing)Soul$(0) isn't capable of too much independent thought, as long as the the real, live $(thing)Player$(0) is present in the $(thing)Dimension$(0), they are somewhat entangled."
 		},
 		{
-			"type": "text",
-			"text": "incorporeal.entry.soul_cores1"
+			"type": "patchouli:text",
+			"text": "To inform a $(item)Soul Core$(0) of your presence, right click it. This process has been known to sting a bit.<br><br>If a $(item)Soul Core$(0) ever runs out of mana, it will violently close the link to the $(thing)Soul$(0) it's bound to; right clicking again will re-establish it."
 		},
 		{
-			"type": "text",
-			"text": "incorporeal.entry.soul_cores2"
+			"type": "patchouli:text",
+			"text": "All $(item)Soul Cores$(0) are built out of the $(item)Soul Core Frame$(0):"
 		},
 		{
 			"type": "botania:runic_altar",
 			"recipe": "incorporeal:soul_core_frame",
-			"text": "incorporeal.entry.soul_cores.flavor"
+			"text": "Show me your worth, Mortals"
 		},
 		{
-			"type": "text",
-			"text": "incorporeal.entry.soul_cores.ender"
+			"type": "patchouli:text",
+			"text": "The $(item)Ender Soul Core$(0) provides block-level access to the $(item)Ender Chest$(0) inventory of the bound $(thing)Player$(0). As long as the $(thing)Player$(0) is present in the dimension, the $(item)Ender Soul Core$(0)'s inventory will mirror their $(item)Ender Chest$(0).<br><br>The usual interactions work; hoppers, corporea sparks... Measuring is free, but adding and removing items uses $(thing)Mana$(0)."
 		},
 		{
 			"type": "botania:runic_altar",
 			"recipe": "incorporeal:ender_soul_core",
-			"text": "incorporeal.entry.soul_cores.ender.flavor"
+			"text": "Driven Drop"
 		},
 		{
-			"type": "text",
-			"text": "incorporeal.entry.soul_cores.corporea"
-		},
-		{
-			"type": "botania:runic_altar",
-			"recipe": "incorporeal:corporea_soul_core",
-			"text": "incorporeal.entry.soul_cores.corporea.flavor"
-		},
-		{
-			"type": "text",
-			"text": "incorporeal.entry.soul_cores.potion"
+			"type": "patchouli:text",
+			"text": "The $(item)Blood Soul Core$(0), at the cost of $(thing)Mana$(0), injects all potion effects received via $(item)Splash Potions$(0) into the bloodstream of the bound $(thing)Player$(0).<br><br>Since the $(thing)Soul$(0) suspended in a $(item)Soul Core$(0) is technically undead, this process will cause the usual effect inversions to occur (for example, $(thing)Instant Health$(0) will damage the bound $(item)Player$(0))."
 		},
 		{
 			"type": "botania:runic_altar",
 			"recipe": "incorporeal:potion_soul_core",
-			"text": "incorporeal.entry.soul_cores.potion.flavor"
+			"text": "A heart-to-heart"
+		},
+		{
+			"type": "patchouli:relations",
+			"title": "Corporea Soul Core?",
+			"text": "This block was removed in 1.18, but was replaced with a simpler method to do the same thing.",
+			"entries": [ "incorporeal:misc/corporea_player_heads" ]
 		}
 	]
 }
