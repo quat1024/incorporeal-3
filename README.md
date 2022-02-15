@@ -21,6 +21,7 @@ Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-f
 * ender soul core, kind of??
 * the datapack and lexicon (cut paste from 1.16 for now)
 * redstone root crop
+* corporea soul core's replacement mechanic (corporea spark on player head)
 
 ## Things left to port
 

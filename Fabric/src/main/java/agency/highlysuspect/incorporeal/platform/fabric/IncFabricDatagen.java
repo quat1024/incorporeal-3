@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import vazkii.botania.common.lib.ModTags;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class IncFabricDatagen implements DataGeneratorEntrypoint {
 		
 		addProvider(gen, "Incorporeal block and item tags", pit -> {
 			pit.accept(blockTag(ModTags.Blocks.CORPOREA_SPARK_OVERRIDE,
-				IncBlocks.RED_STRING_LIAR, IncBlocks.CLEARLY));
+				IncBlocks.RED_STRING_LIAR, IncBlocks.CLEARLY, Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD));
 			
 			//todo: maybe this abstraction needs some work lol
 			blockAndItem(pit, ModTags.Blocks.FUNCTIONAL_SPECIAL_FLOWERS, ModTags.Items.FUNCTIONAL_SPECIAL_FLOWERS,
