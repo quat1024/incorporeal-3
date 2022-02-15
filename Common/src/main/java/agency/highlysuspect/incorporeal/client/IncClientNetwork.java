@@ -63,12 +63,14 @@ public class IncClientNetwork {
 	}
 	
 	//called on the network thread - Watch out
-	public static void handle(Minecraft client, FriendlyByteBuf buf) {
+	public static void handle(FriendlyByteBuf buf) {
+		Minecraft minecraft = Minecraft.getInstance();
+		
 		byte which = buf.readByte();
 		BiConsumer<Minecraft, FriendlyByteBuf> handler = handlers.get(which);
 		if(handler != null) {
 			//give it the rest of the buf
-			handler.accept(client, buf);
+			handler.accept(minecraft, buf);
 		}
 	}
 }

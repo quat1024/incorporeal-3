@@ -37,6 +37,9 @@ public class IncForge {
 		//I gotta admit. Fabric's "client entrypoint" scheme is a lot nicer than forge's "proxy" pattern
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> IncForgeClient::init);
 		
+		//Awful networking crap that i dont need any of on fabric because fabric has a reasonable networking api
+		IncForgeNetworking.init();
+		
 		//some other stuff (not different between loaders)
 		FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> Inc.registerExtraThings());
 	}

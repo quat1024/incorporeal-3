@@ -38,7 +38,7 @@ public class IncFabricClient implements ClientModInitializer {
 		IncClientBlockProperties.registerWandHudCaps((factory, types) -> BotaniaFabricClientCapabilities.WAND_HUD.registerForBlockEntities((be, c) -> factory.apply(be), types));
 		
 		//client half of the network channel
-		ClientPlayNetworking.registerGlobalReceiver(IncFabric.NETWORK_ID, (client, handler, buf, responseSender) -> IncClientNetwork.handle(client, buf));
+		ClientPlayNetworking.registerGlobalReceiver(IncFabric.NETWORK_ID, (client, handler, buf, responseSender) -> IncClientNetwork.handle(buf));
 		IncClientNetwork.initialize();
 	}
 }
