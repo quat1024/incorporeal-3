@@ -41,7 +41,7 @@ public class FunnyBlockEntity extends TileEntityFunctionalFlower {
 	}
 	
 	public static FunnyBlockEntity small(BlockPos pos, BlockState state) {
-		return new FunnyBlockEntity(IncBlockEntityTypes.FUNNY_BIG, pos, state, 2, 3, 7, 0.6);
+		return new FunnyBlockEntity(IncBlockEntityTypes.FUNNY_SMALL, pos, state, 2, 3, 7, 0.6);
 	}
 	
 	private final int range;

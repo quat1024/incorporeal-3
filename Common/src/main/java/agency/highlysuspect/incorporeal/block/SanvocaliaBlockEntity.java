@@ -53,7 +53,7 @@ public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 	}
 	
 	public static SanvocaliaBlockEntity small(BlockPos pos, BlockState state) {
-		return new SanvocaliaBlockEntity(1, IncBlockEntityTypes.SANVOCALIA_BIG, pos, state);
+		return new SanvocaliaBlockEntity(1, IncBlockEntityTypes.SANVOCALIA_SMALL, pos, state);
 	}
 	
 	private final int radius;
