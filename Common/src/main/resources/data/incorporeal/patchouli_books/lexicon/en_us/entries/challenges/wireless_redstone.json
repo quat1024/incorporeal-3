@@ -1,0 +1,16 @@
+{
+	"name": "Wireless Redstone",
+	"category": "botania:challenges",
+	"icon": "minecraft:redstone",
+	"read_by_default": true,
+	"advancement": "botania:main/mana_pool_pickup_lexicon",
+	"entry_color": "194a5c",
+	"sortnum": 69,
+	"pages": [
+		{
+			"type": "patchouli:quest",
+			"title": "Wireless Redstone",
+			"text": "Figure out some way to create short-range $(thing)Wireless Redstone$(0). It's possible!"
+		}
+	]
+}
