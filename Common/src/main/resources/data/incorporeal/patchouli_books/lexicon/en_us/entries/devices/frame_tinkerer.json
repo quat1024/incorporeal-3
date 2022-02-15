@@ -6,12 +6,16 @@
 	"pages": [
 		{
 			"type": "text",
-			"text": "incorporeal.entry.frame_tinkerer0"
+			"text": "The $(item)Frame Tinkerer$(0) is an indispensible tool for any advanced corporeticist, or really anyone who likes to redecorate often. It acts like a $(item)Spark Tinkerer$(0) - drop an item on it, give it a redstone signal, and the item will change places with one in a random nearby $(item)Item Frame$(0)."
+		},
+		{
+			"type": "text",
+			"text": "Note that it doesn't have a dedicated inventory; just dropping items on top will suffice. They are pushable via $(item)Piston$(0)."
 		},
 		{
 			"type": "crafting",
-			"text": "incorporeal.entry.frame_tinkerer.flavor",
-			"recipe": "incorporeal:frame_tinkerer"
+			"recipe": "incorporeal:frame_tinkerer",
+			"text": "Symbiotic Hematophage"
 		}
 	]
 }

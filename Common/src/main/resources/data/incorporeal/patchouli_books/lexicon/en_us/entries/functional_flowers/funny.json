@@ -6,16 +6,16 @@
 	"pages": [
 		{
 			"type": "text",
-			"text": "incorporeal.entry.funny0"
+			"text": "Legend has it that placing $(item)Note Blocks$(0) around a mana-fed $(item)Sweet Alexum$(0) flower will cause the note blocks to resonate with only the most beautiful of frequencies. For best results, four $(item)Note Blocks$(0) are required to play all of the parts: one above $(item)sand$(0), one above $(item)wood$(0), one above $(item)rock$(0), and one above a block composed of the $(item)purest balance$(0)."
 		},
 		{
 			"type": "text",
-			"text": "incorporeal.entry.funny1"
+			"text": "They also say providing the flower with a high-powered $(thing)Redstone Signal$(0) will restart the tune, while a low-powered signal will merely pause it, and that the $(item)Sweet Alexum Petite$(0) needs the $(item)Note Blocks$(0) to be placed closer but plays the song at a faster clip.<br><br>I wonder if these legends have any truth to them?"
 		},
 		{
 			"type": "botania:petal_apothecary",
-			"text": "incorporeal.entry.funny.flavor",
-			"recipe": "incorporeal:funny"
+			"recipe": "incorporeal:funny",
+			"text": "The other modders make me dance to the funny flower and shout go little dragon go"
 		}
 	],
 	"extra_recipe_mappings": {

@@ -7,16 +7,16 @@
 	"pages": [
 		{
 			"type": "text",
-			"text": "incorporeal.entry.corporea_solidifier0"
+			"text": "The $(item)Corporea Solidifier$(0) acts as a replacement for the $(item)Corporea Retainer$(0). When placed next to a $(item)Corporea Interceptor$(0), the $(item)Corporea Solidifier$(0), instead of remembering the interceptor's request, will create a $(thing)Corporea Ticket$(0) containing the item and item count of the request."
 		},
 		{
 			"type": "text",
-			"text": "incorporeal.entry.corporea_solidifier1"
+			"text": "The $(thing)Corporea Ticket$(0) will be placed in an inventory one or two blocks below the $(item)Solidifier$(0), or placed on-top of none are available, much like a $(item)Corporea Funnel$(0).<br><br>The $(item)Sanvocalia$(0) functional flower seems to be particularly interested in the energies in these $(thing)Corporea Tickets$(0)."
 		},
 		{
 			"type": "crafting",
-			"text": "incorporeal.entry.corporea_solidifier.flavor",
-			"recipe": "incorporeal:corporea_solidifier"
+			"recipe": "incorporeal:corporea_solidifier",
+			"text": "Up, up, down, up"
 		}
 	]
 }

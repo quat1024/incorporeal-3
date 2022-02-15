@@ -1,16 +1,15 @@
 {
-	"name": "incorporeal.entry.unstable_cube",
+	"name": "Unstable Cubes",
 	"category": "botania:misc",
 	"icon": "incorporeal:red_unstable_cube",
 	"entry_color": "194a5c",
 	"pages": [
 		{
 			"type": "text",
-			"text": "incorporeal.entry.unstable_cube0"
+			"text": "$(item)Unstable Cubes$(0) are curious little critters. They crackle pleasantly and spin in a satisfying way when touched, but other than emitting a $(thing)redstone signal$(0) when that happens, don't seem to do anything useful."
 		},
 		{
 			"type": "botania:crafting_multi",
-			"text": "incorporeal.entry.unstable_cube.flavor",
 			"recipes": [
 				"incorporeal:black_unstable_cube",
 				"incorporeal:red_unstable_cube",
@@ -28,7 +27,8 @@
 				"incorporeal:magenta_unstable_cube",
 				"incorporeal:orange_unstable_cube",
 				"incorporeal:white_unstable_cube"
-			]
+			],
+			"text": "Decorative relic from a bygone era"
 		}
 	]
 }
