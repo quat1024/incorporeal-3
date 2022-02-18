@@ -43,6 +43,12 @@ public class IncItems {
 	
 	public static final BlockItem CLEARLY = new BlockItem(IncBlocks.CLEARLY, props());
 	
+	public static final BlockItem DATA_PRISM = new BlockItem(IncBlocks.DATA_PRISM, props());
+	public static final BlockItem DATA_STORAGE = new BlockItem(IncBlocks.DATA_STORAGE, props());
+	public static final BlockItem MATCHER_LENS = new BlockItem(IncBlocks.MATCHER_LENS, props());
+	public static final BlockItem NUMBER_LENS = new BlockItem(IncBlocks.NUMBER_LENS, props());
+	public static final BlockItem NEGATORY_LENS = new BlockItem(IncBlocks.NEGATORY_LENS, props());
+	
 	public static void register(BiConsumer<Item, ResourceLocation> r) {
 		//items
 		r.accept(CORPOREA_TICKET, Inc.id("corporea_ticket"));
@@ -67,20 +73,21 @@ public class IncItems {
 		r.accept(FLOATING_FUNNY_SMALL, Inc.id("floating_funny_chibi"));
 		
 		//unstable cubes
-		UNSTABLE_CUBES.values().forEach(item -> registerBlockItem(r, item));
+		UNSTABLE_CUBES.values().forEach(item -> registerBlockItems(r, item));
 		
 		//clearly
-		registerBlockItem(r, CLEARLY);
+		registerBlockItems(r, CLEARLY);
+		
+		//computer
+		registerBlockItems(r, DATA_PRISM, DATA_STORAGE, MATCHER_LENS, NUMBER_LENS, NEGATORY_LENS);
 	}
 	
 	private static void registerBlockItems(BiConsumer<Item, ResourceLocation> r, BlockItem... bis) {
-		for(BlockItem bi : bis) registerBlockItem(r, bi);
-	}
-	
-	private static void registerBlockItem(BiConsumer<Item, ResourceLocation> r, BlockItem bi) {
-		//TODO: this needed?
-		Item.BY_BLOCK.put(bi.getBlock(), bi);
-		r.accept(bi, Registry.BLOCK.getKey(bi.getBlock()));
+		for(BlockItem bi : bis) {
+			//TODO: this needed?
+			Item.BY_BLOCK.put(bi.getBlock(), bi);
+			r.accept(bi, Registry.BLOCK.getKey(bi.getBlock()));
+		}
 	}
 	
 	private static Item.Properties props() {

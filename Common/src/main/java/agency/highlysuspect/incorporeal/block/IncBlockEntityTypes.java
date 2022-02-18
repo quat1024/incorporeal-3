@@ -1,6 +1,8 @@
 package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.computer.DataPrismBlockEntity;
+import agency.highlysuspect.incorporeal.computer.DataStorageBlockEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -10,12 +12,15 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class IncBlockEntityTypes {
+	//corporetics
 	public static final BlockEntityType<RedStringLiarBlockEntity> RED_STRING_LIAR =
 		IXplatAbstractions.INSTANCE.createBlockEntityType(RedStringLiarBlockEntity::new, IncBlocks.RED_STRING_LIAR);
 	
+	//soul cores
 	public static final BlockEntityType<EnderSoulCoreBlockEntity> ENDER_SOUL_CORE = 
 		IXplatAbstractions.INSTANCE.createBlockEntityType(EnderSoulCoreBlockEntity::new, IncBlocks.ENDER_SOUL_CORE);
 	
+	//flowers
 	public static final BlockEntityType<SanvocaliaBlockEntity> SANVOCALIA_BIG =
 		IXplatAbstractions.INSTANCE.createBlockEntityType(SanvocaliaBlockEntity::big, IncBlocks.SANVOCALIA, IncBlocks.FLOATING_SANVOCALIA);
 	public static final BlockEntityType<SanvocaliaBlockEntity> SANVOCALIA_SMALL =
@@ -26,11 +31,18 @@ public class IncBlockEntityTypes {
 	public static final BlockEntityType<FunnyBlockEntity> FUNNY_SMALL =
 		IXplatAbstractions.INSTANCE.createBlockEntityType(FunnyBlockEntity::small, IncBlocks.FUNNY_SMALL, IncBlocks.FLOATING_FUNNY_SMALL);
 	
+	//unstable cubes
 	//Note - Only one BlockEntityRenderer can be assigned per block entity type.
 	public static final Map<DyeColor, BlockEntityType<UnstableCubeBlockEntity>> UNSTABLE_CUBES = Inc.sixteenColors(color ->
 		IXplatAbstractions.INSTANCE.createBlockEntityType(
 			(pos, state) -> new UnstableCubeBlockEntity(color, pos, state), 
 			IncBlocks.UNSTABLE_CUBES.get(color)));
+	
+	//computer
+	public static final BlockEntityType<DataPrismBlockEntity> DATA_PRISM =
+		IXplatAbstractions.INSTANCE.createBlockEntityType(DataPrismBlockEntity::new, IncBlocks.DATA_PRISM);
+	public static final BlockEntityType<DataStorageBlockEntity> DATA_STORAGE =
+		IXplatAbstractions.INSTANCE.createBlockEntityType(DataStorageBlockEntity::new, IncBlocks.DATA_STORAGE);
 	
 	public static void register(BiConsumer<BlockEntityType<?>, ResourceLocation> r) {
 		r.accept(RED_STRING_LIAR, Inc.id("red_string_liar"));
@@ -43,6 +55,8 @@ public class IncBlockEntityTypes {
 		r.accept(FUNNY_SMALL, Inc.id("funny_small"));
 		
 		UNSTABLE_CUBES.forEach((color, type) -> r.accept(type, Inc.id(color.getName() + "_unstable_cube")));
+		
+		r.accept(DATA_PRISM, Inc.id("data_prism"));
+		r.accept(DATA_STORAGE, Inc.id("data_storage"));
 	}
-	
 }

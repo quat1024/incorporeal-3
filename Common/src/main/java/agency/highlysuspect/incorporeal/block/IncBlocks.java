@@ -1,6 +1,10 @@
 package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.computer.DataLens;
+import agency.highlysuspect.incorporeal.computer.DataPrismBlock;
+import agency.highlysuspect.incorporeal.computer.DataStorageBlock;
+import agency.highlysuspect.incorporeal.computer.LensBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.DyeColor;
@@ -52,6 +56,13 @@ public class IncBlocks {
 	
 	public static final Block CLEARLY = new ClearlyBlock(Properties.of(Material.METAL).sound(SoundType.NETHER_SPROUTS).strength(1f));
 	
+	//computer
+	public static final DataPrismBlock DATA_PRISM = new DataPrismBlock(Properties.of(Material.METAL).noOcclusion());
+	public static final DataStorageBlock DATA_STORAGE = new DataStorageBlock(Properties.of(Material.METAL).noOcclusion());
+	public static final LensBlock MATCHER_LENS = new LensBlock(DataLens.matcher, Properties.of(Material.GLASS).noOcclusion());
+	public static final LensBlock NUMBER_LENS = new LensBlock(DataLens.number, Properties.of(Material.GLASS).noOcclusion());
+	public static final LensBlock NEGATORY_LENS = new LensBlock(DataLens.negatory, Properties.of(Material.GLASS).noOcclusion());
+	
 	public static void register(BiConsumer<Block, ResourceLocation> r) {
 		//assorted corporea devices
 		r.accept(CORPOREA_SOLIDIFIER, Inc.id("corporea_solidifier"));
@@ -83,5 +94,12 @@ public class IncBlocks {
 		
 		//clearly
 		r.accept(CLEARLY, Inc.id("clearly"));
+		
+		//computer
+		r.accept(DATA_PRISM, Inc.id("data_prism"));
+		r.accept(DATA_STORAGE, Inc.id("data_storage"));
+		r.accept(MATCHER_LENS, Inc.id("matcher_lens"));
+		r.accept(NUMBER_LENS, Inc.id("number_lens"));
+		r.accept(NEGATORY_LENS, Inc.id("negatory_lens"));
 	}
 }

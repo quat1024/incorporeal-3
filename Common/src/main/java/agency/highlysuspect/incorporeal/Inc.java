@@ -1,7 +1,10 @@
 package agency.highlysuspect.incorporeal;
 
 import agency.highlysuspect.incorporeal.block.RedStringLiarBlockEntity;
+import agency.highlysuspect.incorporeal.computer.DataTypes;
+import agency.highlysuspect.incorporeal.corporea.AndingCorporeaRequestMatcher;
 import agency.highlysuspect.incorporeal.corporea.EmptyCorporeaRequestMatcher;
+import agency.highlysuspect.incorporeal.corporea.InvertedCorporeaRequestMatcher;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.DyeColor;
@@ -28,11 +31,20 @@ public class Inc {
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 	
 	public static void registerExtraThings() {
-		//Register the empty corporea request matcher (matches no items)
+		//empty matcher (matches no items)
 		CorporeaHelper.instance().registerRequestMatcher(id("empty"), EmptyCorporeaRequestMatcher.class, __ -> EmptyCorporeaRequestMatcher.INSTANCE);
 		
-		//Register Red String Liar corporea node detector
+		//invertedmatcher (matches everything its child matcher doesn't)
+		CorporeaHelper.instance().registerRequestMatcher(id("not"), InvertedCorporeaRequestMatcher.class, InvertedCorporeaRequestMatcher::readFromNBT);
+		
+		//andingmatcher (matches everything all of its submatchers would)
+		CorporeaHelper.instance().registerRequestMatcher(id("and"), AndingCorporeaRequestMatcher.class, AndingCorporeaRequestMatcher::readFromNbt);
+		
+		//red stringed liar's corporea node detector
 		CorporeaNodeDetectors.register(new RedStringLiarBlockEntity.NodeDetector());
+		
+		//computer:
+		DataTypes.registerBuiltinTypes();
 	}
 	
 	public static ResourceLocation id(String path) {
