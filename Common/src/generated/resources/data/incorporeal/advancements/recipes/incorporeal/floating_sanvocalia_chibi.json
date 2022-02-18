@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:floating_sanvocalia_chibi"
+    ]
+  },
+  "criteria": {
+    "sanvocalia_chibi": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "incorporeal:sanvocalia_chibi"
+            ]
+          }
+        ]
+      }
+    },
+    "floating_flowers": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "botania:floating_flowers"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:floating_sanvocalia_chibi"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "sanvocalia_chibi",
+      "floating_flowers",
+      "has_the_recipe"
+    ]
+  ]
+}

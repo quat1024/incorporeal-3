@@ -1,0 +1,58 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:frame_tinkerer"
+    ]
+  },
+  "criteria": {
+    "manasteel_ingots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "botania:manasteel_ingots"
+          }
+        ]
+      }
+    },
+    "livingrock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "botania:livingrock"
+            ]
+          }
+        ]
+      }
+    },
+    "item_frame": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:item_frame"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:frame_tinkerer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "manasteel_ingots",
+      "livingrock",
+      "item_frame",
+      "has_the_recipe"
+    ]
+  ]
+}

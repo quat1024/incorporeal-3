@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:floating_funny"
+    ]
+  },
+  "criteria": {
+    "funny": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "incorporeal:funny"
+            ]
+          }
+        ]
+      }
+    },
+    "floating_flowers": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "botania:floating_flowers"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:floating_funny"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "funny",
+      "floating_flowers",
+      "has_the_recipe"
+    ]
+  ]
+}

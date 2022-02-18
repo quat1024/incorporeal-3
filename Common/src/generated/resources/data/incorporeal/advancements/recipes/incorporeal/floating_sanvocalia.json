@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:floating_sanvocalia"
+    ]
+  },
+  "criteria": {
+    "sanvocalia": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "incorporeal:sanvocalia"
+            ]
+          }
+        ]
+      }
+    },
+    "floating_flowers": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "botania:floating_flowers"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:floating_sanvocalia"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "sanvocalia",
+      "floating_flowers",
+      "has_the_recipe"
+    ]
+  ]
+}

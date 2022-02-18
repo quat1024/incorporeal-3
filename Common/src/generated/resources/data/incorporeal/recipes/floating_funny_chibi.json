@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "incorporeal:funny_chibi"
+    },
+    {
+      "tag": "botania:floating_flowers"
+    }
+  ],
+  "result": {
+    "item": "incorporeal:floating_funny_chibi"
+  }
+}
