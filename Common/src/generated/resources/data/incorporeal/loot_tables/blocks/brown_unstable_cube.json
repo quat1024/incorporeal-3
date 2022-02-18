@@ -1,20 +1,20 @@
 {
+  "type": "minecraft:block",
   "pools": [
     {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "incorporeal:brown_unstable_cube"
+        }
+      ],
       "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }
-      ],
-      "entries": [
-        {
-          "name": "incorporeal:brown_unstable_cube",
-          "type": "minecraft:item"
-        }
-      ],
-      "name": "self",
-      "rolls": 1
+      ]
     }
-  ],
-  "type": "minecraft:block"
+  ]
 }
