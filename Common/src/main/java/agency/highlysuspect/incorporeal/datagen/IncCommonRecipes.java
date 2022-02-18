@@ -1,9 +1,7 @@
 package agency.highlysuspect.incorporeal.datagen;
 
 import agency.highlysuspect.incorporeal.block.IncBlocks;
-import agency.highlysuspect.incorporeal.block.UnstableCubeBlock;
 import agency.highlysuspect.incorporeal.item.IncItems;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import vazkii.botania.common.block.ModBlocks;
@@ -58,14 +56,14 @@ public class IncCommonRecipes {
 				.save(files));
 		
 		//Soul Core Frame
-		new RunicAltarRecipeBuilder(IncItems.SOUL_CORE_FRAME)
-			.mana(RunicAltarRecipeBuilder.TIER_3)
+		RecipeDsl.runic(IncItems.SOUL_CORE_FRAME, RunicAltarRecipeBuilder.TIER_3)
+			//done in this funny way because runic altar recipes have an ingredient order -
+			//it's cosmetic only, ofc, but i like this symmetrical ordering
 			.add(Blocks.ICE, 4).add(ModItems.pixieDust).add(Blocks.ICE, 4).add(ModItems.pixieDust)
 			.save(files);
 		
 		//Ender Soul Core
-		new RunicAltarRecipeBuilder(IncBlocks.ENDER_SOUL_CORE)
-			.mana(RunicAltarRecipeBuilder.TIER_3 * 2)
+		RecipeDsl.runic(IncBlocks.ENDER_SOUL_CORE, RunicAltarRecipeBuilder.TIER_3 * 2)
 			.add(IncItems.SOUL_CORE_FRAME)
 			.add(ModTags.Items.GEMS_DRAGONSTONE, 2)
 			.add(ModItems.manaweaveCloth, 2)

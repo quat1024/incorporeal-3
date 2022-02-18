@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.datagen;
 
+import agency.highlysuspect.incorporeal.datagen.JsonDsl.JsonFile;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.RecipeBuilder;
@@ -16,33 +17,25 @@ import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * btw, this has nothing to do with vanilla's recipe builder system. I don't like it too much.
+ * Quick builder for Runic Altar recipes.
+ * Has nothing to do with the vanilla ShapedRecipeBuilder/FinishedRecipe/etc systems, they're a bit too heavy, I think.
  */
-public class RunicAltarRecipeBuilder {
-	public RunicAltarRecipeBuilder(ItemStack output) {
-		this.output = output;
+public record RunicAltarRecipeBuilder(ItemStack output, int mana, List<Ingredient> ingredients) {
+	public static RunicAltarRecipeBuilder create(ItemStack output, int mana) {
+		return new RunicAltarRecipeBuilder(output, mana, new ArrayList<>());
 	}
 	
-	public RunicAltarRecipeBuilder(ItemLike output) {
-		this.output = new ItemStack(output);
+	public static RunicAltarRecipeBuilder create(ItemLike output, int mana) {
+		return new RunicAltarRecipeBuilder(new ItemStack(output), mana, new ArrayList<>());
 	}
 	
-	public RunicAltarRecipeBuilder(ItemLike output, int count) {
-		this.output = new ItemStack(output, count);
+	public static RunicAltarRecipeBuilder create(ItemLike output, int count, int mana) {
+		return new RunicAltarRecipeBuilder(new ItemStack(output, count), mana, new ArrayList<>());
 	}
-	
-	private final ItemStack output;
-	private int mana = 5200;
-	private List<Ingredient> ingredients = new ArrayList<>();
 	
 	public static final int TIER_1 = 5200; //water, fire, etc
 	public static final int TIER_2 = 8000; //spring, autumn, etc
 	public static final int TIER_3 = 12000; //lust, wrath, etc
-	
-	public RunicAltarRecipeBuilder mana(int mana) {
-		this.mana = mana;
-		return this;
-	}
 	
 	public RunicAltarRecipeBuilder add(ItemLike item) {
 		ingredients.add(Ingredient.of(item));
@@ -80,11 +73,11 @@ public class RunicAltarRecipeBuilder {
 		return json;
 	}
 	
-	public void save(Consumer<JsonDsl.JsonFile> fileConsumer) {
+	public void save(Consumer<JsonFile> fileConsumer) {
 		save(fileConsumer, RecipeBuilder.getDefaultRecipeId(output.getItem()));
 	}
 	
-	public void save(Consumer<JsonDsl.JsonFile> fileConsumer, ResourceLocation id) {
-		fileConsumer.accept(JsonDsl.JsonFile.create("data", id.getNamespace(), "recipes", id.getPath(), toJson()));
+	public void save(Consumer<JsonFile> fileConsumer, ResourceLocation id) {
+		fileConsumer.accept(JsonFile.coerce(toJson(), "data", id.getNamespace(), "recipes", id.getPath()));
 	}
 }

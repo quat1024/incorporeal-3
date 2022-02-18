@@ -43,8 +43,8 @@ public class RecipeDsl {
 		return shapeless(floating).add(notFloating).add(ModTags.Items.FLOATING_FLOWERS);
 	}
 	
-	public static RunicAltarRecipeBuilder runic(ItemLike out) {
-		return new RunicAltarRecipeBuilder(out);
+	public static RunicAltarRecipeBuilder runic(ItemLike out, int mana) {
+		return RunicAltarRecipeBuilder.create(out, mana);
 	}
 	
 	/// Some builders ///
@@ -119,11 +119,11 @@ public class RecipeDsl {
 	public static void save(Consumer<JsonFile> fileConsumer, RecipeBuilder builder, ResourceLocation id) {
 		builder.save(finishedRecipe -> {
 			JsonObject recipeJson = finishedRecipe.serializeRecipe();
-			fileConsumer.accept(JsonFile.create("data", id.getNamespace(), "recipes", id.getPath(), recipeJson));
+			fileConsumer.accept(JsonFile.coerce(recipeJson, "data", id.getNamespace(), "recipes", id.getPath()));
 			
 			JsonObject advancementJson = finishedRecipe.serializeAdvancement();
 			if(advancementJson != null) {
-				fileConsumer.accept(JsonFile.create("data", id.getNamespace(), "advancements/recipes/" + id.getNamespace(), id.getPath(), advancementJson));
+				fileConsumer.accept(JsonFile.coerce(advancementJson, "data", id.getNamespace(), "advancements/recipes/" + id.getNamespace(), id.getPath()));
 			}
 		}, id);
 	}

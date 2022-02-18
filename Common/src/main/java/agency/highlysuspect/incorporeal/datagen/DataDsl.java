@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.datagen;
 
+import agency.highlysuspect.incorporeal.Inc;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import org.apache.logging.log4j.util.Strings;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,8 +35,10 @@ public class DataDsl {
 			public void run(HashCache hashCache) throws IOException {
 				List<JsonFile> files = new ArrayList<>();
 				generator.accept(files::add);
-				
-				files.forEach(f -> f.save(datagen, hashCache));
+				files.forEach(f -> {
+					Inc.LOGGER.info("Saving " + Strings.join(f.pathSegments(), '/')); //todo ugly ;)
+					f.save(datagen, hashCache);
+				});
 			}
 			
 			@Override

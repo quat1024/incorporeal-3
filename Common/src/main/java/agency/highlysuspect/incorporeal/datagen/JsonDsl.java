@@ -10,6 +10,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -44,29 +45,39 @@ public class JsonDsl {
 		return j;
 	}
 	
-	public static JObject.Field field(String name, Object value) {
-		return JObject.Field.coerce(name, value);
-	}
-	
 	/**
-	 * for example, the path
-	 * - src/generated/resources/data/incorporeal/loot_tables/blocks/clearly.json:
+	 * ("Thing which can be written as json", "list of strings") tuple.
+	 * First path segment is the jar root, so probably "assets" or "data"
 	 * 
-	 * has:
-	 * classifier - data
-	 * namespace - incorporeal
-	 * category - loot_tables/blocks
-	 * fileName - clearly
+	 * passing ("data", "incorporeal", "recipes", "blah") will write to data/incorporeal/recipes/blah.json.
+	 * investigate: could this be a (JValue<?>, Path) tuple instead? idk
 	 */
-	public static record JsonFile(String classifier, String namespace, String category, String fileName, JValue<?> value) {
-		public static JsonFile create(String classifier, String namespace, String category, String fileName, Object value) {
-			return new JsonFile(classifier, namespace, category, fileName, JValue.coerce(value));
+	public static record JsonFile(JValue<?> value, List<String> pathSegments) {
+		public static JsonFile create(JValue<?> value, String... pathSegments) {
+			return new JsonFile(value, List.of(pathSegments));
+		}
+		
+		public static JsonFile coerce(Object value, String... pathSegments) {
+			return new JsonFile(JValue.coerce(value), List.of(pathSegments));
 		}
 		
 		public Path getOutputPath(DataGenerator datagen) {
-			return datagen.getOutputFolder().resolve(classifier).resolve(namespace).resolve(category).resolve(fileName + ".json");
+			Path path = datagen.getOutputFolder();
+			
+			//grimy code to concatenate all path segments with a .json on the end
+			//there's not like a "Path#withFileName" or anything >.>
+			//probably could be cleaner
+			for(int i = 0; i < pathSegments.size(); i++) {
+				if(i == pathSegments.size() - 1) path = path.resolve(pathSegments.get(i) + ".json");
+				else path = path.resolve(pathSegments.get(i));
+			}
+			
+			return path;
 		}
 		
+		//wrapper for DataProvider#save that swallows errors
+		//mainly so you don't have to slap "throws IOException" on the whole mod
+		//and so you can use them inside lambdas (for the same reason)
 		public void save(DataGenerator datagen, HashCache cache) {
 			try {
 				DataProvider.save(PRETTY_GSON, cache, value.toGson(), getOutputPath(datagen));
@@ -77,35 +88,39 @@ public class JsonDsl {
 	}
 	
 	/**
-	 * Thin wrapper around google gson
+	 * "Thing that can be serialized as a gson JsonElement"
 	 */
 	public interface JValue<T extends JsonElement> {
 		T toGson();
 		
 		/**
-		 * Tries to guess what json type you mean by a particular Java object
-		 * like if you pass an integer, you probably want a json number
-		 * Anything already a JValue gets returned as-is
+		 * Tries to guess what json type you mean by a particular Java object.
+		 * Like if you pass an integer, you probably want a json number.
+		 * Anything already a JValue gets returned as-is.
+		 * Aka: shitty version of GSON's type adapter thingie.
 		 */
 		static JValue<?> coerce(Object o) {
+			//already jvalues
 			if(o instanceof JValue<?> val) return val;
+			//resourcelocations - also tries to catch usages of "minecraft:air"
+			if(o instanceof ResourceLocation rl) return new JSimple(new JsonPrimitive(DataDsl.notAir(rl).toString()));
+			//google gson primitives
 			if(o instanceof Integer i) return new JSimple(new JsonPrimitive(i));
 			if(o instanceof Boolean b) return new JSimple(new JsonPrimitive(b));
+			if(o instanceof String s) return new JSimple(new JsonPrimitive(s));
 			if(o instanceof JsonObject x) return new JSimple(x);
+			//various registry items (recurses up into the ResourceLocation case)
 			if(o instanceof Item i) return coerce(Registry.ITEM.getKey(i));
 			if(o instanceof Block b) return coerce(Registry.BLOCK.getKey(b));
 			if(o instanceof ItemLike il && il.asItem() != Items.AIR) return coerce(il.asItem());
-			//toss some more things in here later
 			
-			return new JSimple(new JsonPrimitive(o.toString())); //hope toString works
+			//(toss some more things in here as needed)
+			
+			return new JSimple(new JsonPrimitive(o.toString())); //hope toString works on it i guess lol
 		}
 		
-		default JsonFile fileOf(String classifier, String namespace, String category, String fileName) {
-			return new JsonFile(classifier, namespace, category, fileName, this);
-		}
-		
-		default String prettyPrint() {
-			return PRETTY_GSON.toJson(toGson());
+		default JsonFile fileOf(String... segments) {
+			return JsonFile.coerce(this, segments);
 		}
 	}
 	
@@ -115,6 +130,9 @@ public class JsonDsl {
 			return elem;
 		}
 	}
+	
+	//Builders for json objects & json arrays
+	//much nicer to use (when manually constructing large JSON objects) than google GSON
 	
 	/**
 	 * { ... }
@@ -131,33 +149,16 @@ public class JsonDsl {
 			return yes;
 		}
 		
-		public static record Field(String key, JValue<?> value) {
-			public static Field coerce(String key, Object o) {
-				return new Field(key, JValue.coerce(o));
-			}
-		}
-		
 		/**
 		 * Accepts an alternating sequence of keys and values.
-		 * Keys must be strings, other things are coerced to JValues using JValue.coerce.
-		 * Or you can pass a JObject.Field, which counts as both a key and a value
+		 * Keys coerced to strings with toString, values coerced to JValues using JValue.coerce.
 		 */
 		public JObject fields(Object... keyValues) {
 			Iterator<Object> objerator = List.of(keyValues).iterator();
 			while(objerator.hasNext()) {
-				Object key = objerator.next();
-				
-				if(key instanceof Field f) {
-					values.put(f.key, f.value);
-					continue;
-				}
-				
-				if(!(key instanceof String keyString)) {
-					throw new IllegalArgumentException("key is not a string");
-				}
-				
+				String key = objerator.next().toString();
 				Object value = objerator.next();
-				values.put(keyString, JValue.coerce(value));
+				values.put(key, JValue.coerce(value));
 			}
 			return this;
 		}
@@ -183,6 +184,9 @@ public class JsonDsl {
 			return this;
 		}
 		
+		/**
+		 * Values coerced to JValues using JValue.coerce.
+		 */
 		public JArray values(Object... values) {
 			this.values.addAll(Stream.of(values).map(JValue::coerce).collect(Collectors.toList()));
 			return this;
