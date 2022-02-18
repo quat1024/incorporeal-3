@@ -12,7 +12,7 @@ import vazkii.botania.common.lib.ModTags;
 import java.util.function.Consumer;
 
 public class IncCommonRecipes {
-	public static void addRecipes(Consumer<JsonDsl.JsonFile> files) {
+	public static void addRecipes(Consumer<JsonFile> files) {
 		//Corporea Solidifier
 		RecipeDsl.shaped(IncBlocks.CORPOREA_SOLIDIFIER, "PPP", "EFE", "PPP")
 			.define("P", Items.PAPER)

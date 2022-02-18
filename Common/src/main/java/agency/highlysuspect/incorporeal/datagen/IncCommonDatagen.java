@@ -12,11 +12,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static agency.highlysuspect.incorporeal.datagen.DataDsl.addProvider;
-import static agency.highlysuspect.incorporeal.datagen.DataDsl.blockAndItem;
-import static agency.highlysuspect.incorporeal.datagen.DataDsl.blockTag;
-import static agency.highlysuspect.incorporeal.datagen.DataDsl.selfDrop;
-
 public class IncCommonDatagen {
 	public static void configureCommonDatagen(DataGenerator gen) {
 		List<Block> INC_BLOCKS = Registry.BLOCK.keySet().stream()
@@ -24,34 +19,41 @@ public class IncCommonDatagen {
 			.map(Registry.BLOCK::get)
 			.collect(Collectors.toList());
 		
-		addProvider(gen, "Incorporeal block loot tables", files -> {
-			//Blocks that don't drop themselves
+		DataDsl.addProvider(gen, "Incorporeal block loot tables", files -> {
+			//Blocks that don't drop themselves:
 			Set<Block> selfDropExceptions = Set.of(IncBlocks.REDSTONE_ROOT_CROP);
 			
 			for(Block b : INC_BLOCKS) {
 				if(selfDropExceptions.contains(b)) continue;
-				files.accept(selfDrop(b));
+				DataDsl.saveBlockLootTable(files, b, DataDsl.selfDrop(b));
 			}
 		});
 		
-		addProvider(gen, "Incorporeal block and item tags", files -> {
-			files.accept(blockTag(ModTags.Blocks.CORPOREA_SPARK_OVERRIDE,
-				IncBlocks.RED_STRING_LIAR, IncBlocks.CLEARLY, Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD));
+		DataDsl.addProvider(gen, "Incorporeal block and item tags", files -> {
+			//corporea spark override
+			DataDsl.blockTag(ModTags.Blocks.CORPOREA_SPARK_OVERRIDE).addBlocks(
+				IncBlocks.RED_STRING_LIAR, IncBlocks.CLEARLY, Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD
+			).save(files);
 			
-			//todo: maybe this abstraction needs some work lol
-			blockAndItem(files, ModTags.Blocks.FUNCTIONAL_SPECIAL_FLOWERS, ModTags.Items.FUNCTIONAL_SPECIAL_FLOWERS,
+			//functional special flowers
+			DataDsl.blockAndItemTag(ModTags.Blocks.FUNCTIONAL_SPECIAL_FLOWERS).add(
 				IncBlocks.FUNNY, IncBlocks.FUNNY_SMALL, IncBlocks.FLOATING_FUNNY, IncBlocks.FLOATING_FUNNY_SMALL,
-				IncBlocks.SANVOCALIA, IncBlocks.SANVOCALIA_SMALL, IncBlocks.FLOATING_SANVOCALIA, IncBlocks.FLOATING_SANVOCALIA_SMALL);
+				IncBlocks.SANVOCALIA, IncBlocks.SANVOCALIA_SMALL, IncBlocks.FLOATING_SANVOCALIA, IncBlocks.FLOATING_SANVOCALIA_SMALL
+			).save(files);
 			
-			blockAndItem(files, ModTags.Blocks.MINI_FLOWERS, ModTags.Items.MINI_FLOWERS,
+			//mini flowers
+			DataDsl.blockAndItemTag(ModTags.Blocks.MINI_FLOWERS).add(
 				IncBlocks.FUNNY_SMALL, IncBlocks.FLOATING_FUNNY_SMALL,
-				IncBlocks.SANVOCALIA_SMALL, IncBlocks.FLOATING_SANVOCALIA_SMALL);
+				IncBlocks.SANVOCALIA_SMALL, IncBlocks.FLOATING_SANVOCALIA_SMALL
+			).save(files);
 			
-			blockAndItem(files, ModTags.Blocks.SPECIAL_FLOATING_FLOWERS, ModTags.Items.SPECIAL_FLOATING_FLOWERS,
+			//special floating flowers
+			DataDsl.blockAndItemTag(ModTags.Blocks.SPECIAL_FLOATING_FLOWERS).add(
 				IncBlocks.FLOATING_FUNNY, IncBlocks.FLOATING_FUNNY_SMALL,
-				IncBlocks.FLOATING_SANVOCALIA, IncBlocks.FLOATING_SANVOCALIA_SMALL);
+				IncBlocks.FLOATING_SANVOCALIA, IncBlocks.FLOATING_SANVOCALIA_SMALL
+			).save(files);
 		});
 		
-		addProvider(gen, "Incorporeal recipes", IncCommonRecipes::addRecipes);
+		DataDsl.addProvider(gen, "Incorporeal recipes", IncCommonRecipes::addRecipes);
 	}
 }

@@ -1,6 +1,5 @@
 package agency.highlysuspect.incorporeal.datagen;
 
-import agency.highlysuspect.incorporeal.datagen.JsonDsl.JsonFile;
 import com.google.gson.JsonObject;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -119,11 +118,11 @@ public class RecipeDsl {
 	public static void save(Consumer<JsonFile> fileConsumer, RecipeBuilder builder, ResourceLocation id) {
 		builder.save(finishedRecipe -> {
 			JsonObject recipeJson = finishedRecipe.serializeRecipe();
-			fileConsumer.accept(JsonFile.coerce(recipeJson, "data", id.getNamespace(), "recipes", id.getPath()));
+			fileConsumer.accept(JsonFile.create(recipeJson, "data", id.getNamespace(), "recipes", id.getPath()));
 			
 			JsonObject advancementJson = finishedRecipe.serializeAdvancement();
 			if(advancementJson != null) {
-				fileConsumer.accept(JsonFile.coerce(advancementJson, "data", id.getNamespace(), "advancements/recipes/" + id.getNamespace(), id.getPath()));
+				fileConsumer.accept(JsonFile.create(advancementJson, "data", id.getNamespace(), "advancements/recipes/" + id.getNamespace(), id.getPath()));
 			}
 		}, id);
 	}

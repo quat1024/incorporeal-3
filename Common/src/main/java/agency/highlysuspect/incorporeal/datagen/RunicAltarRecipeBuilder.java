@@ -1,6 +1,5 @@
 package agency.highlysuspect.incorporeal.datagen;
 
-import agency.highlysuspect.incorporeal.datagen.JsonDsl.JsonFile;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.RecipeBuilder;
@@ -78,6 +77,6 @@ public record RunicAltarRecipeBuilder(ItemStack output, int mana, List<Ingredien
 	}
 	
 	public void save(Consumer<JsonFile> fileConsumer, ResourceLocation id) {
-		fileConsumer.accept(JsonFile.coerce(toJson(), "data", id.getNamespace(), "recipes", id.getPath()));
+		fileConsumer.accept(JsonFile.create(toJson(), "data", id.getNamespace(), "recipes", id.getPath()));
 	}
 }
