@@ -1,8 +1,6 @@
 Incorporeal 3
 =============
 
-### yes i know it prints a lot of warnings in the log Im too lazy to only paste the datapack bits i need
-
 Magic mod addon, in which an old dragon yells at a corporea spark. 1.18, Forge and Fabric.
 
 Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-forge), Incorporeal 1 (1.12/Forge) is [here](https://github.com/quat1024/incorporeal).

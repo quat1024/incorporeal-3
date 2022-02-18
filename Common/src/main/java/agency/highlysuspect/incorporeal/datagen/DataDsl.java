@@ -103,11 +103,4 @@ public class DataDsl {
 			)
 		).fileOf("data", rl.getNamespace(), "loot_tables/blocks", rl.getPath());
 	}
-	
-	public static void main(String[] args) {
-		SharedConstants.tryDetectVersion();
-		Bootstrap.bootStrap();
-		System.out.println(selfDrop(Blocks.STONE_BUTTON));
-		System.out.println(selfDrop(Blocks.STONE_BUTTON).value().prettyPrint());
-	}
 }

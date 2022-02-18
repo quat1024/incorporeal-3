@@ -59,6 +59,10 @@ public class JsonDsl {
 	 * fileName - clearly
 	 */
 	public static record JsonFile(String classifier, String namespace, String category, String fileName, JValue<?> value) {
+		public static JsonFile create(String classifier, String namespace, String category, String fileName, Object value) {
+			return new JsonFile(classifier, namespace, category, fileName, JValue.coerce(value));
+		}
+		
 		public Path getOutputPath(DataGenerator datagen) {
 			return datagen.getOutputFolder().resolve(classifier).resolve(namespace).resolve(category).resolve(fileName + ".json");
 		}
@@ -87,6 +91,7 @@ public class JsonDsl {
 			if(o instanceof JValue<?> val) return val;
 			if(o instanceof Integer i) return new JSimple(new JsonPrimitive(i));
 			if(o instanceof Boolean b) return new JSimple(new JsonPrimitive(b));
+			if(o instanceof JsonObject x) return new JSimple(x);
 			if(o instanceof Item i) return coerce(Registry.ITEM.getKey(i));
 			if(o instanceof Block b) return coerce(Registry.BLOCK.getKey(b));
 			if(o instanceof ItemLike il && il.asItem() != Items.AIR) return coerce(il.asItem());

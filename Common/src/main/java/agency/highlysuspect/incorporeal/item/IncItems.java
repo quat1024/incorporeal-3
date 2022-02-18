@@ -15,6 +15,7 @@ import java.util.function.BiConsumer;
 
 public class IncItems {
 	public static final CorporeaTicketItem CORPOREA_TICKET = new CorporeaTicketItem(props());
+	public static final Item SOUL_CORE_FRAME = new Item(props()); //TODO: teisr (ugh)
 	
 	public static final BlockItem CORPOREA_SOLIDIFIER = new BlockItem(IncBlocks.CORPOREA_SOLIDIFIER, props());
 	public static final BlockItem RED_STRING_LIAR = new BlockItem(IncBlocks.RED_STRING_LIAR, props());
@@ -44,6 +45,7 @@ public class IncItems {
 	public static void register(BiConsumer<Item, ResourceLocation> r) {
 		//items
 		r.accept(CORPOREA_TICKET, Inc.id("corporea_ticket"));
+		r.accept(SOUL_CORE_FRAME, Inc.id("soul_core_frame"));
 		
 		//blockitems
 		registerBlockItems(r,
