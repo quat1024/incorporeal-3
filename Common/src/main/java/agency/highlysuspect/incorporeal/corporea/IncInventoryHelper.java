@@ -2,6 +2,7 @@ package agency.highlysuspect.incorporeal.corporea;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.WorldlyContainerHolder;
@@ -130,6 +131,12 @@ public class IncInventoryHelper {
 		@Override
 		public void clearContent() {
 			wc.clearContent();
+		}
+	}
+	
+	public static void giveToPlayer(ItemStack stack, ServerPlayer player) {
+		if (!player.getInventory().add(stack)) {
+			player.drop(stack, false);
 		}
 	}
 }

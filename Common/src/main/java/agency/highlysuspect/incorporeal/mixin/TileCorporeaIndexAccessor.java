@@ -4,7 +4,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import vazkii.botania.common.block.tile.corporea.TileCorporeaIndex;
 
+import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 @Mixin(TileCorporeaIndex.class)
 public interface TileCorporeaIndexAccessor {
@@ -20,6 +22,14 @@ public interface TileCorporeaIndexAccessor {
 	 */
 	@Accessor(value = "serverIndexes", remap = false)
 	static Set<TileCorporeaIndex> inc$getServerIndices() {
-		throw new AssertionError();
+		throw new AssertionError("mixin failed to apply");
+	}
+	
+	/**
+	 * And this is the list of regular expressions, used to match chat messages to corporea requests.
+	 */
+	@Accessor(value = "patterns", remap = false)
+	static Map<Pattern, TileCorporeaIndex.IRegexStacker> inc$getPatterns() {
+		throw new AssertionError("mixin failed to apply");
 	}
 }
