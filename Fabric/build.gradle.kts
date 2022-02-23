@@ -31,6 +31,9 @@ loom {
             //Doesn't work lol
             //vmArg("-Dfabric-api.datagen.output-dir=${project(":Common").relativePath("./src/generated/resources")}")
             vmArg("-Dfabric-api.datagen.output-dir=${file("../Common/src/generated/resources")}")
+            
+            //for EnUsRewriter:
+            vmArg("-Dincorporeal.en-us=${file("../Common/src/main/resources/assets/incorporeal/lang/en_us.json")}")
         }
 
         //Loom doesn't generate run configs by default in subprojects.

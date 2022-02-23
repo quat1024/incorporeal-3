@@ -77,5 +77,15 @@
 	
 	"incorporeal.empty_matcher": "Nothing",
 	
-	"incorporeal.subtitle.unstable": "Unstable Cube chimes"
+	"incorporeal.subtitle.unstable": "Unstable Cube chimes",
+	
+	"zzzzzz.incorporeal.en-us-rewriter.marker.zzzzzz": "(AUTOMATICALLY GENERATED LANG ENTIRES BELOW THIS LINE - NO TOUCHY)",
+	"incorporeal.lexica.devices.frame_tinkerer.0.text": "The $(item)Frame Tinkerer$(0) is an indispensible tool for any advanced corporeticist, or really anyone who likes to redecorate often. It acts like a $(item)Spark Tinkerer$(0) - drop an item on it, give it a redstone signal, and the item will change places with one in a random nearby $(item)Item Frame$(0).",
+	"incorporeal.lexica.devices.frame_tinkerer.1.text": "Note that it doesn't have a dedicated inventory; just dropping items on top will suffice. They are pushable via $(item)Piston$(0).",
+	"incorporeal.lexica.devices.frame_tinkerer.2.text": "Symbiotic Hematophage",
+	"incorporeal.lexica.challenges.corporea_sorting_hall.name": "Corporea Sorting Hall",
+	"incorporeal.lexica.challenges.corporea_sorting_hall.0.title": "Corporea Sorting Hall",
+	"incorporeal.lexica.challenges.corporea_sorting_hall.0.text": "Create a $(thing)Corporea Network$(0) that doesn't simply store items out-of-sight, but organizes them into logical groups so you can manually access each item too, instead of relying on a $(item)Corporea Index$(0). Bonus points if it can unpack and sort $(item)Shulker Boxes$(0) too.",
+	"incorporeal.lexica.challenges.pixel_screen.0.title": "Pixel Screen",
+	"incorporeal.lexica.challenges.pixel_screen.0.text": "Repurpose the $(item)Frame Tinkerer$(0) to create a dynamic, changing map-art display on a wall, floor, or ceiling covered in $(item)Glow Item Frames$(0). Bonus points if it actually displays something useful..."
 }

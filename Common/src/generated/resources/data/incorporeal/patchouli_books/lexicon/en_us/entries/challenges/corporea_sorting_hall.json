@@ -1,0 +1,16 @@
+{
+  "name": "incorporeal.lexica.challenges.corporea_sorting_hall.name",
+  "category": "botania:challenges",
+  "icon": "botania:corporea_spark_master",
+  "read_by_default": true,
+  "advancement": "botania:main/mana_pool_pickup_lexicon",
+  "color": "194a5c",
+  "sortnum": 69,
+  "pages": [
+    {
+      "type": "patchouli:quest",
+      "title": "incorporeal.lexica.challenges.corporea_sorting_hall.0.title",
+      "text": "incorporeal.lexica.challenges.corporea_sorting_hall.0.text"
+    }
+  ]
+}

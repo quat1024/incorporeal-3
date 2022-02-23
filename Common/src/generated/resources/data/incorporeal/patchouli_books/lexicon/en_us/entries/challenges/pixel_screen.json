@@ -1,0 +1,21 @@
+{
+  "category": "botania:challenges",
+  "icon": "incorporeal:frame_tinkerer",
+  "read_by_default": true,
+  "advancement": "botania:main/mana_pool_pickup_lexicon",
+  "color": "194a5c",
+  "sortnum": 69,
+  "pages": [
+    {
+      "type": "patchouli:quest",
+      "title": "incorporeal.lexica.challenges.pixel_screen.0.title",
+      "text": "incorporeal.lexica.challenges.pixel_screen.0.text"
+    },
+    {
+      "type": "patchouli:relations",
+      "entries": [
+        "incorporeal:devices/frame_tinkerer"
+      ]
+    }
+  ]
+}

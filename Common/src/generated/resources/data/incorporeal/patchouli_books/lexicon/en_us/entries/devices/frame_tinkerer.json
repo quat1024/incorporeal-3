@@ -1,0 +1,21 @@
+{
+  "name": "block.incorporeal.frame_tinkerer",
+  "category": "botania:devices",
+  "icon": "incorporeal:frame_tinkerer",
+  "color": "194a5c",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexica.devices.frame_tinkerer.0.text"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexica.devices.frame_tinkerer.1.text"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "incorporeal:frame_tinkerer",
+      "text": "incorporeal.lexica.devices.frame_tinkerer.2.text"
+    }
+  ]
+}

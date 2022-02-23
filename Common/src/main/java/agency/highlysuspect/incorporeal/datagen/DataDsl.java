@@ -23,6 +23,7 @@ import org.apache.logging.log4j.util.Strings;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 /**
@@ -43,12 +44,12 @@ public class DataDsl {
 	//Don't be afraid of the Consumer<Consumer<T>>.
 	//It gives you a bucket to throw JsonFiles into, you fill the bucket, and they get written to disk.
 	//Simple as that.
-	public static void addProvider(DataGenerator datagen, String name, Consumer<Consumer<JsonFile>> generator) {
+	public static void addProvider(DataGenerator datagen, String name, BiConsumer<DataGenerator, Consumer<JsonFile>> generator) {
 		datagen.addProvider(new DataProvider() {
 			@Override
 			public void run(HashCache hashCache) throws IOException {
 				List<JsonFile> bucket = new ArrayList<>();
-				generator.accept(bucket::add);
+				generator.accept(datagen, bucket::add);
 				bucket.forEach(f -> {
 					Inc.LOGGER.info("Saving " + Strings.join(f.pathSegments(), '/')); //todo ugly ;)
 					f.save(datagen, hashCache);

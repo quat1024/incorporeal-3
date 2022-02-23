@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("JavadocReference") //incfabricdatagen
 public class IncCommonDatagen {
 	public static void configureCommonDatagen(DataGenerator gen) {
-		DataDsl.addProvider(gen, "Incorporeal block loot tables", files -> {
+		DataDsl.addProvider(gen, "Incorporeal block loot tables", (datagen, files) -> {
 			List<Block> INC_BLOCKS = Registry.BLOCK.keySet().stream()
 				.filter(rl -> rl.getNamespace().equals(Inc.MODID))
 				.map(Registry.BLOCK::get)
@@ -40,7 +40,7 @@ public class IncCommonDatagen {
 			}
 		});
 		
-		DataDsl.addProvider(gen, "Incorporeal block and item tags", files -> {
+		DataDsl.addProvider(gen, "Incorporeal block and item tags", (datagen, files) -> {
 			//corporea spark override
 			DataDsl.blockTag(ModTags.Blocks.CORPOREA_SPARK_OVERRIDE).addBlocks(
 				IncBlocks.RED_STRING_LIAR, IncBlocks.CLEARLY, Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD
@@ -65,7 +65,7 @@ public class IncCommonDatagen {
 			).save(files);
 		});
 		
-		DataDsl.addProvider(gen, "Incorporeal recipes", files -> {
+		DataDsl.addProvider(gen, "Incorporeal recipes", (datagen, files) -> {
 			//Corporea Solidifier
 			RecipeDsl.shaped(IncBlocks.CORPOREA_SOLIDIFIER, "PPP", "EFE", "PPP")
 				.define("P", Items.PAPER)
@@ -123,5 +123,7 @@ public class IncCommonDatagen {
 				.add(ModItems.enderHand)
 				.save(files);
 		});
+		
+		DataDsl.addProvider(gen, "Incorporeal Lexica Botania entries", IncLexiconDatagen::doIt);
 	}
 }
