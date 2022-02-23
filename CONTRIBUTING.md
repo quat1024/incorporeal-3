@@ -23,9 +23,9 @@ Thank you for contributing art! The bulk of the textures are programmer art, I a
 
 Thank you for contributing a translation!
 
-* If you do not want to translate a language entry, simply leave it out, instead of copying-and-pasting from `en_us.json`.
-* At this time, Incorporeal's entries in the Lexica Botania are not translatable (without making a whole other book). I (selfishly) did this to make the Lexica easier to edit in English.
-  * Fixing this is on my roadmap - let me know.
+The same as Botania's policy: If you do not translate a language entry from `en_us.json`, simply leave it out, instead of copying-and-pasting.
+
+The Patchouli book .jsons are created with a data generator. If you must override a page, please place it in `Common/src/main/resources/data/incorporeal/patchouli_books/lexicon/<your language code>/entries`, instead of editing anything in `Common/src/generated`. I can move the files for you, if you want.
 
 # Code
 
