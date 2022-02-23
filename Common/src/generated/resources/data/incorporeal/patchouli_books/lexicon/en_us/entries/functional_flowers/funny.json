@@ -6,16 +6,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.functional_flowers.funny.0.text"
+      "text": "incorporeal.lexicon.functional_flowers.funny.0.text"
     },
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.functional_flowers.funny.1.text"
+      "text": "incorporeal.lexicon.functional_flowers.funny.1.text"
     },
     {
       "type": "botania:petal_apothecary",
       "recipe": "incorporeal:funny",
-      "text": "incorporeal.lexica.functional_flowers.funny.2.text"
+      "text": "incorporeal.lexicon.functional_flowers.funny.2.text"
     }
   ],
   "extra_recipe_mappings": {

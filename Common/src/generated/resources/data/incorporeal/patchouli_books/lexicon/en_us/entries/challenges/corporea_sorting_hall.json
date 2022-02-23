@@ -1,5 +1,5 @@
 {
-  "name": "incorporeal.lexica.challenges.corporea_sorting_hall.name",
+  "name": "incorporeal.lexicon.challenges.corporea_sorting_hall.name",
   "category": "botania:challenges",
   "icon": "botania:corporea_spark_master",
   "read_by_default": true,
@@ -9,8 +9,8 @@
   "pages": [
     {
       "type": "patchouli:quest",
-      "title": "incorporeal.lexica.challenges.corporea_sorting_hall.0.title",
-      "text": "incorporeal.lexica.challenges.corporea_sorting_hall.0.text"
+      "title": "incorporeal.lexicon.challenges.corporea_sorting_hall.0.title",
+      "text": "incorporeal.lexicon.challenges.corporea_sorting_hall.0.text"
     }
   ]
 }

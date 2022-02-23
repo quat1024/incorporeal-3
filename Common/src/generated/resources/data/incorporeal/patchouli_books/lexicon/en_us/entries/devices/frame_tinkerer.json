@@ -6,16 +6,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.devices.frame_tinkerer.0.text"
+      "text": "incorporeal.lexicon.devices.frame_tinkerer.0.text"
     },
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.devices.frame_tinkerer.1.text"
+      "text": "incorporeal.lexicon.devices.frame_tinkerer.1.text"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "incorporeal:frame_tinkerer",
-      "text": "incorporeal.lexica.devices.frame_tinkerer.2.text"
+      "text": "incorporeal.lexicon.devices.frame_tinkerer.2.text"
     }
   ]
 }

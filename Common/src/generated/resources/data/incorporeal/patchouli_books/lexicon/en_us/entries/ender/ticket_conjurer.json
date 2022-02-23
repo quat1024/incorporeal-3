@@ -7,16 +7,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.ender.ticket_conjurer.0.text"
+      "text": "incorporeal.lexicon.ender.ticket_conjurer.0.text"
     },
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.ender.ticket_conjurer.1.text"
+      "text": "incorporeal.lexicon.ender.ticket_conjurer.1.text"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "incorporeal:ticket_conjurer",
-      "text": "incorporeal.lexica.ender.ticket_conjurer.2.text"
+      "text": "incorporeal.lexicon.ender.ticket_conjurer.2.text"
     },
     {
       "type": "patchouli:relations",

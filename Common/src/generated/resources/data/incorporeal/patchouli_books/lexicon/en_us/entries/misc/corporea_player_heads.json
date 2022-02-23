@@ -1,5 +1,5 @@
 {
-  "name": "incorporeal.lexica.misc.corporea_player_heads.name",
+  "name": "incorporeal.lexicon.misc.corporea_player_heads.name",
   "category": "botania:misc",
   "icon": "minecraft:player_head",
   "advancement": "botania:main/elf_lexicon_pickup",
@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.misc.corporea_player_heads.0.text"
+      "text": "incorporeal.lexicon.misc.corporea_player_heads.0.text"
     },
     {
       "type": "patchouli:relations",
@@ -15,11 +15,11 @@
         "botania:misc/head_creating",
         "botania:ender/corporea_index"
       ],
-      "text": "incorporeal.lexica.misc.corporea_player_heads.1.text"
+      "text": "incorporeal.lexicon.misc.corporea_player_heads.1.text"
     },
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.misc.corporea_player_heads.2.text"
+      "text": "incorporeal.lexicon.misc.corporea_player_heads.2.text"
     }
   ]
 }

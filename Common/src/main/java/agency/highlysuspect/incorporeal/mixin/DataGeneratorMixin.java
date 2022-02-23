@@ -18,6 +18,9 @@ public class DataGeneratorMixin implements DatagenDuck {
 		return enUsRewriter;
 	}
 	
+	/**
+	 * After all the data generators have run, give EnUsRewriter a chance to apply any changes made to en_us.json.
+	 */
 	@Inject(method = "run", at = @At("TAIL"))
 	private void afterRun(CallbackInfo ci) {
 		enUsRewriter.rewrite();

@@ -7,16 +7,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.tools.fractured_space_rod.0.text"
+      "text": "incorporeal.lexicon.tools.fractured_space_rod.0.text"
     },
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.tools.fractured_space_rod.1.text"
+      "text": "incorporeal.lexicon.tools.fractured_space_rod.1.text"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "incorporeal:fractured_space_rod",
-      "text": "incorporeal.lexica.tools.fractured_space_rod.2.text"
+      "text": "incorporeal.lexicon.tools.fractured_space_rod.2.text"
     }
   ]
 }

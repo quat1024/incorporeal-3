@@ -7,16 +7,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.ender.corporea_retainer_evaporator.0.text"
+      "text": "incorporeal.lexicon.ender.corporea_retainer_evaporator.0.text"
     },
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.ender.corporea_retainer_evaporator.1.text"
+      "text": "incorporeal.lexicon.ender.corporea_retainer_evaporator.1.text"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "incorporeal:corporea_retainer_evaporator",
-      "text": "incorporeal.lexica.ender.corporea_retainer_evaporator.2.text"
+      "text": "incorporeal.lexicon.ender.corporea_retainer_evaporator.2.text"
     }
   ]
 }

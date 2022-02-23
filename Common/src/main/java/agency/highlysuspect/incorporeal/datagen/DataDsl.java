@@ -41,7 +41,7 @@ public class DataDsl {
 	
 	/// Simple data provider interface ///
 	
-	//Don't be afraid of the Consumer<Consumer<T>>.
+	//Don't be afraid of the double nested Consumer<Consumer<T>>.
 	//It gives you a bucket to throw JsonFiles into, you fill the bucket, and they get written to disk.
 	//Simple as that.
 	public static void addProvider(DataGenerator datagen, String name, BiConsumer<DataGenerator, Consumer<JsonFile>> generator) {

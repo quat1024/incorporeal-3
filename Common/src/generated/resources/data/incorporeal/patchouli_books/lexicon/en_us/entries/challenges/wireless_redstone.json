@@ -1,5 +1,5 @@
 {
-  "name": "incorporeal.lexica.challenges.wireless_redstone.name",
+  "name": "incorporeal.lexicon.challenges.wireless_redstone.name",
   "category": "botania:challenges",
   "icon": "minecraft:redstone",
   "read_by_default": true,
@@ -9,8 +9,8 @@
   "pages": [
     {
       "type": "patchouli:quest",
-      "title": "incorporeal.lexica.challenges.wireless_redstone.0.title",
-      "text": "incorporeal.lexica.challenges.wireless_redstone.0.text"
+      "title": "incorporeal.lexicon.challenges.wireless_redstone.0.title",
+      "text": "incorporeal.lexicon.challenges.wireless_redstone.0.text"
     }
   ]
 }

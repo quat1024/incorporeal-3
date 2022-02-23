@@ -7,12 +7,12 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.functional_flowers.sanvocalia.0.text"
+      "text": "incorporeal.lexicon.functional_flowers.sanvocalia.0.text"
     },
     {
       "type": "botania:petal_apothecary",
       "recipe": "incorporeal:sanvocalia",
-      "text": "incorporeal.lexica.functional_flowers.sanvocalia.1.text"
+      "text": "incorporeal.lexicon.functional_flowers.sanvocalia.1.text"
     },
     {
       "type": "patchouli:relations",

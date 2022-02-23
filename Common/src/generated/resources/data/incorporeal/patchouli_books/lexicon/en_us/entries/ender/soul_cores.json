@@ -1,5 +1,5 @@
 {
-  "name": "incorporeal.lexica.ender.soul_cores.name",
+  "name": "incorporeal.lexicon.ender.soul_cores.name",
   "category": "botania:ender",
   "icon": "incorporeal:soul_core_frame",
   "advancement": "botania:main/elf_lexicon_pickup",
@@ -7,41 +7,41 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.ender.soul_cores.0.text"
+      "text": "incorporeal.lexicon.ender.soul_cores.0.text"
     },
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.ender.soul_cores.1.text"
+      "text": "incorporeal.lexicon.ender.soul_cores.1.text"
     },
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.ender.soul_cores.2.text"
+      "text": "incorporeal.lexicon.ender.soul_cores.2.text"
     },
     {
       "type": "botania:runic_altar",
       "recipe": "incorporeal:soul_core_frame",
-      "text": "incorporeal.lexica.ender.soul_cores.3.text"
+      "text": "incorporeal.lexicon.ender.soul_cores.3.text"
     },
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.ender.soul_cores.4.text"
+      "text": "incorporeal.lexicon.ender.soul_cores.4.text"
     },
     {
       "type": "botania:runic_altar",
       "recipe": "incorporeal:ender_soul_core",
-      "text": "incorporeal.lexica.ender.soul_cores.5.text"
+      "text": "incorporeal.lexicon.ender.soul_cores.5.text"
     },
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.ender.soul_cores.6.text"
+      "text": "incorporeal.lexicon.ender.soul_cores.6.text"
     },
     {
       "type": "patchouli:relations",
       "entries": [
         "incorporeal:misc/corporea_player_heads"
       ],
-      "title": "incorporeal.lexica.ender.soul_cores.7.title",
-      "text": "incorporeal.lexica.ender.soul_cores.7.text"
+      "title": "incorporeal.lexicon.ender.soul_cores.7.title",
+      "text": "incorporeal.lexicon.ender.soul_cores.7.text"
     }
   ]
 }

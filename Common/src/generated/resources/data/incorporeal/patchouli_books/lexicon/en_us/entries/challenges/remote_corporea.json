@@ -1,5 +1,5 @@
 {
-  "name": "incorporeal.lexica.challenges.remote_corporea.name",
+  "name": "incorporeal.lexicon.challenges.remote_corporea.name",
   "category": "botania:challenges",
   "icon": "botania:corporea_spark",
   "read_by_default": true,
@@ -9,8 +9,8 @@
   "pages": [
     {
       "type": "patchouli:quest",
-      "title": "incorporeal.lexica.challenges.remote_corporea.0.title",
-      "text": "incorporeal.lexica.challenges.remote_corporea.0.text"
+      "title": "incorporeal.lexicon.challenges.remote_corporea.0.title",
+      "text": "incorporeal.lexicon.challenges.remote_corporea.0.text"
     },
     {
       "type": "patchouli:relations",

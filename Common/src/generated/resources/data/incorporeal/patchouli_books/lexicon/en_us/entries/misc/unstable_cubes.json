@@ -1,12 +1,12 @@
 {
-  "name": "incorporeal.lexica.misc.unstable_cubes.name",
+  "name": "incorporeal.lexicon.misc.unstable_cubes.name",
   "category": "botania:misc",
   "icon": "incorporeal:red_unstable_cube",
   "color": "194a5c",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "incorporeal.lexica.misc.unstable_cubes.0.text"
+      "text": "incorporeal.lexicon.misc.unstable_cubes.0.text"
     },
     {
       "type": "botania:crafting_multi",
@@ -28,7 +28,7 @@
         "incorporeal:red_unstable_cube",
         "incorporeal:black_unstable_cube"
       ],
-      "text": "incorporeal.lexica.misc.unstable_cubes.1.text"
+      "text": "incorporeal.lexicon.misc.unstable_cubes.1.text"
     }
   ]
 }
