@@ -1,0 +1,28 @@
+{
+  "name": "item.incorporeal.ticket_conjurer",
+  "category": "botania:ender",
+  "icon": "incorporeal:ticket_conjurer",
+  "advancement": "botania:main/elf_lexicon_pickup",
+  "color": "194a5c",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexica.ender.ticket_conjurer.0.text"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexica.ender.ticket_conjurer.1.text"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "incorporeal:ticket_conjurer",
+      "text": "incorporeal.lexica.ender.ticket_conjurer.2.text"
+    },
+    {
+      "type": "patchouli:relations",
+      "entries": [
+        "incorporeal:functional_flowers/sanvocalia"
+      ]
+    }
+  ]
+}

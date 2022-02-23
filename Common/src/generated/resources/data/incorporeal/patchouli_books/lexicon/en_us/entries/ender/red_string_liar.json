@@ -1,0 +1,32 @@
+{
+  "name": "block.incorporeal.red_string_liar",
+  "category": "botania:ender",
+  "icon": "incorporeal:red_string_liar",
+  "advancement": "botania:main/elf_lexicon_pickup",
+  "color": "194a5c",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexica.ender.red_string_liar.0.text"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexica.ender.red_string_liar.1.text"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexica.ender.red_string_liar.2.text"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "incorporeal:red_string_liar",
+      "text": "incorporeal.lexica.ender.red_string_liar.3.text"
+    },
+    {
+      "type": "patchouli:relations",
+      "entries": [
+        "botania:ender/red_string"
+      ]
+    }
+  ]
+}

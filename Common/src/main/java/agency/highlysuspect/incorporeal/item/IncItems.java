@@ -19,6 +19,7 @@ public class IncItems {
 	public static final CorporeaTicketItem CORPOREA_TICKET = new CorporeaTicketItem(props());
 	public static final TicketConjurerItem TICKET_CONJURER = new TicketConjurerItem(props().stacksTo(1));
 	public static final Item SOUL_CORE_FRAME = new Item(props()); //TODO: teisr (ugh)
+	public static final Item FRACTURED_SPACE_ROD = new Item(props()); //TODO
 	
 	//corporetics
 	public static final BlockItem CORPOREA_SOLIDIFIER = new BlockItem(IncBlocks.CORPOREA_SOLIDIFIER, props());
@@ -63,6 +64,7 @@ public class IncItems {
 		r.accept(CORPOREA_TICKET, Inc.id("corporea_ticket"));
 		r.accept(TICKET_CONJURER, Inc.id("ticket_conjurer"));
 		r.accept(SOUL_CORE_FRAME, Inc.id("soul_core_frame"));
+		r.accept(FRACTURED_SPACE_ROD, Inc.id("fractured_space_rod"));
 		
 		//blockitems
 		registerBlockItems(r,

@@ -7,15 +7,20 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * This is not a builder for everything relating to BookEntry.
@@ -29,20 +34,37 @@ public class PatchouliEntryBuilder {
 		this.langBase = Inc.MODID + ".lexica." + shortPath.replace('/', '.');
 	}
 	
+	//Book's id.
 	public final ResourceLocation bookId;
-	public final String filePath; //e.g. "ender/corporea_solidifier"
-	public final String patchyPath; //e.g. "incorporeal:ender/corporea_solidifier"
-	public final String langBase; //e.g. "incorporeal.lexica.ender.corporea_solidifier"
 	
-	public String name;
-	public boolean addLangEntryForName;
+	//Where the entry .json file will end up (not namespaced - book id already takes care of the namespace)
+	//e.g. "ender/corporea_solidifier"
+	public final String filePath;
 	
-	public String category; //assumed nonnull
-	public Item icon; //assumed nonnull
+	//How to refer to this entry from other Patchouli pages.
+	//e.g. "incorporeal:ender/corporea_solidifier"
+	public final String patchyPath;
+	
+	//Prefix for any auto-generated language keys.
+	//e.g. "incorporeal.lexica.ender.corporea_solidifier"
+	public final String langBase;
+	
+	//Patchy will will crash with a null `name`: https://github.com/VazkiiMods/Patchouli/issues/509
+	//For prototyping, allow a missing name
+	public String name = "Unnamed Incorporeal Entry";
+	
+	//If "true", `name` is a literal string, and a translation key should be created for it.
+	//If "false", `name` is already a translation key.
+	public boolean addLangEntryForName = true;
+	
+	//Assorted patchy BookEntry properties. Not all of them are mirrored across into this builder.
+	public String category = "missing:category";
+	public Item icon = Items.STONE;
 	public boolean readByDefault = false;
 	public @Nullable String advancement;
 	public int color = -1;
 	public int sortnum = -1;
+	public Map<String, Integer> extraRecipeMappings = new HashMap<>();
 	
 	private int currentPage = 0;
 	private EnUsRewriter rewriter = null; //set and used below
@@ -68,11 +90,18 @@ public class PatchouliEntryBuilder {
 		if(sortnum != -1) json.addProperty("sortnum", sortnum);
 		
 		JsonArray pagesArray = new JsonArray();
+		currentPage = 0;
 		for(Page page : pages) {
 			pagesArray.add(page.toJson(this::generatePageLangKey));
 			currentPage++;
 		}
 		json.add("pages", pagesArray);
+		
+		if(!extraRecipeMappings.isEmpty()) {
+			JsonObject yes = new JsonObject();
+			extraRecipeMappings.forEach((k, v) -> yes.addProperty(k, v));
+			json.add("extra_recipe_mappings", yes);
+		}
 		
 		files.accept(JsonFile.create(json, "data", bookId.getNamespace(), "patchouli_books", bookId.getPath(), "en_us", "entries", filePath));
 		
@@ -125,10 +154,28 @@ public class PatchouliEntryBuilder {
 		return this;
 	}
 	
+	public PatchouliEntryBuilder extraRecipeMapping(ItemLike xd, int page) {
+		this.extraRecipeMappings.put(Registry.ITEM.getKey(xd.asItem()).toString(), page);
+		return this;
+	}
+	
+	public PatchouliEntryBuilder extraRecipeMapping(ItemLike xd) {
+		return extraRecipeMapping(xd, 0);
+	}
+	
 	/// utils ///
 	
-	public PatchouliEntryBuilder challenge() {
-		return this.category("botania:challenges").readByDefault().advancement("botania:main/mana_pool_pickup_lexicon").sortnum(69);
+	public PatchouliEntryBuilder challenge(String name, String text) {
+		return this.category("botania:challenges")
+			.name(name)
+			.readByDefault()
+			.advancement("botania:main/mana_pool_pickup_lexicon")
+			.sortnum(69)
+			.checkboxQuest(name, text);
+	}
+	
+	public PatchouliEntryBuilder elven() {
+		return this.advancement("botania:main/elf_lexicon_pickup");
 	}
 	
 	/// pages ///
@@ -143,15 +190,7 @@ public class PatchouliEntryBuilder {
 	}
 	
 	public PatchouliEntryBuilder crafting(String recipeId, String text) {
-		pages.add((json, langKeyMaker) -> {
-			json.addProperty("type", patchouliId("crafting").toString());
-			json.addProperty("recipe", recipeId);
-			if(text != null) {
-				json.addProperty("text", langKeyMaker.apply("text", text));
-			}
-		});
-		
-		return this;
+		return recipe(patchouliId("crafting"), recipeId, text);
 	}
 	
 	public PatchouliEntryBuilder crafting(ItemLike thing, String text) {
@@ -160,15 +199,45 @@ public class PatchouliEntryBuilder {
 	}
 	
 	public PatchouliEntryBuilder petalApothecary(String recipeId, String text) {
+		return recipe(Inc.botaniaId("petal_apothecary"), recipeId, text);
+	}
+	
+	public PatchouliEntryBuilder petalApothecary(ItemLike thing, String text) {
+		//Assumes the item's crafting recipe is named after the item
+		return petalApothecary(Registry.ITEM.getKey(thing.asItem()).toString(), text);
+	}
+	
+	public PatchouliEntryBuilder runicAltar(String recipeId, String text) {
+		return recipe(Inc.botaniaId("runic_altar"), recipeId, text);
+	}
+	
+	public PatchouliEntryBuilder runicAltar(ItemLike thing, String text) {
+		//Assumes the item's crafting recipe is named after the item
+		return runicAltar(Registry.ITEM.getKey(thing.asItem()).toString(), text);
+	}
+	
+	public PatchouliEntryBuilder recipe(ResourceLocation type, String recipeId, String text) {
 		pages.add((json, langKeyMaker) -> {
-			json.addProperty("type", Inc.botaniaId("petal_apothecary").toString());
+			json.addProperty("type", type.toString());
 			json.addProperty("recipe", recipeId);
-			if(text != null) {
-				json.addProperty("text", langKeyMaker.apply("text", text));
-			}
+			if(text != null) json.addProperty("text", langKeyMaker.apply("text", text));
 		});
 		
 		return this;
+	}
+	
+	public PatchouliEntryBuilder craftingMulti(Iterable<String> multi, String text) {
+		pages.add((json, langKeyMaker) -> {
+			json.addProperty("type", Inc.botaniaId("crafting_multi").toString());
+			json.add("recipes", jsonArrayStrings(multi));
+			if(text != null) json.addProperty("text", langKeyMaker.apply("text", text));
+		});
+		
+		return this;
+	}
+	
+	public PatchouliEntryBuilder craftingMulti(Collection<? extends ItemLike> yes, String text) {
+		return craftingMulti(yes.stream().map(ItemLike::asItem).map(Registry.ITEM::getKey).map(ResourceLocation::toString).collect(Collectors.toList()), text);
 	}
 	
 	public PatchouliEntryBuilder checkboxQuest(String title, String text) {
@@ -181,7 +250,7 @@ public class PatchouliEntryBuilder {
 		return this;
 	}
 	
-	public PatchouliEntryBuilder relations(@Nullable String text, Object... others) {
+	public PatchouliEntryBuilder relations(@Nullable String title, @Nullable String text, Object... others) {
 		List<String> relations = Stream.of(others).map(other -> {
 			if(other instanceof PatchouliEntryBuilder entry) return entry.patchyPath;
 			else return other.toString();
@@ -190,6 +259,7 @@ public class PatchouliEntryBuilder {
 		pages.add((json, langKeyMaker) -> {
 			json.addProperty("type", patchouliId("relations").toString());
 			json.add("entries", jsonArrayStrings(relations));
+			if(title != null) json.addProperty("title", langKeyMaker.apply("title", title));
 			if(text != null) json.addProperty("text", langKeyMaker.apply("text", text));
 		});
 		
@@ -197,7 +267,7 @@ public class PatchouliEntryBuilder {
 	}
 	
 	public PatchouliEntryBuilder relations0(Object... others) {
-		return relations(null, others);
+		return relations(null, null, others);
 	}
 	
 	/// pages internal ///

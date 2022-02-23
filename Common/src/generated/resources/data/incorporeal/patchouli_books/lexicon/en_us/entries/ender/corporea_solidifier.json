@@ -1,0 +1,22 @@
+{
+  "name": "block.incorporeal.corporea_solidifier",
+  "category": "botania:ender",
+  "icon": "incorporeal:corporea_solidifier",
+  "advancement": "botania:main/elf_lexicon_pickup",
+  "color": "194a5c",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexica.ender.corporea_solidifier.0.text"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexica.ender.corporea_solidifier.1.text"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "incorporeal:corporea_solidifier",
+      "text": "incorporeal.lexica.ender.corporea_solidifier.2.text"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "block.incorporeal.funny",
+  "category": "botania:functional_flowers",
+  "icon": "incorporeal:funny",
+  "color": "194a5c",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexica.functional_flowers.funny.0.text"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexica.functional_flowers.funny.1.text"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "incorporeal:funny",
+      "text": "incorporeal.lexica.functional_flowers.funny.2.text"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "incorporeal:funny_chibi": 0,
+    "incorporeal:floating_funny": 0,
+    "incorporeal:floating_funny_chibi": 0
+  }
+}

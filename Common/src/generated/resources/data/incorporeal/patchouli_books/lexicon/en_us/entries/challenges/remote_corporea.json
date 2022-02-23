@@ -1,0 +1,28 @@
+{
+  "name": "incorporeal.lexica.challenges.remote_corporea.name",
+  "category": "botania:challenges",
+  "icon": "botania:corporea_spark",
+  "read_by_default": true,
+  "advancement": "botania:main/mana_pool_pickup_lexicon",
+  "color": "194a5c",
+  "sortnum": 69,
+  "pages": [
+    {
+      "type": "patchouli:quest",
+      "title": "incorporeal.lexica.challenges.remote_corporea.0.title",
+      "text": "incorporeal.lexica.challenges.remote_corporea.0.text"
+    },
+    {
+      "type": "patchouli:relations",
+      "entries": [
+        "botania:ender/corporea",
+        "botania:ender/corporea_index",
+        "botania:ender/ender_hand",
+        "incorporeal:ender/soul_cores",
+        "incorporeal:tools/fractured_space_rod",
+        "incorporeal:ender/ticket_conjurer",
+        "incorporeal:functional_flowers/sanvocalia"
+      ]
+    }
+  ]
+}

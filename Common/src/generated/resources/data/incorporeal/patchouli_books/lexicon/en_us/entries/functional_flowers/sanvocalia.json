@@ -1,0 +1,30 @@
+{
+  "name": "block.incorporeal.sanvocalia",
+  "category": "botania:functional_flowers",
+  "icon": "incorporeal:sanvocalia",
+  "advancement": "botania:main/elf_lexicon_pickup",
+  "color": "194a5c",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexica.functional_flowers.sanvocalia.0.text"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "incorporeal:sanvocalia",
+      "text": "incorporeal.lexica.functional_flowers.sanvocalia.1.text"
+    },
+    {
+      "type": "patchouli:relations",
+      "entries": [
+        "incorporeal:ender/corporea_solidifier",
+        "incorporeal:ender/ticket_conjurer"
+      ]
+    }
+  ],
+  "extra_recipe_mappings": {
+    "incorporeal:floating_sanvocalia_chibi": 0,
+    "incorporeal:floating_sanvocalia": 0,
+    "incorporeal:sanvocalia_chibi": 0
+  }
+}

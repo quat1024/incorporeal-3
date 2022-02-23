@@ -1,0 +1,34 @@
+{
+  "name": "incorporeal.lexica.misc.unstable_cubes.name",
+  "category": "botania:misc",
+  "icon": "incorporeal:red_unstable_cube",
+  "color": "194a5c",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexica.misc.unstable_cubes.0.text"
+    },
+    {
+      "type": "botania:crafting_multi",
+      "recipes": [
+        "incorporeal:white_unstable_cube",
+        "incorporeal:orange_unstable_cube",
+        "incorporeal:magenta_unstable_cube",
+        "incorporeal:light_blue_unstable_cube",
+        "incorporeal:yellow_unstable_cube",
+        "incorporeal:lime_unstable_cube",
+        "incorporeal:pink_unstable_cube",
+        "incorporeal:gray_unstable_cube",
+        "incorporeal:light_gray_unstable_cube",
+        "incorporeal:cyan_unstable_cube",
+        "incorporeal:purple_unstable_cube",
+        "incorporeal:blue_unstable_cube",
+        "incorporeal:brown_unstable_cube",
+        "incorporeal:green_unstable_cube",
+        "incorporeal:red_unstable_cube",
+        "incorporeal:black_unstable_cube"
+      ],
+      "text": "incorporeal.lexica.misc.unstable_cubes.1.text"
+    }
+  ]
+}
