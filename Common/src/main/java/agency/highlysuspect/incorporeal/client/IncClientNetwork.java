@@ -15,6 +15,11 @@ import vazkii.botania.common.item.ItemTwigWand;
 
 import java.util.function.BiConsumer;
 
+/**
+ * The receiving end of server-to-client communication.
+ * 
+ * Raw FriendlyByteBufs are used, because each loader has its own network abstraction, and I just do not want to deal with it.
+ */
 public class IncClientNetwork {
 	//a flat array would probably be better lol.
 	public static Byte2ObjectMap<BiConsumer<Minecraft, FriendlyByteBuf>> handlers = new Byte2ObjectOpenHashMap<>();
@@ -62,15 +67,12 @@ public class IncClientNetwork {
 		//Classload
 	}
 	
-	//called on the network thread - Watch out
+	//called on the network thread - Watch out!!
 	public static void handle(FriendlyByteBuf buf) {
-		Minecraft minecraft = Minecraft.getInstance();
-		
+		//Read the first byte to determine the packet type
 		byte which = buf.readByte();
+		//then dispatch the rest of the buffer to the packet handler
 		BiConsumer<Minecraft, FriendlyByteBuf> handler = handlers.get(which);
-		if(handler != null) {
-			//give it the rest of the buf
-			handler.accept(minecraft, buf);
-		}
+		if(handler != null) handler.accept(Minecraft.getInstance(), buf);
 	}
 }

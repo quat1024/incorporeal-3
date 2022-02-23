@@ -7,6 +7,9 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.ItemStack;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 
+/**
+ * A corporea request matcher that only matches things its inner matcher doesn't.
+ */
 public record InvertedCorporeaRequestMatcher(ICorporeaRequestMatcher inner) implements ICorporeaRequestMatcher {
 	public static ICorporeaRequestMatcher invert(ICorporeaRequestMatcher other) {
 		//Avoid inverting twice in this simple case

@@ -6,6 +6,11 @@ import net.minecraft.network.FriendlyByteBuf;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Packet that the Sweet Alexum sends to display special particle effects.
+ * 
+ * @see agency.highlysuspect.incorporeal.block.entity.FunnyBlockEntity
+ */
 public record FunnyEffect(BlockPos src, double sparkleHeight, List<Line> lines) implements IncNetwork.Packable {
 	public FunnyEffect(BlockPos src, double sparkleHeight) {
 		this(src, sparkleHeight, new ArrayList<>());

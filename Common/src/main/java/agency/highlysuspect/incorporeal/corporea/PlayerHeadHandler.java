@@ -6,17 +6,14 @@ import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractSkullBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.PlayerHeadBlock;
 import net.minecraft.world.level.block.PlayerWallHeadBlock;
 import net.minecraft.world.level.block.SkullBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import vazkii.botania.api.corporea.CorporeaHelper;
 import vazkii.botania.api.corporea.ICorporeaNode;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
@@ -27,9 +24,14 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Used to implement the corporea-spark-on-player-head thing (replacement for the corporea soul core mechanic)
- * Gets plugged in to each platform's event backend in the platform initializers
+ * Used to implement the corporea-spark-on-player-head thing, which is the replacement for the corporea soul core mechanic.
+ * Botania fires an event on each platform's event-bus abstraction whenever a corporea index is used; each of my own platform
+ * initializers plug in to that event.
+ * 
+ * @see IncFabric
+ * @see IncForge
  */
+@SuppressWarnings("JavadocReference") //above
 public class PlayerHeadHandler {
 	//returns true to cancel the request
 	public static boolean onIndexRequest(ServerPlayer requester, ICorporeaRequestMatcher request, int requestCount, ICorporeaSpark indexSpark) {

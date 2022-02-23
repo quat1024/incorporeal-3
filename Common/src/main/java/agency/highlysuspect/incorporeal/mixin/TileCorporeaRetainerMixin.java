@@ -13,8 +13,7 @@ import java.util.Objects;
 
 /**
  * Augments the Corporea Retainer with getters/setters for reading and writing its ICorporeaRequestMatcher
- * and its request count. It should correctly update the comparator signal when writing the request count,
- * but I haven't really tested.
+ * and its request count. Tries to setChanged and update comparator signal at appropriate times.
  */
 @Mixin(TileCorporeaRetainer.class)
 public abstract class TileCorporeaRetainerMixin implements RetainerDuck {
@@ -28,6 +27,7 @@ public abstract class TileCorporeaRetainerMixin implements RetainerDuck {
 		return request;
 	}
 	
+	@SuppressWarnings("ConstantConditions") //doublecast
 	@Override
 	public void inc$setMatcher(@Nullable ICorporeaRequestMatcher matcher) {
 		if(!Objects.equals(request, matcher)) {
@@ -41,6 +41,7 @@ public abstract class TileCorporeaRetainerMixin implements RetainerDuck {
 		return requestCount;
 	}
 	
+	@SuppressWarnings("ConstantConditions") //doublecast
 	@Override
 	public void inc$setCount(int newCount) {
 		requestCount = newCount;

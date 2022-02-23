@@ -10,24 +10,30 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import vazkii.botania.common.item.block.ItemBlockSpecialFlower;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class IncItems {
+	//non-blockitems
 	public static final CorporeaTicketItem CORPOREA_TICKET = new CorporeaTicketItem(props());
 	public static final TicketConjurerItem TICKET_CONJURER = new TicketConjurerItem(props().stacksTo(1));
 	public static final Item SOUL_CORE_FRAME = new Item(props()); //TODO: teisr (ugh)
 	
+	//corporetics
 	public static final BlockItem CORPOREA_SOLIDIFIER = new BlockItem(IncBlocks.CORPOREA_SOLIDIFIER, props());
 	public static final BlockItem RED_STRING_LIAR = new BlockItem(IncBlocks.RED_STRING_LIAR, props());
 	public static final BlockItem FRAME_TINKERER = new BlockItem(IncBlocks.FRAME_TINKERER, props());
 	public static final BlockItem CORPOREA_RETAINER_EVAPORATOR = new BlockItem(IncBlocks.CORPOREA_RETAINER_EVAPORATOR, props());
 	
+	//soul cores
 	public static final BlockItem ENDER_SOUL_CORE = new IncBlockItemWithTEISR(IncBlocks.ENDER_SOUL_CORE, props());
 	
+	//natural devices
 	public static final BlockItem NATURAL_REPEATER = new BlockItem(IncBlocks.NATURAL_REPEATER, props());
 	public static final BlockItem NATURAL_COMPARATOR = new BlockItem(IncBlocks.NATURAL_COMPARATOR, props());
 	
+	//flowers
 	public static final ItemBlockSpecialFlower SANVOCALIA = new ItemBlockSpecialFlower(IncBlocks.SANVOCALIA, props());
 	public static final ItemBlockSpecialFlower SANVOCALIA_SMALL = new ItemBlockSpecialFlower(IncBlocks.SANVOCALIA_SMALL, props());
 	public static final ItemBlockSpecialFlower FLOATING_SANVOCALIA = new ItemBlockSpecialFlower(IncBlocks.FLOATING_SANVOCALIA, props());
@@ -38,11 +44,14 @@ public class IncItems {
 	public static final ItemBlockSpecialFlower FLOATING_FUNNY = new ItemBlockSpecialFlower(IncBlocks.FLOATING_FUNNY, props());
 	public static final ItemBlockSpecialFlower FLOATING_FUNNY_SMALL = new ItemBlockSpecialFlower(IncBlocks.FLOATING_FUNNY_SMALL, props());
 	
+	//unstable cubes
 	public static final Map<DyeColor, BlockItem> UNSTABLE_CUBES = Inc.sixteenColors(
 		color -> new IncBlockItemWithTEISR(IncBlocks.UNSTABLE_CUBES.get(color), props()));
 	
+	//Clearly
 	public static final BlockItem CLEARLY = new BlockItem(IncBlocks.CLEARLY, props());
 	
+	//computer
 	public static final BlockItem DATA_PRISM = new BlockItem(IncBlocks.DATA_PRISM, props());
 	public static final BlockItem DATA_STORAGE = new BlockItem(IncBlocks.DATA_STORAGE, props());
 	public static final BlockItem MATCHER_LENS = new BlockItem(IncBlocks.MATCHER_LENS, props());
@@ -73,7 +82,7 @@ public class IncItems {
 		r.accept(FLOATING_FUNNY_SMALL, Inc.id("floating_funny_chibi"));
 		
 		//unstable cubes
-		UNSTABLE_CUBES.values().forEach(item -> registerBlockItems(r, item));
+		registerBlockItems(r, UNSTABLE_CUBES.values());
 		
 		//clearly
 		registerBlockItems(r, CLEARLY);
@@ -88,6 +97,12 @@ public class IncItems {
 			Item.BY_BLOCK.put(bi.getBlock(), bi);
 			r.accept(bi, Registry.BLOCK.getKey(bi.getBlock()));
 		}
+	}
+	
+	//ah, java.
+	//never change
+	private static void registerBlockItems(BiConsumer<Item, ResourceLocation> r, Collection<BlockItem> bis) {
+		registerBlockItems(r, bis.toArray(BlockItem[]::new));
 	}
 	
 	private static Item.Properties props() {

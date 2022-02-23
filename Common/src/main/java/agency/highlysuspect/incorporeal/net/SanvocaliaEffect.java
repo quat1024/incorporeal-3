@@ -7,6 +7,11 @@ import net.minecraft.world.phys.Vec3;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Packet that the Sanvocalia sends whenever it eats an item.
+ * 
+ * @see agency.highlysuspect.incorporeal.block.entity.SanvocaliaBlockEntity
+ */
 public record SanvocaliaEffect(Vec3 start, Set<BlockPos> ends) implements IncNetwork.Packable {
 	@Override
 	public byte packId() {

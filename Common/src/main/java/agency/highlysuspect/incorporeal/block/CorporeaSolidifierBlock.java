@@ -15,9 +15,9 @@ import javax.annotation.Nullable;
 /**
  * A block that kinda acts like a corporea retainer, but spits its requests out as corporea ticket items, instead of storing them.
  * 
- * See TileCorporeaInterceptorMixin for the sauce that makes this actually work.
- * By the way. This block, on its own, does very little, and it's just a convenient place to stick the code relating to
- * spawning the corporea ticket.
+ * @see agency.highlysuspect.incorporeal.mixin.TileCorporeaInterceptorMixin for the sauce that makes this actually work.
+ *
+ * This block, on its own, does very little. It's a convenient place to stick the code relating to spawning the corporea ticket, though.
  */
 public class CorporeaSolidifierBlock extends Block {
 	public CorporeaSolidifierBlock(Properties props) {

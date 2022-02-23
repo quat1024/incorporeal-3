@@ -27,7 +27,7 @@ import vazkii.botania.mixin.AccessorItemEntity;
 import java.util.List;
 
 /**
- * A block that swaps any (single) items dropped on itself, with the items in nearby Item Frames.
+ * The frame tinkerer. When powered, swaps any (single) items dropped on itself with the items in nearby Item Frames.
  */
 public class FrameTinkererBlock extends BlockModWaterloggable {
 	public FrameTinkererBlock(Properties properties) {

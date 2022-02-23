@@ -16,9 +16,9 @@ import vazkii.botania.client.core.handler.ClientTickHandler;
 
 /**
  * The BlockEntityRenderer for the Unstable Cube. In charge of rotating at a weird angle, tinting it, etc.
- * Note that it takes an additional DyeColor parameter, for the color of the cube to draw.
- * Botania's TEISR machinery passes a `null` BlockEntity in the item renderer, but I still need to know what color
- * to make the unstable cube model.
+ * Note that it takes an additional DyeColor parameter, for the color of the cube to draw - Botania's TEISR
+ * machinery passes a `null` BlockEntity in the item renderer, but I still need to know what color to make
+ * the unstable cube model.
  */
 public class UnstableCubeBlockEntityRenderer implements BlockEntityRenderer<UnstableCubeBlockEntity> {
 	public UnstableCubeBlockEntityRenderer(DyeColor color, BlockEntityRendererProvider.Context ctx) {

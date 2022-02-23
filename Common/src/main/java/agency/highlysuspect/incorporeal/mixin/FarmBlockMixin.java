@@ -10,11 +10,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/**
- * Makes farmland not regress to dirt underneath a Natural Repeater/Comparator block
- */
 @Mixin(FarmBlock.class)
 public class FarmBlockMixin {
+	/**
+	 * Makes farmland not regress to dirt underneath a Natural Repeater/Comparator block.
+	 */
 	@Inject(
 		method = "isUnderCrops",
 		at = @At("HEAD"),

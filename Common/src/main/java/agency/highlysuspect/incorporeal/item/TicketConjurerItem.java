@@ -14,6 +14,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The ticket conjurer. It's like a portable Corporea Index, but gives you Corporea Tickets instead.
+ * @see CorporeaTicketItem
+ */
 public class TicketConjurerItem extends Item {
 	public TicketConjurerItem(Properties $$0) {
 		super($$0);

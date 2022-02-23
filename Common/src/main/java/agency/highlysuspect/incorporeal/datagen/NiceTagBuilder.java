@@ -13,13 +13,17 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+/**
+ * Really simple builder, mainly intended for block/item tags.
+ * No typechecking here, just pass it resourcelocations.
+ */
 public class NiceTagBuilder {
 	public NiceTagBuilder(String classifier, ResourceLocation id) {
 		this.classifier = classifier;
 		this.id = id;
 	}
 	
-	public final String classifier; // "blocks", "items" etc. thing after "tags" in the file path
+	public final String classifier; // "blocks", "items" etc - the thing after "tags" in the file path
 	public final ResourceLocation id;
 	public boolean replace = false;
 	public final List<String> entries = new ArrayList<>();

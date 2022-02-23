@@ -12,11 +12,10 @@ import java.nio.file.Path;
 import java.util.List;
 
 /**
- * ("Thing which can be written as json", "list of strings") tuple.
- * First path segment is the jar root, so probably "assets" or "data"
- * <p>
+ * ("Json", "list of strings") tuple.
+ * First path segment is the jar root, so probably "assets" or "data" -
  * passing ("data", "incorporeal", "recipes", "blah") will write to data/incorporeal/recipes/blah.json.
- * investigate: could this be a (JValue<?>, Path) tuple instead? idk
+ * investigate: could this be a (JsonElement, Path) tuple instead? Idk
  */
 public record JsonFile(JsonElement value, List<String> pathSegments) {
 	public static final Gson PRETTY_GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
@@ -28,9 +27,8 @@ public record JsonFile(JsonElement value, List<String> pathSegments) {
 	public Path getOutputPath(DataGenerator datagen) {
 		Path path = datagen.getOutputFolder();
 		
-		//grimy code to concatenate all path segments with a .json on the end
-		//there's not like a "Path#withFileName" or anything >.>
-		//probably could be cleaner
+		//Grimy code to concatenate all path segments with a .json at the end
+		//There's not like a "Path#withFileName" or anything >.> probably could be cleaner
 		for(int i = 0; i < pathSegments.size(); i++) {
 			if(i == pathSegments.size() - 1) path = path.resolve(pathSegments.get(i) + ".json");
 			else path = path.resolve(pathSegments.get(i));
@@ -39,8 +37,7 @@ public record JsonFile(JsonElement value, List<String> pathSegments) {
 		return path;
 	}
 	
-	//wrapper for DataProvider#save that swallows errors
-	//mainly so you don't have to slap "throws IOException" on the whole mod
+	//Wrapper for DataProvider#save that doesn't throw IOException, mainly so you don't have to slap "throws IOException" on the whole mod
 	//and so you can use them inside lambdas (for the same reason)
 	public void save(DataGenerator datagen, HashCache cache) {
 		try {

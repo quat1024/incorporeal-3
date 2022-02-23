@@ -26,8 +26,11 @@ import vazkii.botania.common.block.BlockModWaterloggable;
 
 /**
  * The Unstable Cube. This is a pointless decorative block that spawns lightning particles, somewhat inspired by
- * off of a super old cut block from Botania 1.7. In this mod, it also spins around when you click on it, and
+ * off of a super old cut block from Botania 1.6. In this mod, it also spins around when you click on it, and
  * emits a redstone signal depending on how fast it's spinning.
+ * 
+ * @see UnstableCubeBlockEntity
+ * @see UnstableCubeClientTicker
  */
 public class UnstableCubeBlock extends BlockModWaterloggable implements EntityBlock {
 	public UnstableCubeBlock(DyeColor color, Properties props) {

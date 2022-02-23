@@ -16,6 +16,11 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import vazkii.botania.common.item.ModItems;
 
+/**
+ * Incorporeal edits Botania's "redstone root" to be a plantable crop. This is the crop block.
+ * 
+ * @see agency.highlysuspect.incorporeal.mixin.ModItemsMixin for where this edit is done.
+ */
 public class RedstoneRootCropBlock extends CropBlock {
 	public RedstoneRootCropBlock(Properties props) {
 		super(props);
@@ -54,14 +59,14 @@ public class RedstoneRootCropBlock extends CropBlock {
 		builder.add(AGE);
 	}
 	
-	/// Things relating to mixin crimes below
+	/// Things relating to the mixin crimes below
 	
 	@Override
 	public Item asItem() {
 		return ModItems.redstoneRoot;
 	}
 	
-	//weird cropblock thing
+	//Weird cropblock thing
 	@Override
 	protected ItemLike getBaseSeedId() {
 		return this;
@@ -70,6 +75,7 @@ public class RedstoneRootCropBlock extends CropBlock {
 	//(super illegal)
 	@Override
 	public String getDescriptionId() {
+		//Noone will ever know!
 		return "item.botania.redstone_root";
 	}
 }

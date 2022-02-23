@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -12,7 +13,9 @@ import vazkii.botania.common.block.string.BlockRedString;
 import vazkii.botania.common.block.tile.string.TileRedString;
 
 /**
- * The Red String Liar.
+ * The Red String Liar's block. Basically just red string boilerplate.
+ * 
+ * @see RedStringLiarBlockEntity for more info.
  */
 public class RedStringLiarBlock extends BlockRedString {
 	public RedStringLiarBlock(Properties props) {

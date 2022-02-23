@@ -38,6 +38,7 @@ public class TileCorporeaInterceptorMixin {
 			target = "Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"
 		)
 	)
+	@SuppressWarnings("ConstantConditions") //Doublecasts
 	private void whenIntercepting(ICorporeaRequestMatcher request, int count, ICorporeaSpark spark, ICorporeaSpark source, List<ItemStack> stacks, List<ICorporeaNode> nodes, boolean doit, CallbackInfo ci) {
 		Level level = ((TileCorporeaInterceptor) (Object) this).getLevel();
 		assert level != null;

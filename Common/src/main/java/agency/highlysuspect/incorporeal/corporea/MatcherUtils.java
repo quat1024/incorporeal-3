@@ -12,7 +12,8 @@ import java.util.function.Function;
 
 /**
  * Utilities for reading and writing ICorporeaRequestMatchers to NBT tags.
- * Probably should be part of Botania's real API, now that I think about it.
+ * ICorporeaRequestMatchers are able to serialize themselves to NBT, but the resulting data doesn't include the *type* of
+ * matcher that did the serializing, so there's no way to retrieve it.
  */
 public class MatcherUtils {
 	public static Optional<ICorporeaRequestMatcher> tryFromTag(CompoundTag nbt) {

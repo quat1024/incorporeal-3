@@ -10,7 +10,11 @@ import net.minecraft.world.item.ItemStack;
 import java.util.Optional;
 
 /**
- * An item that logically may carry a SolidifiedRequest.
+ * An item that may carry a SolidifiedRequest.
+ * 
+ * @see TicketConjurerItem for a producer
+ * @see agency.highlysuspect.incorporeal.block.CorporeaSolidifierBlock for another producer
+ * @see agency.highlysuspect.incorporeal.block.entity.SanvocaliaBlockEntity for a consumer
  */
 public class CorporeaTicketItem extends Item {
 	public CorporeaTicketItem(Properties properties) {

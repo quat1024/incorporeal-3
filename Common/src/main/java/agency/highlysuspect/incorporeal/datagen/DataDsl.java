@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * Pile of utilities for writing datagens that create serverside data.
+ */
 public class DataDsl {
 	/// Common helpers ///
 	

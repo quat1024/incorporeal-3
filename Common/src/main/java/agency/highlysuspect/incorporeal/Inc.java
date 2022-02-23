@@ -30,6 +30,7 @@ public class Inc {
 	public static final String MODID = "incorporeal";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 	
+	//Called real early on Fabric and in CommonInit on forge
 	public static void registerExtraThings() {
 		//empty matcher (matches no items)
 		CorporeaHelper.instance().registerRequestMatcher(id("empty"), EmptyCorporeaRequestMatcher.class, __ -> EmptyCorporeaRequestMatcher.INSTANCE);
@@ -43,7 +44,7 @@ public class Inc {
 		//red stringed liar's corporea node detector
 		CorporeaNodeDetectors.register(new RedStringLiarBlockEntity.NodeDetector());
 		
-		//computer:
+		//computer stuff
 		DataTypes.registerBuiltinTypes();
 	}
 	

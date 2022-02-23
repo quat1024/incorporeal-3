@@ -18,7 +18,9 @@ import java.util.function.Supplier;
  * Because networking apis are very different across loaders, this is an attempt to
  * write a convenient abstraction on top of both. Both loaders only register 1 packet that
  * all networking goes through. It is not a full abstraction, only covering the things I need
- * at the moment (s -> c networking)
+ * at the moment (simple s -> c networking).
+ * 
+ * Raw FriendlyByteBufs are used and data is manually packed into them. 
  */
 public class IncNetwork {
 	public static void sendTo(Packable data, ServerPlayer player) {

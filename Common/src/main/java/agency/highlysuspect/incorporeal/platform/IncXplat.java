@@ -34,7 +34,7 @@ public interface IncXplat {
 	//Item.Properties with a creative tab set, basically
 	Item.Properties defaultItemProperties();
 	
-	//Constructor requires an accessor on Fabric
+	//The named DamageSource constructor is not public on Fabric
 	DamageSource newDamageSource(String name);
 	
 	//Send a block of data from server to client, using the incorporeal packet abstraction

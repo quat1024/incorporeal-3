@@ -28,6 +28,9 @@ import vazkii.botania.common.block.tile.TileMod;
 
 import java.util.Optional;
 
+/**
+ * Parent class of all "soul cores", handling the soul-grabbing part and some mana logistics.
+ */
 public abstract class AbstractSoulCoreBlockEntity extends TileMod implements IManaReceiver {
 	public AbstractSoulCoreBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);

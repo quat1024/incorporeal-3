@@ -17,10 +17,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * More utilities for working with inventories.
+ * More utilities for working with inventories, named after Botania's InventoryHelper.
  * 
- * Named after Botania's InventoryHelper. The name is a bit of an anachronism, because currently Botania
- * works in terms of Containers, so I do the same to match.
+ * The name is a bit of an anachronism, because currently Botania works in terms of Containers. :)
  */
 public class IncInventoryHelper {
 	public static @Nullable Container getSidedContainerAt(Level level, BlockPos pos, Direction direction) {

@@ -9,11 +9,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DiodeBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.RepeaterBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
+/**
+ * The base class of the "natural devices".
+ */
 public abstract class CrappyDiodeBlock extends DiodeBlock {
 	public CrappyDiodeBlock(Properties props) {
 		super(props);
@@ -27,7 +28,7 @@ public abstract class CrappyDiodeBlock extends DiodeBlock {
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		//In Forge this used to plug into IPlantable, but noone gives a shit about iplantable.
 		//Really awful interface to implement via mixin/xplat anyways.
-		//Maybe toss some more tags in here. (DIRT contains grass blocks, btw.)
+		//Maybe toss some more tags in here? (DIRT contains grass blocks, btw.)
 		BlockPos soilPos = pos.below();
 		
 		Block block = level.getBlockState(soilPos).getBlock();
@@ -50,8 +51,8 @@ public abstract class CrappyDiodeBlock extends DiodeBlock {
 	
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> $$0) {
-		//If you don't add POWERED several diodeblock things will crash.
-		//If you don't add FACING several HorizontalDirectionBlock things will crash.
+		//If you don't add POWERED, several diodeblock things will crash.
+		//If you don't add FACING, several HorizontalDirectionBlock things will crash.
 		//Mojang this is what inheritance is for. THis is literally what inheritance is allllll about
 		//Why
 		super.createBlockStateDefinition($$0.add(DiodeBlock.POWERED, HorizontalDirectionalBlock.FACING));

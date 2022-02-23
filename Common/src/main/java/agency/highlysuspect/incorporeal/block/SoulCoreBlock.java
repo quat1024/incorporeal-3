@@ -19,6 +19,9 @@ import vazkii.botania.common.entity.EntityDoppleganger;
 
 import java.util.function.Supplier;
 
+/**
+ * The block used for all Soul Cores. Pass in the BlockEntity that the core uses.
+ */
 public class SoulCoreBlock extends BlockMod implements EntityBlock {
 	public SoulCoreBlock(Supplier<BlockEntityType<? extends AbstractSoulCoreBlockEntity>> typeS, Properties props) {
 		super(props);
@@ -27,6 +30,7 @@ public class SoulCoreBlock extends BlockMod implements EntityBlock {
 	
 	private final Supplier<BlockEntityType<? extends AbstractSoulCoreBlockEntity>> typeS;
 	
+	//initial activation
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if(!EntityDoppleganger.isTruePlayer(player)) return InteractionResult.PASS;
@@ -34,6 +38,7 @@ public class SoulCoreBlock extends BlockMod implements EntityBlock {
 		return level.getBlockEntity(pos) instanceof AbstractSoulCoreBlockEntity soul ? soul.activate(player, hand) : InteractionResult.PASS;
 	}
 	
+	//comparator
 	@Override
 	public boolean hasAnalogOutputSignal(BlockState $$0) {
 		return true;
@@ -44,6 +49,7 @@ public class SoulCoreBlock extends BlockMod implements EntityBlock {
 		return level.getBlockEntity(pos) instanceof AbstractSoulCoreBlockEntity soul ? soul.signal() : 0;
 	}
 	
+	//block entity
 	@Override
 	public RenderShape getRenderShape(BlockState $$0) {
 		return RenderShape.ENTITYBLOCK_ANIMATED;

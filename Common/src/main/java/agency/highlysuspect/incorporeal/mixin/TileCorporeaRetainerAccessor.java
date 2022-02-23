@@ -19,6 +19,8 @@ import java.util.function.Function;
  * Corporea Retainer fields.
  * 
  * Retrieving the serializers again should probably be a part of CorporeaHelper's public API, though. :)
+ * 
+ * @see agency.highlysuspect.incorporeal.corporea.MatcherUtils
  */
 @Mixin(TileCorporeaRetainer.class)
 public interface TileCorporeaRetainerAccessor {

@@ -14,8 +14,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
- * "anding", cause it ands them together
- * this is the opposite of inc2's "or" operation
+ * An "anding" corporea request matcher, because it takes a bunch of child requests and only matches the item if all the children do.
  */
 public record AndingCorporeaRequestMatcher(List<ICorporeaRequestMatcher> others) implements ICorporeaRequestMatcher {
 	public static ICorporeaRequestMatcher combine(Collection<ICorporeaRequestMatcher> others) {

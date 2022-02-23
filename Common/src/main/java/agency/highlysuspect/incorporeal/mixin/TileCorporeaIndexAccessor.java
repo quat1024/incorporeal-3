@@ -17,8 +17,7 @@ public interface TileCorporeaIndexAccessor {
 	 * I need to write something similar to that code for the Sanvocalia, which needs to detect nearby
 	 * corporea indices, and figured doing it the same way that Botania does would be a good idea.
 	 * 
-	 * Now that I think about it, it wouldn't be that hard to manually iterate nearby BlockEntities
-	 * and see if they are item frames, instead. So this mixin could probably be removed.
+	 * @see agency.highlysuspect.incorporeal.corporea.IndexFinder
 	 */
 	@Accessor(value = "serverIndexes", remap = false)
 	static Set<TileCorporeaIndex> inc$getServerIndices() {
@@ -27,6 +26,8 @@ public interface TileCorporeaIndexAccessor {
 	
 	/**
 	 * And this is the list of regular expressions, used to match chat messages to corporea requests.
+	 * 
+	 * @see agency.highlysuspect.incorporeal.item.TicketConjurerItem
 	 */
 	@Accessor(value = "patterns", remap = false)
 	static Map<Pattern, TileCorporeaIndex.IRegexStacker> inc$getPatterns() {

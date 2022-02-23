@@ -27,6 +27,15 @@ import vazkii.botania.common.annotations.SoftImplement;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The "natural comparator". It's like a comparator, but has a 1-second delay, and only outputs 15 or 0.
+ * Because it's "like a comparator", the bulk of this class is a straight copy-paste of the comparator class.
+ * Funny how that works.
+ * 
+ * The SENSITIVE property controls how the mapping from analog comparator signals to the digital on/off signal is done.
+ * If it is sensitive, every non-zero signal maps to "on", and only a signal of zero maps to "off".
+ * If not, only a signal of 15 maps to "on", and everything else maps to "off".
+ */
 public class CrappyComparatorBlock extends CrappyDiodeBlock {
 	public CrappyComparatorBlock(Properties props) {
 		super(props);
@@ -35,8 +44,6 @@ public class CrappyComparatorBlock extends CrappyDiodeBlock {
 			.setValue(SENSITIVE, false));
 	}
 	
-	//True: 0 maps to 0, everything else maps to 15
-	//False: 15 maps to 15, everything else maps to 0
 	public static final BooleanProperty SENSITIVE = BooleanProperty.create("sensitive");
 	
 	@Override

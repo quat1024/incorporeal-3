@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * See the Unstable Cube for more information on what this is all about.
+ * @see vazkii.botania.api.internal.VanillaPacketDispatcher
  */
 public class NotVanillaPacketDispatcher {
 	public static void dispatchToNearbyPlayersExcept(BlockEntity be, @Nullable Player skip) {

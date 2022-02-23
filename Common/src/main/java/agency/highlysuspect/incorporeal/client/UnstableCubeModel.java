@@ -12,7 +12,8 @@ import net.minecraft.client.renderer.RenderType;
 
 /**
  * The model, that the Unstable Cube's block entity renderer will rotate at a weird angle, tint, and draw.
- * Yes, it's just a cube.
+ * 
+ * Yes, it's just a single cube.
  */
 public class UnstableCubeModel extends Model {
 	public UnstableCubeModel(ModelPart root) {

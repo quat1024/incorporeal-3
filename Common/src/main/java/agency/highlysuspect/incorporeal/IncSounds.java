@@ -5,9 +5,6 @@ import net.minecraft.sounds.SoundEvent;
 
 import java.util.function.BiConsumer;
 
-/**
- * Various sound events for the mod.
- */
 public class IncSounds {
 	public static final SoundEvent UNSTABLE = new SoundEvent(Inc.id("unstable"));
 	

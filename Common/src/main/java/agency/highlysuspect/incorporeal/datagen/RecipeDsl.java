@@ -17,6 +17,9 @@ import vazkii.botania.mixin.AccessorRecipeProvider;
 
 import java.util.function.Consumer;
 
+/**
+ * Pile of utilities for writing various types of recipes.
+ */
 public class RecipeDsl {
 	/// DSL ///
 	

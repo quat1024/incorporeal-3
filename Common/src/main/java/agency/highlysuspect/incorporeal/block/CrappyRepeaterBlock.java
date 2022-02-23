@@ -15,6 +15,9 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 import java.util.Random;
 
+/**
+ * The natural repeater. It acts just like a repeater, but has a non-configurable delay of 1 second.
+ */
 public class CrappyRepeaterBlock extends CrappyDiodeBlock {
 	public CrappyRepeaterBlock(Properties props) {
 		super(props);
@@ -23,10 +26,9 @@ public class CrappyRepeaterBlock extends CrappyDiodeBlock {
 			.setValue(L0CKED, false));
 	}
 	
-	//using a different name, because one (1) time ever i was bitten by remapping
-	//that fucked up if you included a field with the same name as an obf field.
-	public static final BooleanProperty L0CKED = BlockStateProperties.LOCKED;
-	//Yes that is a zero.
+	//using a different name, because one (1) time ever, i was bitten by remapping that fucked up if
+	//you included a field with the same name as an obf field.
+	public static final BooleanProperty L0CKED = BlockStateProperties.LOCKED; //Yes that is a zero.
 	
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> $$0) {
@@ -55,7 +57,7 @@ public class CrappyRepeaterBlock extends CrappyDiodeBlock {
 		return isDiode($$0);
 	}
 	
-	//Paste from RepeaterBlock modified to include a hardcoded particle distance
+	//Paste from RepeaterBlock modified to include a hardcoded particle distance, because there's no way to move the torch.
 	public void animateTick(BlockState $$0, Level $$1, BlockPos $$2, Random $$3) {
 		if ($$0.getValue(POWERED)) {
 			Direction $$4 = $$0.getValue(FACING);

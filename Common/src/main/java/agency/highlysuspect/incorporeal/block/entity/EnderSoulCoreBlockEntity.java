@@ -9,6 +9,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * The Ender Soul Core block entity. Provides block-level access to the owner's ender chest container.
+ * That's the idea, anyways. It's a little unfinished.
+ */
 public class EnderSoulCoreBlockEntity extends AbstractSoulCoreBlockEntity implements Container {
 	public EnderSoulCoreBlockEntity(BlockPos pos, BlockState state) {
 		super(IncBlockEntityTypes.ENDER_SOUL_CORE, pos, state);

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import vazkii.botania.common.item.ModItems;
 
 /**
- * We do a little registry replacement
+ * Replaces Botania's otherwise plain Redstone Root item, with a BlockItem that places the redstone root crop.
  */
 @Mixin(ModItems.class)
 public abstract class ModItemsMixin {
