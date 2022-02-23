@@ -2,7 +2,7 @@
   "name": "block.incorporeal.frame_tinkerer",
   "category": "botania:devices",
   "icon": "incorporeal:frame_tinkerer",
-  "color": "194a5c",
+  "entry_color": "04759e",
   "pages": [
     {
       "type": "patchouli:text",

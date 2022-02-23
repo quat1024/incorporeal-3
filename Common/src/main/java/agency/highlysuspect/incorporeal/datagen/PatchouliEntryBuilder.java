@@ -87,7 +87,7 @@ public class PatchouliEntryBuilder {
 		json.addProperty("icon", DataDsl.notAir(Registry.ITEM.getKey(icon)).toString());
 		if(readByDefault) json.addProperty("read_by_default", true); //no need to include the property if it's false
 		if(advancement != null) json.addProperty("advancement", advancement);
-		if(color != -1) json.addProperty("color", Integer.toHexString(color));
+		if(color != -1) json.addProperty("entry_color", String.format("%06x", color));
 		if(sortnum != -1) json.addProperty("sortnum", sortnum);
 		
 		//Pages

@@ -2,7 +2,7 @@
   "name": "block.incorporeal.funny",
   "category": "botania:functional_flowers",
   "icon": "incorporeal:funny",
-  "color": "194a5c",
+  "entry_color": "04759e",
   "pages": [
     {
       "type": "patchouli:text",

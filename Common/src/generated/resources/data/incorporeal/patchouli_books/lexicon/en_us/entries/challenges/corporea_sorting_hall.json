@@ -4,7 +4,7 @@
   "icon": "botania:corporea_spark_master",
   "read_by_default": true,
   "advancement": "botania:main/mana_pool_pickup_lexicon",
-  "color": "194a5c",
+  "entry_color": "04759e",
   "sortnum": 69,
   "pages": [
     {

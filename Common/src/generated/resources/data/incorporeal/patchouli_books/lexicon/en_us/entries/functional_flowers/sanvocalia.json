@@ -3,7 +3,7 @@
   "category": "botania:functional_flowers",
   "icon": "incorporeal:sanvocalia",
   "advancement": "botania:main/elf_lexicon_pickup",
-  "color": "194a5c",
+  "entry_color": "04759e",
   "pages": [
     {
       "type": "patchouli:text",

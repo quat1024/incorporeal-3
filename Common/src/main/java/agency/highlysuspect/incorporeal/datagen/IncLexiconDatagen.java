@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 
 public class IncLexiconDatagen {
 	public static final ResourceLocation BOOK_ID = Inc.id("lexicon");
-	public static final int INCORPOREAL_BLUE = 0x194a5c;
+	public static final int INCORPOREAL_BLUE = 0x04759e;
 	
 	private static PatchouliEntryBuilder builder(String path) {
 		return new PatchouliEntryBuilder(BOOK_ID, path).color(INCORPOREAL_BLUE);
