@@ -106,6 +106,6 @@ public class IncItems {
 	}
 	
 	private static Item.Properties props() {
-		return IncXplat.INSTANCE.defaultItemProperties();
+		return new Item.Properties().tab(IncXplat.INSTANCE.getCreativeTab());
 	}
 }

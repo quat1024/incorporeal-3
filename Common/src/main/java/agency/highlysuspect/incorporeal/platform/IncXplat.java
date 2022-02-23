@@ -4,7 +4,7 @@ import agency.highlysuspect.incorporeal.Inc;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
 
 import java.util.List;
 import java.util.ServiceLoader;
@@ -31,8 +31,8 @@ public interface IncXplat {
 		}
 	}
 	
-	//Item.Properties with a creative tab set, basically
-	Item.Properties defaultItemProperties();
+	//One of those things that happens to be different across loaders
+	CreativeModeTab getCreativeTab();
 	
 	//The named DamageSource constructor is not public on Fabric
 	DamageSource newDamageSource(String name);

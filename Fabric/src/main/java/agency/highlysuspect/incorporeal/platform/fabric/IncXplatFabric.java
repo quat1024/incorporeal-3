@@ -6,12 +6,12 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
 
 public class IncXplatFabric implements IncXplat {
 	@Override
-	public Item.Properties defaultItemProperties() {
-		return new Item.Properties().tab(IncFabricCreativeTab.INSTANCE);
+	public CreativeModeTab getCreativeTab() {
+		return IncFabricCreativeTab.INSTANCE;
 	}
 	
 	@Override

@@ -4,13 +4,13 @@ import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.network.PacketDistributor;
 
 public class IncXplatForge implements IncXplat {
 	@Override
-	public Item.Properties defaultItemProperties() {
-		return new Item.Properties().tab(IncForgeCreativeTab.INSTANCE);
+	public CreativeModeTab getCreativeTab() {
+		return IncForgeCreativeTab.INSTANCE;
 	}
 	
 	@Override
