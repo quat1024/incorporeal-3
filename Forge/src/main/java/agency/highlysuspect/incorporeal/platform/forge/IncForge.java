@@ -5,7 +5,7 @@ import agency.highlysuspect.incorporeal.IncSounds;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.corporea.PlayerHeadHandler;
 import agency.highlysuspect.incorporeal.item.IncItems;
-import agency.highlysuspect.incorporeal.block.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;

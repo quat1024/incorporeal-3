@@ -1,6 +1,7 @@
-package agency.highlysuspect.incorporeal.block;
+package agency.highlysuspect.incorporeal.block.entity;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.computer.DataPrismBlockEntity;
 import agency.highlysuspect.incorporeal.computer.DataStorageBlockEntity;
 import net.minecraft.resources.ResourceLocation;

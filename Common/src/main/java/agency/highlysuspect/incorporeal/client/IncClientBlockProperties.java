@@ -1,8 +1,8 @@
 package agency.highlysuspect.incorporeal.client;
 
-import agency.highlysuspect.incorporeal.block.AbstractSoulCoreBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.AbstractSoulCoreBlockEntity;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
-import agency.highlysuspect.incorporeal.block.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
 import vazkii.botania.api.block.IWandHUD;

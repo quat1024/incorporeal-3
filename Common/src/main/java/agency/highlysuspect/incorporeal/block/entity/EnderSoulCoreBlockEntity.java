@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.block;
+package agency.highlysuspect.incorporeal.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;

@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.block;
 
+import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;

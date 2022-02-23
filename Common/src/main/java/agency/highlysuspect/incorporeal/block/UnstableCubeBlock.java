@@ -1,5 +1,7 @@
 package agency.highlysuspect.incorporeal.block;
 
+import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.block.entity.UnstableCubeBlockEntity;
 import agency.highlysuspect.incorporeal.client.UnstableCubeClientTicker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

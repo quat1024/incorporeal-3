@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.block;
+package agency.highlysuspect.incorporeal.block.entity;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.NotVanillaPacketDispatcher;

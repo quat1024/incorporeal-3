@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.computer.DataLens;
 import agency.highlysuspect.incorporeal.computer.DataPrismBlock;
 import agency.highlysuspect.incorporeal.computer.DataStorageBlock;

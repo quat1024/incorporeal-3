@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.computer;
 
-import agency.highlysuspect.incorporeal.block.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

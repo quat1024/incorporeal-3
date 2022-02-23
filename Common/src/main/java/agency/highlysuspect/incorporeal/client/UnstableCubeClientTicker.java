@@ -2,7 +2,7 @@ package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.IncSounds;
 import agency.highlysuspect.incorporeal.block.UnstableCubeBlock;
-import agency.highlysuspect.incorporeal.block.UnstableCubeBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.UnstableCubeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.DyeColor;

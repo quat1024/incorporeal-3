@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.block;
+package agency.highlysuspect.incorporeal.block.entity;
 
 import agency.highlysuspect.incorporeal.corporea.FrameReader;
 import agency.highlysuspect.incorporeal.corporea.IncInventoryHelper;
