@@ -17,18 +17,19 @@ Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-f
 * The funny
 * natural redstone circuitry
 * ender soul core, kind of??
-* the datapack and lexicon (cut paste from 1.16 for now)
+* the datapack and lexicon
 * redstone root crop
 * corporea soul core's *mechanic* (now just a corporea spark on player head), not the block itself
 * ticket conjurer
+* rod of the fractured space
 
-## Things left to port
+## Things left to do
 
 * ticket conjurer's HUD overlay when you're holding one
 * potion soul core (needs an entity)
-* rod of the fractured space (needs an entity) (also remember the botania rods tag)
-* maybe change natural circuits to be stonecut from redstone roots instead of dropping
-* Redo ender soulcores a little bit. It also needs to correctly drain mana. This will need some work i think
+* properly impl ender soul core
+* properly impl red string liar..?
+* switch to botania 428 or 429-snapshot
 
 ## Things left to design and write
 

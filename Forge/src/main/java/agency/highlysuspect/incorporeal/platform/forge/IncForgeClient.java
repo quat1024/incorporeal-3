@@ -2,6 +2,7 @@ package agency.highlysuspect.incorporeal.platform.forge;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.client.IncClientBlockProperties;
+import agency.highlysuspect.incorporeal.client.IncClientEntityProperties;
 import agency.highlysuspect.incorporeal.client.IncClientItemProperties;
 import agency.highlysuspect.incorporeal.client.IncClientLayerDefinitions;
 import agency.highlysuspect.incorporeal.client.IncClientNetwork;
@@ -43,7 +44,10 @@ public class IncForgeClient {
 			//block entity renderers
 			IncClientBlockProperties.registerBlockEntityRenderers(e::registerBlockEntityRenderer);
 			
-			//(builtin item renderers handled with a different method)
+			//entity renderers
+			IncClientEntityProperties.registerEntityRenderers(e::registerEntityRenderer);
+			
+			//(builtin item renderers handled a different way)
 		});
 		
 		yes.addListener((EntityRenderersEvent.RegisterLayerDefinitions e) -> {

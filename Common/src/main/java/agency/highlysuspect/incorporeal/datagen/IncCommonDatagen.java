@@ -41,10 +41,15 @@ public class IncCommonDatagen {
 		});
 		
 		DataDsl.addProvider(gen, "Incorporeal block and item tags", (datagen, files) -> {
+			//rods
+			DataDsl.itemTag(ModTags.Items.RODS)
+				.addItems(IncItems.FRACTURED_SPACE_ROD)
+				.save(files);
+			
 			//corporea spark override
-			DataDsl.blockTag(ModTags.Blocks.CORPOREA_SPARK_OVERRIDE).addBlocks(
-				IncBlocks.RED_STRING_LIAR, IncBlocks.CLEARLY, Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD
-			).save(files);
+			DataDsl.blockTag(ModTags.Blocks.CORPOREA_SPARK_OVERRIDE)
+				.addBlocks(IncBlocks.RED_STRING_LIAR, IncBlocks.CLEARLY, Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD)
+				.save(files);
 			
 			//functional special flowers
 			DataDsl.blockAndItemTag(ModTags.Blocks.FUNCTIONAL_SPECIAL_FLOWERS).add(

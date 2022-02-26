@@ -4,11 +4,16 @@ import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncSounds;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.corporea.PlayerHeadHandler;
+import agency.highlysuspect.incorporeal.entity.IncEntityTypes;
+import agency.highlysuspect.incorporeal.item.FracturedSpaceRodItem;
 import agency.highlysuspect.incorporeal.item.IncItems;
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -17,7 +22,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import vazkii.botania.api.BotaniaForgeCapabilities;
 import vazkii.botania.api.corporea.CorporeaIndexRequestEvent;
+import vazkii.botania.forge.CapabilityUtil;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -28,11 +35,15 @@ public class IncForge {
 		//blocks
 		bind(ForgeRegistries.BLOCKS, IncBlocks::register);
 		
-		//items
+		//items and item capabilities
 		bind(ForgeRegistries.ITEMS, IncItems::register);
+		MinecraftForge.EVENT_BUS.addGenericListener(ItemStack.class, IncForge::itemCapabilities);
 		
 		//block entity types
 		bind(ForgeRegistries.BLOCK_ENTITIES, IncBlockEntityTypes::register);
+		
+		//entities
+		bind(ForgeRegistries.ENTITIES, IncEntityTypes::register);
 		
 		//sound events
 		bind(ForgeRegistries.SOUND_EVENTS, IncSounds::register);
@@ -61,5 +72,13 @@ public class IncForge {
 					forgeRegistry.register(t);
 				});
 			});
+	}
+	
+	private static void itemCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
+		ItemStack stack = event.getObject();
+		if(stack.getItem() == IncItems.FRACTURED_SPACE_ROD) {
+			event.addCapability(Inc.id("coord_bound_item"), CapabilityUtil.makeProvider(BotaniaForgeCapabilities.COORD_BOUND_ITEM,
+				new FracturedSpaceRodItem.CoordBoundItem(stack)));
+		}
 	}
 }

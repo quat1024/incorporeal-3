@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.platform.fabric;
 
 import agency.highlysuspect.incorporeal.client.IncClientBlockProperties;
+import agency.highlysuspect.incorporeal.client.IncClientEntityProperties;
 import agency.highlysuspect.incorporeal.client.IncClientItemProperties;
 import agency.highlysuspect.incorporeal.client.IncClientLayerDefinitions;
 import agency.highlysuspect.incorporeal.client.IncClientNetwork;
@@ -10,6 +11,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import vazkii.botania.api.BotaniaFabricClientCapabilities;
 import vazkii.botania.client.render.tile.TEISR;
@@ -26,8 +28,9 @@ public class IncFabricClient implements ClientModInitializer {
 		//block render layers
 		IncClientBlockProperties.registerRenderTypes(BlockRenderLayerMap.INSTANCE::putBlock);
 		
-		//block entity renderers & builtin item renderers
+		//block entity renderers, entity renderers, & builtin item renderers
 		IncClientBlockProperties.registerBlockEntityRenderers(BlockEntityRendererRegistry::register);
+		IncClientEntityProperties.registerEntityRenderers(EntityRendererRegistry::register);
 		IncClientItemProperties.BE_ITEM_RENDERER_FACTORIES.forEach((block, teisrMaker) -> {
 			//From Botania. Stands for "Tile Entity Item Stack Renderer", a Forge anachronism.
 			TEISR teisr = teisrMaker.apply(block);

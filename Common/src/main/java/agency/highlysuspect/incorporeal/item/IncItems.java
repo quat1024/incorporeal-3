@@ -19,7 +19,7 @@ public class IncItems {
 	public static final CorporeaTicketItem CORPOREA_TICKET = new CorporeaTicketItem(props());
 	public static final TicketConjurerItem TICKET_CONJURER = new TicketConjurerItem(props().stacksTo(1));
 	public static final Item SOUL_CORE_FRAME = new Item(props()); //TODO: teisr (ugh)
-	public static final Item FRACTURED_SPACE_ROD = new Item(props()); //TODO
+	public static final Item FRACTURED_SPACE_ROD = new FracturedSpaceRodItem(props().stacksTo(1));
 	
 	//corporetics
 	public static final BlockItem CORPOREA_SOLIDIFIER = new BlockItem(IncBlocks.CORPOREA_SOLIDIFIER, props());
