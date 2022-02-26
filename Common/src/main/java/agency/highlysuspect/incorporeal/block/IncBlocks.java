@@ -32,6 +32,7 @@ public class IncBlocks {
 	//soul cores
 	private static final Properties soulCoreProps = Properties.of(Material.NETHER_WOOD).sound(SoundType.NETHER_SPROUTS).strength(1f).isSuffocating((__, ___, ____) -> false).noOcclusion();
 	public static final SoulCoreBlock ENDER_SOUL_CORE = new SoulCoreBlock(() -> IncBlockEntityTypes.ENDER_SOUL_CORE, soulCoreProps);
+	public static final SoulCoreBlock POTION_SOUL_CORE = new SoulCoreBlock(() -> IncBlockEntityTypes.POTION_SOUL_CORE, soulCoreProps);
 	
 	//natural devices
 	private static final Properties naturalDeviceProps = Properties.of(Material.DECORATION).instabreak().sound(SoundType.CROP).noOcclusion();
@@ -79,6 +80,7 @@ public class IncBlocks {
 		
 		//soul cores
 		r.accept(ENDER_SOUL_CORE, Inc.id("ender_soul_core"));
+		r.accept(POTION_SOUL_CORE, Inc.id("potion_soul_core"));
 		
 		//natural devices
 		r.accept(NATURAL_REPEATER, Inc.id("natural_repeater"));

@@ -9,6 +9,7 @@ import agency.highlysuspect.incorporeal.item.FracturedSpaceRodItem;
 import agency.highlysuspect.incorporeal.item.IncItems;
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import vazkii.botania.api.BotaniaFabricCapabilities;
@@ -31,6 +32,7 @@ public class IncFabric implements ModInitializer {
 		
 		//entity types
 		IncEntityTypes.register((type, name) -> Registry.register(Registry.ENTITY_TYPE, name, type));
+		IncEntityTypes.registerAttributes(FabricDefaultAttributeRegistry::register);
 		
 		//sound events
 		IncSounds.register((sound, name) -> Registry.register(Registry.SOUND_EVENT, name, sound));

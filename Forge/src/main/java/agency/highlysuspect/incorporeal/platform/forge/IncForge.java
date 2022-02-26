@@ -15,6 +15,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -44,6 +45,8 @@ public class IncForge {
 		
 		//entities
 		bind(ForgeRegistries.ENTITIES, IncEntityTypes::register);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener((EntityAttributeCreationEvent e) ->
+			IncEntityTypes.registerAttributes((type, builder) -> e.put(type, builder.build()))); //what
 		
 		//sound events
 		bind(ForgeRegistries.SOUND_EVENTS, IncSounds::register);

@@ -20,6 +20,8 @@ public class IncBlockEntityTypes {
 	//soul cores
 	public static final BlockEntityType<EnderSoulCoreBlockEntity> ENDER_SOUL_CORE = 
 		IXplatAbstractions.INSTANCE.createBlockEntityType(EnderSoulCoreBlockEntity::new, IncBlocks.ENDER_SOUL_CORE);
+	public static final BlockEntityType<PotionSoulCoreBlockEntity> POTION_SOUL_CORE =
+		IXplatAbstractions.INSTANCE.createBlockEntityType(PotionSoulCoreBlockEntity::new, IncBlocks.POTION_SOUL_CORE);
 	
 	//flowers
 	public static final BlockEntityType<SanvocaliaBlockEntity> SANVOCALIA_BIG =
@@ -49,6 +51,7 @@ public class IncBlockEntityTypes {
 		r.accept(RED_STRING_LIAR, Inc.id("red_string_liar"));
 		
 		r.accept(ENDER_SOUL_CORE, Inc.id("ender_soul_core"));
+		r.accept(POTION_SOUL_CORE, Inc.id("potion_soul_core"));
 		
 		r.accept(SANVOCALIA_BIG, Inc.id("sanvocalia"));
 		r.accept(SANVOCALIA_SMALL, Inc.id("sanvocalia_small"));
