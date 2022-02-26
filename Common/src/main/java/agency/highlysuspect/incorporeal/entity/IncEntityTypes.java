@@ -10,7 +10,7 @@ import java.util.function.BiConsumer;
 public class IncEntityTypes {
 	public static final EntityType<FracturedSpaceCollector> FRACTURED_SPACE_COLLECTOR =
 		EntityType.Builder.<FracturedSpaceCollector>of(FracturedSpaceCollector::new, MobCategory.MISC)
-			.sized(2f, 0.1f)
+			.sized(4f, 0.1f)
 			.fireImmune()
 			.updateInterval(Integer.MAX_VALUE)
 			.clientTrackingRange(10)

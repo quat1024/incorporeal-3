@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.entity;
 
+import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.item.FracturedSpaceRodItem;
 import agency.highlysuspect.incorporeal.item.IncItems;
 import net.minecraft.core.BlockPos;
@@ -75,8 +76,8 @@ public class FracturedSpaceCollector extends Entity {
 			doSparkles(age);
 		} else if(age > AGE_SPECIAL_START) {
 			//find items intersecting me. (this time i remembered to check isAlive, isnt that great!!!!!!)
-			List<ItemEntity> nearbyItemEnts = level.getEntitiesOfClass(ItemEntity.class, getBoundingBox().inflate(1), ent ->
-				ent != null && ent.isAlive() && Math.hypot(getX() - getZ(), ent.getX() - ent.getZ()) <= RADIUS);
+			List<ItemEntity> nearbyItemEnts = level.getEntitiesOfClass(ItemEntity.class, getBoundingBox(), ent ->
+				ent != null && ent.isAlive() && Math.hypot(getX() - ent.getX(), getZ() - ent.getZ()) <= RADIUS);
 			
 			//give em a good zucc
 			for(ItemEntity ent : nearbyItemEnts) {
