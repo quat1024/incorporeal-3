@@ -77,7 +77,8 @@ If you're using Eclipse:
 
 * forge server run configuration
 * TEST IT MORE, test remapping, test refmaps in prod, test test !!
-* non-`Common` `-sources` jars don't contain `Common` sources - hubry said this happens to patchy and botania too. why?
+* non-`Common` `-sources` jars don't contain `Common` sources
+  * https://github.com/VazkiiMods/Botania/commit/48103b54fe2ff2c9b34b021fb3a8c7ca106fdb67 but i need to make it work on kotlin buildscripts lmao
 * figure out what's the difference between depending on `:Common` and adding its source set to the compilation classpath, and if you need to do both
 
 ### Why are you using kotlin buildscripts
