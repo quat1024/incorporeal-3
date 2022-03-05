@@ -22,7 +22,7 @@ import vazkii.botania.client.core.handler.ClientTickHandler;
  */
 public class UnstableCubeBlockEntityRenderer implements BlockEntityRenderer<UnstableCubeBlockEntity> {
 	public UnstableCubeBlockEntityRenderer(DyeColor color, BlockEntityRendererProvider.Context ctx) {
-		model = new UnstableCubeModel(ctx.bakeLayer(IncClientModelLayers.UNSTABLE_CUBE));
+		model = new UnstableCubeModel(ctx.bakeLayer(IncClientProperties.ModelLayers.UNSTABLE_CUBE));
 		
 		int colorPacked = color.getFireworkColor();
 		red = ((colorPacked & 0xFF0000) >> 16) / 255f;

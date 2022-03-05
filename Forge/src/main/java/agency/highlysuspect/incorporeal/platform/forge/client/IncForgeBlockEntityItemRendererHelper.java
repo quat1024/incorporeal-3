@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.platform.forge.client;
 
-import agency.highlysuspect.incorporeal.client.IncClientItemProperties;
+import agency.highlysuspect.incorporeal.client.IncClientProperties;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -35,7 +35,7 @@ public class IncForgeBlockEntityItemRendererHelper {
 			var renderer = renderers.computeIfAbsent(stack.getItem(), i -> {
 				var block = Block.byItem(i);
 				//return EntityRenderers.BE_ITEM_RENDERER_FACTORIES.get(block).apply(block);
-				Function<Block, TEISR> factory = IncClientItemProperties.BE_ITEM_RENDERER_FACTORIES.get(block);
+				Function<Block, TEISR> factory = IncClientProperties.BE_ITEM_RENDERER_FACTORIES.get(block);
 				if(factory != null) return factory.apply(block);
 				else return null;
 			});
