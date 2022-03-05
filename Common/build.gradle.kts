@@ -7,7 +7,8 @@ plugins {
 
 dependencies {
     //botania-xplat - Multiloader Botania code
-    implementation(group = "vazkii.botania", name = "Botania-xplat", version = "1.18.1-428-SNAPSHOT").isChanging = true
+    val botaniaVersion: String by project;
+    implementation(group = "vazkii.botania", name = "Botania-xplat", version = botaniaVersion).isChanging = true
 }
 
 sourceSets["main"].resources {

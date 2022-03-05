@@ -29,7 +29,6 @@ Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-f
 * potion soul core (needs an entity)
 * properly impl ender soul core
 * properly impl red string liar..?
-* switch to botania 428 or 429-snapshot
 
 ## Things left to design and write
 
@@ -60,9 +59,8 @@ See:
 * `gradle.properties` for build variables like name and version number
 
 Keep in mind:
-* It's currently open-season for Botania API breaks, and the `1.18.1-428-SNAPSHOT` version I'm depending on right now is literally just `HEAD`.
-  * Builds are not reproducible and may break at any time.
-  * Life on the edge! ;)
+* The current version of Botania being depended on is `1.18.1-430-SNAPSHOT`, a.k.a, Botania `HEAD`.
+  * Jared's jenkins doesn't store `-SNAPSHOT` versions for an indefinite amount of time. The version may be changed in `gradle.properties`.
 * I prefer to develop on Fabric first and fix Forge later.
 
 Having weird build issues:

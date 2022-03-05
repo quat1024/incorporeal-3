@@ -7,7 +7,9 @@ plugins {
 
 dependencies {
     modImplementation(group = "net.fabricmc.fabric-api", name = "fabric-api", version = "0.44.0+1.18")
-    modImplementation(group = "vazkii.botania"         , name = "Botania"   , version = "1.18.1-428-FABRIC-SNAPSHOT").isChanging = true
+    
+    val botaniaVersion: String by project;
+    modImplementation(group = "vazkii.botania"         , name = "Botania"   , version = williePls(botaniaVersion)).isChanging = true
     
     //botania-fabric's transitive dependencies as of Jan 29, 2022; https://github.com/VazkiiMods/Botania/blob/1b16b5672fd7c59f4fa0e5e235f9b8120b84dcb2/Fabric/build.gradle
     //Due to reasons, Botania does not (currently) publish transitive dependency information for its artifacts.
@@ -18,6 +20,15 @@ dependencies {
     modImplementation(group = "dev.emi"                                      , name = "trinkets"                    , version = "3.1.0")
     modImplementation(group = "com.jamieswhiteshirt"                         , name = "reach-entity-attributes"     , version = "2.1.1")
     modImplementation(group = "com.github.emilyploszaj"                      , name = "step-height-entity-attribute", version = "v1.0.1")
+}
+
+//Ok so botnio forge and fabric are published under the same maven group, but the fabric one has a differently formatted version string
+//1.18.1-428 -> 1.18.1-428-FABRIC
+//1.18.1-429-SNAPSHOT -> 1.18.1-429-FABRIC-SNAPSHOT
+fun williePls(input: String): String {
+    val parts = input.split('-').toMutableList()
+    parts.add(2, "FABRIC")
+    return parts.joinToString(separator = "-")
 }
 
 loom {
