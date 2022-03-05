@@ -8,6 +8,7 @@ import agency.highlysuspect.incorporeal.entity.IncEntityTypes;
 import agency.highlysuspect.incorporeal.item.FracturedSpaceRodItem;
 import agency.highlysuspect.incorporeal.item.IncItems;
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.platform.fabric.mixin.FabricFabricCommonInitializerMixin;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.core.Registry;
@@ -17,6 +18,11 @@ import vazkii.botania.api.corporea.CorporeaIndexRequestCallback;
 
 public class IncFabric implements ModInitializer {
 	public static final ResourceLocation NETWORK_ID = new ResourceLocation(Inc.MODID, "net");
+	
+	//tfw no mod load order
+	public static boolean incInit = false;
+	public static boolean botaniaInit = false;
+	public static boolean didLateInit = false;
 	
 	@Override
 	public void onInitialize() {
@@ -37,10 +43,31 @@ public class IncFabric implements ModInitializer {
 		//sound events
 		IncSounds.register((sound, name) -> Registry.register(Registry.SOUND_EVENT, name, sound));
 		
-		//that one corporea event
-		CorporeaIndexRequestCallback.EVENT.register(PlayerHeadHandler::onIndexRequest);
-		
-		//some other stuff (not different between loaders)
-		Inc.registerExtraThings();
+		incInit = true;
+		afterBotania();
+	}
+	
+	/**
+	 * Some Botania behaviors use lists that are checked top-to-bottom.
+	 * In those cases, registration order may be important.
+	 * This is a problem when there's no load-order in the frickin modloader lmao!
+	 * @see FabricFabricCommonInitializerMixin
+	 */
+	public static void afterBotania() {
+		Inc.LOGGER.warn("Fabric post-botania init: incorporeal {}, botania {}", incInit, botaniaInit);
+		if(incInit && botaniaInit) {
+			if(didLateInit) throw new IllegalStateException("Already post-botania initialized");
+			Inc.LOGGER.info("It is time.");
+			
+			//that one corporea event
+			CorporeaIndexRequestCallback.EVENT.register(PlayerHeadHandler::onIndexRequest);
+			
+			//some other stuff (not different between loaders)
+			Inc.registerExtraThings();
+			
+			didLateInit = true;
+		} else {
+			Inc.LOGGER.info("Not yet, gentle one.");
+		}
 	}
 }

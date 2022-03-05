@@ -14,3 +14,9 @@ credits = "the Artemis System, Dudblockman, SnazzGass, jaredlll08, Darkhax, all 
 modId="forge"
 mandatory=true
 versionRange="[39.0.44,)"
+
+[[dependencies.incorporeal]]
+modId="botania"
+mandatory=true
+ordering="AFTER"
+versionRange="*"

@@ -27,7 +27,7 @@ mixin {
 dependencies {
     //Declare a dependency on Minecraft, or rather on Forge's patched version of it.
     val minecraftVersion: String by project
-    minecraft("net.minecraftforge:forge:$minecraftVersion-39.0.58")
+    minecraft("net.minecraftforge:forge:$minecraftVersion-39.0.88")
 
     //Declare a dependency on the common source set.
     compileOnly(project(":Common"))
