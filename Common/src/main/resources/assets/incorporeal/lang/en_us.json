@@ -78,6 +78,7 @@
 	"incorporeal.empty_matcher": "Nothing",
 	
 	"incorporeal.subtitle.unstable": "Unstable Cube chimes",
+	"incorporeal.subtitle.retainer_evaporator_click": "Corporea Retainer Evaporator clicks",
 	
 	"zzzzzz.incorporeal.en-us-rewriter.marker.zzzzzz": "(AUTOMATICALLY GENERATED LANG ENTIRES BELOW THIS LINE - NO TOUCHY)",
 	"incorporeal.lexicon.devices.frame_tinkerer.0.text": "The $(item)Frame Tinkerer$(0) is an indispensible tool for any advanced corporeticist, or really anyone who likes to redecorate often. It acts like a $(item)Spark Tinkerer$(0) - drop an item on it, give it a redstone signal, and the item will change places with one in a random nearby $(item)Item Frame$(0).",

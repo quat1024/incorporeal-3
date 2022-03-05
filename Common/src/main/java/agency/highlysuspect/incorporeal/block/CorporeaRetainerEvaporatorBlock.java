@@ -1,9 +1,17 @@
 package agency.highlysuspect.incorporeal.block;
 
+import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.IncSounds;
 import agency.highlysuspect.incorporeal.corporea.RetainerDuck;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -11,6 +19,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -24,11 +34,28 @@ import org.jetbrains.annotations.Nullable;
 public class CorporeaRetainerEvaporatorBlock extends Block {
 	public CorporeaRetainerEvaporatorBlock(Properties props) {
 		super(props);
+		
+		registerDefaultState(defaultBlockState()
+			.setValue(BlockStateProperties.POWERED, false)
+			.setValue(SETTING, CorporeaFrameRotation.ONE));
 	}
+	
+	public static final EnumProperty<CorporeaFrameRotation> SETTING = EnumProperty.create("setting", CorporeaFrameRotation.class);
 	
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		super.createBlockStateDefinition(builder.add(BlockStateProperties.POWERED));
+		super.createBlockStateDefinition(builder.add(BlockStateProperties.POWERED, SETTING));
+	}
+	
+	@Override
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		state = state.cycle(SETTING);
+		
+		level.setBlockAndUpdate(pos, state);
+		level.playSound(player, pos, IncSounds.RETAINER_EVAPORATOR_CLICK, SoundSource.BLOCKS, 1f,
+			Inc.rangeRemap(state.getValue(SETTING).ordinal(), 0, 7, 0.3f, 2f));
+		
+		return InteractionResult.SUCCESS;
 	}
 	
 	@Override
@@ -51,11 +78,27 @@ public class CorporeaRetainerEvaporatorBlock extends Block {
 				for(Direction horiz : Direction.Plane.HORIZONTAL) {
 					BlockEntity be = level.getBlockEntity(pos.relative(horiz));
 					if(be instanceof RetainerDuck duck) {
-						//TODO: maybe use capability again, like in 1.16. But it will need to be cross-loader now.
-						duck.inc$setCount(Math.max(0, duck.inc$getCount() - 1));
+						duck.inc$setCount(Math.max(0, duck.inc$getCount() - state.getValue(SETTING).stackSize));
 					}
 				}
 			}
+		}
+	}
+	
+	/**
+	 * Enum-codified version of that corporea funnel mechanic where the rotation of an item frame corresponds to a number from 1 to 64.
+	 */
+	public enum CorporeaFrameRotation implements StringRepresentable {
+		ONE(1), TWO(2), FOUR(4), EIGHT(8), SIXTEEN(16), THIRTY_TWO(32), FORTY_EIGHT(48), SIXTY_FOUR(64);
+		
+		CorporeaFrameRotation(int stackSize) {
+			this.stackSize = stackSize;
+		}
+		public final int stackSize;
+		
+		@Override
+		public String getSerializedName() {
+			return Integer.toString(stackSize);
 		}
 	}
 }
