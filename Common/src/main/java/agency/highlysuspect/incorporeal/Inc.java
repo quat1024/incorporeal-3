@@ -80,10 +80,4 @@ public class Inc {
 		for(DyeColor color : DyeColor.values()) map.put(color, maker.apply(color));
 		return map;
 	}
-	
-	public static <T> Map<Tupling, T> octupleCompressed(Function<Tupling, T> maker) {
-		Map<Tupling, T> map = new EnumMap<Tupling, T>(Tupling.class);
-		for(Tupling tupling : Tupling.values()) map.put(tupling, maker.apply(tupling));
-		return map;
-	}
 }

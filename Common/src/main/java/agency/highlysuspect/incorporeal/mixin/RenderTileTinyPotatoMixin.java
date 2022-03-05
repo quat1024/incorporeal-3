@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.mixin;
 
+import agency.highlysuspect.incorporeal.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.block.CompressedTinyPotatoBlock;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -27,7 +28,7 @@ public class RenderTileTinyPotatoMixin {
 	public void afterTranslating(@Nonnull TileTinyPotato potato, float partialTicks, PoseStack ms, @Nonnull MultiBufferSource buffers, int light, int overlay, CallbackInfo ci) {
 		BlockState state = potato.getBlockState();
 		if(state.getBlock() instanceof CompressedTinyPotatoBlock compressed) {
-			float scaleFactor = compressed.tupling.getTaterScaleFactor();
+			float scaleFactor = CompressedTaterUtil.taterScaleFactor(compressed.compressionLevel);
 			ms.scale(scaleFactor, scaleFactor, scaleFactor);
 		}
 	}

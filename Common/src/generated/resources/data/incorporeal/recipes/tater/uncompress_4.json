@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "incorporeal:quintuple_compressed_tiny_potato"
+    }
+  ],
+  "result": {
+    "item": "incorporeal:quadruple_compressed_tiny_potato",
+    "count": 9
+  }
+}

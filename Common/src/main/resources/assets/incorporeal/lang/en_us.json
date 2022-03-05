@@ -57,6 +57,11 @@
 	"block.incorporeal.septuple_compressed_tiny_potato": "Colossal Potato",
 	"block.incorporeal.octuple_compressed_tiny_potato": "Galactic Potato",
 	"block.incorporeal.compressed_tiny_potatoes.tooltip": "%s Tiny Potatoes",
+	"block.incorporeal.tiny_tiny_potato": "Tinier Potato",
+	"block.incorporeal.tiny_tiny_tiny_potato": "Tiniest Potato",
+	"block.incorporeal.tiny_tiny_tiny_tiny_potato": "Tiniester Potato",
+	"block.incorporeal.tiny_tiny_tiny_tiny_tiny_potato": "Tiniestest Potato",
+	"block.incorporeal.compressed_tiny_potatoes.tooltip.fraction": "1/%s of a Tiny Potato",
 	
 	"incorporeal.solidified_request": "%sx %s",
 	"incorporeal.solidified_request.count_only": "%sx ",

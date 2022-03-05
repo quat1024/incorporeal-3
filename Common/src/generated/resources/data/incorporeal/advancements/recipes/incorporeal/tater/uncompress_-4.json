@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "incorporeal:single_compressed_tiny_potato"
+      "incorporeal:tater/uncompress_-4"
     ]
   },
   "criteria": {
-    "tiny_potato": {
+    "tiny_tiny_tiny_tiny_potato": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "botania:tiny_potato"
+              "incorporeal:tiny_tiny_tiny_tiny_potato"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "incorporeal:single_compressed_tiny_potato"
+        "recipe": "incorporeal:tater/uncompress_-4"
       }
     }
   },
   "requirements": [
     [
-      "tiny_potato",
+      "tiny_tiny_tiny_tiny_potato",
       "has_the_recipe"
     ]
   ]

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "incorporeal:quadruple_compressed_tiny_potato"
+      "incorporeal:tater/uncompress_2"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "incorporeal:quadruple_compressed_tiny_potato"
+        "recipe": "incorporeal:tater/uncompress_2"
       }
     }
   },

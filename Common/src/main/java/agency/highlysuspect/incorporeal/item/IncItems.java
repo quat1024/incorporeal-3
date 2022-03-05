@@ -1,7 +1,6 @@
 package agency.highlysuspect.incorporeal.item;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.Tupling;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.Registry;
@@ -14,6 +13,7 @@ import vazkii.botania.common.item.block.ItemBlockSpecialFlower;
 import vazkii.botania.common.item.block.ItemBlockTinyPotato;
 
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -57,9 +57,11 @@ public class IncItems {
 	public static final BlockItem CLEARLY = new BlockItem(IncBlocks.CLEARLY, props());
 	
 	//taters
-	public static final Map<Tupling, ItemBlockTinyPotato> COMPRESSED_TATERS = Inc.octupleCompressed(
-		tupling -> new ItemBlockTinyPotato(IncBlocks.COMPRESSED_TATERS.get(tupling),
-			props().rarity(tupling == Tupling.OCTUPLE ? Rarity.EPIC : Rarity.UNCOMMON)));
+	public static final Map<Integer, ItemBlockTinyPotato> COMPRESSED_TATERS = new LinkedHashMap<>();
+	static {
+		IncBlocks.COMPRESSED_TATERS.forEach((level, block) ->
+			COMPRESSED_TATERS.put(level, new ItemBlockTinyPotato(block, props().rarity(level == 8 ? Rarity.EPIC : Rarity.UNCOMMON))));
+	}
 	
 	//computer
 	public static final BlockItem DATA_PRISM = new BlockItem(IncBlocks.DATA_PRISM, props());
@@ -86,14 +88,12 @@ public class IncItems {
 			//clearly
 			CLEARLY,
 			//computer
-			DATA_PRISM, DATA_STORAGE, MATCHER_LENS, NUMBER_LENS, NEGATORY_LENS
-		));
-		
-		//unstable cubes
-		registerBlockItems(r, UNSTABLE_CUBES.values());
-		
-		//taters
-		registerBlockItems(r, COMPRESSED_TATERS.values());
+			DATA_PRISM, DATA_STORAGE, MATCHER_LENS, NUMBER_LENS, NEGATORY_LENS),
+			//unstable cubes
+			UNSTABLE_CUBES.values(),
+			//taters
+			COMPRESSED_TATERS.values()
+		);
 		
 		//flowers
 		r.accept(SANVOCALIA, Inc.id("sanvocalia"));
@@ -107,11 +107,14 @@ public class IncItems {
 		r.accept(FLOATING_FUNNY_SMALL, Inc.id("floating_funny_chibi"));
 	}
 	
-	private static void registerBlockItems(BiConsumer<Item, ResourceLocation> r, Collection<? extends BlockItem> bis) {
-		for(BlockItem bi : bis) {
-			//TODO: this needed?
-			Item.BY_BLOCK.put(bi.getBlock(), bi);
-			r.accept(bi, Registry.BLOCK.getKey(bi.getBlock()));
+	@SafeVarargs
+	private static void registerBlockItems(BiConsumer<Item, ResourceLocation> r, Collection<? extends BlockItem>... collections) {
+		for(Collection<? extends BlockItem> collection : collections) {
+			for(BlockItem bi : collection) {
+				//TODO: this needed?
+				Item.BY_BLOCK.put(bi.getBlock(), bi);
+				r.accept(bi, Registry.BLOCK.getKey(bi.getBlock()));
+			}
 		}
 	}
 	

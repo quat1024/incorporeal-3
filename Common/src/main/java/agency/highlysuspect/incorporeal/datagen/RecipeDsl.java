@@ -16,6 +16,7 @@ import vazkii.botania.common.lib.ModTags;
 import vazkii.botania.mixin.AccessorRecipeProvider;
 
 import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 /**
  * Pile of utilities for writing various types of recipes.
@@ -41,8 +42,12 @@ public class RecipeDsl {
 		return shapeless(out, 1);
 	}
 	
-	public static NiceShapedRecipeBuilder compress(ItemLike in, ItemLike out) {
-		return shaped(out, "###", "###", "###").define("#", in);
+	public static NiceShapedRecipeBuilder compress9(ItemLike small, ItemLike big) {
+		return shaped(big, "###", "###", "###").define("#", small);
+	}
+	
+	public static NiceShapelessRecipeBuilder uncompressTo9(ItemLike big, ItemLike small) {
+		return shapeless(small, 9).add(big);
 	}
 	
 	public static NiceShapelessRecipeBuilder floatingFlower(ItemLike notFloating, ItemLike floating) {

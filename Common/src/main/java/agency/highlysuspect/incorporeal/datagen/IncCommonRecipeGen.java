@@ -1,8 +1,11 @@
 package agency.highlysuspect.incorporeal.datagen;
 
+import agency.highlysuspect.incorporeal.CompressedTaterUtil;
+import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.item.IncItems;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -14,6 +17,7 @@ import vazkii.botania.common.lib.ModTags;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class IncCommonRecipeGen {
@@ -110,9 +114,15 @@ public class IncCommonRecipeGen {
 			.save(files);
 		
 		//Compressed Tiny Potatoes
-		List<Block> sequence = Stream.concat(Stream.of(ModBlocks.tinyPotato), IncBlocks.COMPRESSED_TATERS.values().stream()).collect(Collectors.toList());
-		for(int i = 1; i < sequence.size(); i++) {
-			RecipeDsl.compress(sequence.get(i - 1), sequence.get(i)).save(files);
+		for(int i = CompressedTaterUtil.SMALLEST; i < CompressedTaterUtil.LARGEST; i++) {
+			Block small = CompressedTaterUtil.getPotato(i);
+			Block big = CompressedTaterUtil.getPotato(i + 1);
+			
+			ResourceLocation compressId = Inc.id("tater/compress_" + i);
+			ResourceLocation uncompressId = Inc.id("tater/uncompress_" + i);
+			
+			RecipeDsl.compress9(small, big).save(files, compressId);
+			RecipeDsl.uncompressTo9(big, small).save(files, uncompressId);
 		}
 	}
 }

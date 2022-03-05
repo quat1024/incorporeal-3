@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "incorporeal:triple_compressed_tiny_potato"
+      "incorporeal:tater/compress_7"
     ]
   },
   "criteria": {
-    "double_compressed_tiny_potato": {
+    "septuple_compressed_tiny_potato": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "incorporeal:double_compressed_tiny_potato"
+              "incorporeal:septuple_compressed_tiny_potato"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "incorporeal:triple_compressed_tiny_potato"
+        "recipe": "incorporeal:tater/compress_7"
       }
     }
   },
   "requirements": [
     [
-      "double_compressed_tiny_potato",
+      "septuple_compressed_tiny_potato",
       "has_the_recipe"
     ]
   ]
