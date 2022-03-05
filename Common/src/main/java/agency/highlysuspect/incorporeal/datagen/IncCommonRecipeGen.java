@@ -7,7 +7,6 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import vazkii.botania.common.block.ModBlocks;
-import vazkii.botania.common.block.ModFluffBlocks;
 import vazkii.botania.common.item.ModItems;
 import vazkii.botania.common.lib.ModTags;
 
@@ -15,6 +14,20 @@ import java.util.function.Consumer;
 
 public class IncCommonRecipeGen {
 	public static void doIt(DataGenerator datagen, Consumer<JsonFile> files) {
+		//Ticket Conjurer
+		RecipeDsl.shaped(IncItems.TICKET_CONJURER, "SES", "EIE", "SES")
+			.define("S", ModTags.Items.INGOTS_MANASTEEL)
+			.define("E", ModTags.Items.INGOTS_ELEMENTIUM)
+			.define("I", ModBlocks.corporeaIndex)
+			.save(files);
+		
+		//Rod of the Fractured Space
+		RecipeDsl.shaped(IncItems.FRACTURED_SPACE_ROD, " EG", " TE", "T  ")
+			.define("E", Items.ENDER_EYE)
+			.define("G", ModItems.lifeEssence)
+			.define("T", ModItems.dreamwoodTwig)
+			.save(files);
+		
 		//Corporea Solidifier
 		RecipeDsl.shaped(IncBlocks.CORPOREA_SOLIDIFIER, "PPP", "EFE", "PPP")
 			.define("P", Items.PAPER)
