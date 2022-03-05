@@ -36,14 +36,15 @@ loom {
         //Common Datagen. One loader has to be the one in charge of it, and it'll be fabric.
         create("common-datagen") {
             client()
-            vmArg("-Dbotania.xplat_datagen=1")
             vmArg("-Dfabric-api.datagen")
             vmArg("-Dfabric-api.datagen.modid=incorporeal")
-            //Doesn't work lol
-            //vmArg("-Dfabric-api.datagen.output-dir=${project(":Common").relativePath("./src/generated/resources")}")
+            //vmArg("-Dfabric-api.datagen.output-dir=${project(":Common").relativePath("./src/generated/resources")}") //Doesn't work lol
             vmArg("-Dfabric-api.datagen.output-dir=${file("../Common/src/generated/resources")}")
             
-            //for EnUsRewriter:
+            //tell myself that this is the common datagen
+            vmArg("-Dbotania.xplat_datagen=1")
+            
+            //tell EnUsRewriter which file to stomp on
             vmArg("-Dincorporeal.en-us=${file("../Common/src/main/resources/assets/incorporeal/lang/en_us.json")}")
         }
 

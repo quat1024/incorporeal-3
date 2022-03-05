@@ -13,7 +13,7 @@ import vazkii.botania.common.item.ModItems;
 
 import java.util.function.Consumer;
 
-public class IncLexiconDatagen {
+public class IncCommonLexiconGen {
 	public static final ResourceLocation BOOK_ID = Inc.id("lexicon");
 	public static final int INCORPOREAL_BLUE = 0x04759e;
 	

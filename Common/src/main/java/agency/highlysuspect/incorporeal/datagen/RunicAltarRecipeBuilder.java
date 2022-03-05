@@ -77,6 +77,8 @@ public record RunicAltarRecipeBuilder(ItemStack output, int mana, List<Ingredien
 	}
 	
 	public void save(Consumer<JsonFile> fileConsumer, ResourceLocation id) {
+		DataDsl.notAir(id); //Explode now if you try to save a recipe for unregistered item
+		
 		fileConsumer.accept(JsonFile.create(toJson(), "data", id.getNamespace(), "recipes", id.getPath()));
 	}
 }

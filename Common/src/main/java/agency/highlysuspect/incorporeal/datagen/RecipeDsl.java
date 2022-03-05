@@ -111,7 +111,7 @@ public class RecipeDsl {
 		}
 	}
 	
-	/// File saving ///
+	/// File saving for the above recipe builders ///
 	
 	public static void save(Consumer<JsonFile> fileConsumer, RecipeBuilder builder) {
 		save(fileConsumer, builder, RecipeBuilder.getDefaultRecipeId(builder.getResult()));
@@ -119,6 +119,8 @@ public class RecipeDsl {
 	
 	//shaped a little bit after the lambda in RecipeProvider#run
 	public static void save(Consumer<JsonFile> fileConsumer, RecipeBuilder builder, ResourceLocation id) {
+		DataDsl.notAir(id); //Explode now if you try to save a recipe for unregistered item
+		
 		builder.save(finishedRecipe -> {
 			JsonObject recipeJson = finishedRecipe.serializeRecipe();
 			fileConsumer.accept(JsonFile.create(recipeJson, "data", id.getNamespace(), "recipes", id.getPath()));

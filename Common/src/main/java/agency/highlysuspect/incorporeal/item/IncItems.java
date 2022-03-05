@@ -11,6 +11,7 @@ import net.minecraft.world.item.Item;
 import vazkii.botania.common.item.block.ItemBlockSpecialFlower;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
@@ -29,6 +30,7 @@ public class IncItems {
 	
 	//soul cores
 	public static final BlockItem ENDER_SOUL_CORE = new IncBlockItemWithTEISR(IncBlocks.ENDER_SOUL_CORE, props());
+	public static final BlockItem POTION_SOUL_CORE = new IncBlockItemWithTEISR(IncBlocks.POTION_SOUL_CORE, props());
 	
 	//natural devices
 	public static final BlockItem NATURAL_REPEATER = new BlockItem(IncBlocks.NATURAL_REPEATER, props());
@@ -66,11 +68,22 @@ public class IncItems {
 		r.accept(SOUL_CORE_FRAME, Inc.id("soul_core_frame"));
 		r.accept(FRACTURED_SPACE_ROD, Inc.id("fractured_space_rod"));
 		
-		//blockitems
-		registerBlockItems(r,
+		//generic blockitems
+		registerBlockItems(r, List.of(
+			//corporetics
 			CORPOREA_SOLIDIFIER, RED_STRING_LIAR, FRAME_TINKERER, CORPOREA_RETAINER_EVAPORATOR,
-			ENDER_SOUL_CORE,
-			NATURAL_REPEATER, NATURAL_COMPARATOR);
+			//soul cores
+			ENDER_SOUL_CORE, POTION_SOUL_CORE,
+			//natural devices
+			NATURAL_REPEATER, NATURAL_COMPARATOR,
+			//clearly
+			CLEARLY,
+			//computer
+			DATA_PRISM, DATA_STORAGE, MATCHER_LENS, NUMBER_LENS, NEGATORY_LENS
+		));
+		
+		//unstable cubes
+		registerBlockItems(r, UNSTABLE_CUBES.values());
 		
 		//flowers
 		r.accept(SANVOCALIA, Inc.id("sanvocalia"));
@@ -82,29 +95,14 @@ public class IncItems {
 		r.accept(FUNNY_SMALL, Inc.id("funny_chibi"));
 		r.accept(FLOATING_FUNNY, Inc.id("floating_funny"));
 		r.accept(FLOATING_FUNNY_SMALL, Inc.id("floating_funny_chibi"));
-		
-		//unstable cubes
-		registerBlockItems(r, UNSTABLE_CUBES.values());
-		
-		//clearly
-		registerBlockItems(r, CLEARLY);
-		
-		//computer
-		registerBlockItems(r, DATA_PRISM, DATA_STORAGE, MATCHER_LENS, NUMBER_LENS, NEGATORY_LENS);
 	}
 	
-	private static void registerBlockItems(BiConsumer<Item, ResourceLocation> r, BlockItem... bis) {
+	private static void registerBlockItems(BiConsumer<Item, ResourceLocation> r, Collection<BlockItem> bis) {
 		for(BlockItem bi : bis) {
 			//TODO: this needed?
 			Item.BY_BLOCK.put(bi.getBlock(), bi);
 			r.accept(bi, Registry.BLOCK.getKey(bi.getBlock()));
 		}
-	}
-	
-	//ah, java.
-	//never change
-	private static void registerBlockItems(BiConsumer<Item, ResourceLocation> r, Collection<BlockItem> bis) {
-		registerBlockItems(r, bis.toArray(BlockItem[]::new));
 	}
 	
 	private static Item.Properties props() {
