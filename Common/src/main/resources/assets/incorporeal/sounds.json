@@ -2,15 +2,5 @@
 	"unstable": {
 		"sounds": ["incorporeal:unstable"],
 		"subtitle": "incorporeal.subtitle.unstable"
-	},
-	"retainer_evaporator_click": {
-		"sounds": [
-			{
-				"type": "event",
-				"name": "minecraft:block.lever.click",
-				"volume": 0.3
-			}
-		],
-		"subtitle": "incorporeal.subtitle.retainer_evaporator_click"
 	}
 }

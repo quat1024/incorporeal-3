@@ -36,12 +36,6 @@ public class IncCommonRecipeGen {
 			.define("F", Items.ITEM_FRAME)
 			.save(files);
 		
-		//Corporea Retainer Evaporator
-		RecipeDsl.shaped(IncBlocks.CORPOREA_RETAINER_EVAPORATOR, "P P", "PCP", "P P")
-			.define("P", ModFluffBlocks.bluePavement)
-			.define("C", ModItems.corporeaSpark)
-			.save(files);
-		
 		//Sanvocalia
 		RecipeDsl.apothecary(IncBlocks.SANVOCALIA)
 			.addPetals(DyeColor.WHITE, DyeColor.ORANGE, DyeColor.ORANGE, DyeColor.RED)

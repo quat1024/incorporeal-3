@@ -26,7 +26,6 @@ public class IncItems {
 	public static final BlockItem CORPOREA_SOLIDIFIER = new BlockItem(IncBlocks.CORPOREA_SOLIDIFIER, props());
 	public static final BlockItem RED_STRING_LIAR = new BlockItem(IncBlocks.RED_STRING_LIAR, props());
 	public static final BlockItem FRAME_TINKERER = new BlockItem(IncBlocks.FRAME_TINKERER, props());
-	public static final BlockItem CORPOREA_RETAINER_EVAPORATOR = new BlockItem(IncBlocks.CORPOREA_RETAINER_EVAPORATOR, props());
 	
 	//soul cores
 	public static final BlockItem ENDER_SOUL_CORE = new IncBlockItemWithTEISR(IncBlocks.ENDER_SOUL_CORE, props());
@@ -71,7 +70,7 @@ public class IncItems {
 		//generic blockitems
 		registerBlockItems(r, List.of(
 			//corporetics
-			CORPOREA_SOLIDIFIER, RED_STRING_LIAR, FRAME_TINKERER, CORPOREA_RETAINER_EVAPORATOR,
+			CORPOREA_SOLIDIFIER, RED_STRING_LIAR, FRAME_TINKERER,
 			//soul cores
 			ENDER_SOUL_CORE, POTION_SOUL_CORE,
 			//natural devices

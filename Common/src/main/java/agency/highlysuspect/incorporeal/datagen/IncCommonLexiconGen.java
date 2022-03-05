@@ -64,15 +64,6 @@ public class IncCommonLexiconGen {
 			.save(generator, files);
 		
 		//Ender
-		PatchouliEntryBuilder corporeaRetainerEvaporator = builder("ender/corporea_retainer_evaporator")
-			.nameAndIcon(IncBlocks.CORPOREA_RETAINER_EVAPORATOR)
-			.enderCategory()
-			.elven()
-			.text("The $(item)Corporea Retainer Evaporator$(0) is an addon to the $(item)Corporea Retainer$(0), similar to how the $(item)Corporea Retainer$(0) is itself an addon for the $(item)Corporea Interceptor$(0). When the $(item)Corporea Retainer Evaporator$(0) receives a redstone signal, the item counts of all stored requests in adjacent $(item)Corporea Retainers$(0) will decrease by 1.")
-			.text("Note that this process is destructive; powering the $(item)Corporea Retainer$(0) after decrementing its request size will cause it to perform a request of the new size. Using multiple retainers off of the same $(item)Corporea Interceptor$(0) could prove useful.")
-			.crafting(IncBlocks.CORPOREA_RETAINER_EVAPORATOR, "But enough about me, let's kill You!!")
-			.save(generator, files);
-		
 		PatchouliEntryBuilder corporeaSolidifier = builder("ender/corporea_solidifier")
 			.nameAndIcon(IncBlocks.CORPOREA_SOLIDIFIER)
 			.enderCategory()

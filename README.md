@@ -9,7 +9,6 @@ Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-f
 
 * corporea solidifier
 * corporea ticket
-* corporea retainer evaporator
 * red string liar
 * item frame tinkerer
 * unstable cubes
@@ -44,9 +43,13 @@ Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-f
   * I want to go in a different direction
   * will be integrated into the main addon, and not its own thing
 * Corporea Soul Core
-  * I still like this idea a lot, but want to make it much cheaper to access
-  * (tentatively) Just put a corporea spark on a player head
+  * I still like this idea a lot, so I made it much cheaper to access
+  * Just put a corporea spark on a player head
   * ...This could go in Botania
+* Corporea Retainer Evaporator
+  * Obsoleted by using two corporea retainers set to the new "Retain Missing" mode and pingponging a request between them
+  * I love this mechanic sooooo much lmao
+  * Also obsoleted by computermod (when i impl that)
 
 # Build information
 

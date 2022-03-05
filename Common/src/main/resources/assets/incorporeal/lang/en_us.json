@@ -10,7 +10,6 @@
 	"block.incorporeal.corporea_solidifier": "Corporea Solidifier",
 	"block.incorporeal.red_string_liar": "Red Stringed Liar",
 	"block.incorporeal.frame_tinkerer": "Frame Tinkerer",
-	"block.incorporeal.corporea_retainer_evaporator": "Corporea Retainer Evaporator",
 	
 	"block.incorporeal.black_unstable_cube": "Black Unstable Cube",
 	"block.incorporeal.red_unstable_cube": "Red Unstable Cube",
@@ -78,7 +77,6 @@
 	"incorporeal.empty_matcher": "Nothing",
 	
 	"incorporeal.subtitle.unstable": "Unstable Cube chimes",
-	"incorporeal.subtitle.retainer_evaporator_click": "Corporea Retainer Evaporator clicks",
 	
 	"zzzzzz.incorporeal.en-us-rewriter.marker.zzzzzz": "(AUTOMATICALLY GENERATED LANG ENTIRES BELOW THIS LINE - NO TOUCHY)",
 	"incorporeal.lexicon.devices.frame_tinkerer.0.text": "The $(item)Frame Tinkerer$(0) is an indispensible tool for any advanced corporeticist, or really anyone who likes to redecorate often. It acts like a $(item)Spark Tinkerer$(0) - drop an item on it, give it a redstone signal, and the item will change places with one in a random nearby $(item)Item Frame$(0).",
@@ -89,9 +87,6 @@
 	"incorporeal.lexicon.functional_flowers.funny.2.text": "The other modders make me dance to the funny flower and shout go little dragon go",
 	"incorporeal.lexicon.functional_flowers.sanvocalia.0.text": "The $(item)Sanvocalia$(0) is a flower especially attuned to corporetic frequencies. When this flower has $(item)Mana$(0) available and is near a $(item)Corporea Index$(0), it will whisper the requests written on nearby $(item)Corporea Tickets$(0) to the $(item)Index$(0).<br><br>Tickets can be created with a $(item)Corporea Solidifier$(0) or a $(item)Ticker Conjurer$(0).",
 	"incorporeal.lexicon.functional_flowers.sanvocalia.1.text": "Do you still remember?",
-	"incorporeal.lexicon.ender.corporea_retainer_evaporator.0.text": "The $(item)Corporea Retainer Evaporator$(0) is an addon to the $(item)Corporea Retainer$(0), similar to how the $(item)Corporea Retainer$(0) is itself an addon for the $(item)Corporea Interceptor$(0). When the $(item)Corporea Retainer Evaporator$(0) receives a redstone signal, the item counts of all stored requests in adjacent $(item)Corporea Retainers$(0) will decrease by 1.",
-	"incorporeal.lexicon.ender.corporea_retainer_evaporator.1.text": "Note that this process is destructive; powering the $(item)Corporea Retainer$(0) after decrementing its request size will cause it to perform a request of the new size. Using multiple retainers off of the same $(item)Corporea Interceptor$(0) could prove useful.",
-	"incorporeal.lexicon.ender.corporea_retainer_evaporator.2.text": "But enough about me, let's kill You!!",
 	"incorporeal.lexicon.ender.corporea_solidifier.0.text": "The $(item)Corporea Solidifier$(0) acts as a replacement for the $(item)Corporea Retainer$(0). When placed next to a $(item)Corporea Interceptor$(0), the $(item)Corporea Solidifier$(0), instead of remembering the interceptor's request, will create a $(thing)Corporea Ticket$(0) containing the item and item count of the request.",
 	"incorporeal.lexicon.ender.corporea_solidifier.1.text": "The $(thing)Corporea Ticket$(0) will be placed in an inventory one or two blocks below the $(item)Solidifier$(0), or placed on-top of none are available, much like a $(item)Corporea Funnel$(0).<br><br>The $(item)Sanvocalia$(0) functional flower seems to be particularly interested in the energies in these $(thing)Corporea Tickets$(0).",
 	"incorporeal.lexicon.ender.corporea_solidifier.2.text": "Up, up, down, up",
