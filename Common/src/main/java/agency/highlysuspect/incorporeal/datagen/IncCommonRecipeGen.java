@@ -5,12 +5,16 @@ import agency.highlysuspect.incorporeal.item.IncItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import vazkii.botania.common.block.ModBlocks;
 import vazkii.botania.common.item.ModItems;
 import vazkii.botania.common.lib.ModTags;
 
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class IncCommonRecipeGen {
 	public static void doIt(DataGenerator datagen, Consumer<JsonFile> files) {
@@ -104,5 +108,11 @@ public class IncCommonRecipeGen {
 			.add(ModItems.manaweaveCloth, 2)
 			.add(ModItems.bloodPendant)
 			.save(files);
+		
+		//Compressed Tiny Potatoes
+		List<Block> sequence = Stream.concat(Stream.of(ModBlocks.tinyPotato), IncBlocks.COMPRESSED_TATERS.values().stream()).collect(Collectors.toList());
+		for(int i = 1; i < sequence.size(); i++) {
+			RecipeDsl.compress(sequence.get(i - 1), sequence.get(i)).save(files);
+		}
 	}
 }

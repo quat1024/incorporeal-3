@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "incorporeal:double_compressed_tiny_potato"
+    }
+  },
+  "result": {
+    "item": "incorporeal:triple_compressed_tiny_potato"
+  }
+}

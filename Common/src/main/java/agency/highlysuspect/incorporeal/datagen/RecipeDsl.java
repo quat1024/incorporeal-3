@@ -41,6 +41,10 @@ public class RecipeDsl {
 		return shapeless(out, 1);
 	}
 	
+	public static NiceShapedRecipeBuilder compress(ItemLike in, ItemLike out) {
+		return shaped(out, "###", "###", "###").define("#", in);
+	}
+	
 	public static NiceShapelessRecipeBuilder floatingFlower(ItemLike notFloating, ItemLike floating) {
 		return shapeless(floating).add(notFloating).add(ModTags.Items.FLOATING_FLOWERS);
 	}

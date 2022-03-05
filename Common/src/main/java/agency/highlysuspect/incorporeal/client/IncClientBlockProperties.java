@@ -31,6 +31,8 @@ public class IncClientBlockProperties {
 		r.accept(IncBlocks.FUNNY_SMALL, cutout);
 		r.accept(IncBlocks.FLOATING_FUNNY, cutout);
 		r.accept(IncBlocks.FLOATING_FUNNY_SMALL, cutout);
+		
+		for(Block b : IncBlocks.COMPRESSED_TATERS.values()) r.accept(b, cutout);
 	}
 	
 	public static void registerBlockEntityRenderers(EntityRenderers.BERConsumer r) {

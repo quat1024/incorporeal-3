@@ -12,8 +12,12 @@
 		"TileCorporeaIndexInputHandlerMixin",
 		"ItemFrameAccessor",
 		"ModItemsMixin",
+		"ModTilesMixin",
 		"FarmBlockMixin",
 		"DataGeneratorMixin"
+	],
+	"client": [
+		"RenderTileTinyPotatoMixin"
 	],
 	"package": "agency.highlysuspect.incorporeal.mixin",
 	"required": true

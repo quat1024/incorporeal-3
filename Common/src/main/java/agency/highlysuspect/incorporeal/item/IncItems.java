@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.item;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.Tupling;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.Registry;
@@ -8,7 +9,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import vazkii.botania.common.item.block.ItemBlockSpecialFlower;
+import vazkii.botania.common.item.block.ItemBlockTinyPotato;
 
 import java.util.Collection;
 import java.util.List;
@@ -53,6 +56,11 @@ public class IncItems {
 	//Clearly
 	public static final BlockItem CLEARLY = new BlockItem(IncBlocks.CLEARLY, props());
 	
+	//taters
+	public static final Map<Tupling, ItemBlockTinyPotato> COMPRESSED_TATERS = Inc.octupleCompressed(
+		tupling -> new ItemBlockTinyPotato(IncBlocks.COMPRESSED_TATERS.get(tupling),
+			props().rarity(tupling == Tupling.OCTUPLE ? Rarity.EPIC : Rarity.UNCOMMON)));
+	
 	//computer
 	public static final BlockItem DATA_PRISM = new BlockItem(IncBlocks.DATA_PRISM, props());
 	public static final BlockItem DATA_STORAGE = new BlockItem(IncBlocks.DATA_STORAGE, props());
@@ -84,6 +92,9 @@ public class IncItems {
 		//unstable cubes
 		registerBlockItems(r, UNSTABLE_CUBES.values());
 		
+		//taters
+		registerBlockItems(r, COMPRESSED_TATERS.values());
+		
 		//flowers
 		r.accept(SANVOCALIA, Inc.id("sanvocalia"));
 		r.accept(SANVOCALIA_SMALL, Inc.id("sanvocalia_chibi"));
@@ -96,7 +107,7 @@ public class IncItems {
 		r.accept(FLOATING_FUNNY_SMALL, Inc.id("floating_funny_chibi"));
 	}
 	
-	private static void registerBlockItems(BiConsumer<Item, ResourceLocation> r, Collection<BlockItem> bis) {
+	private static void registerBlockItems(BiConsumer<Item, ResourceLocation> r, Collection<? extends BlockItem> bis) {
 		for(BlockItem bi : bis) {
 			//TODO: this needed?
 			Item.BY_BLOCK.put(bi.getBlock(), bi);

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:quadruple_compressed_tiny_potato"
+    ]
+  },
+  "criteria": {
+    "triple_compressed_tiny_potato": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "incorporeal:triple_compressed_tiny_potato"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:quadruple_compressed_tiny_potato"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "triple_compressed_tiny_potato",
+      "has_the_recipe"
+    ]
+  ]
+}

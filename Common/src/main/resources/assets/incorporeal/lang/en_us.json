@@ -48,6 +48,16 @@
 	"block.incorporeal.clearly": "clearly",
 	"block.incorporeal.clearly.fryer": "You do not own an air fryer",
 	
+	"block.incorporeal.single_compressed_tiny_potato": "Little Potato",
+	"block.incorporeal.double_compressed_tiny_potato": "Small Potato",
+	"block.incorporeal.triple_compressed_tiny_potato": "Medium Potato",
+	"block.incorporeal.quadruple_compressed_tiny_potato": "Jumbo Potato",
+	"block.incorporeal.quintuple_compressed_tiny_potato": "Immense Potato",
+	"block.incorporeal.sextuple_compressed_tiny_potato": "Enormous Potato",
+	"block.incorporeal.septuple_compressed_tiny_potato": "Colossal Potato",
+	"block.incorporeal.octuple_compressed_tiny_potato": "Galactic Potato",
+	"block.incorporeal.compressed_tiny_potatoes.tooltip": "%s Tiny Potatoes",
+	
 	"incorporeal.solidified_request": "%sx %s",
 	"incorporeal.solidified_request.count_only": "%sx ",
 	"incorporeal.request.anything": "Anything",

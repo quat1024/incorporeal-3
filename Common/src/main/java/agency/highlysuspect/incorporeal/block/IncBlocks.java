@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.Tupling;
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.computer.DataLens;
 import agency.highlysuspect.incorporeal.computer.DataPrismBlock;
@@ -63,6 +64,12 @@ public class IncBlocks {
 	//clearly
 	public static final Block CLEARLY = new ClearlyBlock(Properties.of(Material.METAL).sound(SoundType.NETHER_SPROUTS).strength(1f));
 	
+	//taters
+	public static final Map<Tupling, CompressedTinyPotatoBlock> COMPRESSED_TATERS = Inc.octupleCompressed(tupling ->
+		new CompressedTinyPotatoBlock(tupling, Properties.copy(ModBlocks.tinyPotato)
+			.noOcclusion() //octuple tater is a full-block square on the bottom and it culls stuff lmao
+			.strength(tupling.level() / 2f)));
+	
 	//computer
 	public static final DataPrismBlock DATA_PRISM = new DataPrismBlock(Properties.of(Material.METAL).noOcclusion());
 	public static final DataStorageBlock DATA_STORAGE = new DataStorageBlock(Properties.of(Material.METAL).noOcclusion());
@@ -101,6 +108,9 @@ public class IncBlocks {
 		
 		//clearly
 		r.accept(CLEARLY, Inc.id("clearly"));
+		
+		//taters
+		COMPRESSED_TATERS.forEach((tupling, block) -> r.accept(block, Inc.id(tupling.compressedPrefix("tiny_potato"))));
 		
 		//computer
 		r.accept(DATA_PRISM, Inc.id("data_prism"));
