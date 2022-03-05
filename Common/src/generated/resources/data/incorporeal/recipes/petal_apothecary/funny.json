@@ -1,0 +1,29 @@
+{
+  "type": "botania:petal_apothecary",
+  "output": {
+    "item": "incorporeal:funny"
+  },
+  "ingredients": [
+    {
+      "tag": "botania:petals/red"
+    },
+    {
+      "tag": "botania:petals/orange"
+    },
+    {
+      "tag": "botania:petals/yellow"
+    },
+    {
+      "tag": "botania:petals/lime"
+    },
+    {
+      "tag": "botania:petals/light_blue"
+    },
+    {
+      "tag": "botania:petals/purple"
+    },
+    {
+      "item": "botania:redstone_root"
+    }
+  ]
+}

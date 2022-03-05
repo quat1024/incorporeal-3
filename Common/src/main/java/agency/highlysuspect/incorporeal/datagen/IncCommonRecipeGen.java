@@ -3,6 +3,7 @@ package agency.highlysuspect.incorporeal.datagen;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.item.IncItems;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import vazkii.botania.common.block.ModBlocks;
@@ -40,6 +41,24 @@ public class IncCommonRecipeGen {
 			.define("P", ModFluffBlocks.bluePavement)
 			.define("C", ModItems.corporeaSpark)
 			.save(files);
+		
+		//Sanvocalia
+		RecipeDsl.apothecary(IncBlocks.SANVOCALIA)
+			.addPetals(DyeColor.WHITE, DyeColor.ORANGE, DyeColor.ORANGE, DyeColor.RED)
+			.add(ModItems.runeLust)
+			.add(ModItems.pixieDust)
+			.add(ModItems.redstoneRoot)
+			.save(files);
+		
+		//Funny
+		RecipeDsl.apothecary(IncBlocks.FUNNY)
+			.addPetals(DyeColor.RED, DyeColor.ORANGE, DyeColor.YELLOW, DyeColor.LIME, DyeColor.LIGHT_BLUE, DyeColor.PURPLE)
+			.add(ModItems.redstoneRoot)
+			.save(files);
+		
+		//X -> Mini X
+		RecipeDsl.miniFlower(IncBlocks.SANVOCALIA, IncBlocks.SANVOCALIA_SMALL).save(files);
+		RecipeDsl.miniFlower(IncBlocks.FUNNY, IncBlocks.FUNNY_SMALL).save(files);
 		
 		//X -> Floating X
 		RecipeDsl.floatingFlower(IncBlocks.SANVOCALIA, IncBlocks.FLOATING_SANVOCALIA).save(files);

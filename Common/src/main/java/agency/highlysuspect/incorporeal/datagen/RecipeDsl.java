@@ -49,6 +49,18 @@ public class RecipeDsl {
 		return RunicAltarRecipeBuilder.create(out, mana);
 	}
 	
+	public static PetalApothecaryRecipeBuilder apothecary(ItemLike out) {
+		return PetalApothecaryRecipeBuilder.create(out);
+	}
+	
+	public static ManaInfusionRecipeBuilder infusion(ItemLike out, int mana) {
+		return ManaInfusionRecipeBuilder.create(out, mana);
+	}
+	
+	public static ManaInfusionRecipeBuilder miniFlower(ItemLike big, ItemLike small) {
+		return infusion(small, 2500).input(big).alchemyCatalyst().group("botania:flower_shrinking");
+	}
+	
 	/// Some builders ///
 	
 	//wrapper of ShapedRecipeBuilder that automatically adds advancement criteria for each recipe ingredient, and plugs into the JsonFile ecosystem.

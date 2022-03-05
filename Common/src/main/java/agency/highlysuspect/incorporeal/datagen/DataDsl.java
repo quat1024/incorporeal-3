@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 /**
  * Pile of utilities for writing datagens that create serverside data.
@@ -37,6 +38,14 @@ public class DataDsl {
 	public static ResourceLocation notAir(ResourceLocation in) {
 		if(in.equals(AIR)) throw new IllegalArgumentException("minecraft:air");
 		else return in;
+	}
+	
+	public static ResourceLocation mapPath(ResourceLocation in, UnaryOperator<String> mapper) {
+		return new ResourceLocation(in.getNamespace(), mapper.apply(in.getPath()));
+	}
+	
+	public static ResourceLocation prefixPath(ResourceLocation in, String pathPrefix) {
+		return new ResourceLocation(in.getNamespace(), pathPrefix + in.getPath());
 	}
 	
 	/// Simple data provider interface ///
