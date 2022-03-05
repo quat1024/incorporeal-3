@@ -11,7 +11,7 @@
     },
     {
       "type": "botania:petal_apothecary",
-      "recipe": "incorporeal:sanvocalia",
+      "recipe": "incorporeal:petal_apothecary/sanvocalia",
       "text": "incorporeal.lexicon.functional_flowers.sanvocalia.1.text"
     },
     {

@@ -247,18 +247,18 @@ public class PatchouliEntryBuilder {
 		return recipe("botania:runic_altar", recipeId, text);
 	}
 	
-	//and some helpers that assume the recipe ID is the same as the item ID
+	//Some helpers that assume the recipe ID is in a conventional location
 	//(maybe plugging into the recipe datagen to get a better heuristic for that would be nice :eyes:)
 	public PatchouliEntryBuilder crafting(ItemLike thing, String text) {
 		return crafting(Registry.ITEM.getKey(thing.asItem()).toString(), text);
 	}
 	
 	public PatchouliEntryBuilder petalApothecary(ItemLike thing, String text) {
-		return petalApothecary(Registry.ITEM.getKey(thing.asItem()).toString(), text);
+		return petalApothecary(DataDsl.prefixPath(Registry.ITEM.getKey(thing.asItem()), "petal_apothecary").toString(), text);
 	}
 	
 	public PatchouliEntryBuilder runicAltar(ItemLike thing, String text) {
-		return runicAltar(Registry.ITEM.getKey(thing.asItem()).toString(), text);
+		return runicAltar(DataDsl.prefixPath(Registry.ITEM.getKey(thing.asItem()), "runic_altar").toString(), text);
 	}
 	
 	//the special botania:crafting_multi page

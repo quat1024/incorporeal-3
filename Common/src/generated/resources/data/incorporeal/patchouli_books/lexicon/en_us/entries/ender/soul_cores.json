@@ -19,7 +19,7 @@
     },
     {
       "type": "botania:runic_altar",
-      "recipe": "incorporeal:soul_core_frame",
+      "recipe": "incorporeal:runic_altar/soul_core_frame",
       "text": "incorporeal.lexicon.ender.soul_cores.3.text"
     },
     {
@@ -28,7 +28,7 @@
     },
     {
       "type": "botania:runic_altar",
-      "recipe": "incorporeal:ender_soul_core",
+      "recipe": "incorporeal:runic_altar/ender_soul_core",
       "text": "incorporeal.lexicon.ender.soul_cores.5.text"
     },
     {

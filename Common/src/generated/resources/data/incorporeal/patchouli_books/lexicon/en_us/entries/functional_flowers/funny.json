@@ -14,7 +14,7 @@
     },
     {
       "type": "botania:petal_apothecary",
-      "recipe": "incorporeal:funny",
+      "recipe": "incorporeal:petal_apothecary/funny",
       "text": "incorporeal.lexicon.functional_flowers.funny.2.text"
     }
   ],

@@ -45,7 +45,7 @@ public class DataDsl {
 	}
 	
 	public static ResourceLocation prefixPath(ResourceLocation in, String pathPrefix) {
-		return new ResourceLocation(in.getNamespace(), pathPrefix + in.getPath());
+		return new ResourceLocation(in.getNamespace(), pathPrefix + '/' + in.getPath());
 	}
 	
 	/// Simple data provider interface ///
