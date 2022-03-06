@@ -2,8 +2,9 @@
   "replace": false,
   "values": [
     "incorporeal:red_string_liar",
-    "incorporeal:clearly",
+    "incorporeal:ender_soul_core",
     "minecraft:player_head",
-    "minecraft:player_wall_head"
+    "minecraft:player_wall_head",
+    "incorporeal:clearly"
   ]
 }

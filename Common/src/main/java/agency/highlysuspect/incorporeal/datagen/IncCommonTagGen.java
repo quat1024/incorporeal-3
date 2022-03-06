@@ -17,8 +17,14 @@ public class IncCommonTagGen {
 		
 		//corporea spark override
 		DataDsl.blockTag(ModTags.Blocks.CORPOREA_SPARK_OVERRIDE)
-			.addBlocks(IncBlocks.RED_STRING_LIAR, IncBlocks.CLEARLY, Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD)
-			.save(files);
+			.addBlocks(
+				//things that aren't real inventories per se
+				IncBlocks.RED_STRING_LIAR, IncBlocks.ENDER_SOUL_CORE,
+				//for the "sparks on player heads" access control mechanic
+				Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD,
+				//literally no reason
+				IncBlocks.CLEARLY
+			).save(files);
 		
 		//functional special flowers
 		DataDsl.blockAndItemTag(ModTags.Blocks.FUNCTIONAL_SPECIAL_FLOWERS).add(

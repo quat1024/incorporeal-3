@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal;
 
+import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
 import agency.highlysuspect.incorporeal.computer.DataTypes;
 import agency.highlysuspect.incorporeal.corporea.AndingCorporeaRequestMatcher;
@@ -32,17 +33,14 @@ public class Inc {
 	
 	//Called after Botania's initializer on Fabric and in CommonInit on forge
 	public static void registerExtraThings() {
-		//empty matcher (matches no items)
+		//corporea matchers
 		CorporeaHelper.instance().registerRequestMatcher(id("empty"), EmptyCorporeaRequestMatcher.class, __ -> EmptyCorporeaRequestMatcher.INSTANCE);
-		
-		//invertedmatcher (matches everything its child matcher doesn't)
 		CorporeaHelper.instance().registerRequestMatcher(id("not"), InvertedCorporeaRequestMatcher.class, InvertedCorporeaRequestMatcher::readFromNBT);
-		
-		//andingmatcher (matches everything all of its submatchers would)
 		CorporeaHelper.instance().registerRequestMatcher(id("and"), AndingCorporeaRequestMatcher.class, AndingCorporeaRequestMatcher::readFromNbt);
 		
-		//red stringed liar's corporea node detector
+		//corporea node detectors
 		CorporeaNodeDetectors.register(new RedStringLiarBlockEntity.NodeDetector());
+		CorporeaNodeDetectors.register(new EnderSoulCoreBlockEntity.NodeDetector());
 		
 		//computer stuff
 		DataTypes.registerBuiltinTypes();

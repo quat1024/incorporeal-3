@@ -25,10 +25,9 @@ Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-f
 ## Things left to do
 
 * ticket conjurer's HUD overlay when you're holding one
-* properly impl potion soul core
-* properly impl ender soul core
+* Impl ender soul core on Forge
+* Make the potion soul core actually work !
 * properly impl red string liar..?
-* working item models for compressed taters (SUUUPER ANNOYING) (I HATE BAKEDMODELS)
 
 ## Things left to design and write
 
