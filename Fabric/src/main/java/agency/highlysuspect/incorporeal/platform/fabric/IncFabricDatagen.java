@@ -3,6 +3,7 @@ package agency.highlysuspect.incorporeal.platform.fabric;
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.datagen.DataDsl;
 import agency.highlysuspect.incorporeal.datagen.IncCommonBlockLootGen;
+import agency.highlysuspect.incorporeal.datagen.IncCommonModelsAndBlockstates;
 import agency.highlysuspect.incorporeal.datagen.IncCommonRecipeGen;
 import agency.highlysuspect.incorporeal.datagen.IncCommonTagGen;
 import agency.highlysuspect.incorporeal.datagen.IncCommonLexiconGen;
@@ -27,5 +28,6 @@ public class IncFabricDatagen implements DataGeneratorEntrypoint {
 		DataDsl.addProvider(gen, "Incorporeal block and item tags", IncCommonTagGen::doIt);
 		DataDsl.addProvider(gen, "Incorporeal recipes", IncCommonRecipeGen::doIt);
 		DataDsl.addProvider(gen, "Incorporeal Lexica Botania entries", IncCommonLexiconGen::doIt);
+		DataDsl.addProvider(gen, "Incorporeal blockstates and block models", IncCommonModelsAndBlockstates::doIt);
 	}
 }

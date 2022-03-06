@@ -1,24 +1,31 @@
 package agency.highlysuspect.incorporeal.block.entity;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.PlayerEnderChestContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
+import vazkii.botania.api.corporea.ICorporeaNode;
+import vazkii.botania.api.corporea.ICorporeaNodeDetector;
+import vazkii.botania.api.corporea.ICorporeaRequest;
+import vazkii.botania.api.corporea.ICorporeaSpark;
+import vazkii.botania.common.impl.corporea.AbstractCorporeaNode;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * The Ender Soul Core block entity. Provides block-level access to the owner's ender chest container.
- * That's the idea, anyways. It's a little unfinished.
  */
-public class EnderSoulCoreBlockEntity extends AbstractSoulCoreBlockEntity implements Container {
+public class EnderSoulCoreBlockEntity extends AbstractSoulCoreBlockEntity {
 	public EnderSoulCoreBlockEntity(BlockPos pos, BlockState state) {
 		super(IncBlockEntityTypes.ENDER_SOUL_CORE, pos, state);
 	}
 	
-	//updated once per tick
 	private @Nullable PlayerEnderChestContainer enderChest = null;
 	
 	@Override
@@ -31,49 +38,88 @@ public class EnderSoulCoreBlockEntity extends AbstractSoulCoreBlockEntity implem
 		enderChest = findPlayer().map(ServerPlayer::getEnderChestInventory).orElse(null);
 	}
 	
-	@Override
-	public int getContainerSize() {
-		return 27;
+	/**
+	 * Drain mana according to how many items were removed.
+	 */
+	public void trackItemMovement(int itemCount) {
+		drainMana(5 * itemCount);
 	}
 	
-	@SuppressWarnings("SimplifiableConditionalExpression")
-	@Override
-	public boolean isEmpty() {
-		return enderChest != null ? enderChest.isEmpty() : true;
+	/**
+	 * Updated once per tick.
+	 */
+	public @Nullable PlayerEnderChestContainer getEnderChest() {
+		return enderChest;
 	}
 	
-	@Override
-	public ItemStack getItem(int i) {
-		return enderChest != null ? enderChest.getItem(i) : ItemStack.EMPTY; 
-	}
-	
-	@Override
-	public ItemStack removeItem(int i, int i1) {
-		return enderChest != null ? enderChest.removeItem(i, i1) : ItemStack.EMPTY;
-	}
-	
-	@Override
-	public ItemStack removeItemNoUpdate(int i) {
-		return enderChest != null ? enderChest.removeItemNoUpdate(i) : ItemStack.EMPTY;
-	}
-	
-	@Override
-	public void setItem(int i, ItemStack itemStack) {
-		if(enderChest != null) enderChest.setItem(i, itemStack);
-	}
-	
-	@Override
-	public boolean stillValid(Player player) {
-		return true;
-	}
-	
-	@Override
-	public void clearContent() {
-		//No. Lol
-	}
-	
-	@Override
-	public int getMaxStackSize() {
-		return enderChest != null ? enderChest.getMaxStackSize() : 1;
+	public static class NodeDetector implements ICorporeaNodeDetector {
+		@Nullable
+		@Override
+		public ICorporeaNode getNode(Level world, ICorporeaSpark spark) {
+			EnderSoulCoreBlockEntity be = IncBlockEntityTypes.ENDER_SOUL_CORE.getBlockEntity(world, spark.getAttachPos());
+			if(be == null) return null;
+			else return new Node(be, world, spark.getAttachPos(), spark);
+		}
+		
+		public static class Node extends AbstractCorporeaNode {
+			public Node(EnderSoulCoreBlockEntity be, Level world, BlockPos pos, ICorporeaSpark spark) {
+				super(world, pos, spark);
+				this.be = be;
+			}
+			
+			private final EnderSoulCoreBlockEntity be;
+			
+			@Override
+			public List<ItemStack> countItems(ICorporeaRequest request) {
+				PlayerEnderChestContainer container = be.getEnderChest();
+				if(container == null) return Collections.emptyList();
+				else return iterateOverSlots(container, request, false);
+			}
+			
+			@Override
+			public List<ItemStack> extractItems(ICorporeaRequest request) {
+				PlayerEnderChestContainer container = be.getEnderChest();
+				if(container == null) return Collections.emptyList();
+				
+				List<ItemStack> extracted = iterateOverSlots(container, request, true);
+				for(ItemStack stack : extracted) be.trackItemMovement(stack.getCount()); //pay for the items
+				return extracted;
+			}
+			
+			//BotaniaCopy: VanillaCorporeaNode
+			protected List<ItemStack> iterateOverSlots(Container inv, ICorporeaRequest request, boolean doit) {
+				ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
+				
+				for (int i = inv.getContainerSize() - 1; i >= 0; i--) {
+					ItemStack stackAt = inv.getItem(i);
+					if (request.getMatcher().test(stackAt)) {
+						request.trackFound(stackAt.getCount());
+						
+						int rem = Math.min(stackAt.getCount(), request.getStillNeeded() == -1 ? stackAt.getCount() : request.getStillNeeded());
+						if (rem > 0) {
+							request.trackSatisfied(rem);
+							
+							if (doit) {
+								ItemStack copy = stackAt.copy();
+								copy.setCount(rem);
+								if (getSpark().isCreative()) {
+									builder.add(copy);
+								} else {
+									builder.addAll(breakDownBigStack(inv.removeItem(i, rem)));
+								}
+								getSpark().onItemExtracted(copy);
+								request.trackExtracted(rem);
+							} else {
+								ItemStack copy = stackAt.copy();
+								copy.setCount(rem);
+								builder.add(copy);
+							}
+						}
+					}
+				}
+				
+				return builder.build();
+			}
+		}
 	}
 }

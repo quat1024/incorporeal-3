@@ -1,8 +1,0 @@
-{
-	"parent": "incorporeal:block/natural_devices/natural_comparator",
-	"textures": {
-		"top": "incorporeal:block/natural_devices/top/comparator_lit",
-		"torch_front": "incorporeal:block/natural_devices/torch_lit",
-		"torch_back": "incorporeal:block/natural_devices/torch_lit"
-	}
-}

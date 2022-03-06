@@ -1,13 +1,14 @@
 package agency.highlysuspect.incorporeal.block;
 
+import agency.highlysuspect.incorporeal.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.Tupling;
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.computer.DataLens;
 import agency.highlysuspect.incorporeal.computer.DataPrismBlock;
 import agency.highlysuspect.incorporeal.computer.DataStorageBlock;
 import agency.highlysuspect.incorporeal.computer.LensBlock;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
@@ -20,6 +21,7 @@ import vazkii.botania.common.block.BlockSpecialFlower;
 import vazkii.botania.common.block.ModBlocks;
 import vazkii.botania.common.block.ModSubtiles;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
@@ -65,10 +67,15 @@ public class IncBlocks {
 	public static final Block CLEARLY = new ClearlyBlock(Properties.of(Material.METAL).sound(SoundType.NETHER_SPROUTS).strength(1f));
 	
 	//taters
-	public static final Map<Tupling, CompressedTinyPotatoBlock> COMPRESSED_TATERS = Inc.octupleCompressed(tupling ->
-		new CompressedTinyPotatoBlock(tupling, Properties.copy(ModBlocks.tinyPotato)
-			.noOcclusion() //octuple tater is a full-block square on the bottom and it culls stuff lmao
-			.strength(tupling.level() / 2f)));
+	public static final Map<Integer, CompressedTinyPotatoBlock> COMPRESSED_TATERS = new LinkedHashMap<>();
+	static {
+		CompressedTaterUtil.prefixes.keySet().forEach(level -> {
+			float strength = Mth.clamp(level / 2f, 0.3f, 4f);
+			COMPRESSED_TATERS.put(level, new CompressedTinyPotatoBlock(level, Properties.copy(ModBlocks.tinyPotato)
+				.noOcclusion()
+				.strength(strength)));
+		});
+	}
 	
 	//computer
 	public static final DataPrismBlock DATA_PRISM = new DataPrismBlock(Properties.of(Material.METAL).noOcclusion());
@@ -110,7 +117,7 @@ public class IncBlocks {
 		r.accept(CLEARLY, Inc.id("clearly"));
 		
 		//taters
-		COMPRESSED_TATERS.forEach((tupling, block) -> r.accept(block, Inc.id(tupling.compressedPrefix("tiny_potato"))));
+		COMPRESSED_TATERS.forEach((level, block) -> r.accept(block, Inc.id(CompressedTaterUtil.prefix(level, "tiny_potato"))));
 		
 		//computer
 		r.accept(DATA_PRISM, Inc.id("data_prism"));

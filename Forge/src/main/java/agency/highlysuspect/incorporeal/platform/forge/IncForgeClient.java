@@ -1,11 +1,8 @@
 package agency.highlysuspect.incorporeal.platform.forge;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.client.IncClientBlockProperties;
-import agency.highlysuspect.incorporeal.client.IncClientEntityProperties;
-import agency.highlysuspect.incorporeal.client.IncClientItemProperties;
-import agency.highlysuspect.incorporeal.client.IncClientLayerDefinitions;
 import agency.highlysuspect.incorporeal.client.IncClientNetwork;
+import agency.highlysuspect.incorporeal.client.IncClientProperties;
 import com.google.common.base.Suppliers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -34,25 +31,25 @@ public class IncForgeClient {
 		
 		yes.addListener((ModelRegistryEvent e) -> {
 			//item property overrides
-			IncClientItemProperties.registerPropertyOverrides((item, id, prop) -> ItemProperties.register(item.asItem(), id, prop));
+			IncClientProperties.registerPropertyOverrides((item, id, prop) -> ItemProperties.register(item.asItem(), id, prop));
 			
 			//block render layers
-			IncClientBlockProperties.registerRenderTypes(ItemBlockRenderTypes::setRenderLayer);
+			IncClientProperties.registerRenderTypes(ItemBlockRenderTypes::setRenderLayer);
 		});
 		
 		yes.addListener((EntityRenderersEvent.RegisterRenderers e) -> {
 			//block entity renderers
-			IncClientBlockProperties.registerBlockEntityRenderers(e::registerBlockEntityRenderer);
+			IncClientProperties.registerBlockEntityRenderers(e::registerBlockEntityRenderer);
 			
 			//entity renderers
-			IncClientEntityProperties.registerEntityRenderers(e::registerEntityRenderer);
+			IncClientProperties.registerEntityRenderers(e::registerEntityRenderer);
 			
 			//(builtin item renderers handled a different way)
 		});
 		
 		yes.addListener((EntityRenderersEvent.RegisterLayerDefinitions e) -> {
 			//(block/)entity model layer definitions
-			IncClientLayerDefinitions.register(e::registerLayerDefinition);
+			IncClientProperties.registerLayerDefinitions(e::registerLayerDefinition);
 		});
 		
 		//Lazily copy pasted from Botania as usual
@@ -72,7 +69,7 @@ public class IncForgeClient {
 	//Lazily copy pasted from Botania as usual
 	private static final Supplier<Map<BlockEntityType<?>, Function<BlockEntity, IWandHUD>>> incWandHuds = Suppliers.memoize(() -> {
 		Map<BlockEntityType<?>, Function<BlockEntity, IWandHUD>> map = new IdentityHashMap<>();
-		IncClientBlockProperties.registerWandHudCaps((factory, types) -> {
+		IncClientProperties.registerWandHudCaps((factory, types) -> {
 			for(BlockEntityType<?> type : types) {
 				map.put(type, factory);
 			}

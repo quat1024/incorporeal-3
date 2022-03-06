@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:tater/uncompress_-1"
+    ]
+  },
+  "criteria": {
+    "tiny_potato": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "botania:tiny_potato"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:tater/uncompress_-1"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "tiny_potato",
+      "has_the_recipe"
+    ]
+  ]
+}

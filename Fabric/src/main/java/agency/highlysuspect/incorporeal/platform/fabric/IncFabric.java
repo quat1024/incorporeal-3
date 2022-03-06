@@ -11,6 +11,7 @@ import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.platform.fabric.mixin.FabricFabricCommonInitializerMixin;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import vazkii.botania.api.BotaniaFabricCapabilities;
@@ -43,8 +44,16 @@ public class IncFabric implements ModInitializer {
 		//sound events
 		IncSounds.register((sound, name) -> Registry.register(Registry.SOUND_EVENT, name, sound));
 		
+		//Capabilities
+		registerCapabilities();
+		
 		incInit = true;
 		afterBotania();
+	}
+	
+	@SuppressWarnings("UnstableApiUsage")
+	public void registerCapabilities() {
+		ItemStorage.SIDED.registerForBlockEntity(EnderSoulCoreStorage::new, IncBlockEntityTypes.ENDER_SOUL_CORE);
 	}
 	
 	/**

@@ -14,7 +14,8 @@
 		"ModItemsMixin",
 		"ModTilesMixin",
 		"FarmBlockMixin",
-		"DataGeneratorMixin"
+		"DataGeneratorMixin",
+		"TextureSlotAccessor"
 	],
 	"client": [
 		"RenderTileTinyPotatoMixin"

@@ -1,11 +1,9 @@
 package agency.highlysuspect.incorporeal.block;
 
-import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.Tupling;
+import agency.highlysuspect.incorporeal.CompressedTaterUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -29,24 +27,23 @@ import vazkii.botania.common.block.tile.TileTinyPotato;
 import java.util.List;
 
 public class CompressedTinyPotatoBlock extends BlockTinyPotato {
-	public CompressedTinyPotatoBlock(Tupling tupling, Properties builder) {
+	public CompressedTinyPotatoBlock(int compressionLevel, Properties builder) {
 		super(builder);
-		this.tupling = tupling;
+		this.compressionLevel = compressionLevel;
 		
-		float radius = tupling.getTaterRadius();
+		float radius = CompressedTaterUtil.taterRadius(compressionLevel);
 		float height = radius * 3;
 		shape = Shapes.box(.5 - radius, 0, .5 - radius, .5 + radius, height, .5 + radius);
 	}
 	
-	public final Tupling tupling;
+	public final int compressionLevel;
 	public final VoxelShape shape;
 	
 	public static final int TATERS_PER_COMPRESSION_LEVEL = 9; //todo maybe make this configurable lmao
 	
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag piss) {
-		String niceCount = String.format("%,d", tupling.count(TATERS_PER_COMPRESSION_LEVEL));
-		tooltip.add(new TranslatableComponent("block.incorporeal.compressed_tiny_potatoes.tooltip", niceCount));
+		tooltip.add(CompressedTaterUtil.formatCount(compressionLevel, TATERS_PER_COMPRESSION_LEVEL));
 		
 		super.appendHoverText(stack, level, tooltip, piss);
 	}

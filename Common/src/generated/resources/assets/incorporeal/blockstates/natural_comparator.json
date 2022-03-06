@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,powered=false,sensitive=false": {
+      "y": 90,
+      "model": "incorporeal:block/natural_devices/natural_comparator_unlit"
+    },
+    "facing=east,powered=false,sensitive=true": {
+      "y": 90,
+      "model": "incorporeal:block/natural_devices/natural_comparator_sensitive_unlit"
+    },
+    "facing=east,powered=true,sensitive=false": {
+      "y": 90,
+      "model": "incorporeal:block/natural_devices/natural_comparator_lit"
+    },
+    "facing=east,powered=true,sensitive=true": {
+      "y": 90,
+      "model": "incorporeal:block/natural_devices/natural_comparator_sensitive_lit"
+    },
+    "facing=north,powered=false,sensitive=false": {
+      "model": "incorporeal:block/natural_devices/natural_comparator_unlit"
+    },
+    "facing=north,powered=false,sensitive=true": {
+      "model": "incorporeal:block/natural_devices/natural_comparator_sensitive_unlit"
+    },
+    "facing=north,powered=true,sensitive=false": {
+      "model": "incorporeal:block/natural_devices/natural_comparator_lit"
+    },
+    "facing=north,powered=true,sensitive=true": {
+      "model": "incorporeal:block/natural_devices/natural_comparator_sensitive_lit"
+    },
+    "facing=south,powered=false,sensitive=false": {
+      "y": 180,
+      "model": "incorporeal:block/natural_devices/natural_comparator_unlit"
+    },
+    "facing=south,powered=false,sensitive=true": {
+      "y": 180,
+      "model": "incorporeal:block/natural_devices/natural_comparator_sensitive_unlit"
+    },
+    "facing=south,powered=true,sensitive=false": {
+      "y": 180,
+      "model": "incorporeal:block/natural_devices/natural_comparator_lit"
+    },
+    "facing=south,powered=true,sensitive=true": {
+      "y": 180,
+      "model": "incorporeal:block/natural_devices/natural_comparator_sensitive_lit"
+    },
+    "facing=west,powered=false,sensitive=false": {
+      "y": 270,
+      "model": "incorporeal:block/natural_devices/natural_comparator_unlit"
+    },
+    "facing=west,powered=false,sensitive=true": {
+      "y": 270,
+      "model": "incorporeal:block/natural_devices/natural_comparator_sensitive_unlit"
+    },
+    "facing=west,powered=true,sensitive=false": {
+      "y": 270,
+      "model": "incorporeal:block/natural_devices/natural_comparator_lit"
+    },
+    "facing=west,powered=true,sensitive=true": {
+      "y": 270,
+      "model": "incorporeal:block/natural_devices/natural_comparator_sensitive_lit"
+    }
+  }
+}

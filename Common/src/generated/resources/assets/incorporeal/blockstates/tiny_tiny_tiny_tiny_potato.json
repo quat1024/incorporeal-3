@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "incorporeal:block/tiny_tiny_tiny_tiny_potato",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "incorporeal:block/tiny_tiny_tiny_tiny_potato"
+    },
+    "facing=south": {
+      "model": "incorporeal:block/tiny_tiny_tiny_tiny_potato",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "incorporeal:block/tiny_tiny_tiny_tiny_potato",
+      "y": 270
+    }
+  }
+}

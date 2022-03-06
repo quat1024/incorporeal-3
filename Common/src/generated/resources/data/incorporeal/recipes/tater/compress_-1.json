@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "incorporeal:tiny_tiny_potato"
+    }
+  },
+  "result": {
+    "item": "botania:tiny_potato"
+  }
+}

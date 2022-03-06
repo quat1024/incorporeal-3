@@ -15,7 +15,7 @@ Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-f
 * Sanvocalia
 * The funny
 * natural redstone circuitry
-* ender soul core, kind of??
+* ender soul core
 * the datapack and lexicon
 * redstone root crop
 * corporea soul core's *mechanic* (now just a corporea spark on player head), not the block itself
@@ -24,14 +24,24 @@ Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-f
 
 ## Things left to do
 
-* ticket conjurer's HUD overlay when you're holding one
-* properly impl potion soul core
-* properly impl ender soul core
-* properly impl red string liar..?
+* Item and block renderers for the Soul Cores
+* Make the potion soul core actually work !
+* Ticket conjurer HUD overlay when you're holding one
+* Give the Red String liar a look, idk if it's implemented correctly
+* Finish computer mod
+* release:)
 
-## Things left to design and write
+## Things to think about adding (low priority)
 
-* Computer mod :)
+* Things that help you visualize a corporea network better
+  * More wand HUDs
+  * More manaseer monocle HUDs
+
+* Assorted Botania-related pointless fluff ("botanextras")
+  * Potted taters
+  * Those weird "red string decorative" blocks from incorporeal 1
+  * Funny dirt
+  * Petal block variants (slabs/stairs, maybe other decorative things)
 
 ## Things that will not be ported
 
