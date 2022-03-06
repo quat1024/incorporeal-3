@@ -3,6 +3,7 @@ package agency.highlysuspect.incorporeal.platform.forge;
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncSounds;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
+import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
 import agency.highlysuspect.incorporeal.corporea.PlayerHeadHandler;
 import agency.highlysuspect.incorporeal.entity.IncEntityTypes;
 import agency.highlysuspect.incorporeal.item.FracturedSpaceRodItem;
@@ -11,6 +12,7 @@ import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -20,6 +22,7 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -61,6 +64,9 @@ public class IncForge {
 		//Awful networking crap that i dont need any of on fabric because fabric has a reasonable networking api
 		IncForgeNetworking.init();
 		
+		//block entity capabilities
+		MinecraftForge.EVENT_BUS.addGenericListener(BlockEntity.class, IncForge::blockEntityCapabilities);
+		
 		//some other stuff (not different between loaders)
 		FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> Inc.registerExtraThings());
 	}
@@ -75,6 +81,14 @@ public class IncForge {
 					forgeRegistry.register(t);
 				});
 			});
+	}
+	
+	private static void blockEntityCapabilities(AttachCapabilitiesEvent<BlockEntity> event) {
+		BlockEntity be = event.getObject();
+		if(be.getType() == IncBlockEntityTypes.ENDER_SOUL_CORE && be instanceof EnderSoulCoreBlockEntity esc) {
+			event.addCapability(Inc.id("inventory"), CapabilityUtil.makeProvider(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
+				new EnderSoulCoreItemHandler(esc)));
+		}
 	}
 	
 	private static void itemCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
