@@ -1,6 +1,8 @@
 package agency.highlysuspect.incorporeal.datagen;
 
+import agency.highlysuspect.incorporeal.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.block.CompressedTinyPotatoBlock;
 import agency.highlysuspect.incorporeal.block.CrappyComparatorBlock;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.block.RedstoneRootCropBlock;
@@ -8,6 +10,7 @@ import agency.highlysuspect.incorporeal.item.IncItems;
 import agency.highlysuspect.incorporeal.mixin.TextureSlotAccessor;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.models.blockstates.BlockStateGenerator;
@@ -119,11 +122,24 @@ public class IncCommonModelsAndBlockstates {
 		singleVariantCubeColumn(IncBlocks.CLEARLY, Inc.id("block/clearly"), Inc.id("black"));
 		itemBlockModelParent(IncBlocks.CLEARLY);
 		
-		/// Taters (Temporary for now maybe) ///
-		for(Block tater : IncBlocks.COMPRESSED_TATERS.values()) {
-			stateGenerators.add(MultiVariantGenerator.multiVariant(tater, modelv(ModelLocationUtils.getModelLocation(ModBlocks.tinyPotato)))
+		/// Taters ///
+		for(CompressedTinyPotatoBlock tater : IncBlocks.COMPRESSED_TATERS.values()) {
+			ResourceLocation modelId = ModelLocationUtils.getModelLocation(tater);
+			
+			//Manually produce a tato model. Set the parent to the botania tiny potato model
+			JsonObject json = new JsonObject();
+			json.addProperty("parent", ModelLocationUtils.getModelLocation(ModBlocks.tinyPotato).toString());
+			
+			//Customize the transforms to make it bigger or smaller :)
+			ItemTransforms transforms = ItemTransformUtil.scaleItemTransforms(ItemTransformUtil.BLOCK_BLOCK, CompressedTaterUtil.taterScaleFactor(tater.compressionLevel));
+			json.add("display", ItemTransformUtil.toJson(transforms));
+			
+			//Write the model and a blockstate pointing to the model
+			modelOutput.accept(modelId, () -> json);
+			stateGenerators.add(MultiVariantGenerator.multiVariant(tater, modelv(modelId))
 				.with(AccessorBlockModelGenerators.horizontalDispatch()));
-			itemBlockModelParent(tater, ModBlocks.tinyPotato);
+			//Write an item model pointing at it
+			itemDelegatedTo(tater, modelId);
 		}
 		
 		/// Computer ///
