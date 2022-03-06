@@ -3,7 +3,9 @@ package agency.highlysuspect.incorporeal.datagen;
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.CrappyComparatorBlock;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
+import agency.highlysuspect.incorporeal.block.RedstoneRootCropBlock;
 import agency.highlysuspect.incorporeal.item.IncItems;
+import agency.highlysuspect.incorporeal.mixin.TextureSlotAccessor;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.core.Registry;
@@ -28,6 +30,7 @@ import vazkii.botania.mixin.AccessorBlockModelGenerators;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -42,11 +45,11 @@ public class IncCommonModelsAndBlockstates {
 	private static final BiConsumer<ResourceLocation, Supplier<JsonElement>> modelOutput = models::put;
 	
 	public static void doIt(DataGenerator generator, Consumer<JsonFile> files) {
-		//Simple items
+		/// Simple items ///
 		itemGenerated(IncItems.FRACTURED_SPACE_ROD, Inc.id("item/fractured_space_rod/tex"));
 		itemGenerated(IncItems.TICKET_CONJURER, Inc.id("item/ticket_conjurer/tex"));
 		
-		//Corporetics
+		/// Corporetics ///
 		singleVariantCubeColumn(IncBlocks.CORPOREA_SOLIDIFIER,
 			Inc.id("block/corporea_solidifier/side"),
 			Inc.id("block/corporea_solidifier/top_bottom")
@@ -63,7 +66,7 @@ public class IncCommonModelsAndBlockstates {
 		redString(IncBlocks.RED_STRING_LIAR, Inc.id("block/red_string_liar/side"));
 		itemBlockModelParent(IncBlocks.RED_STRING_LIAR);
 		
-		//Soul cores
+		/// Soul cores ///
 		singleVariantParticleOnly(IncBlocks.ENDER_SOUL_CORE, Inc.id("entity/ender_soul_core"));
 		itemBlockRotationsBuiltinEntity(IncBlocks.ENDER_SOUL_CORE);
 		singleVariantParticleOnly(IncBlocks.POTION_SOUL_CORE, Inc.id("entity/potion_soul_core"));
@@ -71,54 +74,61 @@ public class IncCommonModelsAndBlockstates {
 		
 		itemBlockRotationsBuiltinEntity(IncItems.SOUL_CORE_FRAME);
 		
-		//Natural devices
-		//(blockmodels are defined manually at the moment)
+		/// Natural devices ///
+		//Redstone root crop
+		TextureSlot TX_HAT = txslot("hat");
+		ModelTemplate shortCrossWithHat = template(Inc.id("block/natural_devices/short_cross_with_hat"), TextureSlot.CROSS, TX_HAT);
+		stateGenerators.add(MultiVariantGenerator.multiVariant(IncBlocks.REDSTONE_ROOT_CROP).with(PropertyDispatch.property(RedstoneRootCropBlock.AGE).generate(age -> modelv(shortCrossWithHat.create(
+			Inc.id("block/natural_devices/crop_" + age),
+			txmap(
+				TextureSlot.CROSS, Inc.id("block/natural_devices/cross/" + (age >= 4 ? "large" : "small")),
+				TX_HAT, Inc.id("block/natural_devices/top/growing_" + age)
+			), modelOutput)))));
+		
+		//Natural repeater
 		stateGenerators.add(MultiVariantGenerator.multiVariant(IncBlocks.NATURAL_REPEATER)
 			.with(AccessorBlockModelGenerators.horizontalDispatch())
 			.with(PropertyDispatch.property(BlockStateProperties.POWERED)
-				.select(false, modelv(Inc.id("block/natural_devices/natural_repeater_unlit")))
-				.select(true , modelv(Inc.id("block/natural_devices/natural_repeater_lit")))));
-		itemDelegatedTo(IncBlocks.NATURAL_REPEATER, Inc.id("block/natural_devices/natural_repeater_unlit"));
+				.generate(powered -> modelv(naturalRepeaterModel(powered)))));
+		itemDelegatedTo(IncBlocks.NATURAL_REPEATER, naturalRepeaterModel(false));
 		
+		//Natural comparator
 		stateGenerators.add(MultiVariantGenerator.multiVariant(IncBlocks.NATURAL_COMPARATOR)
 			.with(AccessorBlockModelGenerators.horizontalDispatch())
 			.with(PropertyDispatch.properties(BlockStateProperties.POWERED, CrappyComparatorBlock.SENSITIVE)
-				.select(false, false, modelv(Inc.id("block/natural_devices/natural_comparator_unlit")))
-				.select(false, true , modelv(Inc.id("block/natural_devices/natural_comparator_sensitive_unlit")))
-				.select(true , false, modelv(Inc.id("block/natural_devices/natural_comparator_lit")))
-				.select(true , true , modelv(Inc.id("block/natural_devices/natural_comparator_sensitive_lit")))));
-		itemDelegatedTo(IncBlocks.NATURAL_COMPARATOR, Inc.id("block/natural_devices/natural_comparator_unlit"));
+				.generate((powered, sensitive) -> modelv(naturalComparatorModel(powered, sensitive)))));
+		itemDelegatedTo(IncBlocks.NATURAL_COMPARATOR, naturalComparatorModel(false, false));
 		
-		//Flowers
-		flower(IncBlocks.SANVOCALIA, Inc.id("block/sanvocalia/big"));
-		flower(IncBlocks.SANVOCALIA_SMALL, Inc.id("block/sanvocalia/small"));
-		flower(IncBlocks.FUNNY, Inc.id("block/funny/thisissosad"));
-		flower(IncBlocks.FUNNY_SMALL, Inc.id("block/funny/alexaplaydespacito"));
-		floatingFlower(IncBlocks.FLOATING_SANVOCALIA, IncBlocks.SANVOCALIA);
-		floatingFlower(IncBlocks.FLOATING_SANVOCALIA_SMALL, IncBlocks.SANVOCALIA_SMALL);
-		floatingFlower(IncBlocks.FLOATING_FUNNY, IncBlocks.FUNNY);
-		floatingFlower(IncBlocks.FLOATING_FUNNY_SMALL, IncBlocks.FUNNY_SMALL);
+		/// Flowers ///
+		flowerWithItemModel(IncBlocks.SANVOCALIA, Inc.id("block/sanvocalia/big"));
+		flowerWithItemModel(IncBlocks.SANVOCALIA_SMALL, Inc.id("block/sanvocalia/small"));
+		flowerWithItemModel(IncBlocks.FUNNY, Inc.id("block/funny/thisissosad"));
+		flowerWithItemModel(IncBlocks.FUNNY_SMALL, Inc.id("block/funny/alexaplaydespacito"));
+		floatingFlowerWithItemModel(IncBlocks.FLOATING_SANVOCALIA, IncBlocks.SANVOCALIA);
+		floatingFlowerWithItemModel(IncBlocks.FLOATING_SANVOCALIA_SMALL, IncBlocks.SANVOCALIA_SMALL);
+		floatingFlowerWithItemModel(IncBlocks.FLOATING_FUNNY, IncBlocks.FUNNY);
+		floatingFlowerWithItemModel(IncBlocks.FLOATING_FUNNY_SMALL, IncBlocks.FUNNY_SMALL);
 		
-		//Unstable cubes
+		/// Unstable cubes ///
 		for(Block cube : IncBlocks.UNSTABLE_CUBES.values()) {
 			singleVariantParticleOnly(cube, Inc.id("entity/unstable_cube"));
 			itemBlockRotationsBuiltinEntity(cube);
 		}
 		
-		//Clearly
+		/// Clearly ///
 		singleVariantCubeColumn(IncBlocks.CLEARLY, Inc.id("block/clearly"), Inc.id("black"));
 		itemBlockModelParent(IncBlocks.CLEARLY);
 		
-		//Taters (Temporary for now maybe)
+		/// Taters (Temporary for now maybe) ///
 		for(Block tater : IncBlocks.COMPRESSED_TATERS.values()) {
 			stateGenerators.add(MultiVariantGenerator.multiVariant(tater, modelv(ModelLocationUtils.getModelLocation(ModBlocks.tinyPotato)))
 				.with(AccessorBlockModelGenerators.horizontalDispatch()));
 			itemBlockModelParent(tater, ModBlocks.tinyPotato);
 		}
 		
-		//Computer
+		/// Computer ///
 		
-		//Aaaand write out all the files now
+		/// Aaaand write out all the files now ///
 		stateGenerators.forEach(stateGenerator -> {
 			ResourceLocation id = DataDsl.notAir(Registry.BLOCK.getKey(stateGenerator.getBlock()));
 			files.accept(JsonFile.create(stateGenerator.get(), "assets", id.getNamespace(), "blockstates", id.getPath()));
@@ -127,6 +137,8 @@ public class IncCommonModelsAndBlockstates {
 		models.forEach((id, elementSupplier) ->
 			files.accept(JsonFile.create(elementSupplier.get(), "assets", id.getNamespace(), "models", id.getPath())));
 	}
+	
+	/// utilities that write out a block model, and a blockstate file that always points at the model ///
 	
 	public static void singleVariantBlockState(Block b, ResourceLocation model) {
 		stateGenerators.add(MultiVariantGenerator.multiVariant(b, Variant.variant().with(VariantProperties.MODEL, model)));
@@ -144,18 +156,20 @@ public class IncCommonModelsAndBlockstates {
 		singleVariantBlockState(b, ModelTemplates.CUBE_COLUMN.create(b, TextureMapping.column(side, end), modelOutput));
 	}
 	
-	public static final ModelTemplate threeHighBottomTopTemplate = new ModelTemplate(Optional.of(Inc.botaniaId("block/shapes/three_high_bottom_top")), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE);
+	public static final ModelTemplate threeHighBottomTopTemplate = template(Inc.botaniaId("block/shapes/three_high_bottom_top"), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE);
 	public static void singleVariantThreeHighBottomTop(Block b, ResourceLocation bottom, ResourceLocation top, ResourceLocation side) {
-		singleVariantBlockState(b, threeHighBottomTopTemplate.create(b, new TextureMapping().put(TextureSlot.BOTTOM, bottom).put(TextureSlot.TOP, top).put(TextureSlot.SIDE, side), modelOutput));
+		singleVariantBlockState(b, threeHighBottomTopTemplate.create(b, txmap(TextureSlot.BOTTOM, bottom, TextureSlot.TOP, top).put(TextureSlot.SIDE, side), modelOutput));
 	}
 	
-	public static final ModelTemplate crossTemplate = new ModelTemplate(Optional.of(Inc.botaniaId("block/shapes/cross")), Optional.empty(), TextureSlot.CROSS);
-	public static void flower(Block b, ResourceLocation texture) {
+	/// generates a flower, and also generates an item model to go with it ///
+	
+	public static final ModelTemplate crossTemplate = template(Inc.botaniaId("block/shapes/cross"), TextureSlot.CROSS);
+	public static void flowerWithItemModel(Block b, ResourceLocation texture) {
 		singleVariantBlockState(b, crossTemplate.create(b, TextureMapping.cross(texture), modelOutput));
 		itemGenerated(b, texture);
 	}
 	
-	public static void floatingFlower(Block floating, Block nonFloating) {
+	public static void floatingFlowerWithItemModel(Block floating, Block nonFloating) {
 		//brittle but might work
 		ResourceLocation floatingModelId = DataDsl.prefixPath(Registry.BLOCK.getKey(floating), "block");
 		ResourceLocation nonFloatingModelId = DataDsl.prefixPath(Registry.BLOCK.getKey(nonFloating), "block");
@@ -177,18 +191,46 @@ public class IncCommonModelsAndBlockstates {
 		itemBlockModelParent(floating);
 	}
 	
+	/// more complicated blockstates ///
+	
 	public static void redString(Block block, ResourceLocation texture) {
-		ResourceLocation front = Inc.botaniaId("block/red_string_sender");
+		ResourceLocation modelId = ModelTemplates.CUBE_ORIENTABLE.create(block, txmap(
+			TextureSlot.TOP, texture,
+			TextureSlot.SIDE, texture,
+			TextureSlot.FRONT, Inc.botaniaId("block/red_string_sender")
+		), modelOutput);
 		
-		ResourceLocation modelId = ModelTemplates.CUBE_ORIENTABLE.create(block, new TextureMapping()
-			.put(TextureSlot.TOP, texture)
-			.put(TextureSlot.SIDE, texture)
-			.put(TextureSlot.FRONT, front), modelOutput);
+		stateGenerators.add(MultiVariantGenerator.multiVariant(block, modelv(modelId)).with(AccessorBlockModelGenerators.facingDispatch()));
+	}
+	
+	public static final TextureSlot TX_TORCH = txslot("torch");
+	public static final ModelTemplate naturalRepeater = template(Inc.id("block/natural_devices/natural_repeater"), TextureSlot.TOP, TX_TORCH);
+	public static ResourceLocation naturalRepeaterModel(boolean lit) {
+		ResourceLocation modelId = Inc.id("block/natural_devices/natural_repeater_" + (lit ? "lit" : "unlit"));
+		ResourceLocation topTexture = Inc.id("block/natural_devices/top/repeater_" + (lit ? "lit" : "unlit"));
 		
-		stateGenerators.add(
-			MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, modelId))
-				.with(AccessorBlockModelGenerators.facingDispatch())
-		);
+		return naturalRepeater.create(modelId, txmap(
+			TextureSlot.TOP, topTexture,
+			TX_TORCH, naturalDeviceTorchTexture(lit)
+		), modelOutput);
+	}
+	
+	public static final TextureSlot TX_TORCH_FRONT = txslot("torch_front");
+	public static final TextureSlot TX_TORCH_BACK = txslot("torch_back");
+	public static final ModelTemplate naturalComparator = template(Inc.id("block/natural_devices/natural_comparator"), TextureSlot.TOP, TX_TORCH_FRONT, TX_TORCH_BACK);
+	public static ResourceLocation naturalComparatorModel(boolean lit, boolean sensitive) {
+		ResourceLocation modelId = Inc.id("block/natural_devices/natural_comparator_" + (sensitive ? "sensitive_" : "") + (lit ? "lit" : "unlit"));
+		ResourceLocation topTexture = Inc.id("block/natural_devices/top/comparator_" + (lit ? "lit" : "unlit"));
+		
+		return naturalComparator.create(modelId, txmap(
+			TextureSlot.TOP, topTexture,
+			TX_TORCH_FRONT, naturalDeviceTorchTexture(sensitive),
+			TX_TORCH_BACK, naturalDeviceTorchTexture(lit)
+		), modelOutput);
+	}
+	
+	public static ResourceLocation naturalDeviceTorchTexture(boolean torchLit) {
+		return Inc.id("block/natural_devices/torch_" + (torchLit ? "lit" : "unlit"));
 	}
 	
 	/// item models ///
@@ -215,7 +257,30 @@ public class IncCommonModelsAndBlockstates {
 	}
 	
 	/// To save typing ///
+	
 	public static Variant modelv(ResourceLocation id) {
 		return Variant.variant().with(VariantProperties.MODEL, id);
+	}
+	
+	public static TextureSlot txslot(String name) {
+		return TextureSlotAccessor.inc$create(name);
+	}
+	
+	//Alternate TextureSlot and ResourceLocation arguments
+	public static TextureMapping txmap(Object... inputs) {
+		TextureMapping mapping = new TextureMapping();
+		
+		Iterator<Object> objerator = List.of(inputs).iterator();
+		while(objerator.hasNext()) {
+			TextureSlot slot = (TextureSlot) objerator.next();
+			ResourceLocation texture = (ResourceLocation) objerator.next(); 
+			mapping = mapping.put(slot, texture);
+		}
+		
+		return mapping;
+	}
+	
+	public static ModelTemplate template(ResourceLocation id, TextureSlot... slots) {
+		return new ModelTemplate(Optional.of(id), Optional.empty(), slots);
 	}
 }
