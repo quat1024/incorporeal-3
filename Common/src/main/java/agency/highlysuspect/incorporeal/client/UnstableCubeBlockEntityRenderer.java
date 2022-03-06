@@ -5,9 +5,12 @@ import agency.highlysuspect.incorporeal.block.entity.UnstableCubeBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.DyeColor;
@@ -22,16 +25,12 @@ import vazkii.botania.client.core.handler.ClientTickHandler;
  */
 public class UnstableCubeBlockEntityRenderer implements BlockEntityRenderer<UnstableCubeBlockEntity> {
 	public UnstableCubeBlockEntityRenderer(DyeColor color, BlockEntityRendererProvider.Context ctx) {
-		model = new UnstableCubeModel(ctx.bakeLayer(IncClientModelLayers.UNSTABLE_CUBE));
-		
 		int colorPacked = color.getFireworkColor();
 		red = ((colorPacked & 0xFF0000) >> 16) / 255f;
 		green = ((colorPacked & 0x00FF00) >> 8) / 255f;
 		blue = (colorPacked & 0x0000FF) / 255f;
 	}
 	
-	private static final ResourceLocation texture = Inc.id("textures/entity/unstable_cube.png");
-	private final UnstableCubeModel model;
 	private final float red, green, blue;
 	
 	@Override
@@ -45,8 +44,14 @@ public class UnstableCubeBlockEntityRenderer implements BlockEntityRenderer<Unst
 			roll(pose, partialTicks, cube.angle, cube.speed, cube.bump, cube.bumpDecay, hash);
 		}
 		
-		VertexConsumer buffer = bufs.getBuffer(model.renderType(texture));
-		model.renderToBuffer(pose, buffer, light, overlay, red, green, blue, 1);
+		// VertexConsumer buffer = bufs.getBuffer(model.renderType(texture));
+		// model.renderToBuffer(pose, buffer, light, overlay, red, green, blue, 1);
+
+		VertexConsumer buffer = bufs.getBuffer(ItemBlockRenderTypes.getRenderType(cube.getBlockState(), false));
+		BakedModel cubeModel = Minecraft.getInstance().getBlockRenderer().getBlockModel(cube.getBlockState());
+		Minecraft.getInstance().getBlockRenderer().getModelRenderer()
+				.renderModel(pose.last(), buffer, cube.getBlockState(),
+						cubeModel, red, green, blue, light, overlay);
 		
 		pose.popPose();
 	}
