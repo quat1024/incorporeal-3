@@ -1,6 +1,6 @@
 {
 	"textures": {
-		"texture": "incorporeal:block/unstable_cube",
+		"texture": "incorporeal:entity/unstable_cube",
 		"particle": "#texture"
 	},
 	"elements": [
