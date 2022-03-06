@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "incorporeal:block/brown_unstable_cube"
+      "model": "incorporeal:block/unstable_cube"
     }
   }
 }

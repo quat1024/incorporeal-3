@@ -114,7 +114,7 @@ public class IncCommonModelsAndBlockstates {
 		
 		/// Unstable cubes ///
 		for(Block cube : IncBlocks.UNSTABLE_CUBES.values()) {
-			singleVariantParticleOnly(cube, Inc.id("entity/unstable_cube"));
+			singleVariantBlockState(cube, Inc.id("block/unstable_cube"));
 			itemBlockRotationsBuiltinEntity(cube);
 		}
 		
