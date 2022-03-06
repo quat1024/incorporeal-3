@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.datagen;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.block.CrappyComparatorBlock;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.item.IncItems;
 import com.google.gson.JsonElement;
@@ -9,6 +10,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.models.blockstates.BlockStateGenerator;
 import net.minecraft.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.data.models.blockstates.Variant;
 import net.minecraft.data.models.blockstates.VariantProperties;
 import net.minecraft.data.models.model.DelegatedModel;
@@ -20,6 +22,7 @@ import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import vazkii.botania.common.block.ModBlocks;
 import vazkii.botania.mixin.AccessorBlockModelGenerators;
 
@@ -39,13 +42,26 @@ public class IncCommonModelsAndBlockstates {
 	private static final BiConsumer<ResourceLocation, Supplier<JsonElement>> modelOutput = models::put;
 	
 	public static void doIt(DataGenerator generator, Consumer<JsonFile> files) {
-		//Corporetics
-		itemBlockModelParent(IncBlocks.CORPOREA_SOLIDIFIER);
-		itemBlockModelParent(IncBlocks.FRAME_TINKERER);
-		itemBlockModelParent(IncBlocks.RED_STRING_LIAR);
-		
+		//Simple items
 		itemGenerated(IncItems.FRACTURED_SPACE_ROD, Inc.id("item/fractured_space_rod/tex"));
 		itemGenerated(IncItems.TICKET_CONJURER, Inc.id("item/ticket_conjurer/tex"));
+		
+		//Corporetics
+		singleVariantCubeColumn(IncBlocks.CORPOREA_SOLIDIFIER,
+			Inc.id("block/corporea_solidifier/side"),
+			Inc.id("block/corporea_solidifier/top_bottom")
+		);
+		itemBlockModelParent(IncBlocks.CORPOREA_SOLIDIFIER);
+		
+		singleVariantThreeHighBottomTop(IncBlocks.FRAME_TINKERER,
+			Inc.id("block/frame_tinkerer/bottom"),
+			Inc.id("block/frame_tinkerer/top"),
+			Inc.id("block/frame_tinkerer/side")
+		);
+		itemBlockModelParent(IncBlocks.FRAME_TINKERER);
+		
+		redString(IncBlocks.RED_STRING_LIAR, Inc.id("block/red_string_liar/side"));
+		itemBlockModelParent(IncBlocks.RED_STRING_LIAR);
 		
 		//Soul cores
 		singleVariantParticleOnly(IncBlocks.ENDER_SOUL_CORE, Inc.id("entity/ender_soul_core"));
@@ -56,7 +72,22 @@ public class IncCommonModelsAndBlockstates {
 		itemBlockRotationsBuiltinEntity(IncItems.SOUL_CORE_FRAME);
 		
 		//Natural devices
-		//(these are done manually at the moment)
+		//(blockmodels are defined manually at the moment)
+		stateGenerators.add(MultiVariantGenerator.multiVariant(IncBlocks.NATURAL_REPEATER)
+			.with(AccessorBlockModelGenerators.horizontalDispatch())
+			.with(PropertyDispatch.property(BlockStateProperties.POWERED)
+				.select(false, modelv(Inc.id("block/natural_devices/natural_repeater_unlit")))
+				.select(true , modelv(Inc.id("block/natural_devices/natural_repeater_lit")))));
+		itemDelegatedTo(IncBlocks.NATURAL_REPEATER, Inc.id("block/natural_devices/natural_repeater_unlit"));
+		
+		stateGenerators.add(MultiVariantGenerator.multiVariant(IncBlocks.NATURAL_COMPARATOR)
+			.with(AccessorBlockModelGenerators.horizontalDispatch())
+			.with(PropertyDispatch.properties(BlockStateProperties.POWERED, CrappyComparatorBlock.SENSITIVE)
+				.select(false, false, modelv(Inc.id("block/natural_devices/natural_comparator_unlit")))
+				.select(false, true , modelv(Inc.id("block/natural_devices/natural_comparator_sensitive_unlit")))
+				.select(true , false, modelv(Inc.id("block/natural_devices/natural_comparator_lit")))
+				.select(true , true , modelv(Inc.id("block/natural_devices/natural_comparator_sensitive_lit")))));
+		itemDelegatedTo(IncBlocks.NATURAL_COMPARATOR, Inc.id("block/natural_devices/natural_comparator_unlit"));
 		
 		//Flowers
 		flower(IncBlocks.SANVOCALIA, Inc.id("block/sanvocalia/big"));
@@ -80,9 +111,8 @@ public class IncCommonModelsAndBlockstates {
 		
 		//Taters (Temporary for now maybe)
 		for(Block tater : IncBlocks.COMPRESSED_TATERS.values()) {
-			stateGenerators.add(MultiVariantGenerator.multiVariant(tater, Variant.variant()
-				.with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(ModBlocks.tinyPotato))
-			).with(AccessorBlockModelGenerators.horizontalDispatch()));
+			stateGenerators.add(MultiVariantGenerator.multiVariant(tater, modelv(ModelLocationUtils.getModelLocation(ModBlocks.tinyPotato)))
+				.with(AccessorBlockModelGenerators.horizontalDispatch()));
 			itemBlockModelParent(tater, ModBlocks.tinyPotato);
 		}
 		
@@ -114,6 +144,11 @@ public class IncCommonModelsAndBlockstates {
 		singleVariantBlockState(b, ModelTemplates.CUBE_COLUMN.create(b, TextureMapping.column(side, end), modelOutput));
 	}
 	
+	public static final ModelTemplate threeHighBottomTopTemplate = new ModelTemplate(Optional.of(Inc.botaniaId("block/shapes/three_high_bottom_top")), Optional.empty(), TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE);
+	public static void singleVariantThreeHighBottomTop(Block b, ResourceLocation bottom, ResourceLocation top, ResourceLocation side) {
+		singleVariantBlockState(b, threeHighBottomTopTemplate.create(b, new TextureMapping().put(TextureSlot.BOTTOM, bottom).put(TextureSlot.TOP, top).put(TextureSlot.SIDE, side), modelOutput));
+	}
+	
 	public static final ModelTemplate crossTemplate = new ModelTemplate(Optional.of(Inc.botaniaId("block/shapes/cross")), Optional.empty(), TextureSlot.CROSS);
 	public static void flower(Block b, ResourceLocation texture) {
 		singleVariantBlockState(b, crossTemplate.create(b, TextureMapping.cross(texture), modelOutput));
@@ -142,6 +177,22 @@ public class IncCommonModelsAndBlockstates {
 		itemBlockModelParent(floating);
 	}
 	
+	public static void redString(Block block, ResourceLocation texture) {
+		ResourceLocation front = Inc.botaniaId("block/red_string_sender");
+		
+		ResourceLocation modelId = ModelTemplates.CUBE_ORIENTABLE.create(block, new TextureMapping()
+			.put(TextureSlot.TOP, texture)
+			.put(TextureSlot.SIDE, texture)
+			.put(TextureSlot.FRONT, front), modelOutput);
+		
+		stateGenerators.add(
+			MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, modelId))
+				.with(AccessorBlockModelGenerators.facingDispatch())
+		);
+	}
+	
+	/// item models ///
+	
 	public static void itemBlockModelParent(Block block) {
 		itemBlockModelParent(block, block);
 	}
@@ -161,5 +212,10 @@ public class IncCommonModelsAndBlockstates {
 	
 	public static void itemGenerated(ItemLike b, ResourceLocation texture) {
 		ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(b.asItem()), TextureMapping.layer0(texture), modelOutput);
+	}
+	
+	/// To save typing ///
+	public static Variant modelv(ResourceLocation id) {
+		return Variant.variant().with(VariantProperties.MODEL, id);
 	}
 }
