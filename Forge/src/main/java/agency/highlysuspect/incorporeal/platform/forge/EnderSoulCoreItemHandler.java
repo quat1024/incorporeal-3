@@ -29,16 +29,16 @@ public record EnderSoulCoreItemHandler(EnderSoulCoreBlockEntity be) implements I
 	@NotNull
 	@Override
 	public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-		ItemStack inserted = getDelegate().insertItem(slot, stack, simulate);
-		if(!simulate) be.trackItemMovement(5 * (stack.getCount() - inserted.getCount()));
-		return inserted;
+		ItemStack leftover = getDelegate().insertItem(slot, stack, simulate);
+		if(!simulate) be.trackItemMovement(stack.getCount() - leftover.getCount());
+		return leftover;
 	}
 	
 	@NotNull
 	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate) {
 		ItemStack extracted = getDelegate().extractItem(slot, amount, simulate);
-		if(!simulate) be.trackItemMovement(5 * extracted.getCount());
+		if(!simulate) be.trackItemMovement(extracted.getCount());
 		return extracted;
 	}
 	
