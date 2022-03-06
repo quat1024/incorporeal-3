@@ -1,0 +1,124 @@
+{
+  "parent": "botania:block/tiny_potato",
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        75.0,
+        45.0,
+        0.0
+      ],
+      "translation": [
+        0.0,
+        7.3,
+        0.0
+      ],
+      "scale": [
+        0.9375,
+        0.9375,
+        0.9375
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75.0,
+        45.0,
+        0.0
+      ],
+      "translation": [
+        0.0,
+        7.3,
+        0.0
+      ],
+      "scale": [
+        0.9375,
+        0.9375,
+        0.9375
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0.0,
+        225.0,
+        0.0
+      ],
+      "translation": [
+        0.0,
+        4.8,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "head": {
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "translation": [
+        0.0,
+        4.8,
+        0.0
+      ],
+      "scale": [
+        2.5,
+        2.5,
+        2.5
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30.0,
+        225.0,
+        0.0
+      ],
+      "translation": [
+        0.0,
+        4.8,
+        0.0
+      ],
+      "scale": [
+        1.5625,
+        1.5625,
+        1.5625
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "translation": [
+        0.0,
+        7.8,
+        0.0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "translation": [
+        0.0,
+        4.8,
+        0.0
+      ],
+      "scale": [
+        1.25,
+        1.25,
+        1.25
+      ]
+    }
+  }
+}

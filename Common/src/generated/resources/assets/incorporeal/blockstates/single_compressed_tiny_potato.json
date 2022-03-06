@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east": {
-      "model": "botania:block/tiny_potato",
+      "model": "incorporeal:block/single_compressed_tiny_potato",
       "y": 90
     },
     "facing=north": {
-      "model": "botania:block/tiny_potato"
+      "model": "incorporeal:block/single_compressed_tiny_potato"
     },
     "facing=south": {
-      "model": "botania:block/tiny_potato",
+      "model": "incorporeal:block/single_compressed_tiny_potato",
       "y": 180
     },
     "facing=west": {
-      "model": "botania:block/tiny_potato",
+      "model": "incorporeal:block/single_compressed_tiny_potato",
       "y": 270
     }
   }
