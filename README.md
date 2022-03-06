@@ -28,6 +28,7 @@ Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-f
 * properly impl potion soul core
 * properly impl ender soul core
 * properly impl red string liar..?
+* working item models for compressed taters (SUUUPER ANNOYING) (I HATE BAKEDMODELS)
 
 ## Things left to design and write
 
