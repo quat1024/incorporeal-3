@@ -29,6 +29,7 @@ public class IncBlocks {
 	//corporetics
 	public static final CorporeaSolidifierBlock CORPOREA_SOLIDIFIER = new CorporeaSolidifierBlock(Properties.copy(ModBlocks.corporeaRetainer));
 	public static final RedStringLiarBlock RED_STRING_LIAR = new RedStringLiarBlock(Properties.copy(ModBlocks.livingrock));
+	public static final RedStringConstrictorBlock RED_STRING_CONSTRICTOR = new RedStringConstrictorBlock(Properties.copy(ModBlocks.livingrock));
 	public static final FrameTinkererBlock FRAME_TINKERER = new FrameTinkererBlock(Properties.copy(Blocks.OAK_PLANKS));
 	
 	//soul cores
@@ -88,6 +89,7 @@ public class IncBlocks {
 		//assorted corporea devices
 		r.accept(CORPOREA_SOLIDIFIER, Inc.id("corporea_solidifier"));
 		r.accept(RED_STRING_LIAR, Inc.id("red_string_liar"));
+		r.accept(RED_STRING_CONSTRICTOR, Inc.id("red_string_constrictor"));
 		r.accept(FRAME_TINKERER, Inc.id("frame_tinkerer"));
 		
 		//soul cores

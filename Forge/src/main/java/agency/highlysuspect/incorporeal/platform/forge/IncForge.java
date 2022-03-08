@@ -4,6 +4,7 @@ import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncSounds;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEntity;
 import agency.highlysuspect.incorporeal.corporea.PlayerHeadHandler;
 import agency.highlysuspect.incorporeal.entity.IncEntityTypes;
 import agency.highlysuspect.incorporeal.item.FracturedSpaceRodItem;
@@ -88,6 +89,8 @@ public class IncForge {
 		if(be.getType() == IncBlockEntityTypes.ENDER_SOUL_CORE && be instanceof EnderSoulCoreBlockEntity esc) {
 			event.addCapability(Inc.id("inventory"), CapabilityUtil.makeProvider(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
 				new EnderSoulCoreItemHandler(esc)));
+		} else if(be.getType() == IncBlockEntityTypes.RED_STRING_CONSTRICTOR && be instanceof RedStringConstrictorBlockEntity rsc) {
+			event.addCapability(Inc.id("magic"), new RedStringConstrictorCapProvider(rsc));
 		}
 	}
 	

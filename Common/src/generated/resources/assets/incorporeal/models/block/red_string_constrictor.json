@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "incorporeal:block/red_string_constrictor/side",
+    "front": "botania:block/red_string_sender",
+    "side": "incorporeal:block/red_string_constrictor/side"
+  }
+}

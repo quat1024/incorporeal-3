@@ -16,6 +16,8 @@ public class IncBlockEntityTypes {
 	//corporetics
 	public static final BlockEntityType<RedStringLiarBlockEntity> RED_STRING_LIAR =
 		IXplatAbstractions.INSTANCE.createBlockEntityType(RedStringLiarBlockEntity::new, IncBlocks.RED_STRING_LIAR);
+	public static final BlockEntityType<RedStringConstrictorBlockEntity> RED_STRING_CONSTRICTOR =
+		IXplatAbstractions.INSTANCE.createBlockEntityType(RedStringConstrictorBlockEntity::new, IncBlocks.RED_STRING_CONSTRICTOR);
 	
 	//soul cores
 	public static final BlockEntityType<EnderSoulCoreBlockEntity> ENDER_SOUL_CORE = 
@@ -49,6 +51,7 @@ public class IncBlockEntityTypes {
 	
 	public static void register(BiConsumer<BlockEntityType<?>, ResourceLocation> r) {
 		r.accept(RED_STRING_LIAR, Inc.id("red_string_liar"));
+		r.accept(RED_STRING_CONSTRICTOR, Inc.id("red_string_constrictor"));
 		
 		r.accept(ENDER_SOUL_CORE, Inc.id("ender_soul_core"));
 		r.accept(POTION_SOUL_CORE, Inc.id("potion_soul_core"));

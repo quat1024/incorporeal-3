@@ -59,15 +59,18 @@ public class IncCommonModelsAndBlockstates {
 		);
 		itemBlockModelParent(IncBlocks.CORPOREA_SOLIDIFIER);
 		
+		redString(IncBlocks.RED_STRING_LIAR, Inc.id("block/red_string_liar/side"));
+		itemBlockModelParent(IncBlocks.RED_STRING_LIAR);
+		
+		redString(IncBlocks.RED_STRING_CONSTRICTOR, Inc.id("block/red_string_constrictor/side"));
+		itemBlockModelParent(IncBlocks.RED_STRING_CONSTRICTOR);
+		
 		singleVariantThreeHighBottomTop(IncBlocks.FRAME_TINKERER,
 			Inc.id("block/frame_tinkerer/bottom"),
 			Inc.id("block/frame_tinkerer/top"),
 			Inc.id("block/frame_tinkerer/side")
 		);
 		itemBlockModelParent(IncBlocks.FRAME_TINKERER);
-		
-		redString(IncBlocks.RED_STRING_LIAR, Inc.id("block/red_string_liar/side"));
-		itemBlockModelParent(IncBlocks.RED_STRING_LIAR);
 		
 		/// Soul cores ///
 		ModelTemplate soulCoreTemplate = template(Inc.id("block/soul_core"), TextureSlot.TEXTURE);

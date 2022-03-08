@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "incorporeal:block/red_string_constrictor",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "incorporeal:block/red_string_constrictor",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "incorporeal:block/red_string_constrictor"
+    },
+    "facing=south": {
+      "model": "incorporeal:block/red_string_constrictor",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "incorporeal:block/red_string_constrictor",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "incorporeal:block/red_string_constrictor",
+      "y": 270
+    }
+  }
+}

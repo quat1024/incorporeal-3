@@ -28,6 +28,7 @@ public class IncItems {
 	//corporetics
 	public static final BlockItem CORPOREA_SOLIDIFIER = new BlockItem(IncBlocks.CORPOREA_SOLIDIFIER, props());
 	public static final BlockItem RED_STRING_LIAR = new BlockItem(IncBlocks.RED_STRING_LIAR, props());
+	public static final BlockItem RED_STRING_CONSTRICTOR = new BlockItem(IncBlocks.RED_STRING_CONSTRICTOR, props());
 	public static final BlockItem FRAME_TINKERER = new BlockItem(IncBlocks.FRAME_TINKERER, props());
 	
 	//soul cores
@@ -80,7 +81,7 @@ public class IncItems {
 		//generic blockitems
 		registerBlockItems(r, List.of(
 			//corporetics
-			CORPOREA_SOLIDIFIER, RED_STRING_LIAR, FRAME_TINKERER,
+			CORPOREA_SOLIDIFIER, RED_STRING_LIAR, RED_STRING_CONSTRICTOR, FRAME_TINKERER,
 			//soul cores
 			ENDER_SOUL_CORE, POTION_SOUL_CORE,
 			//natural devices
