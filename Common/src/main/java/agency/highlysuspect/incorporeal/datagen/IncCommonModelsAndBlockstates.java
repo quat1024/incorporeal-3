@@ -70,18 +70,37 @@ public class IncCommonModelsAndBlockstates {
 		itemBlockModelParent(IncBlocks.RED_STRING_LIAR);
 		
 		/// Soul cores ///
-		
 		ModelTemplate soulCoreTemplate = template(Inc.id("block/soul_core"), TextureSlot.TEXTURE);
 		
+		//TODO: SoulCoreBlockEntityRenderer is set up to be used in an item stack renderer.
+		// However, currently I point all soulcores at the json model that this renderer uses instead
+		// This means they don't orbit and spin in the inventory, but it still looks okay.
+		// The main reason for this compromise is the Soul Core Frame.
+		// - The block entity renderer requires a BakedModel for the cubes model. For the Ender
+		//   and Potion cores, it gets baked by being referred to from their blockmodel, but the Frame
+		//   has no blockmodel, because it is not a block. There are loader APIs to bake additional models,
+		//   but I think getting the model out of BlockEntityRendererProvider.Context will be a headache.
+		// - Special item renderers require their item model to have a parent of builtin/entity. If
+		//   I set the Frame's blockmodel to the json model, I can't write a special renderer for it. I think.
+		// - I am currently not happy with the state of the item renderers in this mod, tbh (I don't like TEISR)
+		//   and would like to fix that before further entrenching myself in it...
+		// 
+		// There is no technical reason for the Ender and Potion cores to not be using the item stack renderer,
+		// but the inconsistency looks weird.
+		
+		//ender
 		singleVariantBlockState(IncBlocks.ENDER_SOUL_CORE,
 			soulCoreTemplate.create(IncBlocks.ENDER_SOUL_CORE, txmap(TextureSlot.TEXTURE, Inc.id("block/soul_cores/ender")), modelOutput));
+		//itemBlockRotationsBuiltinEntity(IncBlocks.ENDER_SOUL_CORE);
 		itemBlockModelParent(IncBlocks.ENDER_SOUL_CORE);
 		
+		//potion
 		singleVariantBlockState(IncBlocks.POTION_SOUL_CORE,
 			soulCoreTemplate.create(IncBlocks.POTION_SOUL_CORE, txmap(TextureSlot.TEXTURE, Inc.id("block/soul_cores/potion")), modelOutput));
+		//itemBlockRotationsBuiltinEntity(IncBlocks.POTION_SOUL_CORE);
 		itemBlockModelParent(IncBlocks.POTION_SOUL_CORE);
 		
-		//this one's not a blockitem
+		//frame
 		soulCoreTemplate.create(ModelLocationUtils.getModelLocation(IncItems.SOUL_CORE_FRAME),
 			txmap(TextureSlot.TEXTURE, Inc.id("block/soul_cores/frame")), modelOutput);
 		
