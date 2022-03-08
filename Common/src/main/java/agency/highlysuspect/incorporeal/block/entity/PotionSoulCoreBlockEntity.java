@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.block.entity;
 
+import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.entity.PotionSoulCoreCollector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;

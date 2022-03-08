@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -14,8 +15,10 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
@@ -44,22 +47,45 @@ public class PotionSoulCoreCollector extends LivingEntity {
 	}
 	
 	@Override
-	public void heal(float $$0) {
-		super.heal($$0);
+	public void heal(float howMuch) {
+		super.heal(howMuch);
+		if(level.isClientSide()) return;
+		
+		Data data = find();
+		if(data == null) {
+			discard();
+			return;
+		}
+		
+		data.player.heal(howMuch);
+		data.be.drainMana(200);
 	}
 	
 	@Override
-	public void baseTick() {
-		//does NOT call super
+	public boolean hurt(DamageSource source, float howMuch) {
+		boolean happened = super.hurt(source, howMuch); //TODO: remove this super call? (will want to fire events on forge)
+		if(happened || level.isClientSide) return happened;
+		
+		Data data = find();
+		if(data == null) {
+			discard();
+			return false;
+		}
+		
+		happened = data.player.hurt(source, howMuch);
+		if(happened) {
+			data.be.drainMana(200);
+			return true;
+		}
+		
+		return false;
 	}
 	
 	@Override
 	public void tick() {
-		//(does NOT call super!!)
-		
 		if(level.isClientSide()) return;
 		
-		//Lock into position etc
+		//Lock into position, etc
 		setDeltaMovement(0, 0, 0);
 		setRot(0, 0);
 		setHealth(getMaxHealth() / 2);
@@ -79,7 +105,7 @@ public class PotionSoulCoreCollector extends LivingEntity {
 			data.be.drainMana(200);
 		}
 		
-		//Clear my potion effects
+		//Clear my own potion effects
 		removeAllEffects(); //nicely
 		getActiveEffects().clear(); //harshly (it's cancellable on forge)
 	}
@@ -93,6 +119,41 @@ public class PotionSoulCoreCollector extends LivingEntity {
 		if(player.isEmpty()) return null;
 		
 		return new Data(be, player.get());
+	}
+	
+	@Override
+	public void knockback(double $$0, double $$1, double $$2) {
+		//nope!
+	}
+	
+	@Override
+	public boolean canBreatheUnderwater() {
+		return true;
+	}
+	
+	@Override
+	protected boolean shouldDropExperience() {
+		return false;
+	}
+	
+	@Override
+	protected boolean shouldDropLoot() {
+		return false;
+	}
+	
+	@Override
+	protected int getExperienceReward(Player $$0) {
+		return 0;
+	}
+	
+	@Override
+	public boolean isInvertedHealAndHarm() {
+		return true; //:eyes:
+	}
+	
+	@Override
+	public MobType getMobType() {
+		return MobType.UNDEAD; //:eyes:
 	}
 	
 	/// livingentity boilerplate ///
@@ -133,11 +194,6 @@ public class PotionSoulCoreCollector extends LivingEntity {
 	}
 	
 	/// entity boilerplate ///
-	
-	@Override
-	protected void defineSynchedData() {
-		//Nothing
-	}
 	
 	@Override
 	public Packet<?> getAddEntityPacket() {
