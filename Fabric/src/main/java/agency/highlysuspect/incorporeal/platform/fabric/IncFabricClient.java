@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
@@ -21,6 +22,9 @@ public class IncFabricClient implements ClientModInitializer {
 		
 		//block render layers
 		IncClientProperties.registerRenderTypes(BlockRenderLayerMap.INSTANCE::putBlock);
+		
+		//block color providers
+		IncClientProperties.registerBlockColorProviders(ColorProviderRegistry.BLOCK::register);
 		
 		//block entity renderers, entity renderers, & builtin item renderers
 		IncClientProperties.registerBlockEntityRenderers(BlockEntityRendererRegistry::register);

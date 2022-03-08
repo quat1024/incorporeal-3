@@ -2,12 +2,11 @@ package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
+import agency.highlysuspect.incorporeal.block.UnstableCubeBlock;
 import agency.highlysuspect.incorporeal.block.entity.AbstractSoulCoreBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.entity.IncEntityTypes;
 import agency.highlysuspect.incorporeal.item.IncItems;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
@@ -16,6 +15,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import vazkii.botania.api.block.IWandHUD;
 import vazkii.botania.api.subtile.TileEntityFunctionalFlower;
+import vazkii.botania.client.render.ColorHandler;
 import vazkii.botania.client.render.entity.EntityRenderers;
 import vazkii.botania.client.render.tile.RenderTileRedString;
 import vazkii.botania.client.render.tile.RenderTileSpecialFlower;
@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class IncClientProperties {
 	//Botania has something like this too, in EntityRenderers, but it's not meant to be extended. So I will reimplement it myself.
@@ -70,6 +69,17 @@ public class IncClientProperties {
 		
 		IncBlockEntityTypes.UNSTABLE_CUBES.forEach((color, type) ->
 			r.register(type, context -> new UnstableCubeBlockEntityRenderer(color, context)));
+	}
+	
+	/// Block color providers ///
+	
+	public static void registerBlockColorProviders(ColorHandler.BlockHandlerConsumer r) {
+		//This does not inform block/item rendering, it uses a block entity renderer,
+		//but it does tint the particles that show up when you break or run around on the blocks
+		r.register((state, level, pos, tintIndex) -> {
+			if(state.getBlock() instanceof UnstableCubeBlock cube) return cube.color.getFireworkColor();
+			else return 0xFFFFFF;
+		}, IncBlocks.UNSTABLE_CUBES.values().toArray(Block[]::new));
 	}
 	
 	/// Item property overrides ///

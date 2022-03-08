@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -37,6 +38,11 @@ public class IncForgeClient {
 			IncClientProperties.registerRenderTypes(ItemBlockRenderTypes::setRenderLayer);
 		});
 		
+		yes.addListener((ColorHandlerEvent.Block e) -> {
+			//block color providers
+			IncClientProperties.registerBlockColorProviders(e.getBlockColors()::register);
+		});
+		
 		yes.addListener((EntityRenderersEvent.RegisterRenderers e) -> {
 			//block entity renderers
 			IncClientProperties.registerBlockEntityRenderers(e::registerBlockEntityRenderer);
@@ -47,6 +53,7 @@ public class IncForgeClient {
 			//(builtin item renderers handled a different way)
 		});
 		
+		//Wand HUD capabilities
 		//Lazily copy pasted from Botania as usual
 		no.addGenericListener(BlockEntity.class, (AttachCapabilitiesEvent<BlockEntity> e) -> {
 			BlockEntity be = e.getObject();
@@ -56,9 +63,8 @@ public class IncForgeClient {
 			}
 		});
 		
-		yes.addListener((FMLCommonSetupEvent shit) -> {
-			IncClientNetwork.initialize();
-		});
+		//forge network channel is set up on both sides simultaneously, but i need to stick this client-side init code somewhere
+		yes.addListener((FMLCommonSetupEvent shit) -> IncClientNetwork.initialize());
 	}
 	
 	//Lazily copy pasted from Botania as usual
