@@ -100,14 +100,4 @@ public class IncClientProperties {
 			IncBlockEntityTypes.FUNNY_BIG,
 			IncBlockEntityTypes.FUNNY_SMALL);
 	}
-	
-	/// Mojang's weird model-layer system ///
-	
-	public static void registerLayerDefinitions(BiConsumer<ModelLayerLocation, Supplier<LayerDefinition>> r) {
-		r.accept(ModelLayers.UNSTABLE_CUBE, () -> LayerDefinition.create(UnstableCubeModel.createMesh(), 32, 16));
-	}
-	
-	public static class ModelLayers {
-		public static final ModelLayerLocation UNSTABLE_CUBE = new ModelLayerLocation(Inc.id("unstable_cube"), "main");
-	}
 }

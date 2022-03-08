@@ -40,9 +40,8 @@ public class UnstableCubeBlockEntityRenderer implements BlockEntityRenderer<Unst
 	@Override
 	public void render(@Nullable UnstableCubeBlockEntity cube, float partialTicks, PoseStack pose, MultiBufferSource bufs, int light, int overlay) {
 		pose.pushPose();
-
+		
 		BlockState blockState;
-
 		if(cube == null) {
 			roll(pose, partialTicks, 0, 0, 0, 0, 0);
 			// So they're not so teeny-tiny in the inventory
@@ -54,9 +53,7 @@ public class UnstableCubeBlockEntityRenderer implements BlockEntityRenderer<Unst
 			blockState = cube.getBlockState();
 		}
 		
-		// VertexConsumer buffer = bufs.getBuffer(model.renderType(texture));
-		// model.renderToBuffer(pose, buffer, light, overlay, red, green, blue, 1);
-
+		//ty artemis for this!
 		VertexConsumer buffer = bufs.getBuffer(ItemBlockRenderTypes.getRenderType(blockState, false));
 		BakedModel cubeModel = Minecraft.getInstance().getBlockRenderer().getBlockModel(blockState);
 		Minecraft.getInstance().getBlockRenderer().getModelRenderer()

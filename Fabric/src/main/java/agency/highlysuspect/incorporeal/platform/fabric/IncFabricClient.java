@@ -19,9 +19,6 @@ public class IncFabricClient implements ClientModInitializer {
 		//item property overrides
 		IncClientProperties.registerPropertyOverrides((item, id, prop) -> FabricModelPredicateProviderRegistry.register(item.asItem(), id, prop));
 		
-		//(block/)entity model layer definitions (new 1.18 thing I think?)
-		IncClientProperties.registerLayerDefinitions((mll, sup) -> EntityModelLayerRegistry.registerModelLayer(mll, sup::get));
-		
 		//block render layers
 		IncClientProperties.registerRenderTypes(BlockRenderLayerMap.INSTANCE::putBlock);
 		

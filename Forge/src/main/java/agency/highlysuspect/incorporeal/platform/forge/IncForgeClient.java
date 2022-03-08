@@ -47,11 +47,6 @@ public class IncForgeClient {
 			//(builtin item renderers handled a different way)
 		});
 		
-		yes.addListener((EntityRenderersEvent.RegisterLayerDefinitions e) -> {
-			//(block/)entity model layer definitions
-			IncClientProperties.registerLayerDefinitions(e::registerLayerDefinition);
-		});
-		
 		//Lazily copy pasted from Botania as usual
 		no.addGenericListener(BlockEntity.class, (AttachCapabilitiesEvent<BlockEntity> e) -> {
 			BlockEntity be = e.getObject();
