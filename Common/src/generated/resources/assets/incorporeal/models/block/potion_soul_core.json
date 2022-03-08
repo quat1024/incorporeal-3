@@ -1,5 +1,6 @@
 {
+  "parent": "incorporeal:block/soul_core",
   "textures": {
-    "particle": "incorporeal:entity/potion_soul_core"
+    "texture": "incorporeal:block/soul_cores/potion"
   }
 }

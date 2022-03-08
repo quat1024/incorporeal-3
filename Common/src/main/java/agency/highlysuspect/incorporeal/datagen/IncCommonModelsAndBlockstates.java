@@ -70,12 +70,20 @@ public class IncCommonModelsAndBlockstates {
 		itemBlockModelParent(IncBlocks.RED_STRING_LIAR);
 		
 		/// Soul cores ///
-		singleVariantParticleOnly(IncBlocks.ENDER_SOUL_CORE, Inc.id("entity/ender_soul_core"));
-		itemBlockRotationsBuiltinEntity(IncBlocks.ENDER_SOUL_CORE);
-		singleVariantParticleOnly(IncBlocks.POTION_SOUL_CORE, Inc.id("entity/potion_soul_core"));
-		itemBlockRotationsBuiltinEntity(IncBlocks.POTION_SOUL_CORE);
 		
-		itemBlockRotationsBuiltinEntity(IncItems.SOUL_CORE_FRAME);
+		ModelTemplate soulCoreTemplate = template(Inc.id("block/soul_core"), TextureSlot.TEXTURE);
+		
+		singleVariantBlockState(IncBlocks.ENDER_SOUL_CORE,
+			soulCoreTemplate.create(IncBlocks.ENDER_SOUL_CORE, txmap(TextureSlot.TEXTURE, Inc.id("block/soul_cores/ender")), modelOutput));
+		itemBlockModelParent(IncBlocks.ENDER_SOUL_CORE);
+		
+		singleVariantBlockState(IncBlocks.POTION_SOUL_CORE,
+			soulCoreTemplate.create(IncBlocks.POTION_SOUL_CORE, txmap(TextureSlot.TEXTURE, Inc.id("block/soul_cores/potion")), modelOutput));
+		itemBlockModelParent(IncBlocks.POTION_SOUL_CORE);
+		
+		//this one's not a blockitem
+		soulCoreTemplate.create(ModelLocationUtils.getModelLocation(IncItems.SOUL_CORE_FRAME),
+			txmap(TextureSlot.TEXTURE, Inc.id("block/soul_cores/frame")), modelOutput);
 		
 		/// Natural devices ///
 		//Redstone root crop

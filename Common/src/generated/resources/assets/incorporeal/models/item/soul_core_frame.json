@@ -1,3 +1,6 @@
 {
-  "parent": "incorporeal:item/block_rotations_builtin_entity"
+  "parent": "incorporeal:block/soul_core",
+  "textures": {
+    "texture": "incorporeal:block/soul_cores/frame"
+  }
 }

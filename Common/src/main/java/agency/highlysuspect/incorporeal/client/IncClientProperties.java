@@ -33,16 +33,23 @@ public class IncClientProperties {
 	public static final Map<Block, Function<Block, TEISR>> BE_ITEM_RENDERER_FACTORIES = new HashMap<>();
 	static {
 		IncBlocks.UNSTABLE_CUBES.forEach((color, cube) -> BE_ITEM_RENDERER_FACTORIES.put(cube, TEISR::new));
+		BE_ITEM_RENDERER_FACTORIES.put(IncBlocks.ENDER_SOUL_CORE, TEISR::new);
+		BE_ITEM_RENDERER_FACTORIES.put(IncBlocks.POTION_SOUL_CORE, TEISR::new);
+		//TODO: soul core frame (cant use TEISR)
 	}
 	
 	/// Block render layers ///
 	
 	public static void registerRenderTypes(BiConsumer<Block, RenderType> r) {
 		RenderType cutout = RenderType.cutout();
+		RenderType translucent = RenderType.translucent();
 		
 		r.accept(IncBlocks.NATURAL_REPEATER, cutout);
 		r.accept(IncBlocks.NATURAL_COMPARATOR, cutout);
 		r.accept(IncBlocks.REDSTONE_ROOT_CROP, cutout);
+		
+		r.accept(IncBlocks.ENDER_SOUL_CORE, translucent);
+		r.accept(IncBlocks.POTION_SOUL_CORE, translucent);
 		
 		r.accept(IncBlocks.SANVOCALIA, cutout);
 		r.accept(IncBlocks.SANVOCALIA_SMALL, cutout);
@@ -61,6 +68,11 @@ public class IncClientProperties {
 	
 	public static void registerBlockEntityRenderers(EntityRenderers.BERConsumer r) {
 		r.register(IncBlockEntityTypes.RED_STRING_LIAR, RenderTileRedString::new);
+		
+		r.register(IncBlockEntityTypes.ENDER_SOUL_CORE, ctx ->
+			new SoulCoreBlockEntityRenderer<>(IncBlocks.ENDER_SOUL_CORE.defaultBlockState(), ctx));
+		r.register(IncBlockEntityTypes.POTION_SOUL_CORE, ctx ->
+			new SoulCoreBlockEntityRenderer<>(IncBlocks.POTION_SOUL_CORE.defaultBlockState(), ctx));
 		
 		r.register(IncBlockEntityTypes.SANVOCALIA_BIG, RenderTileSpecialFlower::new);
 		r.register(IncBlockEntityTypes.SANVOCALIA_SMALL, RenderTileSpecialFlower::new);
