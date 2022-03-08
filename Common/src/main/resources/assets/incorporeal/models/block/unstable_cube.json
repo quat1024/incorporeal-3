@@ -1,0 +1,56 @@
+{
+	"textures": {
+		"texture": "incorporeal:entity/unstable_cube",
+		"particle": "#texture"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 8],
+			"to": [16, 8, 16],
+			"faces": {
+				"up": { "texture": "#texture", "tintindex": 0 },
+				"down": { "texture": "#texture", "tintindex": 0 },
+				"north": { "texture": "#texture", "tintindex": 0 },
+				"south": { "texture": "#texture", "tintindex": 0 },
+				"east": { "texture": "#texture", "tintindex": 0 },
+				"west": { "texture": "#texture", "tintindex": 0 }
+			}
+		},
+		{
+			"from": [8, 0, 0],
+			"to": [16, 8, 8],
+			"faces": {
+				"up": { "texture": "#texture", "tintindex": 0 },
+				"down": { "texture": "#texture", "tintindex": 0 },
+				"north": { "texture": "#texture", "tintindex": 0 },
+				"south": { "texture": "#texture", "tintindex": 0 },
+				"east": { "texture": "#texture", "tintindex": 0 },
+				"west": { "texture": "#texture", "tintindex": 0 }
+			}
+		},
+		{
+			"from": [0, 8, 0],
+			"to": [16, 16, 8],
+			"faces": {
+				"up": { "texture": "#texture", "tintindex": 0 },
+				"down": { "texture": "#texture", "tintindex": 0 },
+				"north": { "texture": "#texture", "tintindex": 0 },
+				"south": { "texture": "#texture", "tintindex": 0 },
+				"east": { "texture": "#texture", "tintindex": 0 },
+				"west": { "texture": "#texture", "tintindex": 0 }
+			}
+		},
+		{
+			"from": [0, 8, 8],
+			"to": [8, 16, 16],
+			"faces": {
+				"up": { "texture": "#texture", "tintindex": 0 },
+				"down": { "texture": "#texture", "tintindex": 0 },
+				"north": { "texture": "#texture", "tintindex": 0 },
+				"south": { "texture": "#texture", "tintindex": 0 },
+				"east": { "texture": "#texture", "tintindex": 0 },
+				"west": { "texture": "#texture", "tintindex": 0 }
+			}
+		}
+	]
+}
