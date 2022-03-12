@@ -1,0 +1,60 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:red_string_constrictor"
+    ]
+  },
+  "criteria": {
+    "livingrock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "botania:livingrock"
+            ]
+          }
+        ]
+      }
+    },
+    "red_string": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "botania:red_string"
+            ]
+          }
+        ]
+      }
+    },
+    "dreamwood_twig": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "botania:dreamwood_twig"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:red_string_constrictor"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "livingrock",
+      "red_string",
+      "dreamwood_twig",
+      "has_the_recipe"
+    ]
+  ]
+}

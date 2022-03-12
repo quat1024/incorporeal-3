@@ -17,6 +17,20 @@
       "type": "patchouli:crafting",
       "recipe": "incorporeal:corporea_solidifier",
       "text": "incorporeal.lexicon.ender.corporea_solidifier.2.text"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexicon.ender.corporea_solidifier.3.text"
+    },
+    {
+      "type": "patchouli:relations",
+      "entries": [
+        "incorporeal:functional_flowers/sanvocalia",
+        "incorporeal:ender/ticket_conjurer",
+        "botania:ender/corporea_interceptor",
+        "botania:ender/corporea_retainer",
+        "botania:ender/corporea_funnel"
+      ]
     }
   ]
 }

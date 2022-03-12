@@ -1,0 +1,28 @@
+{
+  "name": "block.incorporeal.red_string_constrictor",
+  "category": "botania:ender",
+  "icon": "incorporeal:red_string_constrictor",
+  "advancement": "botania:main/elf_lexicon_pickup",
+  "entry_color": "04759e",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexicon.ender.red_string_constrictor.0.text"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "incorporeal:red_string_constrictor",
+      "text": "incorporeal.lexicon.ender.red_string_constrictor.1.text"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexicon.ender.red_string_constrictor.2.text"
+    },
+    {
+      "type": "patchouli:relations",
+      "entries": [
+        "botania:ender/red_string"
+      ]
+    }
+  ]
+}

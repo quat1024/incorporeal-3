@@ -36,12 +36,17 @@
       "text": "incorporeal.lexicon.ender.soul_cores.6.text"
     },
     {
+      "type": "botania:runic_altar",
+      "recipe": "incorporeal:runic_altar/potion_soul_core",
+      "text": "incorporeal.lexicon.ender.soul_cores.7.text"
+    },
+    {
       "type": "patchouli:relations",
       "entries": [
         "incorporeal:misc/corporea_player_heads"
       ],
-      "title": "incorporeal.lexicon.ender.soul_cores.7.title",
-      "text": "incorporeal.lexicon.ender.soul_cores.7.text"
+      "title": "incorporeal.lexicon.ender.soul_cores.8.title",
+      "text": "incorporeal.lexicon.ender.soul_cores.8.text"
     }
   ]
 }

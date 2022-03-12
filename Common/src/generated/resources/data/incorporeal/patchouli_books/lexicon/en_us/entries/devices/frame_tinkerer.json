@@ -9,13 +9,19 @@
       "text": "incorporeal.lexicon.devices.frame_tinkerer.0.text"
     },
     {
-      "type": "patchouli:text",
+      "type": "patchouli:crafting",
+      "recipe": "incorporeal:frame_tinkerer",
       "text": "incorporeal.lexicon.devices.frame_tinkerer.1.text"
     },
     {
-      "type": "patchouli:crafting",
-      "recipe": "incorporeal:frame_tinkerer",
+      "type": "patchouli:text",
       "text": "incorporeal.lexicon.devices.frame_tinkerer.2.text"
+    },
+    {
+      "type": "patchouli:relations",
+      "entries": [
+        "botania:mana/spark_changer"
+      ]
     }
   ]
 }

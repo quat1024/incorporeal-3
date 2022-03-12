@@ -14,11 +14,7 @@ import vazkii.botania.common.block.ModBlocks;
 import vazkii.botania.common.item.ModItems;
 import vazkii.botania.common.lib.ModTags;
 
-import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class IncCommonRecipeGen {
 	public static void doIt(DataGenerator datagen, Consumer<JsonFile> files) {
@@ -48,6 +44,13 @@ public class IncCommonRecipeGen {
 			.define("R", ModBlocks.livingrock)
 			.define("S", ModItems.redString)
 			.define("C", ModBlocks.forestEye)
+			.save(files);
+		
+		//Red Stringed Constrictor
+		RecipeDsl.shaped(IncBlocks.RED_STRING_CONSTRICTOR, "RRR", "RCS", "RRR")
+			.define("R", ModBlocks.livingrock)
+			.define("S", ModItems.redString)
+			.define("C", ModItems.dreamwoodTwig) //I never know which items to use for this stuff.
 			.save(files);
 		
 		//Frame Tinkerer

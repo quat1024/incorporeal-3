@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "RCS",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "botania:livingrock"
+    },
+    "S": {
+      "item": "botania:red_string"
+    },
+    "C": {
+      "item": "botania:dreamwood_twig"
+    }
+  },
+  "result": {
+    "item": "incorporeal:red_string_constrictor"
+  }
+}

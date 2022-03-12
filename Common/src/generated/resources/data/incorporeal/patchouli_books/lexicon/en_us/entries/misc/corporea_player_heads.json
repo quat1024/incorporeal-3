@@ -12,8 +12,8 @@
     {
       "type": "patchouli:relations",
       "entries": [
-        "botania:misc/head_creating",
-        "botania:ender/corporea_index"
+        "botania:ender/corporea_index",
+        "botania:misc/head_creating"
       ],
       "text": "incorporeal.lexicon.misc.corporea_player_heads.1.text"
     },

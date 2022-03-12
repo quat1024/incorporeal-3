@@ -31,9 +31,10 @@ public class IncCommonLexiconGen {
 		PatchouliEntryBuilder frameTinkerer = builder("devices/frame_tinkerer")
 			.nameAndIcon(IncBlocks.FRAME_TINKERER)
 			.devicesCategory()
-			.text("The $(item)Frame Tinkerer$(0) is an indispensible tool for any advanced corporeticist, or really anyone who likes to redecorate often. It acts like a $(item)Spark Tinkerer$(0) - drop an item on it, give it a redstone signal, and the item will change places with one in a random nearby $(item)Item Frame$(0).")
-			.text("Note that it doesn't have a dedicated inventory; just dropping items on top will suffice. They are pushable via $(item)Piston$(0).")
+			.text("When the $(item)Frame Tinkerer$(0) gets a $(thing)redstone signal$(0), it'll randomly pick a nearby $(item)Item Frame$(0) located in an adjacent block space, and switch the item displayed in the $(item)Frame$(0) with an item dropped on top of the $(item)Frame Tinkerer$(0). It doesn't have a dedicated inventory; just dropping items on top will suffice. They are pushable via $(item)Piston$(0).")
 			.crafting(IncBlocks.FRAME_TINKERER, "Symbiotic Hematophage")
+			.text("Useful for very advanced $(thing)Corporea Networks$(0), or if you just like to redecorate often.")
+			.relations0("botania:mana/spark_changer")
 			.save(generator, files);
 		
 		//Functional Flowers
@@ -55,7 +56,7 @@ public class IncCommonLexiconGen {
 			.text("The $(item)Sanvocalia$(0) is a flower especially attuned to corporetic frequencies. When this flower has $(item)Mana$(0) available and is near a $(item)Corporea Index$(0), it will whisper the requests written on nearby $(item)Corporea Tickets$(0) to the $(item)Index$(0).<br><br>Tickets can be created with a $(item)Corporea Solidifier$(0) or a $(item)Ticker Conjurer$(0).")
 			.petalApothecary(IncBlocks.SANVOCALIA, "Do you still remember?")
 			.relations0(
-				"incorporeal:ender/corporea_solidifier",
+				"incorporeal:ender/corporea_solidifier", //circular reference xd
 				"incorporeal:ender/ticket_conjurer"
 			)
 			.extraRecipeMapping(IncBlocks.FLOATING_SANVOCALIA)
@@ -68,19 +69,38 @@ public class IncCommonLexiconGen {
 			.nameAndIcon(IncBlocks.CORPOREA_SOLIDIFIER)
 			.enderCategory()
 			.elven()
-			.text("The $(item)Corporea Solidifier$(0) acts as a replacement for the $(item)Corporea Retainer$(0). When placed next to a $(item)Corporea Interceptor$(0), the $(item)Corporea Solidifier$(0), instead of remembering the interceptor's request, will create a $(thing)Corporea Ticket$(0) containing the item and item count of the request.")
-			.text("The $(thing)Corporea Ticket$(0) will be placed in an inventory one or two blocks below the $(item)Solidifier$(0), or placed on-top of none are available, much like a $(item)Corporea Funnel$(0).<br><br>The $(item)Sanvocalia$(0) functional flower seems to be particularly interested in the energies in these $(thing)Corporea Tickets$(0).")
+			.text("The $(item)Corporea Solidifier$(0) acts as a replacement for the $(item)Corporea Retainer$(0). When placed next to a $(item)Corporea Interceptor$(0), the $(item)Solidifier$(0), instead of remembering the interceptor's request, will conjure up a $(thing)Corporea Ticket$(0) item, encapsulating the request's item and size.")
+			.text("The $(thing)Ticket$(0) will be pushed into an inventory placed a block or two below the $(item)Solidifier$(0), or just dropped into the world above the $(item)Solidifier$(0) if none are available, much like the behavior of the $(item)Corporea Funnel$(0).")
 			.crafting(IncBlocks.CORPOREA_SOLIDIFIER, "Up, up, down, up")
+			.text("The $(item)Sanvocalia$(0) functional flower seems to be particularly interested in the $(thing)Corporea Ticket$(0)'s energies.")
+			.relations0(
+				sanvocalia,
+				"incorporeal:ender/ticket_conjurer", //forward reference
+				"botania:ender/corporea_interceptor",
+				"botania:ender/corporea_retainer",
+				"botania:ender/corporea_funnel"
+			)
 			.save(generator, files);
 		
 		PatchouliEntryBuilder redStringLiar = builder("ender/red_string_liar")
 			.nameAndIcon(IncBlocks.RED_STRING_LIAR)
 			.enderCategory()
 			.elven()
-			.text("Turns out, there was more to $(thing)Red String$(0) after all! The $(item)Red Stringed Liar$(0) works best on a $(thing)Corporea Network$(0). It will bind to any block with an inventory, much like the $(item)Red Stringed Container$(0), and will present the items in that inventory to the attached $(thing)Corporea Network$(0) as if it was an inventory full of whatever is in any adjacent $(item)Item Frames$(0).")
-			.text("For example, if a $(item)Red Stringed Liar$(0) is bound to an inventory containing 10 $(item)cookies$(0), and two $(item)Item Frames$(0) showing $(thing)cake$(0) and $(thing)apples$(0) are attached to the $(item)Liar(0), it will report 10 $(thing)cakes$(0), 10 $(thing)apples$(0), and zero $(thing)cookies$(0) to the $(thing)Corporea Network$(0). If $(thing)cake$(0) or $(thing)apples$(0) are then requested through corporea, it will instead retrieve $(item)cookies$(0).")
-			.text("Extracting items from the linked inventory retrieves the real items, so what is asked for may not match what is actually received. (This doesn't duplicate any items!)")
+			.text("The $(item)Red Stringed Liar$(0) works best on a $(thing)Corporea Network$(0). It will bind to any block with an inventory, much like the $(item)Red Stringed Container$(0), and tricks the $(thing)Corporea Network$(0) into thinking the inventory contains the items located in any $(item)Item Frames$(0) placed against the $(item)Liar$(0), instead of whatever items are in the actual inventory.")
+			.text("For example, if a $(item)Red Stringed Liar$(0) is bound to an inventory containing 10 $(item)cookies$(0), and two $(item)Item Frames$(0) showing $(thing)cake$(0) and $(thing)apples$(0) are attached to the $(item)Liar$(0), it will report 10 $(thing)cakes$(0), 10 $(thing)apples$(0), and zero $(thing)cookies$(0) to the $(thing)Corporea Network$(0). If $(thing)cake$(0) or $(thing)apples$(0) are then requested through corporea, it will retrieve $(item)cookies$(0).")
+			.text("Extracting items through the $(item)Red Stringed Liar$(0) retrieves the real items from the bound inventory, so what is asked for may not match what is actually received. (This doesn't duplicate any items!)")
+			.text("Since $(item)Corporea Funnels$(0) can only request $(italic)specific$() items, instead of \"whatever\": one possibility for this block is to allow a $(item)Funnel$(0) to extract $(italic)everything$() from a given inventory, regardless of what's actually inside. The requested item would instead act as a label for which inventory to pull from.<br><br>It's a little bit hard to explain - just experiment with it.")
 			.crafting(IncBlocks.RED_STRING_LIAR, "You Would Not Believe This Random Hecking Nonsense")
+			.relations0("botania:ender/red_string")
+			.save(generator, files);
+		
+		PatchouliEntryBuilder redStringConstrictor = builder("ender/red_string_constrictor")
+			.nameAndIcon(IncBlocks.RED_STRING_CONSTRICTOR)
+			.enderCategory()
+			.elven()
+			.text("When unpowered, the $(item)Red Stringed Constrictor$(0) acts the same as a $(item)Red Stringed Container$(0). However, giving it a $(thing)redstone signal$(0) will cause the $(item)Constrictor$(0) to expose fewer slots of the targeted inventory - a signal strength of 1 will expose everything but the first slot, 2 will skip the first two slots, and so on; up to 15. Giving it a $(thing)right click$(0) will cause it to slice off slots from the end of the inventory instead of the start.")
+			.crafting(IncBlocks.RED_STRING_CONSTRICTOR, "It feels like we only go backwards")
+			.text("Naturally, it only binds to inventories that have a sense of \"slots\" - this may depend on certain $(thing)metaphysical properties of your world$(0). $(7)And by that nonsense I mean it works slightly differently on Fabric and Forge. Sorry about that.$(0)")
 			.relations0("botania:ender/red_string")
 			.save(generator, files);
 		
@@ -89,17 +109,17 @@ public class IncCommonLexiconGen {
 			.icon(IncItems.SOUL_CORE_FRAME)
 			.enderCategory()
 			.elven()
-			.text("$(item)Soul Cores$(0) surround and envelop a $(thing)Player's Soul$(0) in a light $(thing)Mana$(0) solution, ever-so-slightly reanimating it. While the extracted $(thing)Soul$(0) isn't capable of too much independent thought, as long as the the real, live $(thing)Player$(0) is present in the $(thing)Dimension$(0), they are somewhat entangled.")
+			.text("$(item)Soul Cores$(0) surround and envelop a $(thing)Player's Soul$(0) in a light $(thing)Mana$(0) solution, ever-so-slightly reanimating it. While the extracted $(thing)Soul$(0) isn't capable of too much independent thought, as long as the the real, live $(thing)Player$(0) is present in the $(thing)Dimension$(0), they act somewhat entangled.")
 			.text("To inform a $(item)Soul Core$(0) of your presence, right click it. This process has been known to sting a bit.<br><br>If a $(item)Soul Core$(0) ever runs out of mana, it will violently close the link to the $(thing)Soul$(0) it's bound to; right clicking again will re-establish it.")
 			
 			.text("All $(item)Soul Cores$(0) are built out of the $(item)Soul Core Frame$(0):")
 			.runicAltar(IncItems.SOUL_CORE_FRAME, "Show me your worth, Mortals")
 			
-			.text("The $(item)Ender Soul Core$(0) provides block-level access to the $(item)Ender Chest$(0) inventory of the bound $(thing)Player$(0). As long as the $(thing)Player$(0) is present in the dimension, the $(item)Ender Soul Core$(0)'s inventory will mirror their $(item)Ender Chest$(0).<br><br>The usual interactions work; hoppers, corporea sparks... Measuring is free, but adding and removing items uses $(thing)Mana$(0).")
+			.text("The $(item)Ender Soul Core$(0) provides block-level access to the $(item)Ender Chest$(0) inventory of the bound $(thing)Player$(0). As long as the $(thing)Player$(0) is present in the dimension, the $(item)Ender Soul Core's$(0) inventory will mirror their $(item)Ender Chest's$(0).<br><br>The usual interactions work; hoppers, corporea sparks, comparators... Measuring is free, but adding and removing items costs $(thing)Mana$(0).")
 			.runicAltar(IncBlocks.ENDER_SOUL_CORE, "Driven Drop")
 			
-			.text("The $(item)Blood Soul Core$(0), at the cost of $(thing)Mana$(0), injects all potion effects received via $(item)Splash Potions$(0) into the bloodstream of the bound $(thing)Player$(0).<br><br>Since the $(thing)Soul$(0) suspended in a $(item)Soul Core$(0) is technically undead, this process will cause the usual effect inversions to occur (for example, $(thing)Instant Health$(0) will damage the bound $(item)Player$(0)).")
-			//runicAltar
+			.text("The $(item)Blood Soul Core$(0), at the cost of $(thing)Mana$(0), injects all potion effects received via $(item)Splash$(0) or $(item)Lingering Potions$(0) into the bloodstream of the bound $(thing)Player$(0). Its $(thing)Comparator$(0) signal reflects the bound $(thing)Player$(0)'s health.<br><br>Note that since the $(thing)Soul$(0) suspended in a $(item)Soul Core$(0) is technically undead, certain potion effects such as $(item)Instant Health$(0) may not have the desired effect.")
+			.runicAltar(IncBlocks.POTION_SOUL_CORE, "A heart-to-heart")
 		
 			.relations("Corporea Soul Core?", "This block was removed in 1.18, but was replaced with a simpler method to do the same thing.", "incorporeal:misc/corporea_player_heads")
 			.save(generator, files);
@@ -108,10 +128,13 @@ public class IncCommonLexiconGen {
 			.nameAndIcon(IncItems.TICKET_CONJURER)
 			.enderCategory()
 			.elven()
-			.text("The $(item)Ticket Conjurer$(0) assists in the creation of arbitrary $(item)Corporea Tickets$(0), for use with the $(item)Sanvocalia$(0) flower. Other than the fact that it's an item, not a block, it acts identically to a $(item)Corporea Index$(0). Simply hold it in either hand, speak a $(thing)Corporea Request$(0), and a $(item)Corporea Ticket$(0) will be created for it.")
-			.text("The only other difference between it and a $(item)Corporea Index$(0) is in the behavior of the word \"this\", which will refer to the item in your off-hand when you hold the $(item)Ticket Conjurer$(0) in your main hand, and vice versa.")
+			.text("The $(item)Ticket Conjurer$(0) allows one to conveniently create $(item)Corporea Tickets$(0). Simply hold it in either hand, speak a $(thing)Corporea Request$(0) as you would when using a $(item)Corporea Index$(0), and a $(item)Ticket$(0) corresponding to the request will be left in your inventory.<br><br>The word \"this\" will refer to the item in your left hand when the Conjurer is held in your right, and vice versa.")
 			.crafting(IncItems.TICKET_CONJURER, "Dying Breath of Stokesia")
-			.relations0(sanvocalia)
+			.relations0(
+				"botania:ender/corporea_index",
+				corporeaSolidifier,
+				sanvocalia
+			)
 			.save(generator, files);
 		
 		//Misc
@@ -121,9 +144,11 @@ public class IncCommonLexiconGen {
 			.icon(Blocks.PLAYER_HEAD)
 			.elven()
 			.text("With Incorporeal installed, you can place $(thing)Corporea Sparks$(0) onto $(thing)Player Heads$(0). This acts as a simple security system for a $(thing)Corporea Network$(0) - any $(thing)Players$(0) who do not have their head on the network cannot use any $(item)Corporea Indices$(0).")
-			.relations(null, "Now let me see you $(2)DANCE$(0)",
-				"botania:misc/head_creating", "botania:ender/corporea_index")
-			.text("$(8)This supplants the \"Corporea Soul Core\" block from previous versions - I figured the mechanic should be cheaper.$(0)")
+			.relations(null, "Now let me see you $(2)DANCE$(0)", 
+				"botania:ender/corporea_index",
+				"botania:misc/head_creating"
+			)
+			.text("$(7)This supplants the \"Corporea Soul Core\" block from previous versions - I figured the mechanic should be cheaper.$(0)")
 			.save(generator, files);
 		
 		builder("misc/unstable_cubes")
@@ -140,7 +165,7 @@ public class IncCommonLexiconGen {
 			.toolsCategory()
 			.elven()
 			.text("The $(item)Rod of the Fractured Space$(0) has the unique ability to, albeit briefly, open a small wormhole between two points in space. Only $(item)Items$(0) seem to be small and light enough to fit.$(br)Right click on an $(item)Open Crate$(0) to set the destination location.")
-			.text("Then, any time you right click on the ground, all $(item)Items$(0) nearby will be sucked in to the wormhole and dropped out of the $(item)Open Crate$(0), no matter where they are. The process consumes more $(item)Mana$(0) when more items are sent at once; perhaps packaging them up into something like a $(item)Shulker Box$(0) first would be beneficial?")
+			.text("Then, any time you right click on the ground, all $(item)Items$(0) nearby will be sucked in to the wormhole and dropped out of the $(item)Open Crate$(0), no matter where they are. The process consumes more $(item)Mana$(0) when more items are sent at once; perhaps packaging them up into something like a $(item)Shulker Box$(0) first would be beneficial.")
 			.crafting(IncItems.FRACTURED_SPACE_ROD, "- thread of fate manipulator -")
 			.save(generator, files);
 		

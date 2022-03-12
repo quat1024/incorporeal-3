@@ -18,9 +18,13 @@
       "text": "incorporeal.lexicon.ender.red_string_liar.2.text"
     },
     {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexicon.ender.red_string_liar.3.text"
+    },
+    {
       "type": "patchouli:crafting",
       "recipe": "incorporeal:red_string_liar",
-      "text": "incorporeal.lexicon.ender.red_string_liar.3.text"
+      "text": "incorporeal.lexicon.ender.red_string_liar.4.text"
     },
     {
       "type": "patchouli:relations",

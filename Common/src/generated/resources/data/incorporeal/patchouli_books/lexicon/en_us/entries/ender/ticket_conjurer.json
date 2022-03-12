@@ -10,17 +10,15 @@
       "text": "incorporeal.lexicon.ender.ticket_conjurer.0.text"
     },
     {
-      "type": "patchouli:text",
-      "text": "incorporeal.lexicon.ender.ticket_conjurer.1.text"
-    },
-    {
       "type": "patchouli:crafting",
       "recipe": "incorporeal:ticket_conjurer",
-      "text": "incorporeal.lexicon.ender.ticket_conjurer.2.text"
+      "text": "incorporeal.lexicon.ender.ticket_conjurer.1.text"
     },
     {
       "type": "patchouli:relations",
       "entries": [
+        "botania:ender/corporea_index",
+        "incorporeal:ender/corporea_solidifier",
         "incorporeal:functional_flowers/sanvocalia"
       ]
     }

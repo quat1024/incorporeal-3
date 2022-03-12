@@ -68,6 +68,7 @@ public class IncClientProperties {
 	
 	public static void registerBlockEntityRenderers(EntityRenderers.BERConsumer r) {
 		r.register(IncBlockEntityTypes.RED_STRING_LIAR, RenderTileRedString::new);
+		r.register(IncBlockEntityTypes.RED_STRING_CONSTRICTOR, RenderTileRedString::new);
 		
 		r.register(IncBlockEntityTypes.ENDER_SOUL_CORE, ctx ->
 			new SoulCoreBlockEntityRenderer<>(IncBlocks.ENDER_SOUL_CORE.defaultBlockState(), ctx));
