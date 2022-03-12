@@ -23,15 +23,12 @@ public record EnderSoulCoreItemHandler(EnderSoulCoreBlockEntity be) implements I
 	@NotNull
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		if(!be.canAccessSlot(slot)) return ItemStack.EMPTY;
-		else return getDelegate().getStackInSlot(slot);
+		return getDelegate().getStackInSlot(slot);
 	}
 	
 	@NotNull
 	@Override
 	public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-		if(!be.canAccessSlot(slot)) return stack; //no u
-		
 		ItemStack leftover = getDelegate().insertItem(slot, stack, simulate);
 		if(!simulate) be.trackItemMovement(stack.getCount() - leftover.getCount());
 		return leftover;
@@ -40,8 +37,6 @@ public record EnderSoulCoreItemHandler(EnderSoulCoreBlockEntity be) implements I
 	@NotNull
 	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate) {
-		if(!be.canAccessSlot(slot)) return ItemStack.EMPTY;
-		
 		ItemStack extracted = getDelegate().extractItem(slot, amount, simulate);
 		if(!simulate) be.trackItemMovement(extracted.getCount());
 		return extracted;
@@ -49,13 +44,11 @@ public record EnderSoulCoreItemHandler(EnderSoulCoreBlockEntity be) implements I
 	
 	@Override
 	public int getSlotLimit(int slot) {
-		if(!be.canAccessSlot(slot)) return 0;
-		else return getDelegate().getSlotLimit(slot);
+		return getDelegate().getSlotLimit(slot);
 	}
 	
 	@Override
 	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-		if(!be.canAccessSlot(slot)) return false;
-		else return getDelegate().isItemValid(slot, stack);
+		return getDelegate().isItemValid(slot, stack);
 	}
 }
