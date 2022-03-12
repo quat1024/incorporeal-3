@@ -1,47 +1,46 @@
 Incorporeal 3
 =============
 
-Magic mod addon, in which an old dragon yells at a corporea spark. 1.18, Forge and Fabric.
+Magic mod addon in which an old dragon yells at a corporea spark. I don't think I can call it "corporea focused" anymore. 1.18*.1* currently, Forge and Fabric.
 
 Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-forge), Incorporeal 1 (1.12/Forge) is [here](https://github.com/quat1024/incorporeal).
 
 ## Things that have been ported
 
-* corporea solidifier
-* corporea ticket
-* red string liar
-* item frame tinkerer
-* unstable cubes
-* Sanvocalia
-* The funny
+* corporetics
+  * corporea ticket
+  * corporea solidifier
+  * Sanvocalia
+  * ticket conjurer
+  * red string liar
+  * item frame tinkerer
+  * rod of the fractured space
 * natural redstone circuitry
-* ender soul core
-* the datapack and lexicon
-* redstone root crop
-* corporea soul core's *mechanic* (now just a corporea spark on player head), not the block itself
-* ticket conjurer
-* rod of the fractured space
+  * redstone root crop
+  * natural repeater
+  * natural comparator
+* soul cores
+  * ender soul core
+  * blood soul core
+  * corporea soul core's *mechanic* (put a corporea spark on a player head). this supplants the block
+* decorative/fun items
+  * unstable cubes
+  * Sweet Alexum
+
+## New things
+
+* clearly you do not own an air fryer
+* Red String Constrictor
+* Compressed Tiny Potatoes from botania tweaks 1.12 (as well as some uncompressed ones)
 
 ## Things left to do
 
-* Item and block renderers for the Soul Cores
-* Make the potion soul core actually work !
+* Debug the potion soul core
+* Implement Red String Constrictor on Fabric
+* Implement the Red String Liar for platform-specific inventory abstractions
+* Computer mod
 * Ticket conjurer HUD overlay when you're holding one
-* Give the Red String liar a look, idk if it's implemented correctly
-* Finish computer mod
 * release:)
-
-## Things to think about adding (low priority)
-
-* Things that help you visualize a corporea network better
-  * More wand HUDs
-  * More manaseer monocle HUDs
-
-* Assorted Botania-related pointless fluff ("botanextras")
-  * Potted taters
-  * Those weird "red string decorative" blocks from incorporeal 1
-  * Funny dirt
-  * Petal block variants (slabs/stairs, maybe other decorative things)
 
 ## Things that will not be ported
 
