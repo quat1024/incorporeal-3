@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.platform.forge;
 
+import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEntity;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -21,5 +22,10 @@ public class IncXplatForge implements IncXplat {
 	@Override
 	public void sendTo(FriendlyByteBuf buf, ServerPlayer player) {
 		IncForgeNetworking.EXTREMELY_SIMPLE_CHANNEL_CANT_YOU_SEE_HOW_SIMPLE_IT_IS.send(PacketDistributor.PLAYER.with(() -> player), buf);
+	}
+	
+	@Override
+	public BlockEntitySupplier<RedStringConstrictorBlockEntity> redStringConstrictorMaker() {
+		return ForgeRedStringConstrictorBlockEntity::new;
 	}
 }

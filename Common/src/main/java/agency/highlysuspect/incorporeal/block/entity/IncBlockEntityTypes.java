@@ -4,6 +4,7 @@ import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.computer.DataPrismBlockEntity;
 import agency.highlysuspect.incorporeal.computer.DataStorageBlockEntity;
+import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -17,7 +18,7 @@ public class IncBlockEntityTypes {
 	public static final BlockEntityType<RedStringLiarBlockEntity> RED_STRING_LIAR =
 		IXplatAbstractions.INSTANCE.createBlockEntityType(RedStringLiarBlockEntity::new, IncBlocks.RED_STRING_LIAR);
 	public static final BlockEntityType<RedStringConstrictorBlockEntity> RED_STRING_CONSTRICTOR =
-		IXplatAbstractions.INSTANCE.createBlockEntityType(RedStringConstrictorBlockEntity::new, IncBlocks.RED_STRING_CONSTRICTOR);
+		IXplatAbstractions.INSTANCE.createBlockEntityType(IncXplat.INSTANCE.redStringConstrictorMaker()::create, IncBlocks.RED_STRING_CONSTRICTOR);
 	
 	//soul cores
 	public static final BlockEntityType<EnderSoulCoreBlockEntity> ENDER_SOUL_CORE = 

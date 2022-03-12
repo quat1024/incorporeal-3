@@ -54,6 +54,7 @@ public class IncFabric implements ModInitializer {
 	@SuppressWarnings("UnstableApiUsage")
 	public void registerCapabilities() {
 		ItemStorage.SIDED.registerForBlockEntity(EnderSoulCoreStorage::new, IncBlockEntityTypes.ENDER_SOUL_CORE);
+		ItemStorage.SIDED.registerForBlockEntity(FabricRedStringConstrictorBlockEntity::getStorageWithDowncast, IncBlockEntityTypes.RED_STRING_CONSTRICTOR);
 	}
 	
 	/**

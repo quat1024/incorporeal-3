@@ -89,8 +89,6 @@ public class IncForge {
 		if(be.getType() == IncBlockEntityTypes.ENDER_SOUL_CORE && be instanceof EnderSoulCoreBlockEntity esc) {
 			event.addCapability(Inc.id("inventory"), CapabilityUtil.makeProvider(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
 				new EnderSoulCoreItemHandler(esc)));
-		} else if(be.getType() == IncBlockEntityTypes.RED_STRING_CONSTRICTOR && be instanceof RedStringConstrictorBlockEntity rsc) {
-			event.addCapability(Inc.id("magic"), new RedStringConstrictorCapProvider(rsc));
 		}
 	}
 	

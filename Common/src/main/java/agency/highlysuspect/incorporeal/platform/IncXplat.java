@@ -1,13 +1,20 @@
 package agency.highlysuspect.incorporeal.platform;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 import java.util.ServiceLoader;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 /**
@@ -39,4 +46,12 @@ public interface IncXplat {
 	
 	//Send a block of data from server to client, using the incorporeal packet abstraction
 	void sendTo(FriendlyByteBuf buf, ServerPlayer player);
+	
+	BlockEntitySupplier<RedStringConstrictorBlockEntity> redStringConstrictorMaker();
+	
+	//Copy and paste from minecraft because its private
+	@FunctionalInterface
+	interface BlockEntitySupplier<T extends BlockEntity> {
+		T create(BlockPos var1, BlockState var2);
+	}
 }

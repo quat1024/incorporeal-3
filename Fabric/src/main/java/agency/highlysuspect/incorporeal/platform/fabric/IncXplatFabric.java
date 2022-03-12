@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.platform.fabric;
 
+import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEntity;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import agency.highlysuspect.incorporeal.platform.fabric.mixin.FabricAccessorDamageSource;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -22,5 +23,10 @@ public class IncXplatFabric implements IncXplat {
 	@Override
 	public void sendTo(FriendlyByteBuf buf, ServerPlayer player) {
 		ServerPlayNetworking.send(player, IncFabric.NETWORK_ID, buf);
+	}
+	
+	@Override
+	public BlockEntitySupplier<RedStringConstrictorBlockEntity> redStringConstrictorMaker() {
+		return FabricRedStringConstrictorBlockEntity::new;
 	}
 }
