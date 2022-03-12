@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.platform.fabric;
 
 import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import agency.highlysuspect.incorporeal.platform.fabric.mixin.FabricAccessorDamageSource;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -28,5 +29,10 @@ public class IncXplatFabric implements IncXplat {
 	@Override
 	public BlockEntitySupplier<RedStringConstrictorBlockEntity> redStringConstrictorMaker() {
 		return FabricRedStringConstrictorBlockEntity::new;
+	}
+	
+	@Override
+	public BlockEntitySupplier<RedStringLiarBlockEntity> redStringLiarMaker() {
+		return FabricRedStringLiarBlockEntity::new;
 	}
 }

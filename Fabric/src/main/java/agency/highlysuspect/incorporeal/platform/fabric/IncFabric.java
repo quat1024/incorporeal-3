@@ -35,7 +35,7 @@ public class IncFabric implements ModInitializer {
 		
 		//items and item capabilities
 		IncItems.register((item, name) -> Registry.register(Registry.ITEM, name, item));
-		BotaniaFabricCapabilities.COORD_BOUND_ITEM.registerForItems((st, c) -> new FracturedSpaceRodItem.CoordBoundItem(st), IncItems.FRACTURED_SPACE_ROD); //TODO this on forge
+		BotaniaFabricCapabilities.COORD_BOUND_ITEM.registerForItems((st, c) -> new FracturedSpaceRodItem.CoordBoundItem(st), IncItems.FRACTURED_SPACE_ROD);
 		
 		//entity types
 		IncEntityTypes.register((type, name) -> Registry.register(Registry.ENTITY_TYPE, name, type));

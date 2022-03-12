@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.platform.forge;
 
 import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -27,5 +28,10 @@ public class IncXplatForge implements IncXplat {
 	@Override
 	public BlockEntitySupplier<RedStringConstrictorBlockEntity> redStringConstrictorMaker() {
 		return ForgeRedStringConstrictorBlockEntity::new;
+	}
+	
+	@Override
+	public BlockEntitySupplier<RedStringLiarBlockEntity> redStringLiarMaker() {
+		return ForgeRedStringLiarBlockEntity::new;
 	}
 }

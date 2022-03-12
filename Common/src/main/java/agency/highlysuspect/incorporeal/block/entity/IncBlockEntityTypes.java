@@ -16,7 +16,7 @@ import java.util.function.BiConsumer;
 public class IncBlockEntityTypes {
 	//corporetics
 	public static final BlockEntityType<RedStringLiarBlockEntity> RED_STRING_LIAR =
-		IXplatAbstractions.INSTANCE.createBlockEntityType(RedStringLiarBlockEntity::new, IncBlocks.RED_STRING_LIAR);
+		IXplatAbstractions.INSTANCE.createBlockEntityType(IncXplat.INSTANCE.redStringLiarMaker()::create, IncBlocks.RED_STRING_LIAR);
 	public static final BlockEntityType<RedStringConstrictorBlockEntity> RED_STRING_CONSTRICTOR =
 		IXplatAbstractions.INSTANCE.createBlockEntityType(IncXplat.INSTANCE.redStringConstrictorMaker()::create, IncBlocks.RED_STRING_CONSTRICTOR);
 	

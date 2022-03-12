@@ -20,6 +20,10 @@ import vazkii.botania.xplat.IXplatAbstractions;
 
 import javax.annotation.Nonnull;
 
+/**
+ * Implementatoin of the Red Stringed Constrictor on Forge.
+ * Here it uses the platform's IItemHandler abstraction and capabilities.
+ */
 public class ForgeRedStringConstrictorBlockEntity extends RedStringConstrictorBlockEntity {
 	public ForgeRedStringConstrictorBlockEntity(BlockPos pos, BlockState state) {
 		super(pos, state);
@@ -30,7 +34,7 @@ public class ForgeRedStringConstrictorBlockEntity extends RedStringConstrictorBl
 		assert level != null;
 		
 		BlockEntity be = level.getBlockEntity(pos);
-		return be != null && IXplatAbstractions.INSTANCE.isRedStringContainerTarget(be);
+		return be != null && IXplatAbstractions.INSTANCE.isRedStringContainerTarget(be); //out of laziness
 	}
 	
 	@NotNull

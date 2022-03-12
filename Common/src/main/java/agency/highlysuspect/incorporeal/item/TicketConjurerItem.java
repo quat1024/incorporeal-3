@@ -1,6 +1,5 @@
 package agency.highlysuspect.incorporeal.item;
 
-import agency.highlysuspect.incorporeal.corporea.IncInventoryHelper;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import agency.highlysuspect.incorporeal.mixin.TileCorporeaIndexAccessor;
 import net.minecraft.server.level.ServerPlayer;
@@ -63,7 +62,11 @@ public class TicketConjurerItem extends Item {
 		}
 		
 		ItemStack ticket = IncItems.CORPOREA_TICKET.produce(SolidifiedRequest.create(CorporeaHelper.instance().createMatcher(name), count));
-		IncInventoryHelper.giveToPlayer(ticket, player);
+		//give it to the player
+		if (!player.getInventory().add(ticket)) {
+			player.drop(ticket, false);
+		}
+		
 		return true;
 	}
 }

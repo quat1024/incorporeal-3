@@ -2,6 +2,7 @@ package agency.highlysuspect.incorporeal.platform;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -47,6 +48,8 @@ public interface IncXplat {
 	//Send a block of data from server to client, using the incorporeal packet abstraction
 	void sendTo(FriendlyByteBuf buf, ServerPlayer player);
 	
+	//Block entities implemented differently on both sides
+	BlockEntitySupplier<RedStringLiarBlockEntity> redStringLiarMaker();
 	BlockEntitySupplier<RedStringConstrictorBlockEntity> redStringConstrictorMaker();
 	
 	//Copy and paste from minecraft because its private

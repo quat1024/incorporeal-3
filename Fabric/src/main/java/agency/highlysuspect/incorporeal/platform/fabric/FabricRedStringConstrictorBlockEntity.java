@@ -15,10 +15,8 @@ import vazkii.botania.api.internal.VanillaPacketDispatcher;
 import javax.annotation.Nullable;
 
 /**
- * Top half of this is a copy-paste from TileRedStringContainer. The item storage api doesnt work on the client so yeah
- * i need to sync it instead
- * 
- * There is no BlockApiCache or whatever because i simply cannot be assed
+ * Implementation of the Red Stringed Constrictor on Fabric.
+ * Here it uses fabric-transfer-api, but only if the inventory is slotted (CombinedStorage).
  */
 @SuppressWarnings("UnstableApiUsage")
 public class FabricRedStringConstrictorBlockEntity extends RedStringConstrictorBlockEntity {
@@ -26,6 +24,7 @@ public class FabricRedStringConstrictorBlockEntity extends RedStringConstrictorB
 		super(pos, state);
 	}
 	
+	//PASTE FROM BOTANIA RED STRING CONTAINER
 	private BlockPos clientPos;
 	
 	@Override
@@ -62,8 +61,7 @@ public class FabricRedStringConstrictorBlockEntity extends RedStringConstrictorB
 		assert level != null;
 		return level.isClientSide ? clientPos : super.getBinding();
 	}
-	
-	//Ok thats the end of copypasting
+	//END PASTE
 	
 	//I chose to impl this with an abstract method instead of xplat:
 	@Override
