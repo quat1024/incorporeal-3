@@ -98,9 +98,9 @@ public class IncCommonLexiconGen {
 			.nameAndIcon(IncBlocks.RED_STRING_CONSTRICTOR)
 			.enderCategory()
 			.elven()
-			.text("When unpowered, the $(item)Red Stringed Constrictor$(0) acts the same as a $(item)Red Stringed Container$(0). However, giving it a $(thing)redstone signal$(0) will cause the $(item)Constrictor$(0) to expose fewer slots of the targeted inventory - a signal strength of 1 will expose everything but the first slot, 2 will skip the first two slots, and so on; up to 15. Giving it a $(thing)right click$(0) will cause it to slice off slots from the end of the inventory instead of the start.")
+			.text("When unpowered, the $(item)Red Stringed Constrictor$(0) acts the same as a $(item)Red Stringed Container$(0). But giving it a $(thing)redstone signal$(0) will cause it to expose fewer slots of the targeted inventory - a signal strength of 1 will expose everything but the first slot, 2 will skip the first two, and so on.")
 			.crafting(IncBlocks.RED_STRING_CONSTRICTOR, "It feels like we only go backwards")
-			.text("Naturally, it only binds to inventories that have a sense of \"slots\" - this may depend on certain $(thing)metaphysical properties of your world$(0). $(7)And by that nonsense I mean it works slightly differently on Fabric and Forge. Sorry about that.$(0)")
+			.text("A $(thing)right click$(0) will toggle whether it removes slots from the end of the inventory, instead of from the front.<br><br>Naturally, it only binds to inventories that have a sense of \"slots\" - this may depend on certain $(thing)metaphysical properties of your world$(0). $(7)And by that nonsense I mean it works slightly differently on Fabric and Forge. Sorry about that.$(0)")
 			.relations0("botania:ender/red_string")
 			.save(generator, files);
 		
