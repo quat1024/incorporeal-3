@@ -1,6 +1,7 @@
 {
   "parent": "incorporeal:block/soul_core",
   "textures": {
-    "texture": "incorporeal:block/soul_cores/frame"
+    "inner": "incorporeal:block/soul_cores/frame_inner",
+    "outer": "incorporeal:block/soul_cores/frame_outer"
   }
 }

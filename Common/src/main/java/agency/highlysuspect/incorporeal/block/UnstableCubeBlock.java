@@ -39,7 +39,8 @@ public class UnstableCubeBlock extends BlockModWaterloggable implements EntityBl
 	}
 	
 	public final DyeColor color;
-	public static final VoxelShape SHAPE = Shapes.create(3/16d, 3/16d, 3/16d, 1 - 3/16d, 1 - 3/16d, 1 - 3/16d);
+	private static double px = 3;
+	public static final VoxelShape SHAPE = Shapes.create(px/16d, px/16d, px/16d, 1 - px/16d, 1 - px/16d, 1 - px/16d);
 	
 	@Override
 	public VoxelShape getShape(BlockState $$0, BlockGetter $$1, BlockPos $$2, CollisionContext $$3) {

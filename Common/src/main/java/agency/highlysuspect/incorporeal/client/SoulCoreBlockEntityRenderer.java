@@ -50,7 +50,8 @@ public class SoulCoreBlockEntityRenderer<T extends AbstractSoulCoreBlockEntity> 
 		} else {
 			if(core.hasOwnerProfile()) {
 				pose.pushPose();
-				
+
+				pose.scale(14/16f, 14/16f, 14/16f);
 				wobbleSkull(pose, hash, ticks);
 				VertexConsumer buffer = bufs.getBuffer(SkullBlockRenderer.getRenderType(SkullBlock.Types.PLAYER, core.getOwnerProfile()));
 				playerSkullModel.renderToBuffer(pose, buffer, light, overlay, 1f, 1f, 1f, 1f);
@@ -62,7 +63,7 @@ public class SoulCoreBlockEntityRenderer<T extends AbstractSoulCoreBlockEntity> 
 		wobbleCubes(pose, hash, ticks);
 		
 		pose.translate(-.5, -.5, -.5); //blockmodels render from their corner, the old shit rendered from the center
-		
+
 		VertexConsumer buffer = bufs.getBuffer(ItemBlockRenderTypes.getRenderType(state, false));
 		Minecraft.getInstance().getBlockRenderer().getModelRenderer()
 				.renderModel(pose.last(), buffer, state, model, 1f, 1f, 1f, light, overlay);
