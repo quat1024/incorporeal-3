@@ -35,7 +35,6 @@ Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-f
 
 ## Things left to do
 
-* Debug the potion soul core
 * Implement Red String Constrictor on Fabric
 * Implement the Red String Liar for platform-specific inventory abstractions
 * Computer mod

@@ -1,10 +1,10 @@
 package agency.highlysuspect.incorporeal.block.entity;
 
-import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.entity.PotionSoulCoreCollector;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
@@ -27,7 +27,7 @@ public class PotionSoulCoreBlockEntity extends AbstractSoulCoreBlockEntity {
 		
 		//Manage the soulcore collector entities.
 		List<PotionSoulCoreCollector> collectors = findCollectors();
-		Optional<ServerPlayer> player = findPlayer();
+		Optional<Player> player = findPlayerClientSafeLol();
 		
 		//If there's no player present, or there's somehow more than 1 collector, remove them.
 		if(collectors.size() >= 2 || player.isEmpty()) {
@@ -44,5 +44,13 @@ public class PotionSoulCoreBlockEntity extends AbstractSoulCoreBlockEntity {
 	public List<PotionSoulCoreCollector> findCollectors() {
 		assert level != null;
 		return level.getEntitiesOfClass(PotionSoulCoreCollector.class, new AABB(worldPosition));
+	}
+	
+	@Override
+	public int computeSignal() {
+		return findPlayerClientSafeLol().map(player -> {
+			if(player.getMaxHealth() == 0) return 0; //What?
+			else return Mth.floor(Mth.clamp((player.getHealth() / player.getMaxHealth()) * 15, 0, 15));
+		}).orElse(0);
 	}
 }

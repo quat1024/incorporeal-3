@@ -3,9 +3,10 @@ package agency.highlysuspect.incorporeal.block.entity;
 import agency.highlysuspect.incorporeal.corporea.FrameReader;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.decoration.ItemFrame;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.PlayerEnderChestContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -41,12 +42,20 @@ public class EnderSoulCoreBlockEntity extends AbstractSoulCoreBlockEntity {
 	
 	@Override
 	protected void tick() {
-		enderChest = findPlayer().map(ServerPlayer::getEnderChestInventory).orElse(null);
+		if(level == null || level.isClientSide) return;
+		
+		enderChest = findPlayer().map(Player::getEnderChestInventory).orElse(null);
 		if(enderChest == null) {
 			mask = 0;
 		} else {
 			mask = readMask();
 		}
+	}
+	
+	@Override
+	public int computeSignal() {
+		if(enderChest == null) return 0;
+		else return AbstractContainerMenu.getRedstoneSignalFromContainer(enderChest);
 	}
 	
 	public boolean isCompletelyUnmasked() {

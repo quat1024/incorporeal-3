@@ -1,6 +1,5 @@
 package agency.highlysuspect.incorporeal.block.entity;
 
-import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import com.mojang.authlib.GameProfile;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -41,12 +40,20 @@ public abstract class AbstractSoulCoreBlockEntity extends TileMod implements IMa
 	
 	protected GameProfile ownerProfile;
 	protected int mana;
+	protected int signal;
 	
 	protected abstract int getMaxMana();
 	protected abstract void tick();
+	protected abstract int computeSignal();
 	
 	public static void serverTick(Level level, BlockPos pos, BlockState state, AbstractSoulCoreBlockEntity self) {
 		self.tick();
+		
+		int newSignal = self.computeSignal();
+		if(self.signal != newSignal) {
+			self.signal = newSignal;
+			self.setChanged();
+		}
 		
 		if(self.mana <= 0 && self.hasOwnerProfile()) {
 			self.onExpire();
@@ -68,10 +75,8 @@ public abstract class AbstractSoulCoreBlockEntity extends TileMod implements IMa
 	}
 	
 	public Optional<ServerPlayer> findPlayer() {
-		assert level != null; //grumble grumble
+		if(level == null || !hasOwnerProfile()) return Optional.empty();
 		if(level.isClientSide()) throw new IllegalStateException("findPlayer on client level");
-		
-		if(!hasOwnerProfile()) return Optional.empty();
 		
 		MinecraftServer server = level.getServer();
 		assert server != null;
@@ -80,6 +85,15 @@ public abstract class AbstractSoulCoreBlockEntity extends TileMod implements IMa
 		//Must be in the same dimension (gameplay limitation, not technical)
 		if(player == null || player.level != level) return Optional.empty();
 		else return Optional.of(player);
+	}
+	
+	//Level (really EntityGetter)#getPlayerByUUID is slower than PlayerList#getPlayer when there are a lot of players.
+	//PlayerList uses a proper uuid->player hashmap, but EntityGetter's uses a linear scan lol.
+	//It's not that much slower. Actually i probably shouldn't worry about it. Being able to get ServerPlayers is a convenience tho.
+	//This method doesn't have to check that the dimension is the same because it only queries the players on one Level.
+	public Optional<Player> findPlayerClientSafeLol() {
+		if(level == null || !hasOwnerProfile()) return Optional.empty();
+		return Optional.ofNullable(level.getPlayerByUUID(ownerProfile.getId()));
 	}
 	
 	public InteractionResult activate(Player player, InteractionHand hand) {
@@ -118,13 +132,13 @@ public abstract class AbstractSoulCoreBlockEntity extends TileMod implements IMa
 	}
 	
 	public void onExpire() {
-		findPlayer().ifPresent(p -> p.hurt(SOUL, 5f));
+		findPlayerClientSafeLol().ifPresent(p -> p.hurt(SOUL, 5f));
 		setOwnerProfile(null);
 		if(level != null) level.playSound(null, worldPosition, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, .5f, 1.2f);
 	}
 	
-	public int signal() {
-		return Math.round(Inc.rangeRemap(mana, 0, getMaxMana(), 0, 15));
+	public int getSignal() {
+		return signal;
 	}
 	
 	@Override
@@ -136,6 +150,9 @@ public abstract class AbstractSoulCoreBlockEntity extends TileMod implements IMa
 	public void receiveMana(int moreMana) {
 		//technically allow overfilling it...? see TileAvatar
 		mana = Math.min(mana + moreMana, getMaxMana() * 2);
+		
+		setChanged();
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
 	}
 	
 	@Override
@@ -154,6 +171,7 @@ public abstract class AbstractSoulCoreBlockEntity extends TileMod implements IMa
 		
 		if(ownerProfile != null) tag.put("OwnerProfile", NbtUtils.writeGameProfile(new CompoundTag(), ownerProfile));
 		tag.putInt("Mana", mana);
+		tag.putInt("Signal", signal);
 	}
 	
 	@Override
@@ -164,6 +182,7 @@ public abstract class AbstractSoulCoreBlockEntity extends TileMod implements IMa
 		else ownerProfile = null;
 		
 		mana = cmp.getInt("Mana");
+		signal = cmp.getInt("Signal");
 	}
 	
 	public static class WandHud implements IWandHUD {

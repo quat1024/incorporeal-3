@@ -46,7 +46,7 @@ public class SoulCoreBlock extends BlockMod implements EntityBlock {
 	
 	@Override
 	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-		return level.getBlockEntity(pos) instanceof AbstractSoulCoreBlockEntity soul ? soul.signal() : 0;
+		return level.getBlockEntity(pos) instanceof AbstractSoulCoreBlockEntity soul ? soul.getSignal() : 0;
 	}
 	
 	//block entity

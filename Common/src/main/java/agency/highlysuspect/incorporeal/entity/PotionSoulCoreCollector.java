@@ -103,7 +103,7 @@ public class PotionSoulCoreCollector extends LivingEntity {
 		getActiveEffects().clear(); //harshly (it's cancellable on forge)
 	}
 	
-	private record Data(PotionSoulCoreBlockEntity be, ServerPlayer player) {}
+	private record Data(PotionSoulCoreBlockEntity be, Player player) {}
 	private @Nullable Data findOrDiscard() {
 		PotionSoulCoreBlockEntity be = IncBlockEntityTypes.POTION_SOUL_CORE.getBlockEntity(level, blockPosition());
 		if(be == null) {
