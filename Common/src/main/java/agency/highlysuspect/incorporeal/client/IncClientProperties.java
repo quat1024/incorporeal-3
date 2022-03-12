@@ -114,7 +114,8 @@ public class IncClientProperties {
 	
 	public static void registerWandHudCaps(ModTiles.BECapConsumer<IWandHUD> r) {
 		r.accept(be -> new AbstractSoulCoreBlockEntity.WandHud((AbstractSoulCoreBlockEntity) be),
-			IncBlockEntityTypes.ENDER_SOUL_CORE);
+			IncBlockEntityTypes.ENDER_SOUL_CORE,
+			IncBlockEntityTypes.POTION_SOUL_CORE);
 		
 		r.accept(be -> new TileEntityFunctionalFlower.FunctionalWandHud<>((TileEntityFunctionalFlower) be), 
 			IncBlockEntityTypes.SANVOCALIA_BIG,

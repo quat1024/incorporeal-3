@@ -1,9 +1,9 @@
 package agency.highlysuspect.incorporeal.entity;
 
+import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.block.entity.PotionSoulCoreBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -21,6 +21,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.PushReaction;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
@@ -51,11 +52,8 @@ public class PotionSoulCoreCollector extends LivingEntity {
 		super.heal(howMuch);
 		if(level.isClientSide()) return;
 		
-		Data data = find();
-		if(data == null) {
-			discard();
-			return;
-		}
+		Data data = findOrDiscard();
+		if(data == null) return;
 		
 		data.player.heal(howMuch);
 		data.be.drainMana(200);
@@ -66,11 +64,8 @@ public class PotionSoulCoreCollector extends LivingEntity {
 		boolean happened = super.hurt(source, howMuch); //TODO: remove this super call? (will want to fire events on forge)
 		if(happened || level.isClientSide) return happened;
 		
-		Data data = find();
-		if(data == null) {
-			discard();
-			return false;
-		}
+		Data data = findOrDiscard();
+		if(data == null) return false;
 		
 		happened = data.player.hurt(source, howMuch);
 		if(happened) {
@@ -86,6 +81,7 @@ public class PotionSoulCoreCollector extends LivingEntity {
 		if(level.isClientSide()) return;
 		
 		//Lock into position, etc
+		//TODO: compare to the Area Effect Cloud
 		setDeltaMovement(0, 0, 0);
 		setRot(0, 0);
 		setHealth(getMaxHealth() / 2);
@@ -93,11 +89,8 @@ public class PotionSoulCoreCollector extends LivingEntity {
 		setPos(Math.floor(position().x) + 0.5d, Math.floor(position().y + 0.005d), Math.floor(position().z) + 0.5d);
 		
 		//Find the potionsoulcore and the player. if either does not exist, remove the entity
-		Data data = find();
-		if(data == null) {
-			discard();
-			return;
-		}
+		Data data = findOrDiscard();
+		if(data == null) return;
 		
 		//Transfer long lasting potion effects to the player.
 		for(MobEffectInstance effect : getActiveEffects()) {
@@ -111,12 +104,18 @@ public class PotionSoulCoreCollector extends LivingEntity {
 	}
 	
 	private record Data(PotionSoulCoreBlockEntity be, ServerPlayer player) {}
-	private @Nullable Data find() {
+	private @Nullable Data findOrDiscard() {
 		PotionSoulCoreBlockEntity be = IncBlockEntityTypes.POTION_SOUL_CORE.getBlockEntity(level, blockPosition());
-		if(be == null) return null;
+		if(be == null) {
+			discard();
+			return null;
+		}
 		
 		Optional<ServerPlayer> player = be.findPlayer();
-		if(player.isEmpty()) return null;
+		if(player.isEmpty()) {
+			discard();
+			return null;
+		}
 		
 		return new Data(be, player.get());
 	}
@@ -154,6 +153,11 @@ public class PotionSoulCoreCollector extends LivingEntity {
 	@Override
 	public MobType getMobType() {
 		return MobType.UNDEAD; //:eyes:
+	}
+	
+	@Override
+	public PushReaction getPistonPushReaction() {
+		return PushReaction.IGNORE;
 	}
 	
 	/// livingentity boilerplate ///
