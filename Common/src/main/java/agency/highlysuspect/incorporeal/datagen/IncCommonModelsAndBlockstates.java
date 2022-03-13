@@ -73,7 +73,9 @@ public class IncCommonModelsAndBlockstates {
 		itemBlockModelParent(IncBlocks.FRAME_TINKERER);
 		
 		/// Soul cores ///
-		ModelTemplate soulCoreTemplate = template(Inc.id("block/soul_core"), TextureSlot.TEXTURE);
+		TextureSlot TX_INNER = txslot("inner");
+		TextureSlot TX_OUTER = txslot("outer");
+		ModelTemplate soulCoreTemplate = template(Inc.id("block/soul_core"), TX_INNER, TX_OUTER);
 		
 		//TODO: SoulCoreBlockEntityRenderer is set up to be used in an item stack renderer.
 		// However, currently I point all soulcores at the json model that this renderer uses instead
@@ -93,19 +95,27 @@ public class IncCommonModelsAndBlockstates {
 		
 		//ender
 		singleVariantBlockState(IncBlocks.ENDER_SOUL_CORE,
-			soulCoreTemplate.create(IncBlocks.ENDER_SOUL_CORE, txmap(TextureSlot.TEXTURE, Inc.id("block/soul_cores/ender")), modelOutput));
+			soulCoreTemplate.create(IncBlocks.ENDER_SOUL_CORE, txmap(
+					TX_INNER, Inc.id("block/soul_cores/ender_inner"),
+					TX_OUTER, Inc.id("block/soul_cores/ender_outer")
+			), modelOutput));
 		//itemBlockRotationsBuiltinEntity(IncBlocks.ENDER_SOUL_CORE);
 		itemBlockModelParent(IncBlocks.ENDER_SOUL_CORE);
 		
 		//potion
 		singleVariantBlockState(IncBlocks.POTION_SOUL_CORE,
-			soulCoreTemplate.create(IncBlocks.POTION_SOUL_CORE, txmap(TextureSlot.TEXTURE, Inc.id("block/soul_cores/potion")), modelOutput));
+			soulCoreTemplate.create(IncBlocks.POTION_SOUL_CORE, txmap(
+					TX_INNER, Inc.id("block/soul_cores/potion_inner"),
+					TX_OUTER, Inc.id("block/soul_cores/potion_outer")
+			), modelOutput));
 		//itemBlockRotationsBuiltinEntity(IncBlocks.POTION_SOUL_CORE);
 		itemBlockModelParent(IncBlocks.POTION_SOUL_CORE);
 		
 		//frame
-		soulCoreTemplate.create(ModelLocationUtils.getModelLocation(IncItems.SOUL_CORE_FRAME),
-			txmap(TextureSlot.TEXTURE, Inc.id("block/soul_cores/frame")), modelOutput);
+		soulCoreTemplate.create(ModelLocationUtils.getModelLocation(IncItems.SOUL_CORE_FRAME), txmap(
+				TX_INNER, Inc.id("block/soul_cores/frame_inner"),
+				TX_OUTER, Inc.id("block/soul_cores/frame_outer")
+		), modelOutput);
 		
 		/// Natural devices ///
 		//Redstone root crop

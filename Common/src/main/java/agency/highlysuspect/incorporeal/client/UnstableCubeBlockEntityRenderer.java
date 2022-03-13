@@ -44,9 +44,9 @@ public class UnstableCubeBlockEntityRenderer implements BlockEntityRenderer<Unst
 		if(cube == null) {
 			roll(pose, partialTicks, 0, 0, 0, 0, 0);
 			// So they're not so teeny-tiny in the inventory
-			pose.translate(0.5, 0.5, 0.5);
+			pose.translate(.5f, .5f, .5f);
 			pose.scale(1.4f, 1.4f, 1.4f);
-			pose.translate(-0.5, -0.5, -0.5);
+			pose.translate(-.5f, -.5f, -.5f);
 			
 			blockState = IncBlocks.UNSTABLE_CUBES.get(dyeColor).defaultBlockState();
 		} else {
@@ -104,7 +104,6 @@ public class UnstableCubeBlockEntityRenderer implements BlockEntityRenderer<Unst
 		pose.scale(upscale, upscale, upscale);
 		
 		//as with any good PoseStack scheme, there's some random fixup you have to do at the end
-		pose.scale(.5f, .5f, .5f);
 		pose.translate(-.5, -.5, -.5);
 	}
 }
