@@ -14,8 +14,4 @@ public class NotManaLens extends Lens {
 	}
 	
 	public final DataLens dataLens;
-	
-	public static final NotManaLens NUMBER = new NotManaLens(DataLens.number);
-	public static final NotManaLens MATCHER = new NotManaLens(DataLens.matcher);
-	public static final NotManaLens NEGATING = new NotManaLens(DataLens.negating);
 }
