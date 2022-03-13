@@ -2,6 +2,8 @@ package agency.highlysuspect.incorporeal.item;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
+import agency.highlysuspect.incorporeal.computer.NotManaLens;
+import agency.highlysuspect.incorporeal.computer.types.DataLens;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -11,6 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import vazkii.botania.common.item.block.ItemBlockSpecialFlower;
 import vazkii.botania.common.item.block.ItemBlockTinyPotato;
+import vazkii.botania.common.item.lens.ItemLens;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -65,11 +68,10 @@ public class IncItems {
 	}
 	
 	//computer
-	public static final BlockItem DATA_PRISM = new BlockItem(IncBlocks.DATA_PRISM, props());
-	public static final BlockItem DATA_STORAGE = new BlockItem(IncBlocks.DATA_STORAGE, props());
-	public static final BlockItem MATCHER_LENS = new BlockItem(IncBlocks.MATCHER_LENS, props());
-	public static final BlockItem NUMBER_LENS = new BlockItem(IncBlocks.NUMBER_LENS, props());
-	public static final BlockItem NEGATORY_LENS = new BlockItem(IncBlocks.NEGATORY_LENS, props());
+	public static final BlockItem DATA_FUNNEL = new BlockItem(IncBlocks.DATA_FUNNEL, props());
+	public static final ItemLens NUMBER_LENS = new ItemLens(props(), new NotManaLens(DataLens.number), 0);
+	public static final ItemLens MATCHER_LENS = new ItemLens(props(), new NotManaLens(DataLens.matcher), 0);
+	public static final ItemLens NEGATING_LENS = new ItemLens(props(), new NotManaLens(DataLens.negating), 0);
 	
 	public static void register(BiConsumer<Item, ResourceLocation> r) {
 		//items
@@ -89,7 +91,7 @@ public class IncItems {
 			//clearly
 			CLEARLY,
 			//computer
-			DATA_PRISM, DATA_STORAGE, MATCHER_LENS, NUMBER_LENS, NEGATORY_LENS),
+			DATA_FUNNEL),
 			//unstable cubes
 			UNSTABLE_CUBES.values(),
 			//taters
@@ -106,6 +108,11 @@ public class IncItems {
 		r.accept(FUNNY_SMALL, Inc.id("funny_chibi"));
 		r.accept(FLOATING_FUNNY, Inc.id("floating_funny"));
 		r.accept(FLOATING_FUNNY_SMALL, Inc.id("floating_funny_chibi"));
+		
+		//computer stuff that isn't blockitems
+		r.accept(NUMBER_LENS, Inc.id("number_lens"));
+		r.accept(MATCHER_LENS, Inc.id("matcher_lens"));
+		r.accept(NEGATING_LENS, Inc.id("negating_lens"));
 	}
 	
 	@SafeVarargs

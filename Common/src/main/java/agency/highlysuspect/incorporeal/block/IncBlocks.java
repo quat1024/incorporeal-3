@@ -1,12 +1,9 @@
 package agency.highlysuspect.incorporeal.block;
 
-import agency.highlysuspect.incorporeal.computer.types.DataLens;
 import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
-import agency.highlysuspect.incorporeal.computer.DataPrismBlock;
-import agency.highlysuspect.incorporeal.computer.DataStorageBlock;
-import agency.highlysuspect.incorporeal.computer.LensBlock;
+import agency.highlysuspect.incorporeal.computer.DataFunnelBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
@@ -79,11 +76,7 @@ public class IncBlocks {
 	}
 	
 	//computer
-	public static final DataPrismBlock DATA_PRISM = new DataPrismBlock(Properties.of(Material.METAL).noOcclusion());
-	public static final DataStorageBlock DATA_STORAGE = new DataStorageBlock(Properties.of(Material.METAL).noOcclusion());
-	public static final LensBlock MATCHER_LENS = new LensBlock(DataLens.matcher, Properties.of(Material.GLASS).noOcclusion());
-	public static final LensBlock NUMBER_LENS = new LensBlock(DataLens.number, Properties.of(Material.GLASS).noOcclusion());
-	public static final LensBlock NEGATORY_LENS = new LensBlock(DataLens.negatory, Properties.of(Material.GLASS).noOcclusion());
+	public static final DataFunnelBlock DATA_FUNNEL = new DataFunnelBlock(Properties.of(Material.METAL).noOcclusion());
 	
 	public static void register(BiConsumer<Block, ResourceLocation> r) {
 		//assorted corporea devices
@@ -122,10 +115,6 @@ public class IncBlocks {
 		COMPRESSED_TATERS.forEach((level, block) -> r.accept(block, Inc.id(CompressedTaterUtil.prefix(level, "tiny_potato"))));
 		
 		//computer
-		r.accept(DATA_PRISM, Inc.id("data_prism"));
-		r.accept(DATA_STORAGE, Inc.id("data_storage"));
-		r.accept(MATCHER_LENS, Inc.id("matcher_lens"));
-		r.accept(NUMBER_LENS, Inc.id("number_lens"));
-		r.accept(NEGATORY_LENS, Inc.id("negatory_lens"));
+		r.accept(DATA_FUNNEL, Inc.id("data_funnel"));
 	}
 }

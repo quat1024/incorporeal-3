@@ -10,12 +10,13 @@
 		"TileCorporeaInterceptorMixin",
 		"TileCorporeaIndexAccessor",
 		"TileCorporeaIndexInputHandlerMixin",
+		"CorporeaItemStackMatcherAccessor",
 		"ItemFrameAccessor",
 		"ModItemsMixin",
 		"ModTilesMixin",
 		"FarmBlockMixin",
 		"DataGeneratorMixin",
-		"TextureSlotAccessor"
+		"TextureSlotAccessor",
 	],
 	"client": [
 		"RenderTileTinyPotatoMixin"

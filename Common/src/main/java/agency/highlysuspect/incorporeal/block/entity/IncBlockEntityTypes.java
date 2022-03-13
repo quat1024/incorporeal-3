@@ -2,8 +2,7 @@ package agency.highlysuspect.incorporeal.block.entity;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
-import agency.highlysuspect.incorporeal.computer.DataPrismBlockEntity;
-import agency.highlysuspect.incorporeal.computer.DataStorageBlockEntity;
+import agency.highlysuspect.incorporeal.computer.DataFunnelBlockEntity;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
@@ -45,10 +44,8 @@ public class IncBlockEntityTypes {
 			IncBlocks.UNSTABLE_CUBES.get(color)));
 	
 	//computer
-	public static final BlockEntityType<DataPrismBlockEntity> DATA_PRISM =
-		IXplatAbstractions.INSTANCE.createBlockEntityType(DataPrismBlockEntity::new, IncBlocks.DATA_PRISM);
-	public static final BlockEntityType<DataStorageBlockEntity> DATA_STORAGE =
-		IXplatAbstractions.INSTANCE.createBlockEntityType(DataStorageBlockEntity::new, IncBlocks.DATA_STORAGE);
+	public static final BlockEntityType<DataFunnelBlockEntity> DATA_FUNNEL =
+		IXplatAbstractions.INSTANCE.createBlockEntityType(DataFunnelBlockEntity::new, IncBlocks.DATA_FUNNEL);
 	
 	public static void register(BiConsumer<BlockEntityType<?>, ResourceLocation> r) {
 		r.accept(RED_STRING_LIAR, Inc.id("red_string_liar"));
@@ -64,7 +61,6 @@ public class IncBlockEntityTypes {
 		
 		UNSTABLE_CUBES.forEach((color, type) -> r.accept(type, Inc.id(color.getName() + "_unstable_cube")));
 		
-		r.accept(DATA_PRISM, Inc.id("data_prism"));
-		r.accept(DATA_STORAGE, Inc.id("data_storage"));
+		r.accept(DATA_FUNNEL, Inc.id("data_funnel"));
 	}
 }

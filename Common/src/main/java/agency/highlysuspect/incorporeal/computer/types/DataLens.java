@@ -15,7 +15,7 @@ import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
  * Sorry for letting you down on this.
  */
 public interface DataLens {
-	DataType.Datum<?> filter(DataType.Datum<?> input);
+	Datum<?> filter(Datum<?> input);
 	
 	//Here, have a couple examples:
 	DataLens number = input -> {
@@ -24,26 +24,26 @@ public interface DataLens {
 		//Solidified requests focus on the integer portion,
 		if(input.type() == DataTypes.SOLIDIFIED_REQUEST) return input.<SolidifiedRequest>cast().mapTo(DataTypes.INTEGER, SolidifiedRequest::count);
 		//and everything else gets blocked.
-		return DataType.Datum.EMPTY;
+		return Datum.EMPTY;
 	};
 	
 	DataLens matcher = input -> {
 		if(input.type() == DataTypes.MATCHER) return input;
 		if(input.type() == DataTypes.SOLIDIFIED_REQUEST) return input.<SolidifiedRequest>cast().mapTo(DataTypes.MATCHER, SolidifiedRequest::matcher);
-		return DataType.Datum.EMPTY;
+		return Datum.EMPTY;
 	};
 	
-	DataLens negatory = input -> {
+	DataLens negating = input -> {
 		if(input.type() == DataTypes.INTEGER) return input.<Integer>cast().map(i -> -i);
 		if(input.type() == DataTypes.MATCHER) return input.<ICorporeaRequestMatcher>cast().map(InvertedCorporeaRequestMatcher::invert);
 		if(input.type() == DataTypes.SOLIDIFIED_REQUEST) {
 			//negate both halves
 			SolidifiedRequest request = input.<SolidifiedRequest>cast().thing();
-			return new DataType.Datum<>(DataTypes.SOLIDIFIED_REQUEST, SolidifiedRequest.create(
+			return DataTypes.SOLIDIFIED_REQUEST.datumOf(SolidifiedRequest.create(
 				InvertedCorporeaRequestMatcher.invert(request.matcher()),
 				-request.count()
 			));
 		}
-		return DataType.Datum.EMPTY;
+		return Datum.EMPTY;
 	};
 }

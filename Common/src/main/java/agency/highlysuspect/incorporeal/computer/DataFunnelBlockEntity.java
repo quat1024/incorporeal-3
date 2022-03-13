@@ -20,14 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class DataPrismBlockEntity extends TileMod implements IWandBindable {
-	public DataPrismBlockEntity(BlockPos pos, BlockState state) {
-		super(IncBlockEntityTypes.DATA_PRISM, pos, state);
+public class DataFunnelBlockEntity extends TileMod implements IWandBindable {
+	public DataFunnelBlockEntity(BlockPos pos, BlockState state) {
+		super(IncBlockEntityTypes.DATA_FUNNEL, pos, state);
 	}
 	
 	private final List<BlockPos> bindTargets = new ArrayList<>();
 	
-	public void act(BlockPos me, Direction direction) {
+	public void act() {
 		assert level != null;
 		
 		//TODO
@@ -51,14 +51,6 @@ public class DataPrismBlockEntity extends TileMod implements IWandBindable {
 		BlockPos me = getBlockPos();
 		if(Objects.equals(me, target)) return false;
 		if(MathHelper.distSqr(me, target) > 12 * 12) return false;
-		
-		//Only allow axis aligned binds for now.
-		//TODO remove this restriction
-		int matchingAxes = 0;
-		if(me.getX() == target.getX()) matchingAxes++;
-		if(me.getY() == target.getY()) matchingAxes++;
-		if(me.getZ() == target.getZ()) matchingAxes++;
-		if(matchingAxes != 2) return false;
 		
 		bindTargets.add(target);
 		setChanged();

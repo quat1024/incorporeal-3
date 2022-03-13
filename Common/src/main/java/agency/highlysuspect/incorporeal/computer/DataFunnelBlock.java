@@ -2,8 +2,6 @@ package agency.highlysuspect.incorporeal.computer;
 
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -13,24 +11,17 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Nullable;
 
-public class DataPrismBlock extends Block implements EntityBlock {
-	public DataPrismBlock(Properties props) {
+public class DataFunnelBlock extends Block implements EntityBlock {
+	public DataFunnelBlock(Properties props) {
 		super(props);
 		
 		registerDefaultState(defaultBlockState()
-			.setValue(BlockStateProperties.FACING, Direction.UP)
 			.setValue(BlockStateProperties.POWERED, false));
 	}
 	
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> $$0) {
-		super.createBlockStateDefinition($$0.add(BlockStateProperties.FACING, BlockStateProperties.POWERED));
-	}
-	
-	@Nullable
-	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-		return defaultBlockState().setValue(BlockStateProperties.FACING, ctx.getNearestLookingDirection().getOpposite());
+		super.createBlockStateDefinition($$0.add(BlockStateProperties.POWERED));
 	}
 	
 	@Override
@@ -40,8 +31,8 @@ public class DataPrismBlock extends Block implements EntityBlock {
 		if(shouldPower != isPowered) {
 			level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.POWERED, shouldPower));
 			
-			if(!level.isClientSide() && level.getBlockEntity(pos) instanceof DataPrismBlockEntity prism) {
-				prism.act(pos, state.getValue(BlockStateProperties.FACING));
+			if(!level.isClientSide() && level.getBlockEntity(pos) instanceof DataFunnelBlockEntity prism) {
+				prism.act();
 			}
 		}
 	}
@@ -49,6 +40,6 @@ public class DataPrismBlock extends Block implements EntityBlock {
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return IncBlockEntityTypes.DATA_PRISM.create(pos, state);
+		return IncBlockEntityTypes.DATA_FUNNEL.create(pos, state);
 	}
 }
