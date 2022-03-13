@@ -1,5 +1,6 @@
-package agency.highlysuspect.incorporeal;
+package agency.highlysuspect.incorporeal.util;
 
+import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.block.Block;

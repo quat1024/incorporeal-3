@@ -9,7 +9,6 @@ import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.block.IWandBindable;
@@ -22,8 +21,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class DataPrismBlockEntity extends TileMod implements IWandBindable {
-	public DataPrismBlockEntity(BlockPos $$1, BlockState $$2) {
-		super(IncBlockEntityTypes.DATA_PRISM, $$1, $$2);
+	public DataPrismBlockEntity(BlockPos pos, BlockState state) {
+		super(IncBlockEntityTypes.DATA_PRISM, pos, state);
 	}
 	
 	private final List<BlockPos> bindTargets = new ArrayList<>();
@@ -31,33 +30,7 @@ public class DataPrismBlockEntity extends TileMod implements IWandBindable {
 	public void act(BlockPos me, Direction direction) {
 		assert level != null;
 		
-		//TODO (HUUUUUUUGE TODO ITEM): allow raycasts at any angle instead of axis aligned only!!!
-		// This is simpler to implement tho and I am seriously running out of time
-		
-		List<Object> collectedDatums = new ArrayList<>();
-		for(BlockPos target : bindTargets) {
-			//figure out which direction points from the target to myself
-			BlockPos difference = me.subtract(target);
-			int steps = difference.distManhattan(me) - 1;
-			Direction towardsMe = Direction.getNearest(difference.getX(), difference.getY(), difference.getZ()); //might be backwards..!
-			
-			Object datum = null;
-			BlockPos.MutableBlockPos cursor = target.mutable();
-			for(int i = 0; i < steps; i++) {
-				BlockEntity beHere = level.getBlockEntity(cursor);
-				
-				if(DataTypes.canExtractData(beHere)) datum = DataTypes.extractData(beHere);
-				datum = DataTypes.filterData(level, cursor, datum);
-				
-				cursor.move(towardsMe);
-			}
-			
-			if(datum != null) collectedDatums.add(datum);
-		}
-		
-		//add all the pieces of data together (TODO)
-		
-		//send the resulting piece of data out the front of the block (TODO)
+		//TODO
 	}
 	
 	@Override

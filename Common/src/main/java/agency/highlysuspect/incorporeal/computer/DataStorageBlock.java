@@ -9,8 +9,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public class DataStorageBlock extends Block implements EntityBlock {
-	public DataStorageBlock(Properties $$0) {
-		super($$0);
+	public DataStorageBlock(Properties props) {
+		super(props);
 	}
 	
 	@Nullable

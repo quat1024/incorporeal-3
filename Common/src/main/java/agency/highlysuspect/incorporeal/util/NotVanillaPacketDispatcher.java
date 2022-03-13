@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal;
+package agency.highlysuspect.incorporeal.util;
 
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerLevel;

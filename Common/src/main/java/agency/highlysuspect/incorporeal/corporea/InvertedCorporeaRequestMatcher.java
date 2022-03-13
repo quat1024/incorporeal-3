@@ -24,12 +24,12 @@ public record InvertedCorporeaRequestMatcher(ICorporeaRequestMatcher inner) impl
 	
 	@Override
 	public void writeToNBT(CompoundTag tag) {
-		tag.put("inner", MatcherUtils.toTag(inner));
+		tag.put("inner", MatcherUtils.save(inner));
 	}
 	
 	public static InvertedCorporeaRequestMatcher readFromNBT(CompoundTag tag) {
 		//todo: don't throw
-		return new InvertedCorporeaRequestMatcher(MatcherUtils.tryFromTag(tag.getCompound("inner")).orElseThrow());
+		return new InvertedCorporeaRequestMatcher(MatcherUtils.tryLoad(tag.getCompound("inner")).orElseThrow());
 	}
 	
 	@Override

@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.datagen;
 
-import agency.highlysuspect.incorporeal.CompressedTaterUtil;
+import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.CompressedTinyPotatoBlock;
 import agency.highlysuspect.incorporeal.block.CrappyComparatorBlock;

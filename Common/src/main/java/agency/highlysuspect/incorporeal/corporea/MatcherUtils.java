@@ -16,7 +16,7 @@ import java.util.function.Function;
  * matcher that did the serializing, so there's no way to retrieve it.
  */
 public class MatcherUtils {
-	public static Optional<ICorporeaRequestMatcher> tryFromTag(CompoundTag nbt) {
+	public static Optional<ICorporeaRequestMatcher> tryLoad(CompoundTag nbt) {
 		ResourceLocation type = ResourceLocation.tryParse(nbt.getString("type"));
 		if(type == null) return Optional.empty();
 		
@@ -31,7 +31,7 @@ public class MatcherUtils {
 		return Optional.of(de.apply(nbt));
 	}
 	
-	public static CompoundTag toTag(ICorporeaRequestMatcher matcher) {
+	public static CompoundTag save(ICorporeaRequestMatcher matcher) {
 		Map<Class<? extends ICorporeaRequestMatcher>, ResourceLocation> nameMap = TileCorporeaRetainerAccessor.inc$getSerializers();
 		ResourceLocation name = nameMap.get(matcher.getClass());
 		

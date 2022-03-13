@@ -44,7 +44,7 @@ public record AndingCorporeaRequestMatcher(List<ICorporeaRequestMatcher> others)
 	@Override
 	public void writeToNBT(CompoundTag tag) {
 		ListTag list = new ListTag();
-		for(ICorporeaRequestMatcher matcher : others) list.add(MatcherUtils.toTag(matcher));
+		for(ICorporeaRequestMatcher matcher : others) list.add(MatcherUtils.save(matcher));
 		tag.put("compound", list);
 	}
 	
@@ -52,7 +52,7 @@ public record AndingCorporeaRequestMatcher(List<ICorporeaRequestMatcher> others)
 		return new AndingCorporeaRequestMatcher(tag.getList("compound", 10).stream()
 			.filter(t -> t instanceof CompoundTag)
 			.map(t -> (CompoundTag) t)
-			.map(MatcherUtils::tryFromTag)
+			.map(MatcherUtils::tryLoad)
 			.filter(Optional::isPresent)
 			.map(Optional::get)
 			.toList());

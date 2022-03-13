@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal;
+package agency.highlysuspect.incorporeal.util;
 
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 

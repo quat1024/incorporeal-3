@@ -43,13 +43,13 @@ public final class SolidifiedRequest {
 	}
 	
 	public CompoundTag save() {
-		CompoundTag tag = MatcherUtils.toTag(matcher);
+		CompoundTag tag = MatcherUtils.save(matcher);
 		tag.putInt("count", count);
 		return tag;
 	}
 	
 	public static Optional<SolidifiedRequest> tryLoad(CompoundTag tag) {
-		return MatcherUtils.tryFromTag(tag).map(matcher -> {
+		return MatcherUtils.tryLoad(tag).map(matcher -> {
 			int count = tag.getInt("count");
 			return create(matcher, count);
 		});

@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.block;
 
-import agency.highlysuspect.incorporeal.CompressedTaterUtil;
+import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;

@@ -14,8 +14,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Nullable;
 
 public class DataPrismBlock extends Block implements EntityBlock {
-	public DataPrismBlock(Properties $$0) {
-		super($$0);
+	public DataPrismBlock(Properties props) {
+		super(props);
 		
 		registerDefaultState(defaultBlockState()
 			.setValue(BlockStateProperties.FACING, Direction.UP)
