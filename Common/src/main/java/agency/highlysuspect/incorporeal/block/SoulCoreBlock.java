@@ -31,16 +31,22 @@ public class SoulCoreBlock extends BlockMod implements EntityBlock {
 		super(props);
 		this.typeS = typeS;
 	}
-
-	private static double px = 1;
-	public static final VoxelShape SHAPE = Shapes.create(px/16d, px/16d, px/16d, 1 - px/16d, 1 - px/16d, 1 - px/16d);
+	
+	public static final double PX = 1;
+	public static final VoxelShape SHAPE = Shapes.create(PX/16d, PX/16d, PX/16d, 1 - PX/16d, 1 - PX/16d, 1 - PX/16d);
+	
+	//some measurements that are helpful elsewhere, like for getting the potion soul core's collector entity
+	//centered inside the block
+	public static final double WIDTH = SHAPE.bounds().getXsize();
+	public static final double HEIGHT = SHAPE.bounds().getYsize();
+	public static final double DISTANCE_OFF_THE_GROUND = PX / 16d;
+	
+	protected final Supplier<BlockEntityType<? extends AbstractSoulCoreBlockEntity>> typeS;
 
 	@Override
 	public VoxelShape getShape(BlockState $$0, BlockGetter $$1, BlockPos $$2, CollisionContext $$3) {
 		return SHAPE;
 	}
-
-	private final Supplier<BlockEntityType<? extends AbstractSoulCoreBlockEntity>> typeS;
 	
 	//initial activation
 	@Override

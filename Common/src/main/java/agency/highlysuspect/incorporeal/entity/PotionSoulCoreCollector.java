@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.entity;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.block.SoulCoreBlock;
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.block.entity.PotionSoulCoreBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -34,9 +35,15 @@ public class PotionSoulCoreCollector extends LivingEntity {
 		noPhysics = true;
 	}
 	
+	//The entity sits just inside the soul core block.
+	public static final double INSET = 0.01;
+	public static final float WIDTH = (float) (SoulCoreBlock.WIDTH - INSET);
+	public static final float HEIGHT = (float) (SoulCoreBlock.HEIGHT - INSET);
+	public static final double DISTANCE_OFF_THE_GROUND = SoulCoreBlock.DISTANCE_OFF_THE_GROUND + (INSET / 2);
+	
 	public PotionSoulCoreCollector(Level level, BlockPos pos) {
 		this(IncEntityTypes.POTION_SOUL_CORE_COLLECTOR, level);
-		setPos(pos.getX() + .5d, pos.getY() + 0.005d, pos.getZ() + 0.5d);
+		setPos(pos.getX() + .5d, pos.getY() + DISTANCE_OFF_THE_GROUND, pos.getZ() + .5d);
 	}
 	
 	public static AttributeSupplier.Builder attrs() {
@@ -86,7 +93,7 @@ public class PotionSoulCoreCollector extends LivingEntity {
 		setRot(0, 0);
 		setHealth(getMaxHealth() / 2);
 		setAirSupply(getMaxAirSupply());
-		setPos(Math.floor(position().x) + 0.5d, Math.floor(position().y + 0.005d), Math.floor(position().z) + 0.5d);
+		setPos(Math.floor(position().x) + .5d, Math.floor(position().y) + DISTANCE_OFF_THE_GROUND, Math.floor(position().z) + .5d);
 		
 		//Find the potionsoulcore and the player. if either does not exist, remove the entity
 		Data data = findOrDiscard();

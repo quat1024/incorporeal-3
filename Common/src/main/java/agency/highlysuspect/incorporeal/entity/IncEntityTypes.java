@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.entity;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.block.SoulCoreBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,7 +21,7 @@ public class IncEntityTypes {
 	
 	public static final EntityType<PotionSoulCoreCollector> POTION_SOUL_CORE_COLLECTOR =
 		EntityType.Builder.<PotionSoulCoreCollector>of(PotionSoulCoreCollector::new, MobCategory.MISC)
-			.sized(0.99f, 0.99f)
+			.sized(PotionSoulCoreCollector.WIDTH, PotionSoulCoreCollector.HEIGHT)
 			.fireImmune()
 			.updateInterval(40)
 			.clientTrackingRange(10)
