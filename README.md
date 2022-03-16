@@ -1,7 +1,9 @@
 Incorporeal 3
 =============
 
-Magic mod addon in which an old dragon yells at a corporea spark. I don't think I can call it "corporea focused" anymore. 1.18*.1* currently, Forge and Fabric.
+[![the real](https://github.com/quat1024/incorporeal-3/actions/workflows/yeaaa.yml/badge.svg)](https://github.com/quat1024/incorporeal-3/actions/workflows/yeaaa.yml)
+
+Magic mod addon in which an old dragon yells at a corporea spark. I don't think I can call it "corporea focused" anymore. 1.18 *.1* currently, Forge and Fabric.
 
 Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-forge), Incorporeal 1 (1.12/Forge) is [here](https://github.com/quat1024/incorporeal).
 
