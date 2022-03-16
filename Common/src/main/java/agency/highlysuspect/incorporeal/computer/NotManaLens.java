@@ -14,4 +14,8 @@ public class NotManaLens extends Lens {
 	}
 	
 	public final DataLens dataLens;
+	
+	public DataLens getDataLens() {
+		return dataLens;
+	}
 }

@@ -3,16 +3,21 @@ package agency.highlysuspect.incorporeal.computer;
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.computer.capabilities.DatumAcceptor;
 import agency.highlysuspect.incorporeal.computer.capabilities.DatumProvider;
+import agency.highlysuspect.incorporeal.computer.types.DataType;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
+import agency.highlysuspect.incorporeal.net.DataFunnelEffect;
+import agency.highlysuspect.incorporeal.net.IncNetwork;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.block.IWandBindable;
 import vazkii.botania.api.internal.VanillaPacketDispatcher;
@@ -20,15 +25,17 @@ import vazkii.botania.common.block.tile.TileMod;
 import vazkii.botania.common.helper.MathHelper;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class DataFunnelBlockEntity extends TileMod implements IWandBindable, DatumAcceptor, DatumProvider {
 	public DataFunnelBlockEntity(BlockPos pos, BlockState state) {
 		super(IncBlockEntityTypes.DATA_FUNNEL, pos, state);
 	}
 	
-	private final List<BlockPos> bindTargets = new ArrayList<>();
+	private final Set<BlockPos> bindTargets = new HashSet<>();
 	private Datum<?> datum = Datum.EMPTY;
 	
 	@Override
@@ -49,12 +56,49 @@ public class DataFunnelBlockEntity extends TileMod implements IWandBindable, Dat
 	public void act() {
 		assert level != null;
 		
-		//TODO: the entire shit
-		// - raycast from datumproviders at bind positions towards myself
-		//   - if finding a mana prism w/ NotManaLens, apply the data effect
-		//   - if finding a datumacceptor, input datum, and drop that raycast
-		// - do the funny magma operation to combine all the datums
-		// - store resulting datum in myself
+		if(level.isClientSide) return;
+		ServerLevel slevel = (ServerLevel) level; 
+		
+		List<Datum<?>> leftoverDatums = new ArrayList<>(bindTargets.size()); //upper bound
+		DataFunnelEffect effect = new DataFunnelEffect();
+		
+		for(BlockPos bindingPos : bindTargets) {
+			//Perform the ridiculously complicated raycast operation
+			DataRayClipContext clip = DataRayClipContext.performClip(level, bindingPos, worldPosition);
+			//Ok now I gotta sift through all that data!!!
+			
+			//Iterate through the linkages (maybe this should be done in reverse order idk, will change the game play)
+			for(DataRayClipContext.Pairing pairing : clip.pairings) {
+				DataRayClipContext.ProviderEntry providerEntry = pairing.provider();
+				
+				Vec3 sparkleStart = providerEntry.pos();
+				Datum<?> datum = providerEntry.provider().readDatum();
+				
+				//Apply lens effects along the way, dragging the datum through the lens.
+				for(DataRayClipContext.LensEntry lensEntry : providerEntry.lenses()) {
+					effect.addLine(sparkleStart, lensEntry.pos(), datum.color());
+					sparkleStart = lensEntry.pos();
+					datum = lensEntry.lens().filter(datum);
+				}
+				
+				//Insert the resulting datum into the acceptor...
+				DataRayClipContext.AcceptorEntry acceptorEntry = pairing.acceptor();
+				effect.addLine(sparkleStart, acceptorEntry.pos(), datum.color());
+				DatumAcceptor acceptor = acceptorEntry.acceptor();
+				if(acceptor == this && !datum.isEmpty()) {
+					//Unless it's me! I need to sum these datums together.
+					leftoverDatums.add(datum);
+				} else {
+					acceptor.acceptDatum(datum);
+				}
+			}
+		}
+		
+		//Sum up the leftover datums and store the result in myself.
+		acceptDatum(Datum.reduce(leftoverDatums));
+		
+		//And show off.
+		if(!effect.isEmpty()) IncNetwork.sendToAllWatching(effect, slevel, worldPosition);
 	}
 	
 	@Override
@@ -64,11 +108,9 @@ public class DataFunnelBlockEntity extends TileMod implements IWandBindable, Dat
 	
 	@Override
 	public boolean bindTo(Player player, ItemStack wand, BlockPos target, Direction side) {
-		//linear scan, yes
-		
 		//binding to the same target again will unbind
-		if(bindTargets.contains(target)) {
-			bindTargets.remove(target);
+		if(bindTargets.contains(target)) { //linear scan smh
+			bindTargets.remove(target); //linear scan smh
 			setChanged();
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
 			return true;
@@ -92,7 +134,7 @@ public class DataFunnelBlockEntity extends TileMod implements IWandBindable, Dat
 		//TODO: This is very silly, and is obviously temporary
 		// Look into something like IWireframeCoordinateListProvider but for blockentities and not items i guess?
 		if(bindTargets.size() == 0) return null;
-		return bindTargets.get(lol++ % bindTargets.size());
+		return new ArrayList<>(bindTargets).get(lol++ % bindTargets.size());
 	}
 	
 	@Override

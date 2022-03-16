@@ -2,6 +2,7 @@ package agency.highlysuspect.incorporeal.computer.types;
 
 import agency.highlysuspect.incorporeal.corporea.InvertedCorporeaRequestMatcher;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
+import org.jetbrains.annotations.NotNull;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 
 /**
@@ -15,9 +16,13 @@ import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
  * Sorry for letting you down on this.
  */
 public interface DataLens {
-	Datum<?> filter(Datum<?> input);
+	@NotNull Datum<?> filter(@NotNull Datum<?> input);
 	
 	//Here, have a couple examples:
+	//This one is completely transparent and never changes the data. It's the ItemStack.EMPTY of DataLenses.
+	DataLens passthrough = input -> input;
+	
+	//This one filters the incoming data to integers.
 	DataLens number = input -> {
 		//Numbers pass through the filter unchanged,
 		if(input.type() == DataTypes.INTEGER) return input;

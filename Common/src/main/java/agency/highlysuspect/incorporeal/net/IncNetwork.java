@@ -87,5 +87,6 @@ public class IncNetwork {
 	public static class Ids {
 		public static final byte FUNNY = 0;
 		public static final byte SANVOCALIA = 1;
+		public static final byte DATA_FUNNEL = 2;
 	}
 }

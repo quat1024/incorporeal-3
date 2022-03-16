@@ -15,7 +15,12 @@ public class EmptyDataType implements DataType<Unit> {
 	}
 	
 	@Override
-	public Unit sum(Unit... inputs) {
-		return Unit.INSTANCE;
+	public int color(Unit thing) {
+		return 0x000000;
+	}
+	
+	@Override
+	public Unit sum(Unit a, Unit b) {
+		return a;
 	}
 }

@@ -3,8 +3,11 @@ package agency.highlysuspect.incorporeal.computer.types;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Unit;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
@@ -15,6 +18,39 @@ import java.util.function.UnaryOperator;
 @ParametersAreNonnullByDefault
 public record Datum<T>(DataType<T> type, T thing) {
 	public static final Datum<Unit> EMPTY = new Datum<>(DataTypes.EMPTY, Unit.INSTANCE);
+	
+	/// Convenience ///
+	
+	public int color() {
+		return type.color(thing);
+	}
+	
+	public boolean isEmpty() {
+		return type == DataTypes.EMPTY;
+	}
+	
+	/**
+	 * Returns EMPTY if any datums can't be added together.
+	 * Currently this happens every time the datums have different types.
+	 * For that reason, this method returns Datum<?> because it may either return Datum<T> or Datum<Unit>.
+	 */
+	public Datum<?> reduce(Iterable<Datum<?>> others) {
+		Datum<T> result = this;
+		for(Datum<?> other : others) {
+			if(other.type.equals(type)) result = result.map(first -> type.sum(first, other.castAndGet()));
+			else return EMPTY;
+		}
+		return result;
+	}
+	
+	public static Datum<?> reduce(Collection<Datum<?>> datums) {
+		if(datums.isEmpty()) return EMPTY;
+		
+		//lop off the first
+		Iterator<Datum<?>> datumerator = datums.iterator();
+		//call reduce with it on the rest
+		return datumerator.next().reduce(() -> datumerator);
+	} 
 	
 	/// Weird bullshit ///
 	

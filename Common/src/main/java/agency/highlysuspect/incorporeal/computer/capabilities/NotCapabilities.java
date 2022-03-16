@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.computer.capabilities;
 
+import agency.highlysuspect.incorporeal.computer.NotManaLens;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
 import agency.highlysuspect.incorporeal.corporea.RetainerDuck;
@@ -19,6 +20,8 @@ import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 import vazkii.botania.common.block.tile.corporea.TileCorporeaCrystalCube;
 import vazkii.botania.common.block.tile.corporea.TileCorporeaIndex;
 import vazkii.botania.common.block.tile.mana.TileManaVoid;
+import vazkii.botania.common.block.tile.mana.TilePrism;
+import vazkii.botania.common.item.lens.ItemLens;
 
 import java.util.Collection;
 
@@ -131,6 +134,15 @@ public class NotCapabilities {
 		//Iterating twice is intentional btw; I want to prefer numbers to booleans if there's both
 		for(Property<?> prop : props) {
 			if(prop instanceof BooleanProperty boolProp) return () -> DataTypes.INTEGER.datumOf(s.getValue(boolProp) ? 1 : 0);
+		}
+		
+		return null;
+	}
+	
+	public static @Nullable DataLensProvider findDataLensProvider(Level level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be) {
+		if(be != null) be = level.getBlockEntity(pos);
+		if(be instanceof TilePrism prism && ItemLens.getLens(prism.getItem(0)) instanceof NotManaLens dataLens) {
+			return dataLens::getDataLens;
 		}
 		
 		return null;

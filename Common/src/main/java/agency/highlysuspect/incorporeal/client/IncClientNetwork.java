@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.client;
 
+import agency.highlysuspect.incorporeal.net.DataFunnelEffect;
 import agency.highlysuspect.incorporeal.net.FunnyEffect;
 import agency.highlysuspect.incorporeal.net.IncNetwork;
 import agency.highlysuspect.incorporeal.net.SanvocaliaEffect;
@@ -59,6 +60,19 @@ public class IncClientNetwork {
 				Level level = mc.level;
 				if(level == null) return;
 				for(BlockPos dst : effect.ends()) ItemTwigWand.doParticleBeam(level, effect.start(), Vec3.atCenterOf(dst));
+			});
+		});
+		
+		handlers.put(IncNetwork.Ids.DATA_FUNNEL, (mc, buf) -> {
+			DataFunnelEffect effect = DataFunnelEffect.unpack(buf);
+			
+			mc.doRunTask(() -> {
+				Level level = mc.level;
+				if(level == null) return;
+				for(DataFunnelEffect.Line line : effect.lines()) {
+					//TODO, color is ignored.
+					ItemTwigWand.doParticleBeam(level, line.start(), line.end());
+				}
 			});
 		});
 	}

@@ -14,10 +14,12 @@ public class IntegerType implements DataType<Integer> {
 	}
 	
 	@Override
-	public Integer sum(Integer... inputs) {
-		//TODO: some sort of saturating addition might be a nice thing to try
-		int pizza = 0;
-		for(int i : inputs) pizza += i;
-		return pizza;
+	public int color(Integer thing) {
+		return 0xFF2222;
+	}
+	
+	@Override
+	public Integer sum(Integer i, Integer j) {
+		return i + j;
 	}
 }

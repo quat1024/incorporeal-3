@@ -20,7 +20,12 @@ public class CorporeaRequestMatcherType implements DataType<ICorporeaRequestMatc
 	}
 	
 	@Override
-	public ICorporeaRequestMatcher sum(ICorporeaRequestMatcher... inputs) {
-		return AndingCorporeaRequestMatcher.combine(List.of(inputs));
+	public int color(ICorporeaRequestMatcher thing) {
+		return 0x7722FF;
+	}
+	
+	@Override
+	public ICorporeaRequestMatcher sum(ICorporeaRequestMatcher a, ICorporeaRequestMatcher b) {
+		return AndingCorporeaRequestMatcher.combine(List.of(a, b));
 	}
 }

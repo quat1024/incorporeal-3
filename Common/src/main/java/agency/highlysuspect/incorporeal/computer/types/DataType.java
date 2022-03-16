@@ -37,6 +37,11 @@ public interface DataType<T> {
 	}
 	
 	/**
+	 * Returns a color corresponding to this data type.
+	 */
+	int color(T thing);
+	
+	/**
 	 * Returns whether these two things are equal.
 	 * By default, forwards to Objects.equals, which works on most types.
 	 */
@@ -56,7 +61,7 @@ public interface DataType<T> {
 	 * Sums the inputs; used in the Data Prism.
 	 */
 	@SuppressWarnings("unchecked") //Can't put SafeVarargs as an interface contract. Play nice, please.
-	T sum(T... inputs);
+	T sum(T a, T b);
 	
 	//Convenience
 	default Datum<T> datumOf(T thing) {
