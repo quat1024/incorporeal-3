@@ -1,12 +1,13 @@
 package agency.highlysuspect.incorporeal.computer.types;
 
-import agency.highlysuspect.incorporeal.corporea.AndingCorporeaRequestMatcher;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import net.minecraft.nbt.CompoundTag;
 
-import java.util.List;
 import java.util.Optional;
 
+/**
+ * A DataType representing "solidified requests", which are a corporea request matcher + count pair.
+ */
 public class SolidifiedRequestType implements DataType<SolidifiedRequest> {
 	@Override
 	public void save(SolidifiedRequest thing, CompoundTag tag) {
@@ -24,10 +25,7 @@ public class SolidifiedRequestType implements DataType<SolidifiedRequest> {
 	}
 	
 	@Override
-	public SolidifiedRequest sum(SolidifiedRequest a, SolidifiedRequest b) {
-		return SolidifiedRequest.create(
-			AndingCorporeaRequestMatcher.combine(List.of(a.matcher(), b.matcher())),
-			a.count() + b.count()
-		);
+	public int signal(SolidifiedRequest thing) {
+		return thing.signalStrength();
 	}
 }

@@ -3,7 +3,10 @@ package agency.highlysuspect.incorporeal.computer.types;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Unit;
 
-public class EmptyDataType implements DataType<Unit> {
+/**
+ * A DataType representing... nothing. The type of the empty Datum.
+ */
+public class EmptyType implements DataType<Unit> {
 	@Override
 	public void save(Unit thing, CompoundTag tag) {
 		//Nope.
@@ -20,7 +23,7 @@ public class EmptyDataType implements DataType<Unit> {
 	}
 	
 	@Override
-	public Unit sum(Unit a, Unit b) {
-		return a;
+	public int signal(Unit thing) {
+		return 0;
 	}
 }

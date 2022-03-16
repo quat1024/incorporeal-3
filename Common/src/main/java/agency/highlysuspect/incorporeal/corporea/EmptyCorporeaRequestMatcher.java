@@ -12,6 +12,8 @@ import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 public class EmptyCorporeaRequestMatcher implements ICorporeaRequestMatcher {
 	public static final EmptyCorporeaRequestMatcher INSTANCE = new EmptyCorporeaRequestMatcher();
 	
+	private EmptyCorporeaRequestMatcher() {}
+	
 	@Override
 	public boolean test(ItemStack stack) {
 		return false; //Nope

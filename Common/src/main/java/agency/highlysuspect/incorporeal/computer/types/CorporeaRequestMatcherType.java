@@ -1,13 +1,15 @@
 package agency.highlysuspect.incorporeal.computer.types;
 
-import agency.highlysuspect.incorporeal.corporea.AndingCorporeaRequestMatcher;
+import agency.highlysuspect.incorporeal.corporea.EmptyCorporeaRequestMatcher;
 import agency.highlysuspect.incorporeal.corporea.MatcherUtils;
 import net.minecraft.nbt.CompoundTag;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 
-import java.util.List;
 import java.util.Optional;
 
+/**
+ * A DataType representing corporea request matchers.
+ */
 public class CorporeaRequestMatcherType implements DataType<ICorporeaRequestMatcher> {
 	@Override
 	public void save(ICorporeaRequestMatcher thing, CompoundTag tag) {
@@ -25,7 +27,8 @@ public class CorporeaRequestMatcherType implements DataType<ICorporeaRequestMatc
 	}
 	
 	@Override
-	public ICorporeaRequestMatcher sum(ICorporeaRequestMatcher a, ICorporeaRequestMatcher b) {
-		return AndingCorporeaRequestMatcher.combine(List.of(a, b));
+	public int signal(ICorporeaRequestMatcher thing) {
+		if(thing == EmptyCorporeaRequestMatcher.INSTANCE || thing == ICorporeaRequestMatcher.Dummy.INSTANCE) return 0;
+		else return 15;
 	}
 }

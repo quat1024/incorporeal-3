@@ -31,10 +31,21 @@ public class DataFunnelBlock extends Block implements EntityBlock {
 		if(shouldPower != isPowered) {
 			level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.POWERED, shouldPower));
 			
-			if(!level.isClientSide() && level.getBlockEntity(pos) instanceof DataFunnelBlockEntity prism) {
-				prism.act();
+			if(shouldPower && !level.isClientSide() && level.getBlockEntity(pos) instanceof DataFunnelBlockEntity funnel) {
+				funnel.doIt();
 			}
 		}
+	}
+	
+	@Override
+	public boolean hasAnalogOutputSignal(BlockState state) {
+		return true;
+	}
+	
+	@Override
+	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+		if(level.getBlockEntity(pos) instanceof DataFunnelBlockEntity funnel) return funnel.signal();
+		else return 0;
 	}
 	
 	@Nullable

@@ -42,6 +42,11 @@ public interface DataType<T> {
 	int color(T thing);
 	
 	/**
+	 * Returns what comparator signal strength this thing should emit.
+	 */
+	int signal(T thing);
+	
+	/**
 	 * Returns whether these two things are equal.
 	 * By default, forwards to Objects.equals, which works on most types.
 	 */
@@ -56,12 +61,6 @@ public interface DataType<T> {
 	default int hashCode(T thing) {
 		return thing.hashCode();
 	}
-	
-	/**
-	 * Sums the inputs; used in the Data Prism.
-	 */
-	@SuppressWarnings("unchecked") //Can't put SafeVarargs as an interface contract. Play nice, please.
-	T sum(T a, T b);
 	
 	//Convenience
 	default Datum<T> datumOf(T thing) {

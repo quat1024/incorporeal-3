@@ -2,6 +2,8 @@ package agency.highlysuspect.incorporeal;
 
 import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
+import agency.highlysuspect.incorporeal.computer.types.DataLenses;
+import agency.highlysuspect.incorporeal.computer.types.DataReducers;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.corporea.AndingCorporeaRequestMatcher;
 import agency.highlysuspect.incorporeal.corporea.EmptyCorporeaRequestMatcher;
@@ -44,6 +46,8 @@ public class Inc {
 		
 		//computer stuff
 		DataTypes.registerBuiltinTypes();
+		DataReducers.registerBuiltinReducers();
+		DataLenses.registerBuiltinLenses();
 	}
 	
 	public static ResourceLocation id(String path) {

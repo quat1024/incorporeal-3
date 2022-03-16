@@ -1,10 +1,12 @@
 package agency.highlysuspect.incorporeal.util;
 
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
 import java.util.IdentityHashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -14,9 +16,9 @@ import java.util.Map;
  * 
  * Name inspired from Yarn's name of "SimpleRegistry" for a class that was... not simple. ;)
  */
-public class SimplerRegistry<T> {
+public class SimplerRegistry<T> implements Iterable<T> {
 	public final Map<T, ResourceLocation> thingsToIds = new IdentityHashMap<>();
-	public final Map<ResourceLocation, T> idsToThings = new HashMap<>();
+	public final Map<ResourceLocation, T> idsToThings = new LinkedHashMap<>();
 	
 	//Marked as synchronized because, like, something something forge parallel loading, lmao.
 	public synchronized T register(T thing, ResourceLocation id) {
@@ -31,6 +33,13 @@ public class SimplerRegistry<T> {
 	
 	public T get(@Nullable ResourceLocation id) {
 		return idsToThings.get(id);
+	}
+	
+	@NotNull
+	@Override
+	public Iterator<T> iterator() {
+		//Iterates in registration order, because idsToThings is a LinkedHashMap.
+		return idsToThings.values().iterator();
 	}
 }
 

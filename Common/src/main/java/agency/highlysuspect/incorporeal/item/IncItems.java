@@ -3,7 +3,7 @@ package agency.highlysuspect.incorporeal.item;
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.computer.NotManaLens;
-import agency.highlysuspect.incorporeal.computer.types.DataLens;
+import agency.highlysuspect.incorporeal.computer.types.DataLenses;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -69,9 +69,9 @@ public class IncItems {
 	
 	//computer
 	public static final BlockItem DATA_FUNNEL = new BlockItem(IncBlocks.DATA_FUNNEL, props());
-	public static final ItemLens NUMBER_LENS = new ItemLens(props(), new NotManaLens(DataLens.number), 0);
-	public static final ItemLens MATCHER_LENS = new ItemLens(props(), new NotManaLens(DataLens.matcher), 0);
-	public static final ItemLens NEGATING_LENS = new ItemLens(props(), new NotManaLens(DataLens.negating), 0);
+	public static final ItemLens NUMBER_LENS = new ItemLens(props(), new NotManaLens(DataLenses.number), 0);
+	public static final ItemLens MATCHER_LENS = new ItemLens(props(), new NotManaLens(DataLenses.matcher), 0);
+	public static final ItemLens NEGATING_LENS = new ItemLens(props(), new NotManaLens(DataLenses.negating), 0);
 	
 	public static void register(BiConsumer<Item, ResourceLocation> r) {
 		//items

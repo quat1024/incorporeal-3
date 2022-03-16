@@ -1,7 +1,11 @@
 package agency.highlysuspect.incorporeal.computer.types;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
 
+/**
+ * A DataType representing whole numbers.
+ */
 public class IntegerType implements DataType<Integer> {
 	@Override
 	public void save(Integer thing, CompoundTag tag) {
@@ -19,7 +23,7 @@ public class IntegerType implements DataType<Integer> {
 	}
 	
 	@Override
-	public Integer sum(Integer i, Integer j) {
-		return i + j;
+	public int signal(Integer thing) {
+		return Mth.clamp(thing, 0, 15);
 	}
 }

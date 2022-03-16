@@ -3,6 +3,7 @@ package agency.highlysuspect.incorporeal.computer;
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.computer.capabilities.DatumAcceptor;
 import agency.highlysuspect.incorporeal.computer.capabilities.DatumProvider;
+import agency.highlysuspect.incorporeal.computer.types.DataReducers;
 import agency.highlysuspect.incorporeal.computer.types.DataType;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
 import agency.highlysuspect.incorporeal.net.DataFunnelEffect;
@@ -37,11 +38,15 @@ public class DataFunnelBlockEntity extends TileMod implements IWandBindable, Dat
 	
 	private final Set<BlockPos> bindTargets = new HashSet<>();
 	private Datum<?> datum = Datum.EMPTY;
+	private int signal = 0;
 	
 	@Override
 	public void acceptDatum(Datum<?> datum) {
 		boolean changed = !this.datum.equals(datum);
+		
 		this.datum = datum;
+		this.signal = datum.signal();
+		
 		if(changed) {
 			setChanged();
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
@@ -53,13 +58,17 @@ public class DataFunnelBlockEntity extends TileMod implements IWandBindable, Dat
 		return datum;
 	}
 	
-	public void act() {
+	public int signal() {
+		return signal;
+	}
+	
+	public void doIt() {
 		assert level != null;
 		
 		if(level.isClientSide) return;
 		ServerLevel slevel = (ServerLevel) level; 
 		
-		List<Datum<?>> leftoverDatums = new ArrayList<>(bindTargets.size()); //upper bound
+		List<Datum<?>> leftoverData = new ArrayList<>(bindTargets.size()); //upper bound
 		DataFunnelEffect effect = new DataFunnelEffect();
 		
 		for(BlockPos bindingPos : bindTargets) {
@@ -67,7 +76,7 @@ public class DataFunnelBlockEntity extends TileMod implements IWandBindable, Dat
 			DataRayClipContext clip = DataRayClipContext.performClip(level, bindingPos, worldPosition);
 			//Ok now I gotta sift through all that data!!!
 			
-			//Iterate through the linkages (maybe this should be done in reverse order idk, will change the game play)
+			//Iterate through the linkages (maybe this should be done in reverse order idk, will change the gameplay)
 			for(DataRayClipContext.Pairing pairing : clip.pairings) {
 				DataRayClipContext.ProviderEntry providerEntry = pairing.provider();
 				
@@ -86,18 +95,18 @@ public class DataFunnelBlockEntity extends TileMod implements IWandBindable, Dat
 				effect.addLine(sparkleStart, acceptorEntry.pos(), datum.color());
 				DatumAcceptor acceptor = acceptorEntry.acceptor();
 				if(acceptor == this && !datum.isEmpty()) {
-					//Unless it's me! I need to sum these datums together.
-					leftoverDatums.add(datum);
+					//Unless it's me because I need to combine and reduce them instead :eyes:
+					leftoverData.add(datum);
 				} else {
 					acceptor.acceptDatum(datum);
 				}
 			}
 		}
 		
-		//Sum up the leftover datums and store the result in myself.
-		acceptDatum(Datum.reduce(leftoverDatums));
+		//Reduce the leftover datums and store the result in myself
+		acceptDatum(DataReducers.reduce(leftoverData));
 		
-		//And show off.
+		//Do an effect tm
 		if(!effect.isEmpty()) IncNetwork.sendToAllWatching(effect, slevel, worldPosition);
 	}
 	
@@ -151,6 +160,7 @@ public class DataFunnelBlockEntity extends TileMod implements IWandBindable, Dat
 	@Override
 	public void readPacketNBT(CompoundTag cmp) {
 		datum = Datum.load(cmp.getCompound("Datum"));
+		signal = datum.signal();
 		
 		bindTargets.clear();
 		ListTag list = cmp.getList("Binds", 10);

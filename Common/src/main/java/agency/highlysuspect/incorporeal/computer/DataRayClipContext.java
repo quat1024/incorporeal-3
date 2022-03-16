@@ -15,40 +15,46 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
- * This method works in a very particular way:
- * @see net.minecraft.world.level.BlockGetter#traverseBlocks(Vec3, Vec3, Object, BiFunction, Function)
+ * This one Minecraft method works in a very particular way:
+ * net.minecraft.world.level.BlockGetter#traverseBlocks(Vec3, Vec3, Object, BiFunction, Function),
  * and this class is designed around its idiosyncrasies.
  * 
- * The third parameter is any arbitrary context parameter, here DataRayClipContext.
- * The fourth parameter is (context, blockpos) -> @Nullable result; here the result is also DataRayClipContext, for convenience.
- *   - If a null result is returned, the raycast continues into the next block space.
- *   - If non-null result is returned, the raycast is exited with that value.
- *   This method is implemented by "step".
- * The fifth paramter is (context) -> result, which is called
- *   - when the raycast misses all blocks (the BiFunction always returned null)
- *   - when the raycast has a very short (basically 0) length
- *   This method is implemented by "finish".
+ * It takes two type parameters, which I'll name <CTX, RESULT>.
+ * The full signature is something like:
+ *    (Vec3 start, Vec3 end, CTX ctx, BiFunction<CTX, BlockPos, @Nullable RESULT> step, Function<CTX, RESULT> miss).
+ * For some context where this method is used: in vanilla, RESULT is always the type "BlockHitResult".
+ * 
+ * `ctx`: Any type you want. Here, it's DataRayClipContext.
+ * `step`: If you return non-null, traverseBlocks returns that value. If you return null, raycasting continues to the next block.
+ * `miss`: If the raycast reached the end without `step` returning non-null, this method is invoked to get the final return value.
+ * 
+ * In this ctx-class implementation, CTX and RESULT are the same type. It's also a little unusal for the CTX class to be mutable,
+ * but I want to trace along the whole ray and pick up information along the way, instead of finding a single intersection point.
  */
 public class DataRayClipContext {
-	public DataRayClipContext(Level level, BlockPos ending) {
+	public DataRayClipContext(Level level, BlockPos start, BlockPos end) {
 		this.level = level;
-		this.ending = ending;
+		this.start = start;
+		this.end = end;
 	}
 	
 	public static DataRayClipContext performClip(Level level, BlockPos start, BlockPos end) {
 		return BlockGetter.traverseBlocks(
+			//start, end
 			Vec3.atCenterOf(start), Vec3.atCenterOf(end),
-			new DataRayClipContext(level, end),
-			DataRayClipContext::step, DataRayClipContext::finish
+			//ctx
+			new DataRayClipContext(level, start, end),
+			//step, miss
+			DataRayClipContext::step, Function.identity()
 		);
 	}
 	
 	public final Level level;
-	public final BlockPos ending;
+	public final BlockPos start;
+	public final BlockPos end;
 	
 	public final List<Pairing> pairings = new ArrayList<>(4); //assume there's not many
 	public @Nullable ProviderEntry unpairedProvider;
@@ -57,9 +63,10 @@ public class DataRayClipContext {
 		//Look up the aspects of whatever's at this location.
 		BlockEntity be = level.getBlockEntity(cursor);
 		BlockState state = be == null ? null : be.getBlockState();
-		@Nullable DatumAcceptor acceptor = NotCapabilities.findDatumAcceptor(level, cursor, state, be);
-		@Nullable DatumProvider provider = NotCapabilities.findDatumProvider(level, cursor, state, be);
-		@Nullable DataLensProvider lensProvider = NotCapabilities.findDataLensProvider(level, cursor, state, be);
+		boolean isDirectBinding = start.equals(cursor);
+		@Nullable DatumAcceptor acceptor = NotCapabilities.findDatumAcceptor(level, cursor, state, be, isDirectBinding);
+		@Nullable DatumProvider provider = NotCapabilities.findDatumProvider(level, cursor, state, be, isDirectBinding);
+		@Nullable DataLensProvider lensProvider = NotCapabilities.findDataLensProvider(level, cursor, state, be, isDirectBinding);
 		
 		if(unpairedProvider != null) {
 			//If there is a lens at this location, tack it on to the list of lens effects applied to this provider
@@ -81,11 +88,8 @@ public class DataRayClipContext {
 			unpairedProvider = new ProviderEntry(provider, provider.tweakPosition(level, cursor), new ArrayList<>());
 		}
 		
+		//Always continue to the next
 		return null;
-	}
-	
-	public DataRayClipContext finish() {
-		return this;
 	}
 	
 	//I apologize in advance for the garbage collector pressure...

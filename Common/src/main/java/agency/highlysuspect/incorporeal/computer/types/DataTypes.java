@@ -9,7 +9,7 @@ import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 public class DataTypes {
 	public static final SimplerRegistry<DataType<?>> REGISTRY = new SimplerRegistry<>();
 	
-	public static final DataType<Unit> EMPTY = new EmptyDataType();
+	public static final DataType<Unit> EMPTY = new EmptyType();
 	public static final DataType<Integer> INTEGER = new IntegerType();
 	public static final DataType<ICorporeaRequestMatcher> MATCHER = new CorporeaRequestMatcherType();
 	public static final DataType<SolidifiedRequest> SOLIDIFIED_REQUEST = new SolidifiedRequestType();
