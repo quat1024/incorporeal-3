@@ -62,6 +62,8 @@ public class IncClientProperties {
 		r.accept(IncBlocks.FLOATING_FUNNY_SMALL, cutout);
 		
 		for(Block b : IncBlocks.COMPRESSED_TATERS.values()) r.accept(b, cutout);
+		
+		r.accept(IncBlocks.DATA_FUNNEL, translucent);
 	}
 	
 	/// Block entity renderers ///
@@ -82,6 +84,8 @@ public class IncClientProperties {
 		
 		IncBlockEntityTypes.UNSTABLE_CUBES.forEach((color, type) ->
 			r.register(type, context -> new UnstableCubeBlockEntityRenderer(color, context)));
+		
+		r.register(IncBlockEntityTypes.DATA_FUNNEL, DataFunnelBlockEntityRenderer::new);
 	}
 	
 	/// Block color providers ///

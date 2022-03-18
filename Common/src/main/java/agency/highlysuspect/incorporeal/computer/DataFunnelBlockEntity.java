@@ -58,6 +58,10 @@ public class DataFunnelBlockEntity extends TileMod implements IWandBindable, Dat
 		return datum;
 	}
 	
+	public Set<BlockPos> getBindings() {
+		return bindTargets;
+	}
+	
 	public int signal() {
 		return signal;
 	}
