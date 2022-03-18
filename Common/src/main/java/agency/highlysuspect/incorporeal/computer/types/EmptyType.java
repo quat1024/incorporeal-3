@@ -19,7 +19,7 @@ public class EmptyType implements DataType<Unit> {
 	
 	@Override
 	public int color(Unit thing) {
-		return 0x000000;
+		return 0x111111;
 	}
 	
 	@Override

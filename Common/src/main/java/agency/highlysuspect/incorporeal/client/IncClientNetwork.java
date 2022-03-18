@@ -12,7 +12,9 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import vazkii.botania.client.fx.SparkleParticleData;
 import vazkii.botania.common.item.ItemTwigWand;
+import vazkii.botania.common.proxy.IProxy;
 
 import java.util.function.BiConsumer;
 
@@ -70,11 +72,29 @@ public class IncClientNetwork {
 				Level level = mc.level;
 				if(level == null) return;
 				for(DataFunnelEffect.Line line : effect.lines()) {
-					//TODO, color is ignored.
-					ItemTwigWand.doParticleBeam(level, line.start(), line.end());
+					doParticleBeamSingleColor(level, line.start(), line.end(), line.color(), 0.2, 2f);
 				}
 			});
 		});
+	}
+	
+	//Kinda copypasterino from ItemTwigWand with funny modifications
+	//Itemtwigwand's "spacing" is 0.05 and "size" is 0.5, for reference
+	public static void doParticleBeamSingleColor(Level world, Vec3 orig, Vec3 end, int color, double spacing, float size) {
+		float r = (color >> 16 & 0xFF) / 255F;
+		float g = (color >> 8 & 0xFF) / 255F;
+		float b = (color & 0xFF) / 255F;
+		
+		Vec3 diff = end.subtract(orig);
+		Vec3 movement = diff.normalize().scale(spacing);
+		int iters = (int) (diff.length() / movement.length());
+		
+		Vec3 currentPos = orig;
+		for (int i = 0; i < iters; i++) {
+			SparkleParticleData data = SparkleParticleData.noClip(size, r, g, b, 4);
+			IProxy.INSTANCE.addParticleForceNear(world, data, currentPos.x, currentPos.y, currentPos.z, 0, 0, 0);
+			currentPos = currentPos.add(movement);
+		}
 	}
 	
 	public static void initialize() {

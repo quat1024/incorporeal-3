@@ -13,12 +13,14 @@ import java.util.Optional;
 public class CorporeaRequestMatcherType implements DataType<ICorporeaRequestMatcher> {
 	@Override
 	public void save(ICorporeaRequestMatcher thing, CompoundTag tag) {
+		//Nest it inside a further tag "matcher" because uhh, matcherutils also uses the key "type"
+		//This has caused 10000000 bugs and its ass to debug every single time
 		tag.put("matcher", MatcherUtils.save(thing));
 	}
 	
 	@Override
 	public Optional<ICorporeaRequestMatcher> tryLoad(CompoundTag tag) {
-		return MatcherUtils.tryLoad(tag);
+		return MatcherUtils.tryLoad(tag.getCompound("matcher"));
 	}
 	
 	@Override
