@@ -183,7 +183,7 @@ public class IncCommonModelsAndBlockstates {
 		
 		/// Computer ///
 		singleVariantBlockState(IncBlocks.DATA_FUNNEL, Inc.id("block/computer/data_funnel"));
-		itemBlockModelParent(IncBlocks.DATA_FUNNEL);
+		itemDelegatedTo(IncBlocks.DATA_FUNNEL, Inc.id("block/computer/data_funnel"));
 		
 		ResourceLocation lensGlassDark = Inc.id("item/computer/lens_glass_dark");
 		ResourceLocation lensGlassDarkSmall = Inc.id("item/computer/lens_glass_dark_small");
