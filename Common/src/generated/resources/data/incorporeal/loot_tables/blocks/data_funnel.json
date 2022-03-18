@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "incorporeal:data_storage"
+          "name": "incorporeal:data_funnel"
         }
       ],
       "conditions": [

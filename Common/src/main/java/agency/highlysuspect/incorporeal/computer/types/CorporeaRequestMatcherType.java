@@ -25,7 +25,7 @@ public class CorporeaRequestMatcherType implements DataType<ICorporeaRequestMatc
 	
 	@Override
 	public int color(ICorporeaRequestMatcher thing) {
-		return 0x7722FF;
+		return 0x6270f3;
 	}
 	
 	@Override

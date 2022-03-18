@@ -64,6 +64,11 @@
 	"block.incorporeal.tiny_tiny_tiny_tiny_tiny_potato": "Tiniestest Potato",
 	"block.incorporeal.compressed_tiny_potatoes.tooltip.fraction": "1/%s of a Tiny Potato",
 	
+	"block.incorporeal.data_funnel": "Data Funnel",
+	"item.incorporeal.number_lens": "Data Lens: Number",
+	"item.incorporeal.matcher_lens": "Data Lens: Matcher",
+	"item.incorporeal.negating_lens": "Data Lens: Negating",
+	
 	"incorporeal.solidified_request": "%sx %s",
 	"incorporeal.solidified_request.count_only": "%sx ",
 	"incorporeal.request.anything": "Anything",

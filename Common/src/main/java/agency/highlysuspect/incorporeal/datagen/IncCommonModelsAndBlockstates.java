@@ -48,11 +48,10 @@ public class IncCommonModelsAndBlockstates {
 	private static final BiConsumer<ResourceLocation, Supplier<JsonElement>> modelOutput = models::put;
 	
 	public static void doIt(DataGenerator generator, Consumer<JsonFile> files) {
-		/// Simple items ///
+		/// Corporetics ///
 		itemGenerated(IncItems.FRACTURED_SPACE_ROD, Inc.id("item/fractured_space_rod/tex"));
 		itemGenerated(IncItems.TICKET_CONJURER, Inc.id("item/ticket_conjurer/tex"));
 		
-		/// Corporetics ///
 		singleVariantCubeColumn(IncBlocks.CORPOREA_SOLIDIFIER,
 			Inc.id("block/corporea_solidifier/side"),
 			Inc.id("block/corporea_solidifier/top_bottom")
@@ -183,6 +182,11 @@ public class IncCommonModelsAndBlockstates {
 		}
 		
 		/// Computer ///
+		ResourceLocation lensGlassDark = Inc.id("item/computer/lens_glass_dark");
+		ResourceLocation lensGlassDarkSmall = Inc.id("item/computer/lens_glass_dark_small");
+		itemLens(IncItems.NUMBER_LENS, lensGlassDark, Inc.id("item/computer/number_lens"));
+		itemLens(IncItems.MATCHER_LENS, lensGlassDark, Inc.id("item/computer/matcher_lens"));
+		itemLens(IncItems.NEGATING_LENS, lensGlassDarkSmall, Inc.id("item/computer/negating_lens"));
 		
 		/// Aaaand write out all the files now ///
 		stateGenerators.forEach(stateGenerator -> {
@@ -310,6 +314,16 @@ public class IncCommonModelsAndBlockstates {
 	
 	public static void itemGenerated(ItemLike b, ResourceLocation texture) {
 		ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(b.asItem()), TextureMapping.layer0(texture), modelOutput);
+	}
+	
+	//from botnaio
+	public static final TextureSlot TX_LAYER1 = txslot("layer1");
+	private static final ModelTemplate GENERATED_1 = template(new ResourceLocation("item/generated"), TextureSlot.LAYER0, TX_LAYER1);
+	public static void itemLens(ItemLike b, ResourceLocation lensGlass, ResourceLocation lensFrame) {
+		GENERATED_1.create(ModelLocationUtils.getModelLocation(b.asItem()), txmap(
+			TextureSlot.LAYER0, lensGlass,
+			TX_LAYER1, lensFrame
+		), modelOutput);
 	}
 	
 	/// To save typing ///
