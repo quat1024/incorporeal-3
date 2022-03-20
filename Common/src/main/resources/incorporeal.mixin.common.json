@@ -17,6 +17,7 @@
 		"FarmBlockMixin",
 		"DataGeneratorMixin",
 		"TextureSlotAccessor",
+		"PistonStructureResolverMixin"
 	],
 	"client": [
 		"RenderTileTinyPotatoMixin"
