@@ -49,21 +49,13 @@ public class PointedDatastoneBlock extends BlockModWaterloggable implements Enti
 	public static final VoxelShape BASE_SHAPE = Block.box(2, 0, 2, 14, 16, 14);
 	
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
-		VoxelShape baseShape = switch(state.getValue(THICKNESS)) {
+		return switch(state.getValue(THICKNESS)) {
 			case TIP -> TIP_SHAPE;
 			case FRUSTUM -> FRUSTUM_SHAPE;
 			case MIDDLE -> MIDDLE_SHAPE;
 			case BASE -> BASE_SHAPE;
 			case TIP_MERGE -> Shapes.block(); //NYI
 		};
-		
-		Vec3 offset = state.getOffset(level, pos);
-		return baseShape.move(offset.x, 0.0D, offset.z);
-	}
-	
-	@Override
-	public OffsetType getOffsetType() {
-		return OffsetType.XZ;
 	}
 	
 	@Override
