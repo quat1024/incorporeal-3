@@ -4,7 +4,6 @@ import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.computer.capabilities.DatumAcceptor;
 import agency.highlysuspect.incorporeal.computer.capabilities.DatumProvider;
 import agency.highlysuspect.incorporeal.computer.types.DataReducers;
-import agency.highlysuspect.incorporeal.computer.types.DataType;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
 import agency.highlysuspect.incorporeal.net.DataFunnelEffect;
 import agency.highlysuspect.incorporeal.net.IncNetwork;
@@ -19,6 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.block.IWandBindable;
 import vazkii.botania.api.internal.VanillaPacketDispatcher;
@@ -41,7 +41,7 @@ public class DataFunnelBlockEntity extends TileMod implements IWandBindable, Dat
 	private int signal = 0;
 	
 	@Override
-	public void acceptDatum(Datum<?> datum) {
+	public void acceptDatum(@NotNull Datum<?> datum) {
 		boolean changed = !this.datum.equals(datum);
 		
 		this.datum = datum;
@@ -54,7 +54,7 @@ public class DataFunnelBlockEntity extends TileMod implements IWandBindable, Dat
 	}
 	
 	@Override
-	public Datum<?> readDatum() {
+	public @NotNull Datum<?> readDatum() {
 		return datum;
 	}
 	
@@ -77,7 +77,7 @@ public class DataFunnelBlockEntity extends TileMod implements IWandBindable, Dat
 		
 		for(BlockPos bindingPos : bindTargets) {
 			//Perform the ridiculously complicated raycast operation
-			DataRayClipContext clip = DataRayClipContext.performClip(level, bindingPos, worldPosition);
+			DataRayClipContext clip = DataRayClipContext.performClip(slevel, bindingPos, worldPosition);
 			//Ok now I gotta sift through all that data!!!
 			
 			//Iterate through the linkages (maybe this should be done in reverse order idk, will change the gameplay)

@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.datagen;
 
+import agency.highlysuspect.incorporeal.computer.PointedDatastoneBlock;
 import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.CompressedTinyPotatoBlock;
@@ -41,6 +42,9 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+/**
+ * Haha holy shit this is ugly, I should fix it some time
+ */
 public class IncCommonModelsAndBlockstates {
 	//Like botania BlockstateProvider
 	private static final List<BlockStateGenerator> stateGenerators = new ArrayList<>();
@@ -182,14 +186,32 @@ public class IncCommonModelsAndBlockstates {
 		}
 		
 		/// Computer ///
+		//funnel
 		singleVariantBlockState(IncBlocks.DATA_FUNNEL, Inc.id("block/computer/data_funnel"));
 		itemDelegatedTo(IncBlocks.DATA_FUNNEL, Inc.id("block/computer/data_funnel"));
 		
+		//lenses
 		ResourceLocation lensGlassDark = Inc.id("item/computer/lens_glass_dark");
 		ResourceLocation lensGlassDarkSmall = Inc.id("item/computer/lens_glass_dark_small");
 		itemLens(IncItems.NUMBER_LENS, lensGlassDark, Inc.id("item/computer/number_lens"));
 		itemLens(IncItems.MATCHER_LENS, lensGlassDark, Inc.id("item/computer/matcher_lens"));
 		itemLens(IncItems.NEGATING_LENS, lensGlassDarkSmall, Inc.id("item/computer/negating_lens"));
+		
+		//datastone
+		singleVariantBlockState(IncBlocks.DATASTONE_BLOCK, Inc.id("block/computer/datastone"));
+		itemDelegatedTo(IncBlocks.DATASTONE_BLOCK, Inc.id("block/computer/datastone"));
+		
+		//pointed datastone
+		stateGenerators.add(MultiVariantGenerator.multiVariant(IncBlocks.POINTED_DATASTONE)
+			.with(PropertyDispatch.property(PointedDatastoneBlock.THICKNESS)
+				.generate(thickness -> {
+					ResourceLocation modelId = Inc.id("block/computer/pointed_datastone/" + thickness.getSerializedName());
+					//TODO
+					ResourceLocation texture = new ResourceLocation("minecraft", "block/pointed_dripstone_down_" + thickness.getSerializedName());
+					return modelv(pointedDripstoneModel(modelId, texture));
+				})));
+		//pointed datastone item model done manually for weird mojang parity reasons!! lmao
+		//itemGenerated(IncBlocks.POINTED_DATASTONE, new ResourceLocation("minecraft", "block/pointed_dripstone_down_tip"));
 		
 		/// Aaaand write out all the files now ///
 		stateGenerators.forEach(stateGenerator -> {
@@ -223,7 +245,7 @@ public class IncCommonModelsAndBlockstates {
 	public static void singleVariantThreeHighBottomTop(Block b, ResourceLocation bottom, ResourceLocation top, ResourceLocation side) {
 		singleVariantBlockState(b, threeHighBottomTopTemplate.create(b, txmap(TextureSlot.BOTTOM, bottom, TextureSlot.TOP, top).put(TextureSlot.SIDE, side), modelOutput));
 	}
-	
+		
 	/// generates a flower, and also generates an item model to go with it ///
 	
 	public static final ModelTemplate crossTemplate = template(Inc.botaniaId("block/shapes/cross"), TextureSlot.CROSS);
@@ -294,6 +316,11 @@ public class IncCommonModelsAndBlockstates {
 	
 	public static ResourceLocation naturalDeviceTorchTexture(boolean torchLit) {
 		return Inc.id("block/natural_devices/torch_" + (torchLit ? "lit" : "unlit"));
+	}
+	
+	public static final ModelTemplate pointedDripstone = template(new ResourceLocation("block/pointed_dripstone"), TextureSlot.CROSS);
+	public static ResourceLocation pointedDripstoneModel(ResourceLocation modelId, ResourceLocation texture) {
+		return pointedDripstone.create(modelId, txmap(TextureSlot.CROSS, texture), modelOutput);
 	}
 	
 	/// item models ///

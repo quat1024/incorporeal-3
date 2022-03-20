@@ -72,6 +72,8 @@ public class IncItems {
 	public static final ItemLens NUMBER_LENS = new ItemLens(props(), new NotManaLens(DataLenses.number), 0);
 	public static final ItemLens MATCHER_LENS = new ItemLens(props(), new NotManaLens(DataLenses.matcher), 0);
 	public static final ItemLens NEGATING_LENS = new ItemLens(props(), new NotManaLens(DataLenses.negating), 0);
+	public static final BlockItem DATASTONE_BLOCK = new BlockItem(IncBlocks.DATASTONE_BLOCK, props());
+	public static final BlockItem POINTED_DATASTONE = new BlockItem(IncBlocks.POINTED_DATASTONE, props());
 	
 	public static void register(BiConsumer<Item, ResourceLocation> r) {
 		//items
@@ -79,24 +81,6 @@ public class IncItems {
 		r.accept(TICKET_CONJURER, Inc.id("ticket_conjurer"));
 		r.accept(SOUL_CORE_FRAME, Inc.id("soul_core_frame"));
 		r.accept(FRACTURED_SPACE_ROD, Inc.id("fractured_space_rod"));
-		
-		//generic blockitems
-		registerBlockItems(r, List.of(
-			//corporetics
-			CORPOREA_SOLIDIFIER, RED_STRING_LIAR, RED_STRING_CONSTRICTOR, FRAME_TINKERER,
-			//soul cores
-			ENDER_SOUL_CORE, POTION_SOUL_CORE,
-			//natural devices
-			NATURAL_REPEATER, NATURAL_COMPARATOR,
-			//clearly
-			CLEARLY,
-			//computer
-			DATA_FUNNEL),
-			//unstable cubes
-			UNSTABLE_CUBES.values(),
-			//taters
-			COMPRESSED_TATERS.values()
-		);
 		
 		//flowers
 		r.accept(SANVOCALIA, Inc.id("sanvocalia"));
@@ -113,13 +97,32 @@ public class IncItems {
 		r.accept(NUMBER_LENS, Inc.id("number_lens"));
 		r.accept(MATCHER_LENS, Inc.id("matcher_lens"));
 		r.accept(NEGATING_LENS, Inc.id("negating_lens"));
+		
+		//blockitems
+		registerBlockItems(r,
+			List.of(
+				//corporetics
+				CORPOREA_SOLIDIFIER, RED_STRING_LIAR, RED_STRING_CONSTRICTOR, FRAME_TINKERER,
+				//soul cores
+				ENDER_SOUL_CORE, POTION_SOUL_CORE,
+				//natural devices
+				NATURAL_REPEATER, NATURAL_COMPARATOR,
+				//clearly
+				CLEARLY,
+				//computer
+				DATA_FUNNEL, DATASTONE_BLOCK, POINTED_DATASTONE
+			),
+			//unstable cubes
+			UNSTABLE_CUBES.values(),
+			//taters
+			COMPRESSED_TATERS.values()
+		);
 	}
 	
 	@SafeVarargs
 	private static void registerBlockItems(BiConsumer<Item, ResourceLocation> r, Collection<? extends BlockItem>... collections) {
 		for(Collection<? extends BlockItem> collection : collections) {
 			for(BlockItem bi : collection) {
-				//TODO: this needed?
 				Item.BY_BLOCK.put(bi.getBlock(), bi);
 				r.accept(bi, Registry.BLOCK.getKey(bi.getBlock()));
 			}

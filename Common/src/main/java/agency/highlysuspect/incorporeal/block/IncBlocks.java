@@ -1,5 +1,7 @@
 package agency.highlysuspect.incorporeal.block;
 
+import agency.highlysuspect.incorporeal.computer.PointedDatastoneBlock;
+import agency.highlysuspect.incorporeal.computer.DatastoneBlock;
 import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
@@ -13,6 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import vazkii.botania.common.block.BlockFloatingSpecialFlower;
 import vazkii.botania.common.block.BlockSpecialFlower;
 import vazkii.botania.common.block.ModBlocks;
@@ -77,6 +80,10 @@ public class IncBlocks {
 	
 	//computer
 	public static final DataFunnelBlock DATA_FUNNEL = new DataFunnelBlock(Properties.of(Material.METAL).noOcclusion());
+	//similar to DRIPSTONE_BLOCK
+	public static final DatastoneBlock DATASTONE_BLOCK = new DatastoneBlock(Properties.of(Material.STONE, MaterialColor.QUARTZ).sound(SoundType.DRIPSTONE_BLOCK).strength(1.5F, 1.0F));
+	//similar to POINTED_DRIPSTONE
+	public static final PointedDatastoneBlock POINTED_DATASTONE = new PointedDatastoneBlock(Properties.of(Material.STONE, MaterialColor.QUARTZ).noOcclusion().sound(SoundType.POINTED_DRIPSTONE).strength(1.5F, 3.0F).dynamicShape());
 	
 	public static void register(BiConsumer<Block, ResourceLocation> r) {
 		//assorted corporea devices
@@ -116,5 +123,7 @@ public class IncBlocks {
 		
 		//computer
 		r.accept(DATA_FUNNEL, Inc.id("data_funnel"));
+		r.accept(DATASTONE_BLOCK, Inc.id("datastone_block"));
+		r.accept(POINTED_DATASTONE, Inc.id("pointed_datastone"));
 	}
 }

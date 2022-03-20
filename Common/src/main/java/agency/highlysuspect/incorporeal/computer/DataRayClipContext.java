@@ -6,6 +6,7 @@ import agency.highlysuspect.incorporeal.computer.capabilities.DatumProvider;
 import agency.highlysuspect.incorporeal.computer.capabilities.NotCapabilities;
 import agency.highlysuspect.incorporeal.computer.types.DataLens;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -35,13 +36,13 @@ import java.util.function.Function;
  * but I want to trace along the whole ray and pick up information along the way, instead of finding a single intersection point.
  */
 public class DataRayClipContext {
-	public DataRayClipContext(Level level, BlockPos start, BlockPos end) {
+	public DataRayClipContext(ServerLevel level, BlockPos start, BlockPos end) {
 		this.level = level;
 		this.start = start;
 		this.end = end;
 	}
 	
-	public static DataRayClipContext performClip(Level level, BlockPos start, BlockPos end) {
+	public static DataRayClipContext performClip(ServerLevel level, BlockPos start, BlockPos end) {
 		return BlockGetter.traverseBlocks(
 			//start, end
 			Vec3.atCenterOf(start), Vec3.atCenterOf(end),
@@ -52,7 +53,7 @@ public class DataRayClipContext {
 		);
 	}
 	
-	public final Level level;
+	public final ServerLevel level;
 	public final BlockPos start;
 	public final BlockPos end;
 	
@@ -80,6 +81,9 @@ public class DataRayClipContext {
 				AcceptorEntry acceptorEntry = new AcceptorEntry(acceptor, acceptor.tweakPosition(level, cursor));
 				pairings.add(new Pairing(unpairedProvider, acceptorEntry));
 				unpairedProvider = null; //start over
+				
+				//Don't move on to accepting a provider from the same block
+				return null;
 			}
 		}
 		

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "thickness=base": {
+      "model": "incorporeal:block/computer/pointed_datastone/base"
+    },
+    "thickness=frustum": {
+      "model": "incorporeal:block/computer/pointed_datastone/frustum"
+    },
+    "thickness=middle": {
+      "model": "incorporeal:block/computer/pointed_datastone/middle"
+    },
+    "thickness=tip": {
+      "model": "incorporeal:block/computer/pointed_datastone/tip"
+    }
+  }
+}

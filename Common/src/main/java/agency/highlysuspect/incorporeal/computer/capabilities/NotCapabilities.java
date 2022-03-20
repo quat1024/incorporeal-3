@@ -1,5 +1,7 @@
 package agency.highlysuspect.incorporeal.computer.capabilities;
 
+import agency.highlysuspect.incorporeal.block.IncBlocks;
+import agency.highlysuspect.incorporeal.computer.DatastoneBlock;
 import agency.highlysuspect.incorporeal.computer.NotManaLens;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
@@ -7,6 +9,7 @@ import agency.highlysuspect.incorporeal.corporea.RetainerDuck;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import agency.highlysuspect.incorporeal.mixin.CorporeaItemStackMatcherAccessor;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -35,7 +38,7 @@ import java.util.Collection;
 public class NotCapabilities {
 	//Pass state/be if you already have them, otherwise they'll be looked up from level/pos by the usual methods.
 	//Yes, this has the same shape as fabric block-api-lookup stuff. I mean, it's good stuff, lol.
-	public static @Nullable DatumAcceptor findDatumAcceptor(Level level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be, boolean directBind) {
+	public static @Nullable DatumAcceptor findDatumAcceptor(ServerLevel level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be, boolean directBind) {
 		//Lookup the block entity if it wasn't provided
 		if(be == null) be = level.getBlockEntity(pos);
 		if(be != null) {
@@ -87,10 +90,21 @@ public class NotCapabilities {
 			};
 		}
 		
+		//Read the blockstate if it's needed
+		if(state == null) {
+			if(be != null) state = be.getBlockState();
+			else state = level.getBlockState(pos);
+		}
+		final BlockState s = state; //Lambda moment
+		final BlockPos posCopy = pos.immutable();
+		
+		//datastone blocks: extend a stack of pointed datastones
+		if(s.getBlock() instanceof DatastoneBlock db) return datum -> db.extendColumn(level, posCopy, datum);
+		
 		return null;
 	}
 	
-	public static @Nullable DatumProvider findDatumProvider(Level level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be, boolean directBind) {
+	public static @Nullable DatumProvider findDatumProvider(ServerLevel level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be, boolean directBind) {
 		if(be == null) be = level.getBlockEntity(pos);
 		if(be != null) {
 			//If it implements, self return
@@ -116,16 +130,20 @@ public class NotCapabilities {
 			if(be instanceof ComparatorBlockEntity comparator) return () -> DataTypes.INTEGER.datumOf(comparator.getOutputSignal());
 		}
 		
+		//Read the blockstate if it's needed
+		if(state == null) {
+			if(be != null) state = be.getBlockState();
+			else state = level.getBlockState(pos);
+		}
+		final BlockState s = state; //Lambda moment
+		final BlockPos posCopy = pos.immutable(); //also watch out for this
+		
+		//Datastone blocks -> retract the column of pointed datastone
+		if(s.getBlock() instanceof DatastoneBlock db) return () -> db.retractColumn(level, posCopy); 
+		
 		//Blockstate property reading is only possible when the funnel is directly bound to this block.
 		//This helps prevent accidentally triggering the behavior, because it can be somewhat surprising.
 		if(directBind) {
-			//Read the blockstate if it's needed
-			if(state == null) {
-				if(be != null) state = be.getBlockState();
-				else state = level.getBlockState(pos);
-			}
-			final BlockState s = state; //Lambda moment
-			
 			//Just look at the first integer property on this BlockState and hope it's a cool one!!!
 			//Basically I tried to allowlist a bunch of interesting properties from BlockStateProperties, but it turned out to be pretty much all of them lmao...
 			//Lots of fun stuff about power levels, crop ages, note block tunings, ...

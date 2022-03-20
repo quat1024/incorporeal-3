@@ -3,9 +3,11 @@ package agency.highlysuspect.incorporeal.block.entity;
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.computer.DataFunnelBlockEntity;
+import agency.highlysuspect.incorporeal.computer.PointedDatastoneBlockEntity;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import vazkii.botania.xplat.IXplatAbstractions;
 
@@ -46,6 +48,8 @@ public class IncBlockEntityTypes {
 	//computer
 	public static final BlockEntityType<DataFunnelBlockEntity> DATA_FUNNEL =
 		IXplatAbstractions.INSTANCE.createBlockEntityType(DataFunnelBlockEntity::new, IncBlocks.DATA_FUNNEL);
+	public static final BlockEntityType<PointedDatastoneBlockEntity> POINTED_DATASTONE =
+		IXplatAbstractions.INSTANCE.createBlockEntityType(PointedDatastoneBlockEntity::new, IncBlocks.POINTED_DATASTONE);
 	
 	public static void register(BiConsumer<BlockEntityType<?>, ResourceLocation> r) {
 		r.accept(RED_STRING_LIAR, Inc.id("red_string_liar"));
@@ -62,5 +66,6 @@ public class IncBlockEntityTypes {
 		UNSTABLE_CUBES.forEach((color, type) -> r.accept(type, Inc.id(color.getName() + "_unstable_cube")));
 		
 		r.accept(DATA_FUNNEL, Inc.id("data_funnel"));
+		r.accept(POINTED_DATASTONE, Inc.id("pointed_datastone"));
 	}
 }
