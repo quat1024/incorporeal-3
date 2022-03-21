@@ -2,12 +2,39 @@
 	"itemGroup.incorporeal": "Incorporeal",
 	
 	"item.incorporeal.fractured_space_rod": "Rod of the Fractured Space",
-	"item.incorporeal.soul_core_frame": "Soul Core Frame",
+	"entity.incorporeal.fractured_space_collector": "Fractured Space (collector)",
+	"incorporeal.fractured_space.saved": "Crate remembered.",
+	"incorporeal.fractured_space.no_pos": "Not bound to a crate",
+	"incorporeal.fractured_space.wrong_dimension": "Bound crate not of this realm",
+	"incorporeal.fractured_space.no_crate_there": "Missing crate at bound location",
+	"incorporeal.fractured_space.tooltip.not_bound": "Not bound to a crate",
+	"incorporeal.fractured_space.tooltip.bound": "Bound to a crate",
+	"incorporeal.fractured_space.tooltip.wrong_dimension": "! Bound crate not of this realm",
+	"incorporeal.fractured_space.tooltip.debug.pos": "Bound position: X %s, Y %s, Z %s",
+	"incorporeal.fractured_space.tooltip.debug.dim": "Bound dimension: %s",
 	
 	"block.incorporeal.corporea_solidifier": "Corporea Solidifier",
 	"block.incorporeal.red_string_liar": "Red Stringed Liar",
 	"block.incorporeal.red_string_constrictor": "Red Stringed Constrictor",
 	"block.incorporeal.frame_tinkerer": "Frame Tinkerer",
+	
+	"item.incorporeal.soul_core_frame": "Soul Core Frame",
+	"block.incorporeal.ender_soul_core": "Ender Soul Core",
+	"block.incorporeal.potion_soul_core": "Blood Soul Core",
+	"entity.incorporeal.potion_soul_core_collector": "Blood Soul Core (collector)",
+	"death.attack.incorporeal.soul": "%s's soul withered away",
+	
+	"block.incorporeal.natural_repeater": "Natural Repeater",
+	"block.incorporeal.natural_comparator": "Natural Comparator",
+	
+	"block.incorporeal.sanvocalia": "Sanvocalia",
+	"block.incorporeal.sanvocalia_chibi": "Sanvocalia Petite",
+	"block.incorporeal.floating_sanvocalia": "Floating Sanvocalia",
+	"block.incorporeal.floating_sanvocalia_chibi": "Floating Sanvocalia Petite",
+	"block.incorporeal.funny": "Sweet Alexum",
+	"block.incorporeal.funny_chibi": "Sweet Alexum Petite",
+	"block.incorporeal.floating_funny": "Floating Sweet Alexum",
+	"block.incorporeal.floating_funny_chibi": "Floating Sweet Alexum Petite",
 	
 	"block.incorporeal.black_unstable_cube": "Black Unstable Cube",
 	"block.incorporeal.red_unstable_cube": "Red Unstable Cube",
@@ -25,21 +52,7 @@
 	"block.incorporeal.magenta_unstable_cube": "Magenta Unstable Cube",
 	"block.incorporeal.orange_unstable_cube": "Orange Unstable Cube",
 	"block.incorporeal.white_unstable_cube": "White Unstable Cube",
-	
-	"block.incorporeal.ender_soul_core": "Ender Soul Core",
-	"block.incorporeal.potion_soul_core": "Blood Soul Core",
-	
-	"block.incorporeal.natural_repeater": "Natural Repeater",
-	"block.incorporeal.natural_comparator": "Natural Comparator",
-	
-	"block.incorporeal.sanvocalia": "Sanvocalia",
-	"block.incorporeal.sanvocalia_chibi": "Sanvocalia Petite",
-	"block.incorporeal.floating_sanvocalia": "Floating Sanvocalia",
-	"block.incorporeal.floating_sanvocalia_chibi": "Floating Sanvocalia Petite",
-	"block.incorporeal.funny": "Sweet Alexum",
-	"block.incorporeal.funny_chibi": "Sweet Alexum Petite",
-	"block.incorporeal.floating_funny": "Floating Sweet Alexum",
-	"block.incorporeal.floating_funny_chibi": "Floating Sweet Alexum Petite",
+	"incorporeal.subtitle.unstable": "Unstable Cube chimes",
 	
 	"block.incorporeal.clearly": "clearly",
 	"block.incorporeal.clearly.fryer": "You do not own an air fryer",
@@ -75,34 +88,14 @@
 	"item.incorporeal.ticket_conjurer.incorporeal:integer": "Ticket Conjurer: Numbers",
 	"item.incorporeal.ticket_conjurer.incorporeal:matcher": "Ticket Conjurer: Corporea Matchers",
 	"item.incorporeal.ticket_conjurer.incorporeal:solidified_request": "Ticket Conjurer: Corporea Requests",
-	
 	"incorporeal.ticket_conjurer.hold0": "Holding Ticket Conjurer!",
 	"incorporeal.ticket_conjurer.hold1": "Anything you say will",
 	"incorporeal.ticket_conjurer.hold2": "create a Ticket",
 	
 	"incorporeal.solidified_request": "%sx %s",
-	
-	"incorporeal.no_soul_core": "Your soul is not compatible with this Corporea Network.",
-	
-	"incorporeal.fractured_space.saved": "Crate remembered.",
-	"incorporeal.fractured_space.no_pos": "Not bound to a crate",
-	"incorporeal.fractured_space.wrong_dimension": "Bound crate not of this realm",
-	"incorporeal.fractured_space.no_crate_there": "Missing crate at bound location",
-	
-	"incorporeal.fractured_space.tooltip.not_bound": "Not bound to a crate",
-	"incorporeal.fractured_space.tooltip.bound": "Bound to a crate",
-	"incorporeal.fractured_space.tooltip.wrong_dimension": "! Bound crate not of this realm",
-	"incorporeal.fractured_space.tooltip.debug.pos": "Bound position: X %s, Y %s, Z %s",
-	"incorporeal.fractured_space.tooltip.debug.dim": "Bound dimension: %s",
-	
-	"death.attack.incorporeal.soul": "%s's soul withered away",
-	
-	"entity.incorporeal.fractured_space_collector": "Fractured Space (collector)",
-	"entity.incorporeal.potion_soul_core_collector": "Blood Soul Core (collector)",
-	
 	"incorporeal.empty_matcher": "Nothing",
 	
-	"incorporeal.subtitle.unstable": "Unstable Cube chimes",
+	"incorporeal.head_not_on_network": "Your soul is not compatible with this Corporea Network.",
 	
 	"zzzzzz.incorporeal.en-us-rewriter.marker.zzzzzz": "(AUTOMATICALLY GENERATED LANG ENTIRES BELOW THIS LINE - OK TO LOCALIZE, BUT EDITS TO EN_US.JSON WILL BE OVERWRITEN!)",
 	"incorporeal.lexicon.devices.frame_tinkerer.0.text": "When the $(item)Frame Tinkerer$(0) gets a $(thing)redstone signal$(0), it'll randomly pick a nearby $(item)Item Frame$(0) located in an adjacent block space, and switch the item displayed in the $(item)Frame$(0) with an item dropped on top of the $(item)Frame Tinkerer$(0). It doesn't have a dedicated inventory; just dropping items on top will suffice. They are pushable via $(item)Piston$(0).",

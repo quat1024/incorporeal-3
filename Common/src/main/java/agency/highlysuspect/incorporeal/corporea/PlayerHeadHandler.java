@@ -62,7 +62,7 @@ public class PlayerHeadHandler {
 		
 		//if there's at least one head on the network & none belong to the player, nope, cancel
 		if(!headUuids.isEmpty() && !headUuids.contains(requester.getUUID())) {
-			requester.sendMessage(new TranslatableComponent("incorporeal.no_soul_core").withStyle(ChatFormatting.RED), Util.NIL_UUID);
+			requester.sendMessage(new TranslatableComponent("incorporeal.head_not_on_network").withStyle(ChatFormatting.RED), Util.NIL_UUID);
 			return true;
 		}
 		
