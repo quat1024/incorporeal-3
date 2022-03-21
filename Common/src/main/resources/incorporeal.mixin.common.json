@@ -20,7 +20,8 @@
 		"PistonStructureResolverMixin"
 	],
 	"client": [
-		"RenderTileTinyPotatoMixin"
+		"client.RenderTileTinyPotatoMixin",
+		"client.HUDHandlerMixin"
 	],
 	"package": "agency.highlysuspect.incorporeal.mixin",
 	"required": true

@@ -5,7 +5,7 @@ Incorporeal 3
 
 Magic mod addon in which an old dragon yells at a corporea spark. I don't think I can call it "corporea focused" anymore. 1.18 *.1* currently, Forge and Fabric.
 
-Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-forge), Incorporeal 1 (1.12/Forge) is [here](https://github.com/quat1024/incorporeal).
+Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-forge), Incorporeal 1 (1.12/Forge) is [here](https://github.com/quat1024/incorporeal), and because I keep wanting to click on it, Botania is [here](https://github.com/vazkiimods/botania).
 
 ## Things that have been ported
 
@@ -37,8 +37,11 @@ Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-f
 
 ## Things left to do
 
-* Computer mod
-* Ticket conjurer HUD overlay when you're holding one
+* Finish up computer mod
+  * gameplay tweaks
+  * documentation
+  * models and textures
+  * entity support for the thingies
 * release:)
 
 ## Things that will not be ported

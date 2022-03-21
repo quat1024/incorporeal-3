@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.mixin;
+package agency.highlysuspect.incorporeal.mixin.client;
 
 import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.block.CompressedTinyPotatoBlock;
