@@ -1,6 +1,9 @@
 package agency.highlysuspect.incorporeal.computer.types;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
@@ -37,14 +40,38 @@ public interface DataType<T> {
 	}
 	
 	/**
-	 * Returns a color corresponding to this data type.
+	 * Returns a color corresponding to this thing.
+	 * A value may not be provided, wherein a color corresponding to the data type should be returned instead.
 	 */
-	int color(T thing);
+	int color(@Nullable T thing);
+	
+	default int color() {
+		return color(null);
+	}
 	
 	/**
 	 * Returns what comparator signal strength this thing should emit.
 	 */
 	int signal(T thing);
+	
+	/**
+	 * Summarize this thing, for display on a Ticket item.
+	 * For Tickets, it will be formatted into the item's display name.
+	 * No need to include text like "Corporea Ticket".
+	 */
+	Component describe(T thing);
+	
+	/**
+	 * Parse this thing out of a chat message, for use with the Ticket Conjurer.
+	 * If the player is holding a Ticket Conjurer in their right hand, "otherHand" contains what they're holding in their left hand.
+	 * And vice versa.
+	 */
+	T parse(String message, ItemStack otherHand);
+	
+	//convenience
+	default Datum<T> parseToDatum(String message, ItemStack otherHand) {
+		return datumOf(parse(message, otherHand));
+	}
 	
 	/**
 	 * Returns whether these two things are equal.

@@ -1,7 +1,12 @@
 package agency.highlysuspect.incorporeal.computer.types;
 
+import agency.highlysuspect.incorporeal.corporea.RequestParser;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * A DataType representing whole numbers.
@@ -25,5 +30,15 @@ public class IntegerType implements DataType<Integer> {
 	@Override
 	public int signal(Integer thing) {
 		return Mth.clamp(thing, 0, 15);
+	}
+	
+	@Override
+	public Component describe(Integer thing) {
+		return new TextComponent(Integer.toString(thing));
+	}
+	
+	@Override
+	public Integer parse(String message, ItemStack otherHand) {
+		return RequestParser.parseCount(message, otherHand);
 	}
 }

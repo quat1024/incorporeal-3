@@ -54,7 +54,6 @@ public class IncCommonModelsAndBlockstates {
 	public static void doIt(DataGenerator generator, Consumer<JsonFile> files) {
 		/// Corporetics ///
 		itemGenerated(IncItems.FRACTURED_SPACE_ROD, Inc.id("item/fractured_space_rod/tex"));
-		itemGenerated(IncItems.TICKET_CONJURER, Inc.id("item/ticket_conjurer/tex"));
 		
 		singleVariantCubeColumn(IncBlocks.CORPOREA_SOLIDIFIER,
 			Inc.id("block/corporea_solidifier/side"),
@@ -186,6 +185,11 @@ public class IncCommonModelsAndBlockstates {
 		}
 		
 		/// Computer ///
+		//ticket (done manually)
+		
+		//ticket conjurer
+		itemGenerated(IncItems.TICKET_CONJURER, Inc.id("item/computer/ticket_conjurer"));
+		
 		//funnel
 		singleVariantBlockState(IncBlocks.DATA_FUNNEL, Inc.id("block/computer/data_funnel"));
 		itemDelegatedTo(IncBlocks.DATA_FUNNEL, Inc.id("block/computer/data_funnel"));
@@ -210,7 +214,7 @@ public class IncCommonModelsAndBlockstates {
 					ResourceLocation texture = new ResourceLocation("minecraft", "block/pointed_dripstone_down_" + thickness.getSerializedName());
 					return modelv(pointedDripstoneModel(modelId, texture));
 				})));
-		//pointed datastone item model done manually for weird mojang parity reasons!! lmao
+		//(pointed datastone item model done manually for weird mojang parity reasons!! lmao)
 		//itemGenerated(IncBlocks.POINTED_DATASTONE, new ResourceLocation("minecraft", "block/pointed_dripstone_down_tip"));
 		
 		/// Aaaand write out all the files now ///

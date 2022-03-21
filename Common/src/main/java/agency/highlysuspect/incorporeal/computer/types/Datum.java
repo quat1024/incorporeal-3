@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.computer.types;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Unit;
 
@@ -33,6 +34,10 @@ public record Datum<T>(DataType<T> type, T thing) {
 	
 	public int signal() {
 		return type.signal(thing);
+	}
+	
+	public Component describe() {
+		return type.describe(thing);
 	}
 	
 	/// Weird bullshit ///

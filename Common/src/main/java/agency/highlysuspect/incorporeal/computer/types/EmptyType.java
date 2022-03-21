@@ -1,7 +1,11 @@
 package agency.highlysuspect.incorporeal.computer.types;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.Unit;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * A DataType representing... nothing. The type of the empty Datum.
@@ -25,5 +29,15 @@ public class EmptyType implements DataType<Unit> {
 	@Override
 	public int signal(Unit thing) {
 		return 0;
+	}
+	
+	@Override
+	public Component describe(Unit thing) {
+		return TextComponent.EMPTY;
+	}
+	
+	@Override
+	public Unit parse(String message, ItemStack otherHand) {
+		return Unit.INSTANCE;
 	}
 }

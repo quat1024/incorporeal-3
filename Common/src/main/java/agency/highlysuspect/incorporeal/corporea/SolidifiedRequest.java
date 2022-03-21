@@ -68,10 +68,6 @@ public final class SolidifiedRequest {
 		return new TranslatableComponent("incorporeal.solidified_request", count, matcher.getRequestName());
 	}
 	
-	public ItemStack toTicket() {
-		return IncItems.CORPOREA_TICKET.produce(this);
-	}
-	
 	public int signalStrength() {
 		return CorporeaHelper.instance().signalStrengthForRequestSize(count);
 	}

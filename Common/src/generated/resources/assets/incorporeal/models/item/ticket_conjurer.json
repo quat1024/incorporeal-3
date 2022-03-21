@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "incorporeal:item/ticket_conjurer/tex"
+    "layer0": "incorporeal:item/computer/ticket_conjurer"
   }
 }

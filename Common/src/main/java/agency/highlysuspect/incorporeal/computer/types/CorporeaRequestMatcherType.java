@@ -2,7 +2,11 @@ package agency.highlysuspect.incorporeal.computer.types;
 
 import agency.highlysuspect.incorporeal.corporea.EmptyCorporeaRequestMatcher;
 import agency.highlysuspect.incorporeal.corporea.MatcherUtils;
+import agency.highlysuspect.incorporeal.corporea.RequestParser;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.ItemStack;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 
 import java.util.Optional;
@@ -32,5 +36,15 @@ public class CorporeaRequestMatcherType implements DataType<ICorporeaRequestMatc
 	public int signal(ICorporeaRequestMatcher thing) {
 		if(thing == EmptyCorporeaRequestMatcher.INSTANCE || thing == ICorporeaRequestMatcher.Dummy.INSTANCE) return 0;
 		else return 15;
+	}
+	
+	@Override
+	public Component describe(ICorporeaRequestMatcher thing) {
+		return thing.getRequestName();
+	}
+	
+	@Override
+	public ICorporeaRequestMatcher parse(String message, ItemStack otherHand) {
+		return RequestParser.parseMatcher(message, otherHand);
 	}
 }

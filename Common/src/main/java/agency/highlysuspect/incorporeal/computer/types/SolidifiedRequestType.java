@@ -1,7 +1,11 @@
 package agency.highlysuspect.incorporeal.computer.types;
 
+import agency.highlysuspect.incorporeal.corporea.RequestParser;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.Optional;
 
@@ -27,5 +31,15 @@ public class SolidifiedRequestType implements DataType<SolidifiedRequest> {
 	@Override
 	public int signal(SolidifiedRequest thing) {
 		return thing.signalStrength();
+	}
+	
+	@Override
+	public Component describe(SolidifiedRequest thing) {
+		return thing.toComponent();
+	}
+	
+	@Override
+	public SolidifiedRequest parse(String message, ItemStack otherHand) {
+		return RequestParser.parseRequest(message, otherHand);
 	}
 }

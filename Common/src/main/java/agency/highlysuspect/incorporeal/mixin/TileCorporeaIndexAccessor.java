@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.mixin;
 
+import agency.highlysuspect.incorporeal.computer.TicketConjurerItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import vazkii.botania.common.block.tile.corporea.TileCorporeaIndex;
@@ -27,7 +28,7 @@ public interface TileCorporeaIndexAccessor {
 	/**
 	 * And this is the list of regular expressions, used to match chat messages to corporea requests.
 	 * 
-	 * @see agency.highlysuspect.incorporeal.item.TicketConjurerItem
+	 * @see TicketConjurerItem
 	 */
 	@Accessor(value = "patterns", remap = false)
 	static Map<Pattern, TileCorporeaIndex.IRegexStacker> inc$getPatterns() {

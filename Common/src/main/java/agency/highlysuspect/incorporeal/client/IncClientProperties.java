@@ -89,7 +89,7 @@ public class IncClientProperties {
 		r.register(IncBlockEntityTypes.DATA_FUNNEL, DataFunnelBlockEntityRenderer::new);
 	}
 	
-	/// Block color providers ///
+	/// Color providers ///
 	
 	public static void registerBlockColorProviders(ColorHandler.BlockHandlerConsumer r) {
 		//This does not inform block/item rendering, it uses a block entity renderer,
@@ -100,13 +100,18 @@ public class IncClientProperties {
 		}, IncBlocks.UNSTABLE_CUBES.values().toArray(Block[]::new));
 	}
 	
+	public static void registerItemColorProviders(ColorHandler.ItemHandlerConsumer r) {
+		r.register((stack, tintIndex) -> IncItems.TICKET.get(stack).color(), IncItems.TICKET);
+		r.register((stack, tintIndex) -> IncItems.TICKET_CONJURER.getType(stack).color(), IncItems.TICKET_CONJURER);
+	}
+	
 	/// Item property overrides ///
 	
 	public static void registerPropertyOverrides(TriConsumer<ItemLike, ResourceLocation, ClampedItemPropertyFunction> r) {
 		//Returns 1 if the corporea ticket has a request written on it, and 0 otherwise.
 		//Now that I think about it, it's pretty much impossible to have a ticket with nothing written on it...
-		r.accept(IncItems.CORPOREA_TICKET, Inc.id("written_ticket"),
-			(stack, level, ent, seed) -> IncItems.CORPOREA_TICKET.hasRequest(stack) ? 1 : 0);
+		r.accept(IncItems.TICKET, Inc.id("written_ticket"),
+			(stack, level, ent, seed) -> !IncItems.TICKET.get(stack).isEmpty() ? 1 : 0);
 	}
 	
 	/// Entity renderers ///

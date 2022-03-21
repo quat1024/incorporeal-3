@@ -2,6 +2,7 @@ package agency.highlysuspect.incorporeal.block.entity;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncConfig;
+import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.corporea.IndexFinder;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import agency.highlysuspect.incorporeal.item.IncItems;
@@ -83,14 +84,15 @@ public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 		List<ItemEntity> nearbyTicketEnts = level.getEntitiesOfClass(ItemEntity.class, itemDetectionBox, ent -> {
 			if(ent == null || !ent.isAlive()) return false;
 			ItemStack stack = ent.getItem();
-			return !stack.isEmpty() && stack.getItem() == IncItems.CORPOREA_TICKET && IncItems.CORPOREA_TICKET.tryGetRequest(stack).isPresent();
+			return !stack.isEmpty() &&
+				stack.getItem() == IncItems.TICKET &&
+				IncItems.TICKET.get(stack).type() == DataTypes.SOLIDIFIED_REQUEST;
 		});
 		if(nearbyTicketEnts.isEmpty()) return;
 		
-		//Pick one at random and get its request
+		//Pick one at random and get its request. The DataType was filtered above.
 		ItemEntity ticketEnt = Inc.choose(nearbyTicketEnts, level.getRandom());
-		@SuppressWarnings("OptionalGetWithoutIsPresent") //Checked above
-		SolidifiedRequest request = IncItems.CORPOREA_TICKET.tryGetRequest(ticketEnt.getItem()).get();
+		SolidifiedRequest request = IncItems.TICKET.get(ticketEnt.getItem()).castAndGet();
 		
 		//Find nearby Corporea Indices
 		List<TileCorporeaIndex> nearbyIndices = IndexFinder.findNearBlock(level, pos, radius);

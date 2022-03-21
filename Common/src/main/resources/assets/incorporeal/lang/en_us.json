@@ -1,9 +1,6 @@
 {
 	"itemGroup.incorporeal": "Incorporeal",
 	
-	"item.incorporeal.corporea_ticket": "Corporea Ticket (blank)",
-	"item.incorporeal.corporea_ticket.has": "Corporea Ticket: %s",
-	"item.incorporeal.ticket_conjurer": "Ticket Conjurer",
 	"item.incorporeal.fractured_space_rod": "Rod of the Fractured Space",
 	"item.incorporeal.soul_core_frame": "Soul Core Frame",
 	
@@ -30,7 +27,6 @@
 	"block.incorporeal.white_unstable_cube": "White Unstable Cube",
 	
 	"block.incorporeal.ender_soul_core": "Ender Soul Core",
-	"block.incorporeal.corporea_soul_core": "Corporea Soul Core",
 	"block.incorporeal.potion_soul_core": "Blood Soul Core",
 	
 	"block.incorporeal.natural_repeater": "Natural Repeater",
@@ -40,7 +36,6 @@
 	"block.incorporeal.sanvocalia_chibi": "Sanvocalia Petite",
 	"block.incorporeal.floating_sanvocalia": "Floating Sanvocalia",
 	"block.incorporeal.floating_sanvocalia_chibi": "Floating Sanvocalia Petite",
-	
 	"block.incorporeal.funny": "Sweet Alexum",
 	"block.incorporeal.funny_chibi": "Sweet Alexum Petite",
 	"block.incorporeal.floating_funny": "Floating Sweet Alexum",
@@ -69,15 +64,21 @@
 	"item.incorporeal.matcher_lens": "Data Lens: Matcher",
 	"item.incorporeal.negating_lens": "Data Lens: Negating",
 	
+	"item.incorporeal.ticket": "Ticket",
+	"item.incorporeal.ticket.incorporeal:empty": "Blank Ticket",
+	"item.incorporeal.ticket.incorporeal:integer": "Numeric Ticket: %s",
+	"item.incorporeal.ticket.incorporeal:matcher": "Corporea Matcher Ticket: %s",
+	"item.incorporeal.ticket.incorporeal:solidified_request": "Corporea Request Ticket: %s",
+	
+	"item.incorporeal.ticket_conjurer": "Ticket Conjurer",
+	"item.incorporeal.ticket_conjurer.incorporeal:empty": "Ticket Conjurer: Empty",
+	"item.incorporeal.ticket_conjurer.incorporeal:integer": "Ticket Conjurer: Numbers",
+	"item.incorporeal.ticket_conjurer.incorporeal:matcher": "Ticket Conjurer: Corporea Matchers",
+	"item.incorporeal.ticket_conjurer.incorporeal:solidified_request": "Ticket Conjurer: Corporea Requests",
+	
 	"incorporeal.solidified_request": "%sx %s",
-	"incorporeal.solidified_request.count_only": "%sx ",
-	"incorporeal.request.anything": "Anything",
 	
 	"incorporeal.no_soul_core": "Your soul is not compatible with this Corporea Network.",
-	
-	"incorporeal.ticket_conjurer.hold0": "Holding Ticket Conjurer!",
-	"incorporeal.ticket_conjurer.hold1": "Anything you say will",
-	"incorporeal.ticket_conjurer.hold2": "create a Corporea Ticket",
 	
 	"incorporeal.fractured_space.saved": "Crate remembered.",
 	"incorporeal.fractured_space.no_pos": "Not bound to a crate",
@@ -99,7 +100,7 @@
 	
 	"incorporeal.subtitle.unstable": "Unstable Cube chimes",
 	
-	"zzzzzz.incorporeal.en-us-rewriter.marker.zzzzzz": "(AUTOMATICALLY GENERATED LANG ENTIRES BELOW THIS LINE - NO TOUCHY)",
+	"zzzzzz.incorporeal.en-us-rewriter.marker.zzzzzz": "(AUTOMATICALLY GENERATED LANG ENTIRES BELOW THIS LINE - OK TO LOCALIZE, BUT EDITS TO EN_US.JSON WILL BE OVERWRITEN!)",
 	"incorporeal.lexicon.devices.frame_tinkerer.0.text": "When the $(item)Frame Tinkerer$(0) gets a $(thing)redstone signal$(0), it'll randomly pick a nearby $(item)Item Frame$(0) located in an adjacent block space, and switch the item displayed in the $(item)Frame$(0) with an item dropped on top of the $(item)Frame Tinkerer$(0). It doesn't have a dedicated inventory; just dropping items on top will suffice. They are pushable via $(item)Piston$(0).",
 	"incorporeal.lexicon.devices.frame_tinkerer.1.text": "Symbiotic Hematophage",
 	"incorporeal.lexicon.devices.frame_tinkerer.2.text": "Useful for very advanced $(thing)Corporea Networks$(0), or if you just like to redecorate often.",

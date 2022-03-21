@@ -38,10 +38,9 @@ public class IncForgeClient {
 			IncClientProperties.registerRenderTypes(ItemBlockRenderTypes::setRenderLayer);
 		});
 		
-		yes.addListener((ColorHandlerEvent.Block e) -> {
-			//block color providers
-			IncClientProperties.registerBlockColorProviders(e.getBlockColors()::register);
-		});
+		//color providers
+		yes.addListener((ColorHandlerEvent.Block e) -> IncClientProperties.registerBlockColorProviders(e.getBlockColors()::register));
+		yes.addListener((ColorHandlerEvent.Item e) -> IncClientProperties.registerItemColorProviders(e.getItemColors()::register));
 		
 		yes.addListener((EntityRenderersEvent.RegisterRenderers e) -> {
 			//block entity renderers

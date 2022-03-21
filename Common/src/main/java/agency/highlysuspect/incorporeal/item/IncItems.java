@@ -2,6 +2,8 @@ package agency.highlysuspect.incorporeal.item;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
+import agency.highlysuspect.incorporeal.computer.TicketConjurerItem;
+import agency.highlysuspect.incorporeal.computer.TicketItem;
 import agency.highlysuspect.incorporeal.computer.NotManaLens;
 import agency.highlysuspect.incorporeal.computer.types.DataLenses;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
@@ -22,19 +24,15 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class IncItems {
-	//non-blockitems
-	public static final CorporeaTicketItem CORPOREA_TICKET = new CorporeaTicketItem(props());
-	public static final TicketConjurerItem TICKET_CONJURER = new TicketConjurerItem(props().stacksTo(1));
-	public static final Item SOUL_CORE_FRAME = new Item(props()); //TODO: teisr (ugh)
-	public static final Item FRACTURED_SPACE_ROD = new FracturedSpaceRodItem(props().stacksTo(1));
-	
 	//corporetics
+	public static final Item FRACTURED_SPACE_ROD = new FracturedSpaceRodItem(props().stacksTo(1));
 	public static final BlockItem CORPOREA_SOLIDIFIER = new BlockItem(IncBlocks.CORPOREA_SOLIDIFIER, props());
 	public static final BlockItem RED_STRING_LIAR = new BlockItem(IncBlocks.RED_STRING_LIAR, props());
 	public static final BlockItem RED_STRING_CONSTRICTOR = new BlockItem(IncBlocks.RED_STRING_CONSTRICTOR, props());
 	public static final BlockItem FRAME_TINKERER = new BlockItem(IncBlocks.FRAME_TINKERER, props());
 	
 	//soul cores
+	public static final Item SOUL_CORE_FRAME = new Item(props()); //TODO: teisr (ugh)
 	public static final BlockItem ENDER_SOUL_CORE = new IncBlockItemWithTEISR(IncBlocks.ENDER_SOUL_CORE, props());
 	public static final BlockItem POTION_SOUL_CORE = new IncBlockItemWithTEISR(IncBlocks.POTION_SOUL_CORE, props());
 	
@@ -68,6 +66,9 @@ public class IncItems {
 	}
 	
 	//computer
+	public static final TicketItem TICKET = new TicketItem(props());
+	public static final TicketConjurerItem TICKET_CONJURER = new TicketConjurerItem(props().stacksTo(1));
+	
 	public static final BlockItem DATA_FUNNEL = new BlockItem(IncBlocks.DATA_FUNNEL, props());
 	public static final ItemLens NUMBER_LENS = new ItemLens(props(), new NotManaLens(DataLenses.number), 0);
 	public static final ItemLens MATCHER_LENS = new ItemLens(props(), new NotManaLens(DataLenses.matcher), 0);
@@ -77,8 +78,6 @@ public class IncItems {
 	
 	public static void register(BiConsumer<Item, ResourceLocation> r) {
 		//items
-		r.accept(CORPOREA_TICKET, Inc.id("corporea_ticket"));
-		r.accept(TICKET_CONJURER, Inc.id("ticket_conjurer"));
 		r.accept(SOUL_CORE_FRAME, Inc.id("soul_core_frame"));
 		r.accept(FRACTURED_SPACE_ROD, Inc.id("fractured_space_rod"));
 		
@@ -94,6 +93,9 @@ public class IncItems {
 		r.accept(FLOATING_FUNNY_SMALL, Inc.id("floating_funny_chibi"));
 		
 		//computer stuff that isn't blockitems
+		r.accept(TICKET, Inc.id("ticket"));
+		r.accept(TICKET_CONJURER, Inc.id("ticket_conjurer"));
+		
 		r.accept(NUMBER_LENS, Inc.id("number_lens"));
 		r.accept(MATCHER_LENS, Inc.id("matcher_lens"));
 		r.accept(NEGATING_LENS, Inc.id("negating_lens"));

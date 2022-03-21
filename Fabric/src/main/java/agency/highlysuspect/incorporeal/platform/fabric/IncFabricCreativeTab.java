@@ -25,7 +25,7 @@ public class IncFabricCreativeTab extends CreativeModeTab {
 	
 	@Override
 	public ItemStack makeIcon() {
-		return new ItemStack(IncItems.CORPOREA_TICKET);
+		return new ItemStack(IncItems.TICKET);
 	}
 	
 	//No search bar rip

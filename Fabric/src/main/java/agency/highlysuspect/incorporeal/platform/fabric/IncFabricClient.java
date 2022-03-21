@@ -22,8 +22,9 @@ public class IncFabricClient implements ClientModInitializer {
 		//block render layers
 		IncClientProperties.registerRenderTypes(BlockRenderLayerMap.INSTANCE::putBlock);
 		
-		//block color providers
+		//color providers
 		IncClientProperties.registerBlockColorProviders(ColorProviderRegistry.BLOCK::register);
+		IncClientProperties.registerItemColorProviders(ColorProviderRegistry.ITEM::register);
 		
 		//block entity renderers, entity renderers, & builtin item renderers
 		IncClientProperties.registerBlockEntityRenderers(BlockEntityRendererRegistry::register);

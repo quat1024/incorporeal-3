@@ -8,6 +8,7 @@ import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * The last thing I want to do is buy into Mojang's registry system right before 1.18.2.
@@ -35,10 +36,16 @@ public class SimplerRegistry<T> implements Iterable<T> {
 		return idsToThings.get(id);
 	}
 	
+	public Optional<T> optionalGet(@Nullable ResourceLocation id) {
+		return Optional.ofNullable(get(id));
+	}
+	
+	/**
+	 * Iterates in registration order.
+	 */
 	@NotNull
 	@Override
 	public Iterator<T> iterator() {
-		//Iterates in registration order, because idsToThings is a LinkedHashMap.
 		return idsToThings.values().iterator();
 	}
 }
