@@ -95,7 +95,7 @@ public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 		SolidifiedRequest request = IncItems.TICKET.get(ticketEnt.getItem()).castAndGet();
 		
 		//Find nearby Corporea Indices
-		List<TileCorporeaIndex> nearbyIndices = IndexFinder.findNearBlock(level, pos, radius);
+		List<TileCorporeaIndex> nearbyIndices = IndexFinder.findNearBlock(level, pos);
 		
 		if(nearbyIndices.isEmpty()) {
 			//Yammer in chat
