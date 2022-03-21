@@ -33,8 +33,17 @@ public class Inc {
 	public static final String MODID = "incorporeal";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 	
+	//The names these things get registered under eventually end up in item names.
+	//It has to be ready by the time Minecraft builds the creative mode searchtree.
+	//On Forge, this happens REALLY EARLY.
+	public static void registerComputerStuff() {
+		DataTypes.registerBuiltinTypes();
+		DataReducers.registerBuiltinReducers();
+		DataLenses.registerBuiltinLenses();
+	}
+	
 	//Called after Botania's initializer on Fabric and in CommonInit on forge
-	public static void registerExtraThings() {
+	public static void afterBotania() {
 		//corporea matchers
 		CorporeaHelper.instance().registerRequestMatcher(id("empty"), EmptyCorporeaRequestMatcher.class, __ -> EmptyCorporeaRequestMatcher.INSTANCE);
 		CorporeaHelper.instance().registerRequestMatcher(id("not"), InvertedCorporeaRequestMatcher.class, InvertedCorporeaRequestMatcher::readFromNBT);
@@ -43,11 +52,6 @@ public class Inc {
 		//corporea node detectors
 		CorporeaNodeDetectors.register(new RedStringLiarBlockEntity.NodeDetector());
 		CorporeaNodeDetectors.register(new EnderSoulCoreBlockEntity.NodeDetector());
-		
-		//computer stuff
-		DataTypes.registerBuiltinTypes();
-		DataReducers.registerBuiltinReducers();
-		DataLenses.registerBuiltinLenses();
 	}
 	
 	public static ResourceLocation id(String path) {

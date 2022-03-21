@@ -4,7 +4,6 @@ import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncSounds;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
-import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEntity;
 import agency.highlysuspect.incorporeal.corporea.PlayerHeadHandler;
 import agency.highlysuspect.incorporeal.entity.IncEntityTypes;
 import agency.highlysuspect.incorporeal.item.FracturedSpaceRodItem;
@@ -43,6 +42,10 @@ public class IncForge {
 		//items and item capabilities
 		bind(ForgeRegistries.ITEMS, IncItems::register);
 		MinecraftForge.EVENT_BUS.addGenericListener(ItemStack.class, IncForge::itemCapabilities);
+		//This has to happen some time before the creative mode search tree gets built.
+		//Item registration is a good time to do that, probably.
+		FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, (RegistryEvent.Register<Item> event) ->
+			Inc.registerComputerStuff());
 		
 		//block entity types
 		bind(ForgeRegistries.BLOCK_ENTITIES, IncBlockEntityTypes::register);
@@ -68,8 +71,9 @@ public class IncForge {
 		//block entity capabilities
 		MinecraftForge.EVENT_BUS.addGenericListener(BlockEntity.class, IncForge::blockEntityCapabilities);
 		
-		//some other stuff (not different between loaders)
-		FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> Inc.registerExtraThings());
+		//Stuff that has to happen relatively late, and after Botania gets initialized.
+		//On Fabric this needs some small hax. Here I simply declared Incorporeal to load afterwards in mods.toml.
+		FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> Inc.afterBotania());
 	}
 	
 	//botania copypasterino !

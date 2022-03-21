@@ -47,6 +47,9 @@ public class IncFabric implements ModInitializer {
 		//Capabilities
 		registerCapabilities();
 		
+		//computer stuff
+		Inc.registerComputerStuff();
+		
 		incInit = true;
 		afterBotania();
 	}
@@ -73,7 +76,7 @@ public class IncFabric implements ModInitializer {
 			CorporeaIndexRequestCallback.EVENT.register(PlayerHeadHandler::onIndexRequest);
 			
 			//some other stuff (not different between loaders)
-			Inc.registerExtraThings();
+			Inc.afterBotania();
 			
 			didLateInit = true;
 		} else {
