@@ -43,14 +43,19 @@ public class UnstableCubeBlockEntityRenderer implements BlockEntityRenderer<Unst
 		this.state = IncBlocks.UNSTABLE_CUBES.get(color).defaultBlockState();
 		this.cubeModel = dispatcher.getBlockModel(state);
 		
+		//Just for fun;)
+		//This did...... not turn out to offset all cubes by 2.5 degrees but idk it looks cool either way
+		this.rotationOffset = (float) Math.toDegrees(color.ordinal() * 2.5f);
+		
 		int colorPacked = color.getFireworkColor();
 		this.red = ((colorPacked & 0xFF0000) >> 16) / 255f;
 		this.green = ((colorPacked & 0x00FF00) >> 8) / 255f;
 		this.blue = (colorPacked & 0x0000FF) / 255f;
 	}
 	
-	private final BakedModel cubeModel;
 	private final BlockState state;
+	private final BakedModel cubeModel;
+	private final float rotationOffset;
 	private final float red, green, blue;
 	
 	//BlockEntityRenderer
@@ -60,9 +65,9 @@ public class UnstableCubeBlockEntityRenderer implements BlockEntityRenderer<Unst
 		
 		if(cube != null) {
 			int hash = Mth.murmurHash3Mixer(cube.getBlockPos().hashCode()) & 0xFFFF;
-			roll(pose, partialTicks, cube.angle, cube.speed, cube.bump, cube.bumpDecay, hash, 0);
+			roll(pose, partialTicks, cube.angle + rotationOffset, cube.speed, cube.bump, cube.bumpDecay, hash, 0);
 		} else { //Item renderer
-			roll(pose, partialTicks, 0, 0, 0, 0, 0, 0.4f);
+			roll(pose, partialTicks, rotationOffset, 0, 0, 0, 0, 0.4f);
 		}
 		
 		drawCube(pose, bufs, light, overlay);
