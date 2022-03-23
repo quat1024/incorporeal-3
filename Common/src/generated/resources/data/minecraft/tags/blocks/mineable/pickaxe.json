@@ -1,0 +1,31 @@
+{
+  "replace": false,
+  "values": [
+    "incorporeal:corporea_solidifier",
+    "incorporeal:red_string_liar",
+    "incorporeal:red_string_constrictor",
+    "incorporeal:frame_tinkerer",
+    "incorporeal:ender_soul_core",
+    "incorporeal:potion_soul_core",
+    "incorporeal:clearly",
+    "incorporeal:data_funnel",
+    "incorporeal:datastone_block",
+    "incorporeal:pointed_datastone",
+    "incorporeal:white_unstable_cube",
+    "incorporeal:orange_unstable_cube",
+    "incorporeal:magenta_unstable_cube",
+    "incorporeal:light_blue_unstable_cube",
+    "incorporeal:yellow_unstable_cube",
+    "incorporeal:lime_unstable_cube",
+    "incorporeal:pink_unstable_cube",
+    "incorporeal:gray_unstable_cube",
+    "incorporeal:light_gray_unstable_cube",
+    "incorporeal:cyan_unstable_cube",
+    "incorporeal:purple_unstable_cube",
+    "incorporeal:blue_unstable_cube",
+    "incorporeal:brown_unstable_cube",
+    "incorporeal:green_unstable_cube",
+    "incorporeal:red_unstable_cube",
+    "incorporeal:black_unstable_cube"
+  ]
+}

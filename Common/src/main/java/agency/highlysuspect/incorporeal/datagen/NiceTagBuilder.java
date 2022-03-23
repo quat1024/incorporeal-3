@@ -5,10 +5,12 @@ import com.google.gson.JsonObject;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
@@ -33,14 +35,22 @@ public class NiceTagBuilder {
 		return this;
 	}
 	
+	public NiceTagBuilder addBlocks(Collection<? extends Block> blocks) {
+		blocks.stream().map(Registry.BLOCK::getKey).map(ResourceLocation::toString).forEach(entries::add);
+		return this;
+	}
+	
 	public NiceTagBuilder addBlocks(Block... blocks) {
-		Stream.of(blocks).map(Registry.BLOCK::getKey).map(ResourceLocation::toString).forEach(entries::add);
+		return addBlocks(List.of(blocks));
+	}
+	
+	public NiceTagBuilder addItems(Collection<? extends ItemLike> itemLikes) {
+		itemLikes.stream().map(ItemLike::asItem).map(Registry.ITEM::getKey).map(ResourceLocation::toString).forEach(entries::add);
 		return this;
 	}
 	
 	public NiceTagBuilder addItems(ItemLike... itemLikes) {
-		Stream.of(itemLikes).map(ItemLike::asItem).map(Registry.ITEM::getKey).map(ResourceLocation::toString).forEach(entries::add);
-		return this;
+		return addItems(List.of(itemLikes));
 	}
 	
 	public NiceTagBuilder addTags(TagKey<?>... tags) {

@@ -3,6 +3,7 @@ package agency.highlysuspect.incorporeal.datagen;
 import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.item.IncItems;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import vazkii.botania.common.lib.ModTags;
 
@@ -43,5 +44,27 @@ public class IncCommonTagGen {
 			IncBlocks.FLOATING_FUNNY, IncBlocks.FLOATING_FUNNY_SMALL,
 			IncBlocks.FLOATING_SANVOCALIA, IncBlocks.FLOATING_SANVOCALIA_SMALL
 		).save(files);
+		
+		//mineability
+		DataDsl.blockTag(BlockTags.MINEABLE_WITH_PICKAXE).addBlocks(
+			IncBlocks.CORPOREA_SOLIDIFIER,
+			IncBlocks.RED_STRING_LIAR,
+			IncBlocks.RED_STRING_CONSTRICTOR,
+			IncBlocks.FRAME_TINKERER,
+			
+			IncBlocks.ENDER_SOUL_CORE,
+			IncBlocks.POTION_SOUL_CORE,
+			
+			//natural devices -> left out (instabreak)
+			//functional flowers -> left out
+			
+			IncBlocks.CLEARLY,
+			IncBlocks.DATA_FUNNEL,
+			IncBlocks.DATASTONE_BLOCK,
+			IncBlocks.POINTED_DATASTONE
+		).addBlocks(IncBlocks.UNSTABLE_CUBES.values())
+			//tatoes -> left out because botania does too
+			//(and also because i think their long breaking times are funny)
+			.save(files);
 	}
 }
