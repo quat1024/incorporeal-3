@@ -6,6 +6,7 @@ import agency.highlysuspect.incorporeal.computer.NotManaLens;
 import agency.highlysuspect.incorporeal.computer.types.DataLenses;
 import agency.highlysuspect.incorporeal.item.FracturedSpaceRodItem;
 import agency.highlysuspect.incorporeal.platform.IncBlockItemWithCoolRenderer;
+import agency.highlysuspect.incorporeal.platform.IncItemWithCoolRenderer;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -38,7 +39,7 @@ public class IncItems {
 	public static final BlockItem FRAME_TINKERER = new BlockItem(IncBlocks.FRAME_TINKERER, props());
 	
 	//soul cores
-	public static final Item SOUL_CORE_FRAME = new Item(props()); //TODO: item renderer
+	public static final Item SOUL_CORE_FRAME = new IncItemWithCoolRenderer(props());
 	public static final BlockItem ENDER_SOUL_CORE = new IncBlockItemWithCoolRenderer(IncBlocks.ENDER_SOUL_CORE, props());
 	public static final BlockItem POTION_SOUL_CORE = new IncBlockItemWithCoolRenderer(IncBlocks.POTION_SOUL_CORE, props());
 	
