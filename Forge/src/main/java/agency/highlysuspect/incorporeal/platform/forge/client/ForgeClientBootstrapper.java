@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.platform.forge.client;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.client.IncClient;
 import agency.highlysuspect.incorporeal.client.IncClientNetwork;
 import agency.highlysuspect.incorporeal.client.IncClientProperties;
 import agency.highlysuspect.incorporeal.platform.IncClientBootstrapper;
@@ -10,6 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ForgeModelBakery;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -39,6 +41,13 @@ public class ForgeClientBootstrapper implements IncClientBootstrapper {
 	public void registerColorProviders() {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener((ColorHandlerEvent.Block e) -> IncClientProperties.registerBlockColorProviders(e.getBlockColors()::register));
 		FMLJavaModLoadingContext.get().getModEventBus().addListener((ColorHandlerEvent.Item e) -> IncClientProperties.registerItemColorProviders(e.getItemColors()::register));
+	}
+	
+	@Override
+	public void registerExtraModelsToBake() {
+		FMLJavaModLoadingContext.get().getModEventBus().addListener((ModelRegistryEvent e) -> {
+			IncClientProperties.registerExtraModelsToBake(ForgeModelBakery::addSpecialModel);
+		});
 	}
 	
 	@Override

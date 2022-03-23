@@ -1,7 +1,9 @@
 package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.IncBlocks;
 import agency.highlysuspect.incorporeal.block.entity.AbstractSoulCoreBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
@@ -18,28 +20,46 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.client.core.handler.ClientTickHandler;
+import vazkii.botania.mixin.client.AccessorModelManager;
+
+import java.util.Map;
 
 public class SoulCoreBlockEntityRenderer<T extends AbstractSoulCoreBlockEntity> implements BlockEntityRenderer<T>, MyDynamicItemRenderer {
 	//block entities
 	public SoulCoreBlockEntityRenderer(BlockState state, BlockEntityRendererProvider.Context ctx) {
-		this(state, ctx.getBlockRenderDispatcher(), ctx.getModelSet());
+		this(state, ctx.getBlockRenderDispatcher().getBlockModel(state), ctx.getModelSet());
 	}
 	
 	//item stacks
 	public SoulCoreBlockEntityRenderer(BlockState state) {
-		this(state, Minecraft.getInstance().getBlockRenderer(), Minecraft.getInstance().getEntityModels());
+		this(state, Minecraft.getInstance().getBlockRenderer().getBlockModel(state), Minecraft.getInstance().getEntityModels());
+	}
+	
+	public static SoulCoreBlockEntityRenderer<EnderSoulCoreBlockEntity> createBlockless(ResourceLocation modelLocation) {
+		ModelManager manager = Minecraft.getInstance().getModelManager();
+		Map<ResourceLocation, BakedModel> modelMap = ((AccessorModelManager) manager).getBakedRegistry();
+		
+		BakedModel model = modelMap.getOrDefault(modelLocation, manager.getMissingModel());
+		
+		return new SoulCoreBlockEntityRenderer<>(
+			IncBlocks.ENDER_SOUL_CORE.defaultBlockState(), //i guess
+			model,
+			Minecraft.getInstance().getEntityModels()
+		);
 	}
 	
 	//common denominator
-	public SoulCoreBlockEntityRenderer(BlockState state, BlockRenderDispatcher blockRenderDispatcher, EntityModelSet entityModelSet) {
+	public SoulCoreBlockEntityRenderer(BlockState state, BakedModel model, EntityModelSet entityModelSet) {
 		this.state = state;
-		this.model = blockRenderDispatcher.getBlockModel(state);
+		this.model = model;
 		this.playerSkullModel = new SkullModel(entityModelSet.bakeLayer(ModelLayers.PLAYER_HEAD));
 	}
 	
@@ -54,7 +74,11 @@ public class SoulCoreBlockEntityRenderer<T extends AbstractSoulCoreBlockEntity> 
 		float ticks = ClientTickHandler.total();
 		
 		pose.pushPose();
-		pose.translate(.5, .5, .5);
+		
+		//Without this, the item renderer looks a TINY bit off centered for some reason
+		//No idea why. Might just be me lol
+		pose.translate(core == null ? .52 : .5, .5, .5);
+		
 		initialWobble(pose, hash, ticks);
 		
 		if(core != null) {
@@ -68,10 +92,6 @@ public class SoulCoreBlockEntityRenderer<T extends AbstractSoulCoreBlockEntity> 
 				
 				pose.popPose();
 			}
-		} else { //Item renderer
-			pose.translate(.5, .5, .5);
-			pose.scale(.9f, .9f, .9f);
-			pose.translate(-.5, -.5, -.5);
 		}
 		
 		wobbleCubes(pose, hash, ticks);

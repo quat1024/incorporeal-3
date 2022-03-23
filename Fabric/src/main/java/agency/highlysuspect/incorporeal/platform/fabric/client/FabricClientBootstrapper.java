@@ -8,6 +8,7 @@ import agency.highlysuspect.incorporeal.platform.fabric.IncBootstrapFabric;
 import com.google.common.base.Suppliers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
@@ -36,6 +37,11 @@ public class FabricClientBootstrapper implements IncClientBootstrapper {
 	public void registerColorProviders() {
 		IncClientProperties.registerBlockColorProviders(ColorProviderRegistry.BLOCK::register);
 		IncClientProperties.registerItemColorProviders(ColorProviderRegistry.ITEM::register);
+	}
+	
+	@Override
+	public void registerExtraModelsToBake() {
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> IncClientProperties.registerExtraModelsToBake(out));
 	}
 	
 	@Override

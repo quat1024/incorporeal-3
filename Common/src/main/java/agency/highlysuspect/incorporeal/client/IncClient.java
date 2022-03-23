@@ -19,6 +19,7 @@ public class IncClient {
 		bootstrapper.registerBlockRenderLayers();
 		bootstrapper.registerColorProviders();
 		
+		bootstrapper.registerExtraModelsToBake();
 		bootstrapper.registerBlockEntityRenderers();
 		bootstrapper.registerEntityRenderers();
 		bootstrapper.registerItemRenderers();

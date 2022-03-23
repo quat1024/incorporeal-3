@@ -7,6 +7,7 @@ import agency.highlysuspect.incorporeal.block.entity.AbstractSoulCoreBlockEntity
 import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.IncEntityTypes;
 import agency.highlysuspect.incorporeal.IncItems;
+import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
@@ -27,6 +28,7 @@ import vazkii.botania.network.TriConsumer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -38,6 +40,11 @@ public class IncClientProperties {
 		IncItems.UNSTABLE_CUBES.forEach((color, cube) -> MY_DYNAMIC_ITEM_RENDERERS.put(cube, () -> new UnstableCubeBlockEntityRenderer(color)));
 		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.ENDER_SOUL_CORE, () -> new SoulCoreBlockEntityRenderer<>(IncBlocks.ENDER_SOUL_CORE.defaultBlockState()));
 		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.POTION_SOUL_CORE, () -> new SoulCoreBlockEntityRenderer<>(IncBlocks.POTION_SOUL_CORE.defaultBlockState()));
+		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.SOUL_CORE_FRAME, () -> SoulCoreBlockEntityRenderer.createBlockless(Inc.id("block/soul_core_frame")));
+	}
+	
+	public static void registerExtraModelsToBake(Consumer<ResourceLocation> r) {
+		r.accept(Inc.id("block/soul_core_frame"));
 	}
 	
 	/// Block render layers ///

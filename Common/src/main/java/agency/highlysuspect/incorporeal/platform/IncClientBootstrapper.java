@@ -5,6 +5,7 @@ public interface IncClientBootstrapper {
 	void registerBlockRenderLayers();
 	void registerColorProviders();
 	
+	void registerExtraModelsToBake();
 	void registerBlockEntityRenderers();
 	void registerEntityRenderers();
 	void registerItemRenderers();
