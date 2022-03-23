@@ -1,7 +1,7 @@
 package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.block.IncBlocks;
+import agency.highlysuspect.incorporeal.IncBlocks;
 import agency.highlysuspect.incorporeal.computer.DataFunnelBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -15,7 +15,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import vazkii.botania.client.core.handler.ClientTickHandler;
 import vazkii.botania.common.helper.MathHelper;

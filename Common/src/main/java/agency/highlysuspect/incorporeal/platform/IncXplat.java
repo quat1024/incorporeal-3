@@ -2,7 +2,6 @@ package agency.highlysuspect.incorporeal.platform;
 
 import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
-import agency.highlysuspect.incorporeal.util.ServiceHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;

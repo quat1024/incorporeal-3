@@ -2,7 +2,7 @@ package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
-import agency.highlysuspect.incorporeal.item.IncItems;
+import agency.highlysuspect.incorporeal.IncItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.item.ItemEntity;

@@ -1,7 +1,7 @@
 package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.block.IncBlocks;
+import agency.highlysuspect.incorporeal.IncBlocks;
 import agency.highlysuspect.incorporeal.block.entity.UnstableCubeBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

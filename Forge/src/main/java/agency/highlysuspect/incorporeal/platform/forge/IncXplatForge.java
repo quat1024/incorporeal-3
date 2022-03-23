@@ -3,7 +3,7 @@ package agency.highlysuspect.incorporeal.platform.forge;
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
-import agency.highlysuspect.incorporeal.item.IncItems;
+import agency.highlysuspect.incorporeal.IncItems;
 import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import agency.highlysuspect.incorporeal.platform.forge.block.entity.ForgeRedStringConstrictorBlockEntity;

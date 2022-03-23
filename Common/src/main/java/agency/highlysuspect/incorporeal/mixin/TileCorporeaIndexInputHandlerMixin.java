@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.mixin;
 
-import agency.highlysuspect.incorporeal.item.IncItems;
+import agency.highlysuspect.incorporeal.IncItems;
 import net.minecraft.server.level.ServerPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

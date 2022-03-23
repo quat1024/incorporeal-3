@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.item;
+package agency.highlysuspect.incorporeal.platform;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;

@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.block.entity;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.util.NotVanillaPacketDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

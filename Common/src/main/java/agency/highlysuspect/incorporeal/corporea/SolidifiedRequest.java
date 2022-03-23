@@ -1,6 +1,5 @@
 package agency.highlysuspect.incorporeal.corporea;
 
-import agency.highlysuspect.incorporeal.item.IncItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;

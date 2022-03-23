@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.client;
 
-import agency.highlysuspect.incorporeal.item.IncItems;
+import agency.highlysuspect.incorporeal.IncItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;

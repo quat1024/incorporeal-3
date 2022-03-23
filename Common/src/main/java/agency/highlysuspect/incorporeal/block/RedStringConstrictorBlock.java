@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.block;
 
-import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;

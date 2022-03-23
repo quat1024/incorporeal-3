@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.mixin;
 
-import agency.highlysuspect.incorporeal.block.IncBlocks;
+import agency.highlysuspect.incorporeal.IncBlocks;
 import net.minecraft.world.level.block.piston.PistonStructureResolver;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;

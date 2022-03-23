@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.block.entity;
 
+import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;

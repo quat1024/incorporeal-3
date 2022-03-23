@@ -1,7 +1,14 @@
-package agency.highlysuspect.incorporeal.block.entity;
+package agency.highlysuspect.incorporeal;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.block.IncBlocks;
+import agency.highlysuspect.incorporeal.IncBlocks;
+import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.FunnyBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.PotionSoulCoreBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.SanvocaliaBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.UnstableCubeBlockEntity;
 import agency.highlysuspect.incorporeal.computer.DataFunnelBlockEntity;
 import agency.highlysuspect.incorporeal.computer.PointedDatastoneBlockEntity;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
@@ -11,7 +18,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import vazkii.botania.api.mana.IManaReceiver;
 import vazkii.botania.xplat.IXplatAbstractions;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;

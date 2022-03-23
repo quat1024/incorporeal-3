@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.platform.forge.mixin.client;
 
-import agency.highlysuspect.incorporeal.item.IncBlockItemWithTEISR;
+import agency.highlysuspect.incorporeal.platform.IncBlockItemWithTEISR;
 import agency.highlysuspect.incorporeal.platform.forge.client.IncForgeBlockEntityItemRendererHelper;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.IItemRenderProperties;
@@ -10,9 +10,9 @@ import java.util.function.Consumer;
 
 //self-mixin
 @Mixin(IncBlockItemWithTEISR.class)
-public class ForgeIncBlockItemWithTEISRForgeMixin extends Item {
+public class ForgeIncBlockItemWithTEISRMixin extends Item {
 	//Dummy constructor for mixin
-	public ForgeIncBlockItemWithTEISRForgeMixin(Properties dummy) {
+	public ForgeIncBlockItemWithTEISRMixin(Properties dummy) {
 		super(dummy);
 	}
 	

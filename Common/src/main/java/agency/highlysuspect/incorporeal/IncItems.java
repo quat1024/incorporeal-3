@@ -1,11 +1,11 @@
-package agency.highlysuspect.incorporeal.item;
+package agency.highlysuspect.incorporeal;
 
-import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.computer.TicketConjurerItem;
 import agency.highlysuspect.incorporeal.computer.TicketItem;
 import agency.highlysuspect.incorporeal.computer.NotManaLens;
 import agency.highlysuspect.incorporeal.computer.types.DataLenses;
+import agency.highlysuspect.incorporeal.item.FracturedSpaceRodItem;
+import agency.highlysuspect.incorporeal.platform.IncBlockItemWithTEISR;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;

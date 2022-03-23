@@ -2,13 +2,13 @@ package agency.highlysuspect.incorporeal.platform.forge;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncSounds;
-import agency.highlysuspect.incorporeal.block.IncBlocks;
+import agency.highlysuspect.incorporeal.IncBlocks;
 import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
-import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.client.IncClient;
 import agency.highlysuspect.incorporeal.corporea.PlayerHeadHandler;
-import agency.highlysuspect.incorporeal.entity.IncEntityTypes;
-import agency.highlysuspect.incorporeal.item.IncItems;
+import agency.highlysuspect.incorporeal.IncEntityTypes;
+import agency.highlysuspect.incorporeal.IncItems;
 import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
 import agency.highlysuspect.incorporeal.platform.forge.block.entity.EnderSoulCoreItemHandler;
 import net.minecraft.resources.ResourceLocation;

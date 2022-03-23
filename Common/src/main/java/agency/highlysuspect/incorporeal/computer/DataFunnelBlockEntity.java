@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.computer;
 
-import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.computer.capabilities.DatumAcceptor;
 import agency.highlysuspect.incorporeal.computer.capabilities.DatumProvider;
 import agency.highlysuspect.incorporeal.computer.types.DataReducers;

@@ -1,7 +1,7 @@
 package agency.highlysuspect.incorporeal.datagen;
 
-import agency.highlysuspect.incorporeal.block.IncBlocks;
-import agency.highlysuspect.incorporeal.item.IncItems;
+import agency.highlysuspect.incorporeal.IncBlocks;
+import agency.highlysuspect.incorporeal.IncItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;

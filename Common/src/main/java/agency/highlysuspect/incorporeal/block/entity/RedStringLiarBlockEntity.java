@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.block.entity;
 
+import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.corporea.FrameReader;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;

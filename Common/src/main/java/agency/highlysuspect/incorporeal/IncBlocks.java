@@ -1,10 +1,19 @@
-package agency.highlysuspect.incorporeal.block;
+package agency.highlysuspect.incorporeal;
 
+import agency.highlysuspect.incorporeal.block.ClearlyBlock;
+import agency.highlysuspect.incorporeal.block.CompressedTinyPotatoBlock;
+import agency.highlysuspect.incorporeal.block.CorporeaSolidifierBlock;
+import agency.highlysuspect.incorporeal.block.CrappyComparatorBlock;
+import agency.highlysuspect.incorporeal.block.CrappyRepeaterBlock;
+import agency.highlysuspect.incorporeal.block.FrameTinkererBlock;
+import agency.highlysuspect.incorporeal.block.RedStringConstrictorBlock;
+import agency.highlysuspect.incorporeal.block.RedStringLiarBlock;
+import agency.highlysuspect.incorporeal.block.RedstoneRootCropBlock;
+import agency.highlysuspect.incorporeal.block.SoulCoreBlock;
+import agency.highlysuspect.incorporeal.block.UnstableCubeBlock;
 import agency.highlysuspect.incorporeal.computer.PointedDatastoneBlock;
 import agency.highlysuspect.incorporeal.computer.DatastoneBlock;
 import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
-import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.computer.DataFunnelBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;

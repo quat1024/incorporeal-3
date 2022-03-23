@@ -3,7 +3,7 @@ package agency.highlysuspect.incorporeal.computer;
 import agency.highlysuspect.incorporeal.computer.types.DataType;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
-import agency.highlysuspect.incorporeal.item.IncItems;
+import agency.highlysuspect.incorporeal.IncItems;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;

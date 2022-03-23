@@ -2,11 +2,11 @@ package agency.highlysuspect.incorporeal.platform.fabric;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncSounds;
-import agency.highlysuspect.incorporeal.block.IncBlocks;
-import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.IncBlocks;
+import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.corporea.PlayerHeadHandler;
-import agency.highlysuspect.incorporeal.entity.IncEntityTypes;
-import agency.highlysuspect.incorporeal.item.IncItems;
+import agency.highlysuspect.incorporeal.IncEntityTypes;
+import agency.highlysuspect.incorporeal.IncItems;
 import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
 import agency.highlysuspect.incorporeal.platform.fabric.block.entity.EnderSoulCoreStorage;
 import agency.highlysuspect.incorporeal.platform.fabric.block.entity.FabricRedStringConstrictorBlockEntity;

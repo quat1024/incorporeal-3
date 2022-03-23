@@ -1,11 +1,12 @@
 package agency.highlysuspect.incorporeal.block.entity;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.IncConfig;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.corporea.IndexFinder;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
-import agency.highlysuspect.incorporeal.item.IncItems;
+import agency.highlysuspect.incorporeal.IncItems;
 import agency.highlysuspect.incorporeal.net.SanvocaliaEffect;
 import com.google.common.base.Preconditions;
 import net.minecraft.core.BlockPos;

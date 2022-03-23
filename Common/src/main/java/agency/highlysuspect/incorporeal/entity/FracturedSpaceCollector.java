@@ -1,8 +1,8 @@
 package agency.highlysuspect.incorporeal.entity;
 
-import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.IncEntityTypes;
 import agency.highlysuspect.incorporeal.item.FracturedSpaceRodItem;
-import agency.highlysuspect.incorporeal.item.IncItems;
+import agency.highlysuspect.incorporeal.IncItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;

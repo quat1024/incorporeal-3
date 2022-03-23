@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.util;
+package agency.highlysuspect.incorporeal.platform;
 
 import agency.highlysuspect.incorporeal.Inc;
 

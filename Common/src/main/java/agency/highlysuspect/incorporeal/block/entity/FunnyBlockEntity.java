@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.block.entity;
 
+import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.util.Bigfunny;
 import agency.highlysuspect.incorporeal.net.FunnyEffect;
 import net.minecraft.core.BlockPos;

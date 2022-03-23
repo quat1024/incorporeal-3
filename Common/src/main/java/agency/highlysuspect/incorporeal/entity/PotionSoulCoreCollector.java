@@ -1,8 +1,8 @@
 package agency.highlysuspect.incorporeal.entity;
 
-import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.IncEntityTypes;
 import agency.highlysuspect.incorporeal.block.SoulCoreBlock;
-import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.block.entity.PotionSoulCoreBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;

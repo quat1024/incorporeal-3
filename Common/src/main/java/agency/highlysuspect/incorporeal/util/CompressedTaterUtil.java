@@ -1,7 +1,7 @@
 package agency.highlysuspect.incorporeal.util;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.block.IncBlocks;
+import agency.highlysuspect.incorporeal.IncBlocks;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.block.Block;
 import vazkii.botania.common.block.ModBlocks;

@@ -1,12 +1,12 @@
 package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.block.IncBlocks;
+import agency.highlysuspect.incorporeal.IncBlocks;
 import agency.highlysuspect.incorporeal.block.UnstableCubeBlock;
 import agency.highlysuspect.incorporeal.block.entity.AbstractSoulCoreBlockEntity;
-import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
-import agency.highlysuspect.incorporeal.entity.IncEntityTypes;
-import agency.highlysuspect.incorporeal.item.IncItems;
+import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.IncEntityTypes;
+import agency.highlysuspect.incorporeal.IncItems;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;

@@ -2,8 +2,8 @@ package agency.highlysuspect.incorporeal.datagen;
 
 import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.block.IncBlocks;
-import agency.highlysuspect.incorporeal.item.IncItems;
+import agency.highlysuspect.incorporeal.IncBlocks;
+import agency.highlysuspect.incorporeal.IncItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
