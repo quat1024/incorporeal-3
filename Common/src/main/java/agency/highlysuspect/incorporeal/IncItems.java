@@ -5,8 +5,6 @@ import agency.highlysuspect.incorporeal.computer.TicketItem;
 import agency.highlysuspect.incorporeal.computer.NotManaLens;
 import agency.highlysuspect.incorporeal.computer.types.DataLenses;
 import agency.highlysuspect.incorporeal.item.FracturedSpaceRodItem;
-import agency.highlysuspect.incorporeal.platform.IncBlockItemWithCoolRenderer;
-import agency.highlysuspect.incorporeal.platform.IncItemWithCoolRenderer;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -39,9 +37,9 @@ public class IncItems {
 	public static final BlockItem FRAME_TINKERER = new BlockItem(IncBlocks.FRAME_TINKERER, props());
 	
 	//soul cores
-	public static final Item SOUL_CORE_FRAME = new IncItemWithCoolRenderer(props());
-	public static final BlockItem ENDER_SOUL_CORE = new IncBlockItemWithCoolRenderer(IncBlocks.ENDER_SOUL_CORE, props());
-	public static final BlockItem POTION_SOUL_CORE = new IncBlockItemWithCoolRenderer(IncBlocks.POTION_SOUL_CORE, props());
+	public static final Item SOUL_CORE_FRAME = new Item(props());
+	public static final BlockItem ENDER_SOUL_CORE = new BlockItem(IncBlocks.ENDER_SOUL_CORE, props());
+	public static final BlockItem POTION_SOUL_CORE = new BlockItem(IncBlocks.POTION_SOUL_CORE, props());
 	
 	//natural devices
 	public static final BlockItem NATURAL_REPEATER = new BlockItem(IncBlocks.NATURAL_REPEATER, props());
@@ -60,7 +58,7 @@ public class IncItems {
 	
 	//unstable cubes
 	public static final Map<DyeColor, BlockItem> UNSTABLE_CUBES = Inc.sixteenColors(
-		color -> new IncBlockItemWithCoolRenderer(IncBlocks.UNSTABLE_CUBES.get(color), props()));
+		color -> new BlockItem(IncBlocks.UNSTABLE_CUBES.get(color), props()));
 	
 	//Clearly
 	public static final BlockItem CLEARLY = new BlockItem(IncBlocks.CLEARLY, props());

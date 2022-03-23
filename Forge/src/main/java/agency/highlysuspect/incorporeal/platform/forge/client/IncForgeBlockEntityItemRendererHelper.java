@@ -42,7 +42,7 @@ public class IncForgeBlockEntityItemRendererHelper {
 		}
 	};
 	
-	private static final IItemRenderProperties PROPS = new IItemRenderProperties() {
+	public static final IItemRenderProperties PROPS = new IItemRenderProperties() {
 		@Override
 		public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
 			return IncForgeBlockEntityItemRendererHelper.RENDERER;

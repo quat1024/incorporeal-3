@@ -5,6 +5,7 @@ import agency.highlysuspect.incorporeal.client.IncClient;
 import agency.highlysuspect.incorporeal.client.IncClientNetwork;
 import agency.highlysuspect.incorporeal.client.IncClientProperties;
 import agency.highlysuspect.incorporeal.platform.IncClientBootstrapper;
+import agency.highlysuspect.incorporeal.platform.forge.mixin.client.ForgeItemAccessor;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -66,7 +67,12 @@ public class ForgeClientBootstrapper implements IncClientBootstrapper {
 	
 	@Override
 	public void registerItemRenderers() {
-		//See ForgeCoolRenderersMixin.
+		//You're supposed to override Item#initializeClient, but like, it really sucks to need a special implementation
+		//of each item class you want a renderer for, *just* to override that one method, because Forge is weird.
+		//So, alright, fine. I'll make my own setter.
+		FMLJavaModLoadingContext.get().getModEventBus().addListener((ModelRegistryEvent e) -> //Just some random, kinda-related event
+			IncClientProperties.MY_DYNAMIC_ITEM_RENDERERS.keySet().forEach(item ->
+				((ForgeItemAccessor) item).inc$setRenderProperties(IncForgeBlockEntityItemRendererHelper.PROPS)));
 	}
 	
 	@Override
