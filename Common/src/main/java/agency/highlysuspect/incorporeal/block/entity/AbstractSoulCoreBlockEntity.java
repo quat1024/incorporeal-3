@@ -185,6 +185,16 @@ public abstract class AbstractSoulCoreBlockEntity extends TileMod implements IMa
 		signal = cmp.getInt("Signal");
 	}
 	
+	@Override
+	public Level getManaReceiverLevel() {
+		return level;
+	}
+	
+	@Override
+	public BlockPos getManaReceiverPos() {
+		return worldPosition;
+	}
+	
 	public static class WandHud implements IWandHUD {
 		public WandHud(AbstractSoulCoreBlockEntity tile) {
 			this.tile = tile;
