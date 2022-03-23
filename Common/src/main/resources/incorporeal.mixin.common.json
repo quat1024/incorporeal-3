@@ -12,7 +12,6 @@
 		"TileCorporeaIndexInputHandlerMixin",
 		"CorporeaItemStackMatcherAccessor",
 		"ItemFrameAccessor",
-		"ModItemsMixin",
 		"ModTilesMixin",
 		"FarmBlockMixin",
 		"DataGeneratorMixin",
