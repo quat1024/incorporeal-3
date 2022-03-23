@@ -3,6 +3,7 @@ package agency.highlysuspect.incorporeal.computer;
 import agency.highlysuspect.incorporeal.block.entity.IncBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.BlockGetter;
@@ -18,7 +19,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DripstoneThickness;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -136,12 +136,16 @@ public class PointedDatastoneBlock extends BlockModWaterloggable implements Enti
 	}
 	
 	public void fall(ServerLevel level, BlockPos pos, BlockState state) {
-		Vec3 posVec = Vec3.atBottomCenterOf(pos);
-		
-		FallingBlockEntity fallingBlock = new FallingBlockEntity(level, posVec.x, posVec.y, posVec.z, state);
+		CompoundTag tag = null;
 		if(level.getBlockEntity(pos) instanceof PointedDatastoneBlockEntity be) {
 			//did you know falling block entities can store nbt? now you do
-			fallingBlock.blockData = be.saveWithoutMetadata();
+			tag = be.saveWithoutMetadata();
+		}
+		
+		FallingBlockEntity fallingBlock = FallingBlockEntity.fall(level, pos, state);
+		
+		if(tag != null) {
+			fallingBlock.blockData = tag;
 		}
 		
 		level.addFreshEntity(fallingBlock);
