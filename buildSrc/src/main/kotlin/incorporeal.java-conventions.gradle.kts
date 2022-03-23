@@ -4,19 +4,17 @@ plugins {
 }
 
 //Set the artifact's version.
-//Here I use the Botania convention of "1.18.1-0", which is not actually Semver or anything. Sue me.
-//You could also set "version" directly in gradle.properties, but i like having the mc version thrown in there too.
+//Here I use the Botania convention of "<game version>-<sequentially increasing number>", which is not actually Semver or anything. Sue me.
 val minecraftVersion: String by project
 val buildNumber: String by project
-var v = "$minecraftVersion-$buildNumber"
 
-//Set in github actions ci
-val sha: String? = System.getenv("GITHUB_SHA");
-if(sha != null) {
-    v += "-SNAPSHOT-${sha.substring(0, 8)}"
+//You could also set "version" directly in gradle.properties, but i like having the mc version thrown in there too.
+val githubActionsCommitHash: String? = System.getenv("GITHUB_SHA")
+version = if(githubActionsCommitHash != null) {
+    "$minecraftVersion-$buildNumber-SNAPSHOT-${githubActionsCommitHash.substring(0, 8)}"
+} else {
+    "$minecraftVersion-$buildNumber"
 }
-
-version = v
 
 java {
     //Declare that Java artifacts should have a sources jar published alongside them.
@@ -30,8 +28,12 @@ java {
 }
 
 configurations.all {
-    //In this project, Botania is declared as a `changing` module, because it's based off active HEAD.
-    //Tell Gradle to update it every time I sit down at my computer so I don't have to manually use refreshDependencies.
+    //Sometimes, the used version of Botania is actually just HEAD.
+    //I want Gradle to update it every time I sit down at my computer, so I don't have to manually use refreshDependencies.
+    //In these cases, the "declareBotaniaAsChanging" property will be set in /gradle.properties, and each project's Botania
+    //dependency will be marked as a "changing" dependency.
+    
+    //Configure the amount of time that changing modules will be cached for.
     resolutionStrategy.cacheChangingModulesFor(12, "hours")
 }
 

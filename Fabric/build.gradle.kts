@@ -6,20 +6,36 @@ plugins {
 }
 
 dependencies {
-    modImplementation(group = "net.fabricmc.fabric-api", name = "fabric-api", version = "0.44.0+1.18")
+    val fabricApiVersion: String by project
+    modImplementation(group = "net.fabricmc.fabric-api", name = "fabric-api", version = fabricApiVersion)
     
-    val botaniaVersion: String by project;
-    modImplementation(group = "vazkii.botania"         , name = "Botania"   , version = williePls(botaniaVersion)).isChanging = true
+    val botaniaVersion: String by project
+    val botania = modImplementation(group = "vazkii.botania", name = "Botania", version = williePls(botaniaVersion))
     
-    //botania-fabric's transitive dependencies as of Jan 29, 2022; https://github.com/VazkiiMods/Botania/blob/1b16b5672fd7c59f4fa0e5e235f9b8120b84dcb2/Fabric/build.gradle
-    //Due to reasons, Botania does not (currently) publish transitive dependency information for its artifacts.
-    modImplementation(group = "vazkii.patchouli"                             , name = "Patchouli"                   , version = "1.18.1-64-FABRIC")
-    modImplementation(group = "me.zeroeightsix"                              , name = "fiber"                       , version = "0.23.0-2")
-    modImplementation(group = "io.github.onyxstudios.Cardinal-Components-API", name = "cardinal-components-base"    , version = "4.0.1")
-    modImplementation(group = "io.github.onyxstudios.Cardinal-Components-API", name = "cardinal-components-entity"  , version = "4.0.1")
-    modImplementation(group = "dev.emi"                                      , name = "trinkets"                    , version = "3.1.0")
-    modImplementation(group = "com.jamieswhiteshirt"                         , name = "reach-entity-attributes"     , version = "2.1.1")
-    modImplementation(group = "com.github.emilyploszaj"                      , name = "step-height-entity-attribute", version = "v1.0.1")
+    //If requested, declare Botania as a "changing" dependency.
+    //This makes Gradle cache it for a much shorter period of time.
+    //See java-conventions for where this is configured.
+    val declareBotaniaAsChanging: String by project
+    if(declareBotaniaAsChanging == "true") {
+        botania.isChanging = true
+    }
+    
+    //botania-fabric's transitive dependencies as of Mar 23, 2022; https://github.com/VazkiiMods/Botania/blob/901045768a3637c8dd64a929837ec12672a11f5a/Fabric/build.gradle
+    //Botania does not (currently) publish transitive dependency information for its artifacts.
+    //See the bottom of java-conventions for a possible reason why.
+    
+    //Actually it currently currently DOES publish transitive deps, but only on botania-fabric and not anything else.
+    //What? Okay. I'll leave them commented out for the time being.
+    
+//    modImplementation(group = "vazkii.patchouli"                             , name = "Patchouli"                   , version = "1.18.2-66-FABRIC-SNAPSHOT")
+//    modImplementation(group = "me.zeroeightsix"                              , name = "fiber"                       , version = "0.23.0-2")
+//    modImplementation(group = "io.github.onyxstudios.Cardinal-Components-API", name = "cardinal-components-base"    , version = "4.0.1")
+//    modImplementation(group = "io.github.onyxstudios.Cardinal-Components-API", name = "cardinal-components-entity"  , version = "4.0.1")
+//    modImplementation(group = "dev.emi"                                      , name = "trinkets"                    , version = "3.3.0") {
+//        isTransitive = false
+//    }
+//    modImplementation(group = "com.jamieswhiteshirt"                         , name = "reach-entity-attributes"     , version = "2.1.1")
+//    modImplementation(group = "com.github.emilyploszaj"                      , name = "step-height-entity-attribute", version = "v1.0.1")
 }
 
 //Ok so botnio forge and fabric are published under the same maven group, but the fabric one has a differently formatted version string

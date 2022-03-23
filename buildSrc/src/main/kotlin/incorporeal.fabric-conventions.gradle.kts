@@ -37,7 +37,8 @@ dependencies {
     mappings(loom.officialMojangMappings())
     
     //Get fabric-loader.
-    modImplementation("net.fabricmc:fabric-loader:0.12.8")
+    val fabricLoaderVersion: String by project
+    modImplementation("net.fabricmc:fabric-loader:${fabricLoaderVersion}")
 }
 
 tasks.withType<JavaCompile>().configureEach {

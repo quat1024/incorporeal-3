@@ -24,6 +24,7 @@ repositories {
         url = uri("https://ladysnake.jfrog.io/artifactory/mods")
         content {
             includeGroup("io.github.onyxstudios.Cardinal-Components-API")
+            includeGroup("dev.onyxstudios.cardinal-components-api") //i guess they moved it
         }
     }
     
@@ -33,6 +34,10 @@ repositories {
         url = uri("https://maven.terraformersmc.com/")
         content {
             includeGroup("dev.emi")
+            
+            //At the moment, required to pick up Mod Menu
+            // https://github.com/emilyploszaj/trinkets/issues/159
+            includeGroup("com.terraformersmc")
         }
     }
     

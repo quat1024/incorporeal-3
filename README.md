@@ -73,8 +73,11 @@ See:
 * `gradle.properties` for build variables like name and version number
 
 Keep in mind:
-* The current version of Botania being depended on is `1.18.1-430-SNAPSHOT`, a.k.a, Botania `HEAD`.
-  * Jared's jenkins doesn't store `-SNAPSHOT` versions for an indefinite amount of time. The version may be changed in `gradle.properties`.
+* The ["xxx: Type by project" syntax](https://docs.gradle.org/current/userguide/kotlin_dsl.html#kotdsl:properties) plucks a value out of `gradle.properties`, I use this file for many project-wide properties.
+* The current version of Botania being depended on is `1.18.2-430-SNAPSHOT`, a.k.a, basically Botania `1.18.x` `HEAD`.
+  * Jared's jenkins doesn't store `-SNAPSHOT` versions for an indefinite amount of time, so the build may break.
+  * The API surface may change out from under me, which will also cause the build to break.
+  * The Botania version may be set in `gradle.properties`.
 * I prefer to develop on Fabric first and fix Forge later.
 
 Having weird build issues:
