@@ -1,22 +1,15 @@
 package agency.highlysuspect.incorporeal.platform;
 
-import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
+import agency.highlysuspect.incorporeal.util.ServiceHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.List;
-import java.util.ServiceLoader;
-import java.util.function.BiFunction;
-import java.util.stream.Collectors;
 
 /**
  * Incorporeal-specific cross-loader abstractions.
@@ -25,22 +18,14 @@ import java.util.stream.Collectors;
  * an implementation of IncXplat for the particular platform, and the main mod entrypoint.
  */
 public interface IncXplat {
-	IncXplat INSTANCE = get();
+	IncXplat INSTANCE = ServiceHelper.loadSingletonService(IncXplat.class);
 	
-	private static IncXplat get() {
-		//Literally pasted from Botania, lol
-		List<ServiceLoader.Provider<IncXplat>> providers = ServiceLoader.load(IncXplat.class).stream().toList();
-		if (providers.size() != 1) {
-			throw new IllegalStateException("There should be exactly one IncXplat implementation on the classpath. Found: " + providers.stream().map(p -> p.type().getName()).collect(Collectors.joining(",", "[", "]")));
-		} else {
-			ServiceLoader.Provider<IncXplat> provider = providers.get(0);
-			Inc.LOGGER.debug("Instantiating IncXplat impl: " + provider.type().getName());
-			return provider.get();
-		}
-	}
+	//Thing that contains implementations for registering blocks, items, etc.
+	//(Kept in a separate class mainly to keep IncXplat to a reasonable size.) 
+	IncBootstrapper createBootstrapper();
 	
 	//One of those things that happens to be different across loaders
-	CreativeModeTab getCreativeTab();
+	CreativeModeTab createCreativeTab();
 	
 	//The named DamageSource constructor is not public on Fabric
 	DamageSource newDamageSource(String name);

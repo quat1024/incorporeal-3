@@ -24,13 +24,13 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"agency.highlysuspect.incorporeal.platform.fabric.IncFabric"
+			"agency.highlysuspect.incorporeal.platform.fabric.FabricEntrypoint"
 		],
 		"client": [
-			"agency.highlysuspect.incorporeal.platform.fabric.IncFabricClient"
+			"agency.highlysuspect.incorporeal.platform.fabric.client.FabricClientEntrypoint"
 		],
 		"fabric-datagen": [
-			"agency.highlysuspect.incorporeal.platform.fabric.IncFabricDatagen"
+			"agency.highlysuspect.incorporeal.platform.fabric.FabricDatagenEntrypoint"
 		]
 	},
 	
@@ -41,6 +41,7 @@
 	
 	"depends": {
 		"fabricloader": "*",
-		"minecraft": ">=1.18.1"
+		"minecraft": ">=1.18.1",
+		"botania": "*"
 	}
 }

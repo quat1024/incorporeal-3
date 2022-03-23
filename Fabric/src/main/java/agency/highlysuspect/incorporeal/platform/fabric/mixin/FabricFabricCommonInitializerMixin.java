@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.platform.fabric.mixin;
 
-import agency.highlysuspect.incorporeal.platform.fabric.IncFabric;
+import agency.highlysuspect.incorporeal.Inc;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +21,6 @@ public class FabricFabricCommonInitializerMixin {
 		remap = false
 	)
 	private void afterInitialize(CallbackInfo ci) {
-		IncFabric.botaniaInit = true;
-		IncFabric.afterBotania();
+		Inc.INSTANCE.markBotaniaAsDoneInitializing();
 	}
 }

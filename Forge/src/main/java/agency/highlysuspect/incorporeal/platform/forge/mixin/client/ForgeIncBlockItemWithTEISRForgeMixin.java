@@ -10,14 +10,14 @@ import java.util.function.Consumer;
 
 //self-mixin
 @Mixin(IncBlockItemWithTEISR.class)
-public class IncBlockItemWithTEISRForgeMixin extends Item {
+public class ForgeIncBlockItemWithTEISRForgeMixin extends Item {
 	//Dummy constructor for mixin
-	public IncBlockItemWithTEISRForgeMixin(Properties dummy) {
+	public ForgeIncBlockItemWithTEISRForgeMixin(Properties dummy) {
 		super(dummy);
 	}
 	
 	@Override
-	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+	public void initializeClient(Consumer<IItemRenderProperties> consumer) { //Forge extension method
 		IncForgeBlockEntityItemRendererHelper.initItem(consumer);
 	}
 }

@@ -11,7 +11,7 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.data.DataGenerator;
 
-public class IncFabricDatagen implements DataGeneratorEntrypoint {
+public class FabricDatagenEntrypoint implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator gen) {
 		Inc.LOGGER.info("datagen output folder: " + gen.getOutputFolder().toAbsolutePath());

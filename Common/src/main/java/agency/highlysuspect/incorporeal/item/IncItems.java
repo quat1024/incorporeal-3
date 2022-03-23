@@ -10,6 +10,7 @@ import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -21,12 +22,14 @@ import vazkii.botania.common.item.lens.ItemLens;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 public class IncItems {
+	//creative tab!
+	public static final CreativeModeTab TAB = IncXplat.INSTANCE.createCreativeTab();
+	
 	//corporetics
 	public static final Item FRACTURED_SPACE_ROD = new FracturedSpaceRodItem(props().stacksTo(1));
 	public static final BlockItem CORPOREA_SOLIDIFIER = new BlockItem(IncBlocks.CORPOREA_SOLIDIFIER, props());
@@ -150,7 +153,7 @@ public class IncItems {
 	}
 	
 	private static Item.Properties props() {
-		return new Item.Properties().tab(IncXplat.INSTANCE.getCreativeTab());
+		return new Item.Properties().tab(TAB);
 	}
 	
 	//BlockItems can be a little bit error-prone:
@@ -178,4 +181,6 @@ public class IncItems {
 			for(BlockItem bi : bis) acceptBlockItem(bi);
 		}
 	}
+	
+	public static final Item CREATIVE_MODE_TAB_ICON = ENDER_SOUL_CORE;
 }

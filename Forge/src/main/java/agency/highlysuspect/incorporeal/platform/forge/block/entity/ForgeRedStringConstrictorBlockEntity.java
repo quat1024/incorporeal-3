@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.platform.forge;
+package agency.highlysuspect.incorporeal.platform.forge.block.entity;
 
 import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEntity;
 import com.google.common.base.Preconditions;

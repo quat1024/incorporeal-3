@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.platform.fabric;
+package agency.highlysuspect.incorporeal.platform.fabric.block.entity;
 
 import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
 import agency.highlysuspect.incorporeal.corporea.LyingCorporeaNode;

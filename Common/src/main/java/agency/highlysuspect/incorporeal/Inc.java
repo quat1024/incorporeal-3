@@ -8,6 +8,8 @@ import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.corporea.AndingCorporeaRequestMatcher;
 import agency.highlysuspect.incorporeal.corporea.EmptyCorporeaRequestMatcher;
 import agency.highlysuspect.incorporeal.corporea.InvertedCorporeaRequestMatcher;
+import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
+import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.DyeColor;
@@ -24,35 +26,72 @@ import java.util.Random;
 import java.util.function.Function;
 
 /**
- * Main entrypoint for the mod, or, as close as you can get in the multiloader world I guess.
- * 
- * Also contains random bits of utility crap. Noone will spot your haphazard "util" package if you
- * throw them all in here. How's that.
+ * Secondary entrypoint for the mod.
+ * The primary entrypoints are modloader specific. Each primary entrypoint calls "Inc.onInitialize()".
  */
 public class Inc {
 	public static final String MODID = "incorporeal";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 	
-	//The names these things get registered under eventually end up in item names.
-	//It has to be ready by the time Minecraft builds the creative mode searchtree.
-	//On Forge, this happens REALLY EARLY.
-	public static void registerComputerStuff() {
+	public static Inc INSTANCE = new Inc(IncXplat.INSTANCE.createBootstrapper());
+	
+	private Inc(IncBootstrapper bootstrapper) {
+		this.bootstrapper = bootstrapper;
+	}
+	
+	private final IncBootstrapper bootstrapper;
+	private boolean selfInit = false;
+	private boolean botaniaInit = false;
+	private boolean bothInit = false;
+	
+	public void onInitialize() {
+		//platform-specific init
+		bootstrapper.registerBlocks();
+		bootstrapper.registerBlockEntityTypes();
+		bootstrapper.registerItems();
+		bootstrapper.registerEntityTypes();
+		bootstrapper.registerEntityAttributes();
+		bootstrapper.registerSoundEvents();
+		bootstrapper.registerServerToClientNetworkChannelSender();
+		bootstrapper.registerCapabilities();
+		
+		//common init
 		DataTypes.registerBuiltinTypes();
 		DataReducers.registerBuiltinReducers();
 		DataLenses.registerBuiltinLenses();
+		
+		//post
+		selfInit = true;
+		bootstrapper.endSelfInit();
+		tryAfterBotaniaInitialization();
 	}
 	
-	//Called after Botania's initializer on Fabric and in CommonInit on forge
-	public static void afterBotania() {
-		//corporea matchers
-		CorporeaHelper.instance().registerRequestMatcher(id("empty"), EmptyCorporeaRequestMatcher.class, __ -> EmptyCorporeaRequestMatcher.INSTANCE);
-		CorporeaHelper.instance().registerRequestMatcher(id("not"), InvertedCorporeaRequestMatcher.class, InvertedCorporeaRequestMatcher::readFromNBT);
-		CorporeaHelper.instance().registerRequestMatcher(id("and"), AndingCorporeaRequestMatcher.class, AndingCorporeaRequestMatcher::readFromNbt);
-		
-		//corporea node detectors
-		CorporeaNodeDetectors.register(new RedStringLiarBlockEntity.NodeDetector());
-		CorporeaNodeDetectors.register(new EnderSoulCoreBlockEntity.NodeDetector());
+	//Call this after you're sure Botania is done initializing.
+	public void markBotaniaAsDoneInitializing() {
+		botaniaInit = true;
+		tryAfterBotaniaInitialization();
 	}
+	
+	private void tryAfterBotaniaInitialization() {
+		if(!bothInit && selfInit && botaniaInit) {
+			bothInit = true;
+			
+			//platform specific post-botania init
+			bootstrapper.registerCorporeaIndexCallback();
+			
+			//common post-botania init
+			//corporea matchers
+			CorporeaHelper.instance().registerRequestMatcher(id("empty"), EmptyCorporeaRequestMatcher.class, __ -> EmptyCorporeaRequestMatcher.INSTANCE);
+			CorporeaHelper.instance().registerRequestMatcher(id("not"), InvertedCorporeaRequestMatcher.class, InvertedCorporeaRequestMatcher::readFromNBT);
+			CorporeaHelper.instance().registerRequestMatcher(id("and"), AndingCorporeaRequestMatcher.class, AndingCorporeaRequestMatcher::readFromNbt);
+			
+			//corporea node detectors
+			CorporeaNodeDetectors.register(new RedStringLiarBlockEntity.NodeDetector());
+			CorporeaNodeDetectors.register(new EnderSoulCoreBlockEntity.NodeDetector());
+		}
+	}
+	
+	//Very commonly used helpers
 	
 	public static ResourceLocation id(String path) {
 		return new ResourceLocation(MODID, path);
