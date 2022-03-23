@@ -147,8 +147,6 @@ public class PointedDatastoneBlock extends BlockModWaterloggable implements Enti
 		if(tag != null) {
 			fallingBlock.blockData = tag;
 		}
-		
-		level.addFreshEntity(fallingBlock);
 	}
 	
 	@Override
