@@ -1,6 +1,5 @@
 package agency.highlysuspect.incorporeal.computer.capabilities;
 
-import agency.highlysuspect.incorporeal.block.IncBlocks;
 import agency.highlysuspect.incorporeal.computer.DatastoneBlock;
 import agency.highlysuspect.incorporeal.computer.NotManaLens;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
@@ -20,9 +19,9 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
+import vazkii.botania.common.block.ModBlocks;
 import vazkii.botania.common.block.tile.corporea.TileCorporeaCrystalCube;
 import vazkii.botania.common.block.tile.corporea.TileCorporeaIndex;
-import vazkii.botania.common.block.tile.mana.TileManaVoid;
 import vazkii.botania.common.block.tile.mana.TilePrism;
 import vazkii.botania.common.item.lens.ItemLens;
 
@@ -44,9 +43,6 @@ public class NotCapabilities {
 		if(be != null) {
 			//if it self-implements just return it
 			if(be instanceof DatumAcceptor acceptor) return acceptor;
-			
-			//Mana voids: trash can
-			if(be instanceof TileManaVoid) return datum -> {};
 			
 			//Corporea retainers: set their retained stuff
 			if(be instanceof RetainerDuck quack) return datum -> {
@@ -98,6 +94,9 @@ public class NotCapabilities {
 		final BlockState s = state; //Lambda moment
 		final BlockPos posCopy = pos.immutable();
 		
+		//mana voids: trash can
+		if(s.getBlock() == ModBlocks.manaVoid) return datum -> {};
+		
 		//datastone blocks: extend a stack of pointed datastones
 		if(s.getBlock() instanceof DatastoneBlock db) return datum -> db.extendColumn(level, posCopy, datum);
 		
@@ -109,9 +108,6 @@ public class NotCapabilities {
 		if(be != null) {
 			//If it implements, self return
 			if(be instanceof DatumProvider provider) return provider;
-			
-			//Mana voids -> empty
-			if(be instanceof TileManaVoid) return () -> Datum.EMPTY;
 			
 			//Corporea retainers -> their pending request, if they have one
 			if(be instanceof RetainerDuck quack) return () -> {
@@ -137,6 +133,9 @@ public class NotCapabilities {
 		}
 		final BlockState s = state; //Lambda moment
 		final BlockPos posCopy = pos.immutable(); //also watch out for this
+		
+		//Mana voids -> empty
+		if(s.getBlock() == ModBlocks.manaVoid) return () -> Datum.EMPTY;
 		
 		//Datastone blocks -> retract the column of pointed datastone
 		if(s.getBlock() instanceof DatastoneBlock db) return () -> db.retractColumn(level, posCopy); 
