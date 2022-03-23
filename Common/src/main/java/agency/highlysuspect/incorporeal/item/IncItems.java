@@ -12,7 +12,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
+import vazkii.botania.api.item.ICoordBoundItem;
 import vazkii.botania.common.item.block.ItemBlockSpecialFlower;
 import vazkii.botania.common.item.block.ItemBlockTinyPotato;
 import vazkii.botania.common.item.lens.ItemLens;
@@ -22,6 +24,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 public class IncItems {
 	//corporetics
@@ -76,62 +79,103 @@ public class IncItems {
 	public static final BlockItem DATASTONE_BLOCK = new BlockItem(IncBlocks.DATASTONE_BLOCK, props());
 	public static final BlockItem POINTED_DATASTONE = new BlockItem(IncBlocks.POINTED_DATASTONE, props());
 	
-	public static void register(BiConsumer<Item, ResourceLocation> r) {
-		//items
-		r.accept(SOUL_CORE_FRAME, Inc.id("soul_core_frame"));
+	//Capability stuff.
+	public static final Map<Item, Function<ItemStack, ICoordBoundItem>> COORD_BOUND_ITEM_MAKERS = Map.of( //(N.B: Map.of caps at 10 entries)
+		FRACTURED_SPACE_ROD, FracturedSpaceRodItem.CoordBoundItem::new
+	);
+	
+	public static void register(BiConsumer<Item, ResourceLocation> rRaw) {
+		ItemRegistrar r = rRaw::accept;
+		
+		//Note that item registry order is significant, particularly when determining the ordering of the creative tab.
+		//(Forge likes to try and keep the ordering the same between runs, Fabric always displays raw registration order.)
+		//So, register the items in a logical, categorical order.
+		
+		//corporetics
 		r.accept(FRACTURED_SPACE_ROD, Inc.id("fractured_space_rod"));
+		r.acceptBlockItems(
+			CORPOREA_SOLIDIFIER,
+			RED_STRING_LIAR,
+			RED_STRING_CONSTRICTOR,
+			FRAME_TINKERER
+		);
+		
+		//soul cores
+		r.accept(SOUL_CORE_FRAME, Inc.id("soul_core_frame"));
+		r.acceptBlockItems(
+			ENDER_SOUL_CORE,
+			POTION_SOUL_CORE
+		);
+		
+		//natural devices
+		r.acceptBlockItems(
+			NATURAL_REPEATER,
+			NATURAL_COMPARATOR
+		);
 		
 		//flowers
-		r.accept(SANVOCALIA, Inc.id("sanvocalia"));
-		r.accept(SANVOCALIA_SMALL, Inc.id("sanvocalia_chibi"));
-		r.accept(FLOATING_SANVOCALIA, Inc.id("floating_sanvocalia"));
-		r.accept(FLOATING_SANVOCALIA_SMALL, Inc.id("floating_sanvocalia_chibi"));
+		r.acceptBlockItems(
+			SANVOCALIA,
+			SANVOCALIA_SMALL,
+			FLOATING_SANVOCALIA,
+			FLOATING_SANVOCALIA_SMALL,
+			FUNNY,
+			FUNNY_SMALL,
+			FLOATING_FUNNY,
+			FLOATING_FUNNY_SMALL
+		);
 		
-		r.accept(FUNNY, Inc.id("funny"));
-		r.accept(FUNNY_SMALL, Inc.id("funny_chibi"));
-		r.accept(FLOATING_FUNNY, Inc.id("floating_funny"));
-		r.accept(FLOATING_FUNNY_SMALL, Inc.id("floating_funny_chibi"));
+		//unstable cubes
+		r.acceptBlockItems(UNSTABLE_CUBES.values());
 		
-		//computer stuff that isn't blockitems
+		//Clearly
+		r.acceptBlockItem(CLEARLY);
+		
+		//Taters
+		r.acceptBlockItems(COMPRESSED_TATERS.values());
+		
+		//Computer
 		r.accept(TICKET, Inc.id("ticket"));
 		r.accept(TICKET_CONJURER, Inc.id("ticket_conjurer"));
 		
+		r.acceptBlockItem(DATA_FUNNEL);
 		r.accept(NUMBER_LENS, Inc.id("number_lens"));
 		r.accept(MATCHER_LENS, Inc.id("matcher_lens"));
 		r.accept(NEGATING_LENS, Inc.id("negating_lens"));
 		
-		//blockitems
-		registerBlockItems(r,
-			List.of(
-				//corporetics
-				CORPOREA_SOLIDIFIER, RED_STRING_LIAR, RED_STRING_CONSTRICTOR, FRAME_TINKERER,
-				//soul cores
-				ENDER_SOUL_CORE, POTION_SOUL_CORE,
-				//natural devices
-				NATURAL_REPEATER, NATURAL_COMPARATOR,
-				//clearly
-				CLEARLY,
-				//computer
-				DATA_FUNNEL, DATASTONE_BLOCK, POINTED_DATASTONE
-			),
-			//unstable cubes
-			UNSTABLE_CUBES.values(),
-			//taters
-			COMPRESSED_TATERS.values()
+		r.acceptBlockItems(
+			DATASTONE_BLOCK,
+			POINTED_DATASTONE
 		);
-	}
-	
-	@SafeVarargs
-	private static void registerBlockItems(BiConsumer<Item, ResourceLocation> r, Collection<? extends BlockItem>... collections) {
-		for(Collection<? extends BlockItem> collection : collections) {
-			for(BlockItem bi : collection) {
-				Item.BY_BLOCK.put(bi.getBlock(), bi);
-				r.accept(bi, Registry.BLOCK.getKey(bi.getBlock()));
-			}
-		}
 	}
 	
 	private static Item.Properties props() {
 		return new Item.Properties().tab(IncXplat.INSTANCE.getCreativeTab());
+	}
+	
+	//BlockItems can be a little bit error-prone:
+	//- BlockItems traditionally use the same ResourceLocation as their block. This is not a hard requirement.
+	//  acceptBlockItem does this for you.
+	//- The Item.BY_BLOCK map is not automatically populated. Bad things may happen if you don't populate it.
+	//  The only way to break this invariant with ItemRegistrar is by calling acceptRaw directly. 
+	public interface ItemRegistrar {
+		void acceptRaw(Item i, ResourceLocation id);
+		
+		default void accept(Item i, ResourceLocation id) {
+			if(i instanceof BlockItem bi) Item.BY_BLOCK.put(bi.getBlock(), bi);
+			acceptRaw(i, id);
+		}
+		
+		default void acceptBlockItem(BlockItem bi) {
+			accept(bi, Registry.BLOCK.getKey(bi.getBlock()));
+		}
+		
+		default void acceptBlockItems(BlockItem... bis) {
+			for(BlockItem bi : bis) acceptBlockItem(bi);
+		}
+		
+		default void acceptBlockItems(Collection<? extends BlockItem> bis) {
+			for(BlockItem bi : bis) acceptBlockItem(bi);
+		}
 	}
 }

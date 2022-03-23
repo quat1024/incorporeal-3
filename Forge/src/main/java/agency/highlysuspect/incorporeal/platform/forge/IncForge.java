@@ -28,10 +28,13 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import vazkii.botania.api.BotaniaForgeCapabilities;
 import vazkii.botania.api.corporea.CorporeaIndexRequestEvent;
+import vazkii.botania.api.item.ICoordBoundItem;
+import vazkii.botania.api.mana.IManaReceiver;
 import vazkii.botania.forge.CapabilityUtil;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 @Mod("incorporeal")
 public class IncForge {
@@ -90,6 +93,13 @@ public class IncForge {
 	
 	private static void blockEntityCapabilities(AttachCapabilitiesEvent<BlockEntity> event) {
 		BlockEntity be = event.getObject();
+		
+		//ManaReceiver for all block entity types that implement it on themself
+		if(IncBlockEntityTypes.SELF_MANA_RECEIVER_BLOCK_ENTITY_TYPES.contains(be.getType()) && be instanceof IManaReceiver receiver) {
+			event.addCapability(Inc.id("mana_receiver"), CapabilityUtil.makeProvider(BotaniaForgeCapabilities.MANA_RECEIVER, receiver));
+		}
+		
+		//Add an item handler capability to the Ender Soul Core
 		if(be.getType() == IncBlockEntityTypes.ENDER_SOUL_CORE && be instanceof EnderSoulCoreBlockEntity esc) {
 			event.addCapability(Inc.id("inventory"), CapabilityUtil.makeProvider(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,
 				new EnderSoulCoreItemHandler(esc)));
@@ -98,9 +108,14 @@ public class IncForge {
 	
 	private static void itemCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
 		ItemStack stack = event.getObject();
-		if(stack.getItem() == IncItems.FRACTURED_SPACE_ROD) {
-			event.addCapability(Inc.id("coord_bound_item"), CapabilityUtil.makeProvider(BotaniaForgeCapabilities.COORD_BOUND_ITEM,
-				new FracturedSpaceRodItem.CoordBoundItem(stack)));
+		Item item = stack.getItem();
+		
+		//CoordBoundItem
+		if(IncItems.COORD_BOUND_ITEM_MAKERS.containsKey(item)) {
+			event.addCapability(Inc.id("coord_bound_item"), CapabilityUtil.makeProvider(
+				BotaniaForgeCapabilities.COORD_BOUND_ITEM,
+				IncItems.COORD_BOUND_ITEM_MAKERS.get(item).apply(stack))
+			);
 		}
 	}
 }

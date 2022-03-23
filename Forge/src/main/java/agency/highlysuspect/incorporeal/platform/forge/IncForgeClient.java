@@ -53,27 +53,15 @@ public class IncForgeClient {
 		});
 		
 		//Wand HUD capabilities
-		//Lazily copy pasted from Botania as usual
 		no.addGenericListener(BlockEntity.class, (AttachCapabilitiesEvent<BlockEntity> e) -> {
 			BlockEntity be = e.getObject();
-			Function<BlockEntity, IWandHUD> makeWandHud = incWandHuds.get().get(be.getType());
-			if(makeWandHud != null) {
-				e.addCapability(Inc.botaniaId("wand_hud"), CapabilityUtil.makeProvider(BotaniaForgeClientCapabilities.WAND_HUD, makeWandHud.apply(be)));
+			if(IncClientProperties.WAND_HUD_MAKERS.containsKey(be.getType())) {
+				Function<BlockEntity, IWandHUD> maker = IncClientProperties.WAND_HUD_MAKERS.get(be.getType());
+				e.addCapability(Inc.id("wand_hud"), CapabilityUtil.makeProvider(BotaniaForgeClientCapabilities.WAND_HUD, maker.apply(be)));
 			}
 		});
 		
 		//forge network channel is set up on both sides simultaneously, but i need to stick this client-side init code somewhere
 		yes.addListener((FMLCommonSetupEvent shit) -> IncClientNetwork.initialize());
 	}
-	
-	//Lazily copy pasted from Botania as usual
-	private static final Supplier<Map<BlockEntityType<?>, Function<BlockEntity, IWandHUD>>> incWandHuds = Suppliers.memoize(() -> {
-		Map<BlockEntityType<?>, Function<BlockEntity, IWandHUD>> map = new IdentityHashMap<>();
-		IncClientProperties.registerWandHudCaps((factory, types) -> {
-			for(BlockEntityType<?> type : types) {
-				map.put(type, factory);
-			}
-		});
-		return map;
-	});
 }

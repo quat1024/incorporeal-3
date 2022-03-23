@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
+import vazkii.botania.api.BotaniaFabricCapabilities;
 import vazkii.botania.api.BotaniaFabricClientCapabilities;
 import vazkii.botania.client.render.tile.TEISR;
 
@@ -35,8 +36,9 @@ public class IncFabricClient implements ClientModInitializer {
 			BuiltinItemRendererRegistry.INSTANCE.register(block, teisr::render);
 		});
 		
-		//wand HUD capability
-		IncClientProperties.registerWandHudCaps((factory, types) -> BotaniaFabricClientCapabilities.WAND_HUD.registerForBlockEntities((be, c) -> factory.apply(be), types));
+		//wand HUD capabilities
+		IncClientProperties.WAND_HUD_MAKERS.forEach((type, maker) ->
+			BotaniaFabricClientCapabilities.WAND_HUD.registerForBlockEntities((be, context) -> maker.apply(be), type));
 		
 		//client half of the network channel
 		ClientPlayNetworking.registerGlobalReceiver(IncFabric.NETWORK_ID, (client, handler, buf, responseSender) -> IncClientNetwork.handle(buf));

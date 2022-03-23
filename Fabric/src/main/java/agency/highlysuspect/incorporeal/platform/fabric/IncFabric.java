@@ -14,8 +14,10 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import vazkii.botania.api.BotaniaFabricCapabilities;
 import vazkii.botania.api.corporea.CorporeaIndexRequestCallback;
+import vazkii.botania.api.mana.IManaReceiver;
 
 public class IncFabric implements ModInitializer {
 	public static final ResourceLocation NETWORK_ID = new ResourceLocation(Inc.MODID, "net");
@@ -35,7 +37,6 @@ public class IncFabric implements ModInitializer {
 		
 		//items and item capabilities
 		IncItems.register((item, name) -> Registry.register(Registry.ITEM, name, item));
-		BotaniaFabricCapabilities.COORD_BOUND_ITEM.registerForItems((st, c) -> new FracturedSpaceRodItem.CoordBoundItem(st), IncItems.FRACTURED_SPACE_ROD);
 		
 		//entity types
 		IncEntityTypes.register((type, name) -> Registry.register(Registry.ENTITY_TYPE, name, type));
@@ -45,7 +46,8 @@ public class IncFabric implements ModInitializer {
 		IncSounds.register((sound, name) -> Registry.register(Registry.SOUND_EVENT, name, sound));
 		
 		//Capabilities
-		registerCapabilities();
+		registerBotaniaCapabilities();
+		registerFabricCapabilities();
 		
 		//computer stuff
 		Inc.registerComputerStuff();
@@ -54,9 +56,25 @@ public class IncFabric implements ModInitializer {
 		afterBotania();
 	}
 	
+	public void registerBotaniaCapabilities() {
+		//Block entities that self-implement IManaReceiver
+		for(BlockEntityType<? extends IManaReceiver> manaReceiverType : IncBlockEntityTypes.SELF_MANA_RECEIVER_BLOCK_ENTITY_TYPES) {
+			BotaniaFabricCapabilities.MANA_RECEIVER.registerSelf(manaReceiverType);
+		}
+		
+		//CoordBoundItem
+		IncItems.COORD_BOUND_ITEM_MAKERS.forEach((item, maker) ->
+			BotaniaFabricCapabilities.COORD_BOUND_ITEM.registerForItems((stack, context) -> maker.apply(stack), item));
+	}
+	
+	//Kept in a separate method mainly so I can annotate it with this:
 	@SuppressWarnings("UnstableApiUsage")
-	public void registerCapabilities() {
+	public void registerFabricCapabilities() {
+		//Add an item handler capability to the Ender Soul Core
 		ItemStorage.SIDED.registerForBlockEntity(EnderSoulCoreStorage::new, IncBlockEntityTypes.ENDER_SOUL_CORE);
+		
+		//Add an item handler capability to the Red String Constrictor
+		//(This line has no equiv on Forge because it's done inside ForgeRedStringConstrictorBlockEntity)
 		ItemStorage.SIDED.registerForBlockEntity(FabricRedStringConstrictorBlockEntity::getStorageWithDowncast, IncBlockEntityTypes.RED_STRING_CONSTRICTOR);
 	}
 	

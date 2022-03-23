@@ -7,11 +7,13 @@ import agency.highlysuspect.incorporeal.computer.PointedDatastoneBlockEntity;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import vazkii.botania.api.mana.IManaReceiver;
 import vazkii.botania.xplat.IXplatAbstractions;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BiConsumer;
 
 public class IncBlockEntityTypes {
@@ -50,6 +52,11 @@ public class IncBlockEntityTypes {
 		IXplatAbstractions.INSTANCE.createBlockEntityType(DataFunnelBlockEntity::new, IncBlocks.DATA_FUNNEL);
 	public static final BlockEntityType<PointedDatastoneBlockEntity> POINTED_DATASTONE =
 		IXplatAbstractions.INSTANCE.createBlockEntityType(PointedDatastoneBlockEntity::new, IncBlocks.POINTED_DATASTONE);
+	
+	//BlockEntityTypes that self-implement IManaReceiver.
+	public static final Set<BlockEntityType<? extends IManaReceiver>> SELF_MANA_RECEIVER_BLOCK_ENTITY_TYPES = Set.of(
+		ENDER_SOUL_CORE, POTION_SOUL_CORE
+	);
 	
 	public static void register(BiConsumer<BlockEntityType<?>, ResourceLocation> r) {
 		r.accept(RED_STRING_LIAR, Inc.id("red_string_liar"));

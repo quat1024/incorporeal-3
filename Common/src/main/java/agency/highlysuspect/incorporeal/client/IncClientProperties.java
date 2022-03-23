@@ -13,6 +13,8 @@ import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import vazkii.botania.api.block.IWandHUD;
 import vazkii.botania.api.subtile.TileEntityFunctionalFlower;
 import vazkii.botania.client.render.ColorHandler;
@@ -20,7 +22,6 @@ import vazkii.botania.client.render.entity.EntityRenderers;
 import vazkii.botania.client.render.tile.RenderTileRedString;
 import vazkii.botania.client.render.tile.RenderTileSpecialFlower;
 import vazkii.botania.client.render.tile.TEISR;
-import vazkii.botania.common.block.tile.ModTiles;
 import vazkii.botania.network.TriConsumer;
 
 import java.util.HashMap;
@@ -123,15 +124,24 @@ public class IncClientProperties {
 	
 	/// Wand HUD capabilities ///
 	
-	public static void registerWandHudCaps(ModTiles.BECapConsumer<IWandHUD> r) {
-		r.accept(be -> new AbstractSoulCoreBlockEntity.WandHud((AbstractSoulCoreBlockEntity) be),
-			IncBlockEntityTypes.ENDER_SOUL_CORE,
-			IncBlockEntityTypes.POTION_SOUL_CORE);
+	public static final Map<BlockEntityType<?>, Function<BlockEntity, IWandHUD>> WAND_HUD_MAKERS = new HashMap<>();
+	static {
+		//Downcasts are required because, in Java, I can't express the typing relationship between the keys and values of the map.
+		//I think it's like, a Map<BlockEntityType<? extends T>, Function<? super T, IWandHUD>>, but the T is scoped to the individual key/value pair, not the whole map.
+		WAND_HUD_MAKERS.put(IncBlockEntityTypes.ENDER_SOUL_CORE, IncClientProperties::soulCoreHudDowncast);
+		WAND_HUD_MAKERS.put(IncBlockEntityTypes.POTION_SOUL_CORE, IncClientProperties::soulCoreHudDowncast);
 		
-		r.accept(be -> new TileEntityFunctionalFlower.FunctionalWandHud<>((TileEntityFunctionalFlower) be), 
-			IncBlockEntityTypes.SANVOCALIA_BIG,
-			IncBlockEntityTypes.SANVOCALIA_SMALL,
-			IncBlockEntityTypes.FUNNY_BIG,
-			IncBlockEntityTypes.FUNNY_SMALL);
+		WAND_HUD_MAKERS.put(IncBlockEntityTypes.SANVOCALIA_BIG, IncClientProperties::functionalFlowerHudDowncast);
+		WAND_HUD_MAKERS.put(IncBlockEntityTypes.SANVOCALIA_SMALL, IncClientProperties::functionalFlowerHudDowncast);
+		WAND_HUD_MAKERS.put(IncBlockEntityTypes.FUNNY_BIG, IncClientProperties::functionalFlowerHudDowncast);
+		WAND_HUD_MAKERS.put(IncBlockEntityTypes.FUNNY_SMALL, IncClientProperties::functionalFlowerHudDowncast);
+	}
+	
+	private static IWandHUD soulCoreHudDowncast(BlockEntity be) {
+		return new AbstractSoulCoreBlockEntity.WandHud((AbstractSoulCoreBlockEntity) be);
+	}
+	
+	private static IWandHUD functionalFlowerHudDowncast(BlockEntity be) {
+		return new TileEntityFunctionalFlower.FunctionalWandHud<>((TileEntityFunctionalFlower) be);
 	}
 }
