@@ -2,8 +2,11 @@ package agency.highlysuspect.incorporeal.platform.fabric.client;
 
 import agency.highlysuspect.incorporeal.client.IncClientNetwork;
 import agency.highlysuspect.incorporeal.client.IncClientProperties;
+import agency.highlysuspect.incorporeal.client.MyDynamicItemRenderer;
 import agency.highlysuspect.incorporeal.platform.IncClientBootstrapper;
 import agency.highlysuspect.incorporeal.platform.fabric.IncBootstrapFabric;
+import com.google.common.base.Suppliers;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
@@ -11,8 +14,12 @@ import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.world.item.ItemStack;
 import vazkii.botania.api.BotaniaFabricClientCapabilities;
-import vazkii.botania.client.render.tile.TEISR;
+
+import java.util.function.Supplier;
 
 public class FabricClientBootstrapper implements IncClientBootstrapper {
 	@Override
@@ -41,13 +48,24 @@ public class FabricClientBootstrapper implements IncClientBootstrapper {
 		IncClientProperties.registerEntityRenderers(EntityRendererRegistry::register);
 	}
 	
+	@SuppressWarnings("ClassCanBeRecord") //Invariant in constructor must be maintained
+	private static class LazilyAccessedDynamicItemRenderer implements BuiltinItemRendererRegistry.DynamicItemRenderer {
+		public LazilyAccessedDynamicItemRenderer(Supplier<MyDynamicItemRenderer> wow) {
+			this.wow = Suppliers.memoize(wow::get);
+		}
+		
+		private final Supplier<MyDynamicItemRenderer> wow;
+		
+		@Override
+		public void render(ItemStack stack, ItemTransforms.TransformType mode, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
+			wow.get().render(stack, mode, matrices, vertexConsumers, light, overlay);
+		}
+	}
+	
 	@Override
 	public void registerItemRenderers() {
-		IncClientProperties.BE_ITEM_RENDERER_FACTORIES.forEach((block, teisrMaker) -> {
-			//From Botania. Stands for "Tile Entity Item Stack Renderer", a Forge anachronism.
-			TEISR teisr = teisrMaker.apply(block);
-			BuiltinItemRendererRegistry.INSTANCE.register(block, teisr::render);
-		});
+		IncClientProperties.MY_DYNAMIC_ITEM_RENDERERS.forEach((item, rendererSupplier) ->
+			BuiltinItemRendererRegistry.INSTANCE.register(item, new LazilyAccessedDynamicItemRenderer(rendererSupplier)));
 	}
 	
 	@Override

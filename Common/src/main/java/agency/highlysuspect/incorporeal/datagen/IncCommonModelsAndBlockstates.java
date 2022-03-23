@@ -89,8 +89,6 @@ public class IncCommonModelsAndBlockstates {
 		//   but I think getting the model out of BlockEntityRendererProvider.Context will be a headache.
 		// - Special item renderers require their item model to have a parent of builtin/entity. If
 		//   I set the Frame's blockmodel to the json model, I can't write a special renderer for it. I think.
-		// - I am currently not happy with the state of the item renderers in this mod, tbh (I don't like TEISR)
-		//   and would like to fix that before further entrenching myself in it...
 		// 
 		// There is no technical reason for the Ender and Potion cores to not be using the item stack renderer,
 		// but the inconsistency looks weird.

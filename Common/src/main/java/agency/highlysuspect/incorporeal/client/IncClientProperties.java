@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -21,22 +22,22 @@ import vazkii.botania.client.render.ColorHandler;
 import vazkii.botania.client.render.entity.EntityRenderers;
 import vazkii.botania.client.render.tile.RenderTileRedString;
 import vazkii.botania.client.render.tile.RenderTileSpecialFlower;
-import vazkii.botania.client.render.tile.TEISR;
 import vazkii.botania.network.TriConsumer;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class IncClientProperties {
-	//Botania has something like this too, in EntityRenderers, but it's not meant to be extended. So I will reimplement it myself.
-	public static final Map<Block, Function<Block, TEISR>> BE_ITEM_RENDERER_FACTORIES = new HashMap<>();
+	/// Dynamic item renderers ///
+	
+	public static final Map<Item, Supplier<MyDynamicItemRenderer>> MY_DYNAMIC_ITEM_RENDERERS = new HashMap<>();
 	static {
-		IncBlocks.UNSTABLE_CUBES.forEach((color, cube) -> BE_ITEM_RENDERER_FACTORIES.put(cube, TEISR::new));
-		BE_ITEM_RENDERER_FACTORIES.put(IncBlocks.ENDER_SOUL_CORE, TEISR::new);
-		BE_ITEM_RENDERER_FACTORIES.put(IncBlocks.POTION_SOUL_CORE, TEISR::new);
-		//TODO: soul core frame (cant use TEISR)
+		IncItems.UNSTABLE_CUBES.forEach((color, cube) -> MY_DYNAMIC_ITEM_RENDERERS.put(cube, () -> new UnstableCubeBlockEntityRenderer(color)));
+		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.ENDER_SOUL_CORE, () -> new SoulCoreBlockEntityRenderer<>(IncBlocks.ENDER_SOUL_CORE.defaultBlockState()));
+		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.POTION_SOUL_CORE, () -> new SoulCoreBlockEntityRenderer<>(IncBlocks.POTION_SOUL_CORE.defaultBlockState()));
 	}
 	
 	/// Block render layers ///

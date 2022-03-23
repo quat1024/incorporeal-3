@@ -57,7 +57,7 @@ public class ForgeClientBootstrapper implements IncClientBootstrapper {
 	
 	@Override
 	public void registerItemRenderers() {
-		//See IncBlockItemWithTEISRForgeMixin.
+		//See ForgeCoolRenderersMixin.
 	}
 	
 	@Override

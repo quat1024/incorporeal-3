@@ -9,55 +9,64 @@ import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.SkullModelBase;
+import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import vazkii.botania.client.core.handler.ClientTickHandler;
 
-public class SoulCoreBlockEntityRenderer<T extends AbstractSoulCoreBlockEntity> implements BlockEntityRenderer<T> {
+public class SoulCoreBlockEntityRenderer<T extends AbstractSoulCoreBlockEntity> implements BlockEntityRenderer<T>, MyDynamicItemRenderer {
+	//block entities
 	public SoulCoreBlockEntityRenderer(BlockState state, BlockEntityRendererProvider.Context ctx) {
+		this(state, ctx.getBlockRenderDispatcher(), ctx.getModelSet());
+	}
+	
+	//item stacks
+	public SoulCoreBlockEntityRenderer(BlockState state) {
+		this(state, Minecraft.getInstance().getBlockRenderer(), Minecraft.getInstance().getEntityModels());
+	}
+	
+	//common denominator
+	public SoulCoreBlockEntityRenderer(BlockState state, BlockRenderDispatcher blockRenderDispatcher, EntityModelSet entityModelSet) {
 		this.state = state;
-		this.model = ctx.getBlockRenderDispatcher().getBlockModel(state);
-		this.playerSkullModel = new SkullModel(ctx.bakeLayer(ModelLayers.PLAYER_HEAD));
+		this.model = blockRenderDispatcher.getBlockModel(state);
+		this.playerSkullModel = new SkullModel(entityModelSet.bakeLayer(ModelLayers.PLAYER_HEAD));
 	}
 	
 	private final BlockState state;
 	private final BakedModel model;
 	private final SkullModelBase playerSkullModel;
 	
+	//BlockEntityRenderer
 	@Override
-	public void render(@Nullable AbstractSoulCoreBlockEntity core, float partialTicks, PoseStack pose, MultiBufferSource bufs, int light, int overlay) {
-		int hash = core == null ? 0 : Mth.murmurHash3Mixer(core.getBlockPos().hashCode()) & 0xFFFF;
+	public void render(@NotNull AbstractSoulCoreBlockEntity core, float partialTicks, PoseStack pose, MultiBufferSource bufs, int light, int overlay) {
+		int hash = Mth.murmurHash3Mixer(core.getBlockPos().hashCode()) & 0xFFFF;
 		float ticks = ClientTickHandler.total();
 		
 		pose.pushPose();
 		pose.translate(.5, .5, .5);
 		initialWobble(pose, hash, ticks);
 		
-		if(core == null) {
-			//used when rendering the item
-			pose.translate(.5, .5, .5);
-			pose.scale(.9f, .9f, .9f);
-			pose.translate(-.5, -.5, -.5);
-		} else {
-			if(core.hasOwnerProfile()) {
-				pose.pushPose();
+		if(core.hasOwnerProfile()) {
+			pose.pushPose();
 
-				pose.scale(14/16f, 14/16f, 14/16f);
-				wobbleSkull(pose, hash, ticks);
-				VertexConsumer buffer = bufs.getBuffer(SkullBlockRenderer.getRenderType(SkullBlock.Types.PLAYER, core.getOwnerProfile()));
-				playerSkullModel.renderToBuffer(pose, buffer, light, overlay, 1f, 1f, 1f, 1f);
-				
-				pose.popPose();
-			}
+			pose.scale(14/16f, 14/16f, 14/16f);
+			wobbleSkull(pose, hash, ticks);
+			VertexConsumer buffer = bufs.getBuffer(SkullBlockRenderer.getRenderType(SkullBlock.Types.PLAYER, core.getOwnerProfile()));
+			playerSkullModel.renderToBuffer(pose, buffer, light, overlay, 1f, 1f, 1f, 1f);
+			
+			pose.popPose();
 		}
 		
 		wobbleCubes(pose, hash, ticks);
@@ -67,6 +76,31 @@ public class SoulCoreBlockEntityRenderer<T extends AbstractSoulCoreBlockEntity> 
 		VertexConsumer buffer = bufs.getBuffer(ItemBlockRenderTypes.getRenderType(state, false));
 		Minecraft.getInstance().getBlockRenderer().getModelRenderer()
 				.renderModel(pose.last(), buffer, state, model, 1f, 1f, 1f, light, overlay);
+		
+		pose.popPose();
+	}
+	
+	//MyDynamicItemRenderer
+	@Override
+	public void render(ItemStack stack, ItemTransforms.TransformType transformType, PoseStack pose, MultiBufferSource bufs, int light, int overlay) {
+		float ticks = ClientTickHandler.total();
+		
+		pose.pushPose();
+		pose.translate(.5, .5, .5);
+		initialWobble(pose, 0, ticks);
+		
+		//used when rendering the item
+		pose.translate(.5, .5, .5);
+		pose.scale(.9f, .9f, .9f);
+		pose.translate(-.5, -.5, -.5);
+		
+		wobbleCubes(pose, 0, ticks);
+		
+		pose.translate(-.5, -.5, -.5); //blockmodels render from their corner, the old shit rendered from the center
+		
+		VertexConsumer buffer = bufs.getBuffer(ItemBlockRenderTypes.getRenderType(state, false));
+		Minecraft.getInstance().getBlockRenderer().getModelRenderer()
+			.renderModel(pose.last(), buffer, state, model, 1f, 1f, 1f, light, overlay);
 		
 		pose.popPose();
 	}
