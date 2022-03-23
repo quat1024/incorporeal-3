@@ -14,23 +14,23 @@ public class CompressedTaterUtil {
 	public static final int SMALLEST = -4;
 	public static final int LARGEST = 8;
 	static {
-		prefixes.put(-4, "tiny_tiny_tiny_tiny_");
-		prefixes.put(-3, "tiny_tiny_tiny_");
-		prefixes.put(-2, "tiny_tiny_");
-		prefixes.put(-1, "tiny_");
+		prefixes.put(-4, "tiny_tiny_tiny_tiny");
+		prefixes.put(-3, "tiny_tiny_tiny");
+		prefixes.put(-2, "tiny_tiny");
+		prefixes.put(-1, "tiny");
 		
-		prefixes.put(1, "single_compressed_");
-		prefixes.put(2, "double_compressed_");
-		prefixes.put(3, "triple_compressed_");
-		prefixes.put(4, "quadruple_compressed_");
-		prefixes.put(5, "quintuple_compressed_");
-		prefixes.put(6, "sextuple_compressed_");
-		prefixes.put(7, "septuple_compressed_");
-		prefixes.put(8, "octuple_compressed_");
+		prefixes.put(1, "single_compressed");
+		prefixes.put(2, "double_compressed");
+		prefixes.put(3, "triple_compressed");
+		prefixes.put(4, "quadruple_compressed");
+		prefixes.put(5, "quintuple_compressed");
+		prefixes.put(6, "sextuple_compressed");
+		prefixes.put(7, "septuple_compressed");
+		prefixes.put(8, "octuple_compressed");
 	}
 	
-	public static String prefix(int compressionLevel, String s) {
-		return prefixes.get(compressionLevel) + s;
+	public static String prefix(int compressionLevel) {
+		return prefixes.get(compressionLevel) + "_tiny_potato";
 	}
 	
 	public static TranslatableComponent formatCount(int compressionLevel, int root) {

@@ -119,7 +119,7 @@ public class IncBlocks {
 		r.accept(CLEARLY, Inc.id("clearly"));
 		
 		//taters
-		COMPRESSED_TATERS.forEach((level, block) -> r.accept(block, Inc.id(CompressedTaterUtil.prefix(level, "tiny_potato"))));
+		COMPRESSED_TATERS.forEach((level, block) -> r.accept(block, Inc.id(CompressedTaterUtil.prefix(level))));
 		
 		//computer
 		r.accept(DATA_FUNNEL, Inc.id("data_funnel"));
