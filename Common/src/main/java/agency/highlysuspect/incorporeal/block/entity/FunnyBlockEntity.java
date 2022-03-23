@@ -167,6 +167,6 @@ public class FunnyBlockEntity extends TileEntityFunctionalFlower {
 	@Nullable
 	@Override
 	public RadiusDescriptor getRadius() {
-		return new RadiusDescriptor.Square(getEffectivePos(), range);
+		return RadiusDescriptor.Rectangle.square(getEffectivePos(), range);
 	}
 }

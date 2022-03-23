@@ -207,6 +207,6 @@ public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 	@Nullable
 	@Override
 	public RadiusDescriptor getRadius() {
-		return new RadiusDescriptor.Square(getEffectivePos(), radius);
+		return RadiusDescriptor.Rectangle.square(getEffectivePos(), radius);
 	}
 }
