@@ -2,7 +2,6 @@ package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.entity.AbstractSoulCoreBlockEntity;
-import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
@@ -23,7 +22,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import vazkii.botania.client.core.handler.ClientTickHandler;
 
 public class SoulCoreBlockEntityRenderer<T extends AbstractSoulCoreBlockEntity> implements BlockEntityRenderer<T>, MyDynamicItemRenderer {
@@ -50,23 +49,29 @@ public class SoulCoreBlockEntityRenderer<T extends AbstractSoulCoreBlockEntity> 
 	
 	//BlockEntityRenderer
 	@Override
-	public void render(@NotNull AbstractSoulCoreBlockEntity core, float partialTicks, PoseStack pose, MultiBufferSource bufs, int light, int overlay) {
-		int hash = Mth.murmurHash3Mixer(core.getBlockPos().hashCode()) & 0xFFFF;
+	public void render(@Nullable AbstractSoulCoreBlockEntity core, float partialTicks, PoseStack pose, MultiBufferSource bufs, int light, int overlay) {
+		int hash = core == null ? 0 : Mth.murmurHash3Mixer(core.getBlockPos().hashCode()) & 0xFFFF;
 		float ticks = ClientTickHandler.total();
 		
 		pose.pushPose();
 		pose.translate(.5, .5, .5);
 		initialWobble(pose, hash, ticks);
 		
-		if(core.hasOwnerProfile()) {
-			pose.pushPose();
-
-			pose.scale(14/16f, 14/16f, 14/16f);
-			wobbleSkull(pose, hash, ticks);
-			VertexConsumer buffer = bufs.getBuffer(SkullBlockRenderer.getRenderType(SkullBlock.Types.PLAYER, core.getOwnerProfile()));
-			playerSkullModel.renderToBuffer(pose, buffer, light, overlay, 1f, 1f, 1f, 1f);
-			
-			pose.popPose();
+		if(core != null) {
+			if(core.hasOwnerProfile()) {
+				pose.pushPose();
+				
+				pose.scale(14 / 16f, 14 / 16f, 14 / 16f);
+				wobbleSkull(pose, hash, ticks);
+				VertexConsumer buffer = bufs.getBuffer(SkullBlockRenderer.getRenderType(SkullBlock.Types.PLAYER, core.getOwnerProfile()));
+				playerSkullModel.renderToBuffer(pose, buffer, light, overlay, 1f, 1f, 1f, 1f);
+				
+				pose.popPose();
+			}
+		} else { //Item renderer
+			pose.translate(.5, .5, .5);
+			pose.scale(.9f, .9f, .9f);
+			pose.translate(-.5, -.5, -.5);
 		}
 		
 		wobbleCubes(pose, hash, ticks);
@@ -83,26 +88,7 @@ public class SoulCoreBlockEntityRenderer<T extends AbstractSoulCoreBlockEntity> 
 	//MyDynamicItemRenderer
 	@Override
 	public void render(ItemStack stack, ItemTransforms.TransformType transformType, PoseStack pose, MultiBufferSource bufs, int light, int overlay) {
-		float ticks = ClientTickHandler.total();
-		
-		pose.pushPose();
-		pose.translate(.5, .5, .5);
-		initialWobble(pose, 0, ticks);
-		
-		//used when rendering the item
-		pose.translate(.5, .5, .5);
-		pose.scale(.9f, .9f, .9f);
-		pose.translate(-.5, -.5, -.5);
-		
-		wobbleCubes(pose, 0, ticks);
-		
-		pose.translate(-.5, -.5, -.5); //blockmodels render from their corner, the old shit rendered from the center
-		
-		VertexConsumer buffer = bufs.getBuffer(ItemBlockRenderTypes.getRenderType(state, false));
-		Minecraft.getInstance().getBlockRenderer().getModelRenderer()
-			.renderModel(pose.last(), buffer, state, model, 1f, 1f, 1f, light, overlay);
-		
-		pose.popPose();
+		render(null, ClientTickHandler.total(), pose, bufs, light, overlay);
 	}
 	
 	private static void initialWobble(PoseStack pose, int hash, float ticks) {

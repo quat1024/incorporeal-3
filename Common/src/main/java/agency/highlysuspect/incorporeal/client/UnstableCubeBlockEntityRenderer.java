@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
@@ -19,7 +18,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import vazkii.botania.client.core.handler.ClientTickHandler;
 
 /**
@@ -56,27 +55,24 @@ public class UnstableCubeBlockEntityRenderer implements BlockEntityRenderer<Unst
 	
 	//BlockEntityRenderer
 	@Override
-	public void render(@NotNull UnstableCubeBlockEntity cube, float partialTicks, PoseStack pose, MultiBufferSource bufs, int light, int overlay) {
+	public void render(@Nullable UnstableCubeBlockEntity cube, float partialTicks, PoseStack pose, MultiBufferSource bufs, int light, int overlay) {
 		pose.pushPose();
 		
-		int hash = Mth.murmurHash3Mixer(cube.getBlockPos().hashCode()) & 0xFFFF;
-		roll(pose, partialTicks, cube.angle, cube.speed, cube.bump, cube.bumpDecay, hash, 0);
-		drawCube(pose, bufs, light, overlay);
+		if(cube != null) {
+			int hash = Mth.murmurHash3Mixer(cube.getBlockPos().hashCode()) & 0xFFFF;
+			roll(pose, partialTicks, cube.angle, cube.speed, cube.bump, cube.bumpDecay, hash, 0);
+		} else { //Item renderer
+			roll(pose, partialTicks, 0, 0, 0, 0, 0, 0.4f);
+		}
 		
+		drawCube(pose, bufs, light, overlay);
 		pose.popPose();
 	}
 	
 	//MyDynamicItemRenderer
 	@Override
 	public void render(ItemStack stack, ItemTransforms.TransformType transformType, PoseStack pose, MultiBufferSource bufs, int light, int overlay) {
-		float partialTicks = ClientTickHandler.total();
-		
-		pose.pushPose();
-		
-		roll(pose, partialTicks, 0, 0, 0, 0, 0, 0.4f);
-		drawCube(pose, bufs, light, overlay);
-		
-		pose.popPose();
+		render(null, ClientTickHandler.total(), pose, bufs, light, overlay);
 	}
 	
 	private void drawCube(PoseStack pose, MultiBufferSource bufs, int light, int overlay) {
