@@ -48,8 +48,4 @@ public class IncForgeBlockEntityItemRendererHelper {
 			return IncForgeBlockEntityItemRendererHelper.RENDERER;
 		}
 	};
-	
-	public static void initItem(Consumer<IItemRenderProperties> consumer) {
-		consumer.accept(PROPS);
-	}
 }
