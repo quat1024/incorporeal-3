@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -46,12 +46,12 @@ public record RunicAltarRecipeBuilder(ItemStack output, int mana, List<Ingredien
 		return this;
 	}
 	
-	public RunicAltarRecipeBuilder add(Tag.Named<Item> item) {
+	public RunicAltarRecipeBuilder add(TagKey<Item> item) {
 		ingredients.add(Ingredient.of(item));
 		return this;
 	}
 	
-	public RunicAltarRecipeBuilder add(Tag.Named<Item> item, int count) {
+	public RunicAltarRecipeBuilder add(TagKey<Item> item, int count) {
 		for(int i = 0; i < count; i++) add(item);
 		return this;
 	}

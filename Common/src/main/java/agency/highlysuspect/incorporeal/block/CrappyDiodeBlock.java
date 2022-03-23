@@ -29,10 +29,8 @@ public abstract class CrappyDiodeBlock extends DiodeBlock {
 		//In Forge this used to plug into IPlantable, but noone gives a shit about iplantable.
 		//Really awful interface to implement via mixin/xplat anyways.
 		//Maybe toss some more tags in here? (DIRT contains grass blocks, btw.)
-		BlockPos soilPos = pos.below();
-		
-		Block block = level.getBlockState(soilPos).getBlock();
-		return block == Blocks.FARMLAND || BlockTags.DIRT.contains(block);
+		BlockState soilState = level.getBlockState(pos.below());
+		return soilState.is(Blocks.FARMLAND) || soilState.is(BlockTags.DIRT);
 	}
 	
 	//Copied from several blocks that are attached to things, like BushBlock and TorchBlock.

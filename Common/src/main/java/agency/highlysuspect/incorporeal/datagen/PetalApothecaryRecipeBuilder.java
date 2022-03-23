@@ -1,19 +1,17 @@
 package agency.highlysuspect.incorporeal.datagen;
 
-import agency.highlysuspect.incorporeal.Inc;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import vazkii.botania.common.helper.ItemNBTHelper;
-import vazkii.botania.common.item.ModItems;
-import vazkii.botania.xplat.IXplatAbstractions;
+import vazkii.botania.common.lib.ModTags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,19 +36,19 @@ public record PetalApothecaryRecipeBuilder(ItemStack output, List<Ingredient> in
 		return this;
 	}
 	
-	public PetalApothecaryRecipeBuilder add(Tag.Named<Item> item) {
+	public PetalApothecaryRecipeBuilder add(TagKey<Item> item) {
 		ingredients.add(Ingredient.of(item));
 		return this;
 	}
 	
-	public PetalApothecaryRecipeBuilder add(Tag.Named<Item> item, int count) {
+	public PetalApothecaryRecipeBuilder add(TagKey<Item> item, int count) {
 		for(int i = 0; i < count; i++) add(item);
 		return this;
 	}
 	
 	public PetalApothecaryRecipeBuilder addPetals(DyeColor... petalColors) {
 		for(DyeColor petalColor : petalColors) {
-			add(IXplatAbstractions.INSTANCE.itemTag(Inc.botaniaId("petals/" + petalColor.getName())));
+			add(ModTags.Items.getPetalTag(petalColor));
 		}
 		return this;
 	}

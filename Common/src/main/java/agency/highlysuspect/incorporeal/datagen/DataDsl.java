@@ -7,7 +7,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -79,24 +79,24 @@ public class DataDsl {
 		return new NiceTagBuilder("blocks", tagRl);
 	}
 	
-	public static NiceTagBuilder blockTag(Tag.Named<Block> tag) {
-		return blockTag(tag.getName());
+	public static NiceTagBuilder blockTag(TagKey<Block> tag) {
+		return blockTag(tag.location());
 	}
 	
 	public static NiceTagBuilder itemTag(ResourceLocation tagRl) {
 		return new NiceTagBuilder("items", tagRl);
 	}
 	
-	public static NiceTagBuilder itemTag(Tag.Named<Item> tag) {
-		return itemTag(tag.getName());
+	public static NiceTagBuilder itemTag(TagKey<Item> tag) {
+		return itemTag(tag.location());
 	}
 	
 	public static NiceTagBuilder.Duplex blockAndItemTag(ResourceLocation tagRl) {
 		return new NiceTagBuilder.Duplex(tagRl);
 	}
 	
-	public static NiceTagBuilder.Duplex blockAndItemTag(Tag.Named<Block> tag) {
-		return blockAndItemTag(tag.getName());
+	public static NiceTagBuilder.Duplex blockAndItemTag(TagKey<Block> tag) {
+		return blockAndItemTag(tag.location());
 	}
 	
 	/// Block loot tables ///

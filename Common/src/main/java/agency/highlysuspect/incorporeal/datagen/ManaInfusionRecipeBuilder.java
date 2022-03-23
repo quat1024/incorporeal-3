@@ -3,7 +3,7 @@ package agency.highlysuspect.incorporeal.datagen;
 import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -46,7 +46,7 @@ public class ManaInfusionRecipeBuilder {
 		return input(Ingredient.of(input));
 	}
 	
-	public ManaInfusionRecipeBuilder input(Tag.Named<Item> input) {
+	public ManaInfusionRecipeBuilder input(TagKey<Item> input) {
 		return input(Ingredient.of(input));
 	}
 	

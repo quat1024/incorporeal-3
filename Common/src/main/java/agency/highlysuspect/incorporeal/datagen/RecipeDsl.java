@@ -8,7 +8,7 @@ import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -16,7 +16,6 @@ import vazkii.botania.common.lib.ModTags;
 import vazkii.botania.mixin.AccessorRecipeProvider;
 
 import java.util.function.Consumer;
-import java.util.function.UnaryOperator;
 
 /**
  * Pile of utilities for writing various types of recipes.
@@ -81,9 +80,9 @@ public class RecipeDsl {
 			return this;
 		}
 		
-		public NiceShapedRecipeBuilder define(Object key, Tag.Named<Item> ingredient) {
+		public NiceShapedRecipeBuilder define(Object key, TagKey<Item> ingredient) {
 			inner.define(toChar(key), ingredient);
-			inner.unlockedBy(ingredient.getName().getPath(), conditionsFromTag(ingredient));
+			inner.unlockedBy(ingredient.location().getPath(), conditionsFromTag(ingredient));
 			return this;
 		}
 		
@@ -107,7 +106,7 @@ public class RecipeDsl {
 			return add(ingredient, 1);
 		}
 		
-		public NiceShapelessRecipeBuilder add(Tag.Named<Item> tag) {
+		public NiceShapelessRecipeBuilder add(TagKey<Item> tag) {
 			return add(tag, 1);
 		}
 		
@@ -117,9 +116,9 @@ public class RecipeDsl {
 			return this;
 		}
 		
-		public NiceShapelessRecipeBuilder add(Tag.Named<Item> tag, int count) {
+		public NiceShapelessRecipeBuilder add(TagKey<Item> tag, int count) {
 			inner.requires(Ingredient.of(tag), count); //isn't a helper method for ing+count for tags, just for Ingredients and ItemLikes, lol
-			inner.unlockedBy(tag.getName().getPath(), conditionsFromTag(tag));
+			inner.unlockedBy(tag.location().getPath(), conditionsFromTag(tag));
 			return this;
 		}
 		
@@ -163,7 +162,7 @@ public class RecipeDsl {
 	}
 	
 	//Uses botania's accessor for RecipeProvider#inventoryTrigger. also i copypasted this from botania.
-	public static InventoryChangeTrigger.TriggerInstance conditionsFromTag(Tag<Item> tag) {
+	public static InventoryChangeTrigger.TriggerInstance conditionsFromTag(TagKey<Item> tag) {
 		return AccessorRecipeProvider.botania_condition(ItemPredicate.Builder.item().of(tag).build());
 	}
 	

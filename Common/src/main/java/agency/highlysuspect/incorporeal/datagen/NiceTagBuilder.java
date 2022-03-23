@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
@@ -43,8 +43,8 @@ public class NiceTagBuilder {
 		return this;
 	}
 	
-	public NiceTagBuilder addTags(Tag.Named<?>... tags) {
-		Stream.of(tags).map(Tag.Named::getName).map(ResourceLocation::toString).forEach(str -> entries.add("#" + str));
+	public NiceTagBuilder addTags(TagKey<?>... tags) {
+		Stream.of(tags).map(TagKey::location).map(ResourceLocation::toString).forEach(str -> entries.add("#" + str));
 		return this;
 	}
 	
