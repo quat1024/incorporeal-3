@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.mixin;
+package agency.highlysuspect.incorporeal.mixin.datagen;
 
 import net.minecraft.data.models.model.TextureSlot;
 import org.spongepowered.asm.mixin.Mixin;

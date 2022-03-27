@@ -1,8 +1,10 @@
 package agency.highlysuspect.incorporeal.datagen;
 
+import agency.highlysuspect.incorporeal.mixin.datagen.DataGeneratorMixin;
+
 /**
  * Implemented on DataGenerator.
- * @see agency.highlysuspect.incorporeal.mixin.DataGeneratorMixin
+ * @see DataGeneratorMixin
  */
 public interface DatagenDuck {
 	EnUsRewriter inc$getEnUsRewriter();

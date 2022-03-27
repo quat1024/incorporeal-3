@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.mixin;
+package agency.highlysuspect.incorporeal.mixin.datagen;
 
 import agency.highlysuspect.incorporeal.datagen.DatagenDuck;
 import agency.highlysuspect.incorporeal.datagen.EnUsRewriter;

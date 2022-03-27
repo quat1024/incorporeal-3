@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.datagen;
 
 import agency.highlysuspect.incorporeal.computer.PointedDatastoneBlock;
+import agency.highlysuspect.incorporeal.mixin.datagen.IncAccessorBlockModelGenerators;
 import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.block.CompressedTinyPotatoBlock;
@@ -8,7 +9,7 @@ import agency.highlysuspect.incorporeal.block.CrappyComparatorBlock;
 import agency.highlysuspect.incorporeal.IncBlocks;
 import agency.highlysuspect.incorporeal.block.RedstoneRootCropBlock;
 import agency.highlysuspect.incorporeal.IncItems;
-import agency.highlysuspect.incorporeal.mixin.TextureSlotAccessor;
+import agency.highlysuspect.incorporeal.mixin.datagen.TextureSlotAccessor;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -117,14 +118,14 @@ public class IncCommonModelsAndBlockstates {
 		
 		//Natural repeater
 		stateGenerators.add(MultiVariantGenerator.multiVariant(IncBlocks.NATURAL_REPEATER)
-			.with(AccessorBlockModelGenerators.horizontalDispatch())
+			.with(IncAccessorBlockModelGenerators.horizontalDispatchAlt())
 			.with(PropertyDispatch.property(BlockStateProperties.POWERED)
 				.generate(powered -> modelv(naturalRepeaterModel(powered)))));
 		itemDelegatedTo(IncBlocks.NATURAL_REPEATER, naturalRepeaterModel(false));
 		
 		//Natural comparator
 		stateGenerators.add(MultiVariantGenerator.multiVariant(IncBlocks.NATURAL_COMPARATOR)
-			.with(AccessorBlockModelGenerators.horizontalDispatch())
+			.with(IncAccessorBlockModelGenerators.horizontalDispatchAlt())
 			.with(PropertyDispatch.properties(BlockStateProperties.POWERED, CrappyComparatorBlock.SENSITIVE)
 				.generate((powered, sensitive) -> modelv(naturalComparatorModel(powered, sensitive)))));
 		itemDelegatedTo(IncBlocks.NATURAL_COMPARATOR, naturalComparatorModel(false, false));

@@ -14,9 +14,10 @@
 		"ItemFrameAccessor",
 		"ModTilesMixin",
 		"FarmBlockMixin",
-		"DataGeneratorMixin",
-		"TextureSlotAccessor",
-		"PistonStructureResolverMixin"
+		"PistonStructureResolverMixin",
+		"datagen.DataGeneratorMixin",
+		"datagen.TextureSlotAccessor",
+		"datagen.IncAccessorBlockModelGenerators"
 	],
 	"client": [
 		"client.RenderTileTinyPotatoMixin",
