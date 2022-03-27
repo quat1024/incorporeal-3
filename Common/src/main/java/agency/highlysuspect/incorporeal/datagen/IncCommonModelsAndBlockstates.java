@@ -45,6 +45,8 @@ import java.util.function.Supplier;
 
 /**
  * Haha holy shit this is ugly, I should fix it some time
+ * 
+ * This is not a place of honor. No highly esteemed deed is commemorated here. Nothing valued is here.
  */
 public class IncCommonModelsAndBlockstates {
 	//Like botania BlockstateProvider
