@@ -52,6 +52,7 @@ loom {
         //Common Datagen. One loader has to be the one in charge of it, and it'll be fabric.
         create("common-datagen") {
             client()
+            runDir("./run/datagen_work")
             vmArg("-Dfabric-api.datagen")
             vmArg("-Dfabric-api.datagen.modid=incorporeal")
             //vmArg("-Dfabric-api.datagen.output-dir=${project(":Common").relativePath("./src/generated/resources")}") //Doesn't work lol
@@ -63,10 +64,9 @@ loom {
             //tell EnUsRewriter which file to stomp on
             vmArg("-Dincorporeal.en-us=${file("../Common/src/main/resources/assets/incorporeal/lang/en_us.json")}")
         }
-
-        //Loom doesn't generate run configs by default in subprojects.
+        
         configureEach {
-            runDir("./run/datagen_work")
+            //Loom doesn't generate run configs by default in subprojects.
             ideConfigGenerated(true)
         }
     }
