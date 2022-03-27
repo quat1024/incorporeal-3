@@ -1,5 +1,3 @@
-import gradle.kotlin.dsl.accessors._22a1ac937b0d3843d97d89c3b79657a3.compileOnly
-
 plugins {
     //Inherit from java-conventions.
     id("incorporeal.java-conventions")
