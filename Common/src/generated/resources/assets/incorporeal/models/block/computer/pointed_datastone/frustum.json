@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/pointed_dripstone",
   "textures": {
-    "cross": "minecraft:block/pointed_dripstone_down_frustum"
+    "cross": "incorporeal:block/computer/pointed_datastone_frustum"
   }
 }

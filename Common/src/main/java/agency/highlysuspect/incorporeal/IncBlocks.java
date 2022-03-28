@@ -90,7 +90,7 @@ public class IncBlocks {
 	//computer
 	public static final DataFunnelBlock DATA_FUNNEL = new DataFunnelBlock(Properties.of(Material.METAL).noOcclusion().strength(2f));
 	//similar to DRIPSTONE_BLOCK
-	public static final DatastoneBlock DATASTONE_BLOCK = new DatastoneBlock(Properties.of(Material.STONE, MaterialColor.QUARTZ).sound(SoundType.DRIPSTONE_BLOCK).strength(1.5F, 1.0F));
+	public static final DatastoneBlock DATASTONE_BLOCK = new DatastoneBlock(Properties.of(Material.STONE, MaterialColor.QUARTZ).sound(SoundType.DRIPSTONE_BLOCK).strength(1.5F, 1.0F).noOcclusion());
 	//similar to POINTED_DRIPSTONE
 	public static final PointedDatastoneBlock POINTED_DATASTONE = new PointedDatastoneBlock(Properties.of(Material.STONE, MaterialColor.QUARTZ).noOcclusion().sound(SoundType.POINTED_DRIPSTONE).strength(1.5F, 3.0F).dynamicShape());
 	

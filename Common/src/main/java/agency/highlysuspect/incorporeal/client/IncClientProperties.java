@@ -73,7 +73,8 @@ public class IncClientProperties {
 		for(Block b : IncBlocks.COMPRESSED_TATERS.values()) r.accept(b, cutout);
 		
 		r.accept(IncBlocks.DATA_FUNNEL, translucent);
-		r.accept(IncBlocks.POINTED_DATASTONE, cutout);
+		r.accept(IncBlocks.DATASTONE_BLOCK, translucent);
+		r.accept(IncBlocks.POINTED_DATASTONE, translucent);
 	}
 	
 	/// Block entity renderers ///

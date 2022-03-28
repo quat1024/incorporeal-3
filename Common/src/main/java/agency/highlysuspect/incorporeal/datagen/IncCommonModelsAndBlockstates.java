@@ -190,17 +190,15 @@ public class IncCommonModelsAndBlockstates {
 		itemLens(IncItems.NEGATING_LENS, lensGlassDarkSmall, Inc.id("item/computer/negating_lens"));
 		
 		//datastone
-		singleVariantBlockState(IncBlocks.DATASTONE_BLOCK, Inc.id("block/computer/datastone"));
-		itemDelegatedTo(IncBlocks.DATASTONE_BLOCK, Inc.id("block/computer/datastone"));
+		singleVariantCubeAll(IncBlocks.DATASTONE_BLOCK, Inc.id("block/computer/datastone"));
+		itemBlockModelParent(IncBlocks.DATASTONE_BLOCK);
 		
 		//pointed datastone
 		stateGenerators.add(MultiVariantGenerator.multiVariant(IncBlocks.POINTED_DATASTONE)
 			.with(PropertyDispatch.property(PointedDatastoneBlock.TYPE)
 				.generate(type -> {
 					ResourceLocation modelId = Inc.id("block/computer/pointed_datastone/" + type.getSerializedName());
-					//TODO
-					ResourceLocation texture = new ResourceLocation("minecraft", "block/pointed_dripstone_down_" + type.getSerializedName());
-					if(type == PointedDatastoneBlock.Type.ON_GROUND) texture = new ResourceLocation("minecraft", "block/pointed_dripstone_up_tip");
+					ResourceLocation texture = Inc.id("block/computer/pointed_datastone_" + type.getSerializedName());
 					return modelv(pointedDripstoneModel(modelId, texture));
 				})));
 		//(pointed datastone item model done manually for weird mojang parity reasons!! lmao)
