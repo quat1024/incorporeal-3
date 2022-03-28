@@ -7,10 +7,12 @@ import agency.highlysuspect.incorporeal.computer.capabilities.NotCapabilities;
 import agency.highlysuspect.incorporeal.computer.types.DataLens;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
@@ -65,8 +67,10 @@ public class DataRayClipContext {
 		BlockEntity be = level.getBlockEntity(cursor);
 		BlockState state = be == null ? null : be.getBlockState();
 		boolean isDirectBinding = start.equals(cursor);
-		@Nullable DatumAcceptor acceptor = NotCapabilities.findDatumAcceptor(level, cursor, state, be, isDirectBinding);
-		@Nullable DatumProvider provider = NotCapabilities.findDatumProvider(level, cursor, state, be, isDirectBinding);
+		List<Entity> entitiesInTheBlockspace = level.getEntities(null, new AABB(cursor));
+		
+		@Nullable DatumAcceptor acceptor = NotCapabilities.findDatumAcceptor(level, cursor, state, be, entitiesInTheBlockspace, isDirectBinding);
+		@Nullable DatumProvider provider = NotCapabilities.findDatumProvider(level, cursor, state, be, entitiesInTheBlockspace, isDirectBinding);
 		@Nullable DataLensProvider lensProvider = NotCapabilities.findDataLensProvider(level, cursor, state, be, isDirectBinding);
 		
 		if(unpairedProvider != null) {

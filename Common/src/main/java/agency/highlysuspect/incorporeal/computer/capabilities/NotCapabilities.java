@@ -1,5 +1,7 @@
 package agency.highlysuspect.incorporeal.computer.capabilities;
 
+import agency.highlysuspect.incorporeal.IncBlocks;
+import agency.highlysuspect.incorporeal.block.CorporeaSolidifierBlock;
 import agency.highlysuspect.incorporeal.computer.DatastoneBlock;
 import agency.highlysuspect.incorporeal.computer.NotManaLens;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
@@ -9,6 +11,8 @@ import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import agency.highlysuspect.incorporeal.mixin.CorporeaItemStackMatcherAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -17,6 +21,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 import vazkii.botania.common.block.ModBlocks;
@@ -26,6 +33,8 @@ import vazkii.botania.common.block.tile.mana.TilePrism;
 import vazkii.botania.common.item.lens.ItemLens;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Hey look, it's stuff that I used forge capailities/AttachCapabilitiesEvent for in 1.12 and 1.16.
@@ -37,7 +46,7 @@ import java.util.Collection;
 public class NotCapabilities {
 	//Pass state/be if you already have them, otherwise they'll be looked up from level/pos by the usual methods.
 	//Yes, this has the same shape as fabric block-api-lookup stuff. I mean, it's good stuff, lol.
-	public static @Nullable DatumAcceptor findDatumAcceptor(ServerLevel level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be, boolean directBind) {
+	public static @Nullable DatumAcceptor findDatumAcceptor(ServerLevel level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be, @Nullable List<Entity> entitiesInTheBlockspace, boolean directBind) {
 		//Lookup the block entity if it wasn't provided
 		if(be == null) be = level.getBlockEntity(pos);
 		if(be != null) {
@@ -97,13 +106,28 @@ public class NotCapabilities {
 		//mana voids: trash can
 		if(s.getBlock() == ModBlocks.manaVoid) return datum -> {};
 		
+		//Corporea solidifiers -> produce ticket
+		if(s.getBlock() == IncBlocks.CORPOREA_SOLIDIFIER) return datum -> IncBlocks.CORPOREA_SOLIDIFIER.receiveDatum(level, posCopy, datum);
+		
 		//datastone blocks: extend a stack of pointed datastones
 		if(s.getBlock() instanceof DatastoneBlock db) return datum -> db.extendColumn(level, posCopy, datum);
+		
+		//Read the list of entities if it's needed
+		if(entitiesInTheBlockspace == null) {
+			entitiesInTheBlockspace = level.getEntities(null, new AABB(pos));
+		}
+		
+		Collections.shuffle(entitiesInTheBlockspace, level.getRandom()); //don't prefer any given entity ordering
+		
+		for(Entity ent : entitiesInTheBlockspace) {
+			//item frames: rotate according to the number passed in
+			if(ent instanceof ItemFrame frame) return new FrameCaps(frame);
+		}
 		
 		return null;
 	}
 	
-	public static @Nullable DatumProvider findDatumProvider(ServerLevel level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be, boolean directBind) {
+	public static @Nullable DatumProvider findDatumProvider(ServerLevel level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be, @Nullable List<Entity> entitiesInTheBlockspace, boolean directBind) {
 		if(be == null) be = level.getBlockEntity(pos);
 		if(be != null) {
 			//If it implements, self return
@@ -157,6 +181,18 @@ public class NotCapabilities {
 			}
 		}
 		
+		//Read the list of entities if it's needed
+		if(entitiesInTheBlockspace == null) {
+			entitiesInTheBlockspace = level.getEntities(null, new AABB(pos));
+		}
+		
+		Collections.shuffle(entitiesInTheBlockspace, level.getRandom()); //don't prefer any given entity ordering
+		
+		for(Entity ent : entitiesInTheBlockspace) {
+			//item frames -> request, as a Corporea Funnel would
+			if(ent instanceof ItemFrame frame) return new FrameCaps(frame);
+		}
+		
 		return null;
 	}
 	
@@ -167,5 +203,69 @@ public class NotCapabilities {
 		}
 		
 		return null;
+	}
+	
+	//Corporea funnels have this thing going on:
+	//rotation 0 -> 1 item
+	//rotation 1 -> 2 items
+	//rotation 2 -> 4 items
+	//rotation 3 -> 8 items
+	//rotation 4 -> 16 items
+	//rotation 5 -> 32 items
+	//rotation 6 -> 48 items (!)
+	//rotation 7 -> 64 items
+	//This method implements the inverse function, rounding down to fill in the gaps.
+	private static int magicNumberToFrameRotation(int magicNumber) {
+		if(magicNumber >= 64) return 7;
+		else if(magicNumber >= 48) return 6;
+		else if(magicNumber >= 32) return 5;
+		else if(magicNumber >= 16) return 4;
+		else if(magicNumber >= 8) return 3;
+		else if(magicNumber >= 4) return 2;
+		else if(magicNumber >= 2) return 1;
+		else return 0;
+	}
+	
+	//And this method implements it forwards.
+	private static int frameRotationToMagicNumber(int frameRotation) {
+		return switch(frameRotation % 8) {
+			case 0 -> 1;
+			case 1 -> 2;
+			case 2 -> 4;
+			case 3 -> 8;
+			case 4 -> 16;
+			case 5 -> 32;
+			case 6 -> 48;
+			case 7 -> 64;
+			default -> throw new IllegalArgumentException();
+		};
+	}
+	
+	private static record FrameCaps(ItemFrame frame) implements DatumAcceptor, DatumProvider, PositionTweakable {
+		@Override
+		public void acceptDatum(@NotNull Datum<?> datum) {
+			if(datum.type() == DataTypes.INTEGER) {
+				int oldRotation = frame.getRotation();
+				int rotation = magicNumberToFrameRotation(datum.castAndGet());
+				frame.setRotation(rotation);
+				
+				if(oldRotation != rotation) {
+					frame.playSound(frame.getRotateItemSound(), 1f, 1f);
+				}
+			}
+		}
+		
+		@Override
+		public @NotNull Datum<?> readDatum() {
+			return DataTypes.SOLIDIFIED_REQUEST.datumOf(SolidifiedRequest.create(
+				frame.getItem(),
+				frameRotationToMagicNumber(frame.getRotation())
+			));
+		}
+		
+		@Override
+		public Vec3 tweakPosition(Level level, BlockPos pos) {
+			return frame.getBoundingBox().getCenter();
+		}
 	}
 }

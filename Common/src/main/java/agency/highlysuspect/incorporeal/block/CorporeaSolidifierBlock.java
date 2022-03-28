@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
+import agency.highlysuspect.incorporeal.computer.types.Datum;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import agency.highlysuspect.incorporeal.IncItems;
 import net.minecraft.core.BlockPos;
@@ -27,11 +28,15 @@ public class CorporeaSolidifierBlock extends Block {
 	}
 	
 	public void receiveRequest(Level level, BlockPos pos, SolidifiedRequest request) {
+		receiveDatum(level, pos, DataTypes.SOLIDIFIED_REQUEST.datumOf(request));
+	}
+	
+	public void receiveDatum(Level level, BlockPos pos, Datum<?> datum) {
 		if(level == null || level.isClientSide()) return;
 		
 		//Based on copy and paste from TileCorporeaFunnel
 		
-		ItemStack ticket = IncItems.TICKET.produce(DataTypes.SOLIDIFIED_REQUEST.datumOf(request));
+		ItemStack ticket = IncItems.TICKET.produce(datum);
 		BlockPos invPos = getInvPos(level, pos);
 		if (invPos != null
 			&& IXplatAbstractions.INSTANCE.insertToInventory(level, invPos, Direction.UP, ticket, true).isEmpty()) {
