@@ -6,18 +6,24 @@ import agency.highlysuspect.incorporeal.computer.capabilities.DatumProvider;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import vazkii.botania.api.internal.VanillaPacketDispatcher;
 import vazkii.botania.common.block.tile.TileMod;
 
-public class PointedDatastoneBlockEntity extends TileMod implements DatumAcceptor, DatumProvider {
-	public PointedDatastoneBlockEntity(BlockPos pos, BlockState state) {
-		super(IncBlockEntityTypes.POINTED_DATASTONE, pos, state);
+public class DataStorageBlockEntity extends TileMod implements DatumAcceptor, DatumProvider {
+	public DataStorageBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		super(type, pos, state);
 	}
 	
-	private @NotNull Datum<?> datum = Datum.EMPTY;
-	private int signal = 0;
+	//I love VIDEO GAMES
+	public static DataStorageBlockEntity makePointedDatastoneTbh(BlockPos pos, BlockState state) {
+		return new DataStorageBlockEntity(IncBlockEntityTypes.POINTED_DATASTONE, pos, state);
+	}
+	
+	protected Datum<?> datum = Datum.EMPTY;
+	protected int signal = 0;
 	
 	@Override
 	public void acceptDatum(@NotNull Datum<?> datum) {

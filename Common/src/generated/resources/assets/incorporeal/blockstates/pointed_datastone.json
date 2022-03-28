@@ -9,6 +9,9 @@
     "thickness=middle": {
       "model": "incorporeal:block/computer/pointed_datastone/middle"
     },
+    "thickness=on_ground": {
+      "model": "incorporeal:block/computer/pointed_datastone/on_ground"
+    },
     "thickness=tip": {
       "model": "incorporeal:block/computer/pointed_datastone/tip"
     }

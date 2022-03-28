@@ -1,7 +1,5 @@
 package agency.highlysuspect.incorporeal;
 
-import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.IncBlocks;
 import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.FunnyBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.PotionSoulCoreBlockEntity;
@@ -10,7 +8,7 @@ import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.SanvocaliaBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.UnstableCubeBlockEntity;
 import agency.highlysuspect.incorporeal.computer.DataFunnelBlockEntity;
-import agency.highlysuspect.incorporeal.computer.PointedDatastoneBlockEntity;
+import agency.highlysuspect.incorporeal.computer.DataStorageBlockEntity;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
@@ -56,8 +54,8 @@ public class IncBlockEntityTypes {
 	//computer
 	public static final BlockEntityType<DataFunnelBlockEntity> DATA_FUNNEL =
 		IXplatAbstractions.INSTANCE.createBlockEntityType(DataFunnelBlockEntity::new, IncBlocks.DATA_FUNNEL);
-	public static final BlockEntityType<PointedDatastoneBlockEntity> POINTED_DATASTONE =
-		IXplatAbstractions.INSTANCE.createBlockEntityType(PointedDatastoneBlockEntity::new, IncBlocks.POINTED_DATASTONE);
+	public static final BlockEntityType<DataStorageBlockEntity> POINTED_DATASTONE =
+		IXplatAbstractions.INSTANCE.createBlockEntityType(DataStorageBlockEntity::makePointedDatastoneTbh, IncBlocks.POINTED_DATASTONE);
 	
 	//BlockEntityTypes that self-implement IManaReceiver.
 	public static final Set<BlockEntityType<? extends IManaReceiver>> SELF_MANA_RECEIVER_BLOCK_ENTITY_TYPES = Set.of(

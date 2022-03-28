@@ -49,6 +49,12 @@ public class DataFunnelBlock extends Block implements EntityBlock {
 		}
 	}
 	
+	@Nullable
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return IncBlockEntityTypes.DATA_FUNNEL.create(pos, state);
+	}
+	
 	@Override
 	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
@@ -56,14 +62,8 @@ public class DataFunnelBlock extends Block implements EntityBlock {
 	
 	@Override
 	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-		if(level.getBlockEntity(pos) instanceof DataFunnelBlockEntity funnel) return funnel.signal();
+		if(level.getBlockEntity(pos) instanceof DataStorageBlockEntity storage) return storage.signal();
 		else return 0;
-	}
-	
-	@Nullable
-	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return IncBlockEntityTypes.DATA_FUNNEL.create(pos, state);
 	}
 	
 	@Override
