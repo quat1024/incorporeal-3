@@ -36,7 +36,7 @@ public abstract class AbstractSoulCoreBlockEntity extends TileMod implements IMa
 	}
 	
 	//idk where else to stick this
-	public static final DamageSource SOUL = IncXplat.INSTANCE.newDamageSource("incorporeal.soul").setMagic();
+	public static final DamageSource SOUL = IncXplat.INSTANCE.createDamageSource("incorporeal.soul").setMagic();
 	
 	protected GameProfile ownerProfile;
 	protected int mana;

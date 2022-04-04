@@ -48,7 +48,7 @@ public class IncXplatForge implements IncXplat {
 	}
 	
 	@Override
-	public DamageSource newDamageSource(String name) {
+	public DamageSource createDamageSource(String name) {
 		return new DamageSource(name);
 	}
 	

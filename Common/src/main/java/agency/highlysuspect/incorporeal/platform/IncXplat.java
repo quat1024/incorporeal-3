@@ -23,11 +23,11 @@ public interface IncXplat {
 	//(Kept in a separate class mainly to keep IncXplat to a reasonable size.) 
 	IncBootstrapper createBootstrapper();
 	
-	//One of those things that happens to be different across loaders
+	//One of those random things that happens to be different across loaders! Wow
 	CreativeModeTab createCreativeTab();
 	
 	//The named DamageSource constructor is not public on Fabric
-	DamageSource newDamageSource(String name);
+	DamageSource createDamageSource(String name);
 	
 	//Send a block of data from server to client, using the incorporeal packet abstraction
 	void sendTo(FriendlyByteBuf buf, ServerPlayer player);

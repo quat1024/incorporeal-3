@@ -47,7 +47,7 @@ public class IncXplatFabric implements IncXplat {
 	}
 	
 	@Override
-	public DamageSource newDamageSource(String name) {
+	public DamageSource createDamageSource(String name) {
 		return FabricAccessorDamageSource.inc$new(name);
 	}
 	
