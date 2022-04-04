@@ -28,6 +28,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import vazkii.botania.api.BotaniaForgeCapabilities;
+import vazkii.botania.api.block.IWandable;
 import vazkii.botania.api.corporea.CorporeaIndexRequestEvent;
 import vazkii.botania.api.mana.IManaReceiver;
 import vazkii.botania.forge.CapabilityUtil;
@@ -90,9 +91,14 @@ public class IncBootstrapForge implements IncBootstrapper {
 		MinecraftForge.EVENT_BUS.addGenericListener(BlockEntity.class, (AttachCapabilitiesEvent<BlockEntity> event) -> {
 			BlockEntity be = event.getObject();
 			
-			//ManaReceiver for all block entity types that implement it on themself
+			//Block entities that self-implement IManaReceiver
 			if(IncBlockEntityTypes.SELF_MANA_RECEIVER_BLOCK_ENTITY_TYPES.contains(be.getType()) && be instanceof IManaReceiver receiver) {
 				event.addCapability(Inc.id("mana_receiver"), CapabilityUtil.makeProvider(BotaniaForgeCapabilities.MANA_RECEIVER, receiver));
+			}
+			
+			//Block entities that self-implement IWandable
+			if(IncBlockEntityTypes.SELF_WANDABLE_BLOCK_ENTITY_TYPES.contains(be.getType()) && be instanceof IWandable wandable) {
+				event.addCapability(Inc.id("wandable"), CapabilityUtil.makeProvider(BotaniaForgeCapabilities.WANDABLE, wandable));
 			}
 			
 			//Add an item handler capability to the Ender Soul Core

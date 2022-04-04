@@ -69,7 +69,6 @@ public class UnstableCubeBlockEntity extends BlockEntity implements IWandable {
 		}
 	}
 	
-	//TODO set up the capability thingie.
 	@Override
 	public boolean onUsedByWand(@Nullable Player player, ItemStack stack, Direction side) {
 		punch(player);
@@ -94,6 +93,11 @@ public class UnstableCubeBlockEntity extends BlockEntity implements IWandable {
 	@Override
 	public Packet<ClientGamePacketListener> getUpdatePacket() {
 		return ClientboundBlockEntityDataPacket.create(this);
+	}
+	
+	@Override
+	public CompoundTag getUpdateTag() {
+		return saveWithoutMetadata();
 	}
 	
 	@Override

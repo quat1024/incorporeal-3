@@ -12,16 +12,15 @@ import agency.highlysuspect.incorporeal.computer.DataStorageBlockEntity;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import vazkii.botania.api.block.IWandable;
 import vazkii.botania.api.mana.IManaReceiver;
 import vazkii.botania.xplat.IXplatAbstractions;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
@@ -61,6 +60,10 @@ public class IncBlockEntityTypes {
 		ENDER_SOUL_CORE, POTION_SOUL_CORE
 	);
 	
+	public static final Set<BlockEntityType<? extends IWandable>> SELF_WANDABLE_BLOCK_ENTITY_TYPES = Set.of(
+		UNSTABLE_CUBE
+	);
+	
 	public static void register(BiConsumer<BlockEntityType<?>, ResourceLocation> r) {
 		r.accept(RED_STRING_LIAR, Inc.id("red_string_liar"));
 		r.accept(RED_STRING_CONSTRICTOR, Inc.id("red_string_constrictor"));
@@ -74,7 +77,6 @@ public class IncBlockEntityTypes {
 		r.accept(FUNNY_SMALL, Inc.id("funny_small"));
 		
 		r.accept(UNSTABLE_CUBE, Inc.id("unstable_cube"));
-		//UNSTABLE_CUBES.forEach((color, type) -> r.accept(type, Inc.id(color.getName() + "_unstable_cube")));
 		
 		r.accept(DATA_FUNNEL, Inc.id("data_funnel"));
 		r.accept(POINTED_DATASTONE, Inc.id("pointed_datastone"));

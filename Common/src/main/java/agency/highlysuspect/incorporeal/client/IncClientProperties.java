@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import vazkii.botania.api.block.IWandHUD;
 import vazkii.botania.api.subtile.TileEntityFunctionalFlower;
@@ -129,7 +130,7 @@ public class IncClientProperties {
 	
 	/// Wand HUD capabilities ///
 	
-	public static final Map<BlockEntityType<?>, Function<net.minecraft.world.level.block.entity.BlockEntity, IWandHUD>> WAND_HUD_MAKERS = new HashMap<>();
+	public static final Map<BlockEntityType<?>, Function<BlockEntity, IWandHUD>> WAND_HUD_MAKERS = new HashMap<>();
 	static {
 		//Downcasts are required because, in Java, I can't express the typing relationship between the keys and values of the map.
 		//I think it's like, a Map<BlockEntityType<? extends T>, Function<? super T, IWandHUD>>, but the T is scoped to the individual key/value pair, not the whole map.
@@ -142,11 +143,11 @@ public class IncClientProperties {
 		WAND_HUD_MAKERS.put(IncBlockEntityTypes.FUNNY_SMALL, IncClientProperties::functionalFlowerHudDowncast);
 	}
 	
-	private static IWandHUD soulCoreHudDowncast(net.minecraft.world.level.block.entity.BlockEntity be) {
+	private static IWandHUD soulCoreHudDowncast(BlockEntity be) {
 		return new AbstractSoulCoreBlockEntity.WandHud((AbstractSoulCoreBlockEntity) be);
 	}
 	
-	private static IWandHUD functionalFlowerHudDowncast(net.minecraft.world.level.block.entity.BlockEntity be) {
+	private static IWandHUD functionalFlowerHudDowncast(BlockEntity be) {
 		return new TileEntityFunctionalFlower.FunctionalWandHud<>((TileEntityFunctionalFlower) be);
 	}
 }

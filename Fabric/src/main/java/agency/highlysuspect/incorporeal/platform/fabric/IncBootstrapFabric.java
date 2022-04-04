@@ -16,6 +16,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import vazkii.botania.api.BotaniaFabricCapabilities;
+import vazkii.botania.api.block.IWandable;
 import vazkii.botania.api.corporea.CorporeaIndexRequestCallback;
 import vazkii.botania.api.mana.IManaReceiver;
 
@@ -69,6 +70,11 @@ public class IncBootstrapFabric implements IncBootstrapper {
 		//Block entities that self-implement IManaReceiver
 		for(BlockEntityType<? extends IManaReceiver> manaReceiverType : IncBlockEntityTypes.SELF_MANA_RECEIVER_BLOCK_ENTITY_TYPES) {
 			BotaniaFabricCapabilities.MANA_RECEIVER.registerSelf(manaReceiverType);
+		}
+		
+		//Block entities that self-implement IWandable
+		for(BlockEntityType<? extends IWandable> wandableType : IncBlockEntityTypes.SELF_WANDABLE_BLOCK_ENTITY_TYPES) {
+			BotaniaFabricCapabilities.WANDABLE.registerSelf(wandableType);
 		}
 		
 		//CoordBoundItem

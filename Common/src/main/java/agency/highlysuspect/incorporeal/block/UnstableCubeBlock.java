@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -75,6 +76,11 @@ public class UnstableCubeBlock extends BlockModWaterloggable implements EntityBl
 	
 	@Override
 	public int getDirectSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+		//special consideration: don't power adjacent dispensers (lol)
+		//this allows you to continually spin cubes using the Wand of the Forest dispenser behavior
+		//yeah man, i dunno either
+		if(level.getBlockState(pos.relative(direction.getOpposite())).getBlock() == Blocks.DISPENSER) return 0;
+		
 		if(level.getBlockEntity(pos) instanceof UnstableCubeBlockEntity be) return be.getPower();
 		else return 0;
 	}
