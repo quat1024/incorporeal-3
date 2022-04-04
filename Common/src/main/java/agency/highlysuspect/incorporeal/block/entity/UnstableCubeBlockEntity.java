@@ -38,8 +38,8 @@ import vazkii.botania.api.block.IWandable;
  * This is a lot of effort put into a block that mayyyybe 10 people will place in their world, ever.
  */
 public class UnstableCubeBlockEntity extends BlockEntity implements IWandable {
-	public UnstableCubeBlockEntity(DyeColor color, BlockPos pos, BlockState state) {
-		super(IncBlockEntityTypes.UNSTABLE_CUBES.get(color), pos, state);
+	public UnstableCubeBlockEntity(BlockPos pos, BlockState state) {
+		super(IncBlockEntityTypes.UNSTABLE_CUBE, pos, state);
 	}
 	
 	private float serverSpeed; //Synced to clients (other than the puncher's client) when someone punches the unstable cube.

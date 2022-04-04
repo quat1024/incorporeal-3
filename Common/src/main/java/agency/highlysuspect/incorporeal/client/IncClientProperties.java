@@ -7,7 +7,6 @@ import agency.highlysuspect.incorporeal.block.entity.AbstractSoulCoreBlockEntity
 import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.IncEntityTypes;
 import agency.highlysuspect.incorporeal.IncItems;
-import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
@@ -15,7 +14,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import vazkii.botania.api.block.IWandHUD;
 import vazkii.botania.api.subtile.TileEntityFunctionalFlower;
@@ -37,7 +35,8 @@ public class IncClientProperties {
 	
 	public static final Map<Item, Supplier<MyDynamicItemRenderer>> MY_DYNAMIC_ITEM_RENDERERS = new HashMap<>();
 	static {
-		IncItems.UNSTABLE_CUBES.forEach((color, cube) -> MY_DYNAMIC_ITEM_RENDERERS.put(cube, () -> new UnstableCubeBlockEntityRenderer(color)));
+		IncItems.UNSTABLE_CUBES.forEach((color, cube) ->
+			MY_DYNAMIC_ITEM_RENDERERS.put(cube, () -> UnstableCubeRenderers.createItemRenderer(color)));
 		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.ENDER_SOUL_CORE, () -> new SoulCoreBlockEntityRenderer<>(IncBlocks.ENDER_SOUL_CORE.defaultBlockState()));
 		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.POTION_SOUL_CORE, () -> new SoulCoreBlockEntityRenderer<>(IncBlocks.POTION_SOUL_CORE.defaultBlockState()));
 		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.SOUL_CORE_FRAME, () -> SoulCoreBlockEntityRenderer.createBlockless(Inc.id("block/soul_core_frame")));
@@ -93,8 +92,7 @@ public class IncClientProperties {
 		r.register(IncBlockEntityTypes.FUNNY_BIG, RenderTileSpecialFlower::new);
 		r.register(IncBlockEntityTypes.FUNNY_SMALL, RenderTileSpecialFlower::new);
 		
-		IncBlockEntityTypes.UNSTABLE_CUBES.forEach((color, type) ->
-			r.register(type, context -> new UnstableCubeBlockEntityRenderer(color, context)));
+		r.register(IncBlockEntityTypes.UNSTABLE_CUBE, UnstableCubeRenderers::createBlockEntityRenderer);
 		
 		r.register(IncBlockEntityTypes.DATA_FUNNEL, DataFunnelBlockEntityRenderer::new);
 	}
@@ -133,7 +131,7 @@ public class IncClientProperties {
 	
 	/// Wand HUD capabilities ///
 	
-	public static final Map<BlockEntityType<?>, Function<BlockEntity, IWandHUD>> WAND_HUD_MAKERS = new HashMap<>();
+	public static final Map<BlockEntityType<?>, Function<net.minecraft.world.level.block.entity.BlockEntity, IWandHUD>> WAND_HUD_MAKERS = new HashMap<>();
 	static {
 		//Downcasts are required because, in Java, I can't express the typing relationship between the keys and values of the map.
 		//I think it's like, a Map<BlockEntityType<? extends T>, Function<? super T, IWandHUD>>, but the T is scoped to the individual key/value pair, not the whole map.
@@ -146,11 +144,11 @@ public class IncClientProperties {
 		WAND_HUD_MAKERS.put(IncBlockEntityTypes.FUNNY_SMALL, IncClientProperties::functionalFlowerHudDowncast);
 	}
 	
-	private static IWandHUD soulCoreHudDowncast(BlockEntity be) {
+	private static IWandHUD soulCoreHudDowncast(net.minecraft.world.level.block.entity.BlockEntity be) {
 		return new AbstractSoulCoreBlockEntity.WandHud((AbstractSoulCoreBlockEntity) be);
 	}
 	
-	private static IWandHUD functionalFlowerHudDowncast(BlockEntity be) {
+	private static IWandHUD functionalFlowerHudDowncast(net.minecraft.world.level.block.entity.BlockEntity be) {
 		return new TileEntityFunctionalFlower.FunctionalWandHud<>((TileEntityFunctionalFlower) be);
 	}
 }

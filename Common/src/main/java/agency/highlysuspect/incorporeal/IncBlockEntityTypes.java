@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import vazkii.botania.api.mana.IManaReceiver;
 import vazkii.botania.xplat.IXplatAbstractions;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
@@ -28,6 +29,10 @@ import java.util.function.BiFunction;
 public class IncBlockEntityTypes {
 	private static <T extends BlockEntity> BlockEntityType<T> make(BiFunction<BlockPos, BlockState, T> func, Block... blocks) {
 		return IXplatAbstractions.INSTANCE.createBlockEntityType(func, blocks);
+	}
+	
+	private static <T extends BlockEntity> BlockEntityType<T> make(BiFunction<BlockPos, BlockState, T> func, Collection<? extends Block> blocks) {
+		return IXplatAbstractions.INSTANCE.createBlockEntityType(func, blocks.toArray(Block[]::new));
 	}
 	
 	//corporetics
@@ -45,10 +50,7 @@ public class IncBlockEntityTypes {
 	public static final BlockEntityType<FunnyBlockEntity> FUNNY_SMALL = make(FunnyBlockEntity::small, IncBlocks.FUNNY_SMALL, IncBlocks.FLOATING_FUNNY_SMALL);
 	
 	//unstable cubes
-	//Note - Only one BlockEntityRenderer can be assigned per block entity type.
-	public static final Map<DyeColor, BlockEntityType<UnstableCubeBlockEntity>> UNSTABLE_CUBES = Inc.sixteenColors(color -> make(
-		(pos, state) -> new UnstableCubeBlockEntity(color, pos, state), 
-		IncBlocks.UNSTABLE_CUBES.get(color)));
+	public static final BlockEntityType<UnstableCubeBlockEntity> UNSTABLE_CUBE = make(UnstableCubeBlockEntity::new, IncBlocks.UNSTABLE_CUBES.values());
 	
 	//computer
 	public static final BlockEntityType<DataFunnelBlockEntity> DATA_FUNNEL = make(DataFunnelBlockEntity::new, IncBlocks.DATA_FUNNEL);
@@ -71,7 +73,8 @@ public class IncBlockEntityTypes {
 		r.accept(FUNNY_BIG, Inc.id("funny"));
 		r.accept(FUNNY_SMALL, Inc.id("funny_small"));
 		
-		UNSTABLE_CUBES.forEach((color, type) -> r.accept(type, Inc.id(color.getName() + "_unstable_cube")));
+		r.accept(UNSTABLE_CUBE, Inc.id("unstable_cube"));
+		//UNSTABLE_CUBES.forEach((color, type) -> r.accept(type, Inc.id(color.getName() + "_unstable_cube")));
 		
 		r.accept(DATA_FUNNEL, Inc.id("data_funnel"));
 		r.accept(POINTED_DATASTONE, Inc.id("pointed_datastone"));

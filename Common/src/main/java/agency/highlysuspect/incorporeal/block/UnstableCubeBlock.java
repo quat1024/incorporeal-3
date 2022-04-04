@@ -39,7 +39,7 @@ public class UnstableCubeBlock extends BlockModWaterloggable implements EntityBl
 	}
 	
 	public final DyeColor color;
-	private static double px = 3;
+	private static final double px = 3;
 	public static final VoxelShape SHAPE = Shapes.create(px/16d, px/16d, px/16d, 1 - px/16d, 1 - px/16d, 1 - px/16d);
 	
 	@Override
@@ -62,6 +62,7 @@ public class UnstableCubeBlock extends BlockModWaterloggable implements EntityBl
 		punch(level, pos, player);
 	}
 	
+	//(quick reminder that all this does is cause redstone dust to point at it)
 	@Override
 	public boolean isSignalSource(BlockState $$0) {
 		return true;
@@ -86,13 +87,13 @@ public class UnstableCubeBlock extends BlockModWaterloggable implements EntityBl
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return IncBlockEntityTypes.UNSTABLE_CUBES.get(color).create(pos, state);
+		return IncBlockEntityTypes.UNSTABLE_CUBE.create(pos, state);
 	}
 	
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, IncBlockEntityTypes.UNSTABLE_CUBES.get(color),
+		return createTickerHelper(type, IncBlockEntityTypes.UNSTABLE_CUBE,
 			level.isClientSide() ? UnstableCubeClientTicker::clientTick : UnstableCubeBlockEntity::serverTick);
 	}
 }
