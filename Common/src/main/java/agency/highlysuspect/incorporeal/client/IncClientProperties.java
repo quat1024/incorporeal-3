@@ -37,9 +37,9 @@ public class IncClientProperties {
 	static {
 		IncItems.UNSTABLE_CUBES.forEach((color, cube) ->
 			MY_DYNAMIC_ITEM_RENDERERS.put(cube, () -> UnstableCubeRenderers.createItemRenderer(color)));
-		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.ENDER_SOUL_CORE, () -> new SoulCoreBlockEntityRenderer<>(IncBlocks.ENDER_SOUL_CORE.defaultBlockState()));
-		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.POTION_SOUL_CORE, () -> new SoulCoreBlockEntityRenderer<>(IncBlocks.POTION_SOUL_CORE.defaultBlockState()));
-		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.SOUL_CORE_FRAME, () -> SoulCoreBlockEntityRenderer.createBlockless(Inc.id("block/soul_core_frame")));
+		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.ENDER_SOUL_CORE, () -> SoulCoreRenderers.createItemRenderer(IncBlocks.ENDER_SOUL_CORE.defaultBlockState()));
+		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.POTION_SOUL_CORE, () -> SoulCoreRenderers.createItemRenderer(IncBlocks.POTION_SOUL_CORE.defaultBlockState()));
+		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.SOUL_CORE_FRAME, () -> SoulCoreRenderers.createItemRendererForNamedModel(Inc.id("block/soul_core_frame")));
 	}
 	
 	public static void registerExtraModelsToBake(Consumer<ResourceLocation> r) {
@@ -82,10 +82,8 @@ public class IncClientProperties {
 		r.register(IncBlockEntityTypes.RED_STRING_LIAR, RenderTileRedString::new);
 		r.register(IncBlockEntityTypes.RED_STRING_CONSTRICTOR, RenderTileRedString::new);
 		
-		r.register(IncBlockEntityTypes.ENDER_SOUL_CORE, ctx ->
-			new SoulCoreBlockEntityRenderer<>(IncBlocks.ENDER_SOUL_CORE.defaultBlockState(), ctx));
-		r.register(IncBlockEntityTypes.POTION_SOUL_CORE, ctx ->
-			new SoulCoreBlockEntityRenderer<>(IncBlocks.POTION_SOUL_CORE.defaultBlockState(), ctx));
+		r.register(IncBlockEntityTypes.ENDER_SOUL_CORE, SoulCoreRenderers::createBlockEntityRenderer);
+		r.register(IncBlockEntityTypes.POTION_SOUL_CORE, SoulCoreRenderers::createBlockEntityRenderer);
 		
 		r.register(IncBlockEntityTypes.SANVOCALIA_BIG, RenderTileSpecialFlower::new);
 		r.register(IncBlockEntityTypes.SANVOCALIA_SMALL, RenderTileSpecialFlower::new);

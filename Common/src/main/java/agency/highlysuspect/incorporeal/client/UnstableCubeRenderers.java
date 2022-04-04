@@ -22,7 +22,8 @@ import org.jetbrains.annotations.NotNull;
 import vazkii.botania.client.core.handler.ClientTickHandler;
 
 /**
- * The BlockEntityRenderer for the Unstable Cube. In charge of rotating at a weird angle, tinting it, etc.
+ * Renderers (BlockEntityRenderer and MyDynamicItemRenderer) for the Unstable Cube.
+ * In charge of rotating at a weird angle, tinting it, etc.
  */
 public abstract class UnstableCubeRenderers {
 	public static BlockEntityRenderer<UnstableCubeBlockEntity> createBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
@@ -32,6 +33,8 @@ public abstract class UnstableCubeRenderers {
 	public static MyDynamicItemRenderer createItemRenderer(DyeColor color) {
 		return new Item(color);
 	}
+	
+	///
 	
 	protected void drawCube(BlockState state, BakedModel model, PoseStack pose, MultiBufferSource bufs, int light, int overlay, float red, float green, float blue) {
 		//ty artemis for this! i changed it tbh
