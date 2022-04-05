@@ -1,0 +1,53 @@
+{
+  "type": "minecraft:stonecutting",
+  "group": "unstable_cubes",
+  "ingredient": [
+    {
+      "item": "incorporeal:white_unstable_cube"
+    },
+    {
+      "item": "incorporeal:orange_unstable_cube"
+    },
+    {
+      "item": "incorporeal:magenta_unstable_cube"
+    },
+    {
+      "item": "incorporeal:yellow_unstable_cube"
+    },
+    {
+      "item": "incorporeal:lime_unstable_cube"
+    },
+    {
+      "item": "incorporeal:pink_unstable_cube"
+    },
+    {
+      "item": "incorporeal:gray_unstable_cube"
+    },
+    {
+      "item": "incorporeal:light_gray_unstable_cube"
+    },
+    {
+      "item": "incorporeal:cyan_unstable_cube"
+    },
+    {
+      "item": "incorporeal:purple_unstable_cube"
+    },
+    {
+      "item": "incorporeal:blue_unstable_cube"
+    },
+    {
+      "item": "incorporeal:brown_unstable_cube"
+    },
+    {
+      "item": "incorporeal:green_unstable_cube"
+    },
+    {
+      "item": "incorporeal:red_unstable_cube"
+    },
+    {
+      "item": "incorporeal:black_unstable_cube"
+    }
+  ],
+  "result": "incorporeal:light_blue_unstable_cube",
+  "count": 1
+}

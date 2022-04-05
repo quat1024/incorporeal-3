@@ -97,6 +97,10 @@ public class IncCommonRecipeGen {
 				.define("P", ModItems.getPetal(color))
 				.define("E", Items.ENDER_PEARL)
 				.save(files));
+		//eh fuck it why not
+		RecipeDsl.stonecuttingGroup(IncBlocks.UNSTABLE_CUBES.values())
+			.group("unstable_cubes")
+			.save(files);
 		
 		//Soul Core Frame
 		RecipeDsl.runic(IncItems.SOUL_CORE_FRAME, RunicAltarRecipeBuilder.TIER_3)
