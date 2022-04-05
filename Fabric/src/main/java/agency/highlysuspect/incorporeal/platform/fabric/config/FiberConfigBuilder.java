@@ -9,7 +9,6 @@ import io.github.fablabsmc.fablabs.api.fiber.v1.serialization.FiberSerialization
 import io.github.fablabsmc.fablabs.api.fiber.v1.serialization.JanksonValueSerializer;
 import io.github.fablabsmc.fablabs.api.fiber.v1.tree.ConfigTree;
 import io.github.fablabsmc.fablabs.api.fiber.v1.tree.PropertyMirror;
-import joptsimple.internal.Strings;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -61,7 +60,7 @@ public class FiberConfigBuilder implements ConfigBuilder {
 		
 		//create a property and bind it to the mirror
 		builder = builder.beginValue(name, ConfigTypes.BOOLEAN, defaultValue)
-			.withComment(Strings.join(commentLines, System.lineSeparator()))
+			.withComment(String.join(System.lineSeparator(), commentLines))
 			.finishValue(boolMirror::mirror);
 		
 		//return the mirror's getter
