@@ -23,25 +23,13 @@ import java.nio.file.StandardOpenOption;
 import java.util.function.Supplier;
 
 public class FiberConfigBuilder implements ConfigBuilder {
-	public static FiberConfigBuilder create(String filename) {
-		//It's no one mod's responsibility to create the configuration directory in this world.
-		try {
-			Files.createDirectory(Paths.get("config"));
-		} catch (FileAlreadyExistsException ignored) {
-			//Someone else did it! Great.
-		} catch (IOException e) {
-			Inc.LOGGER.warn("Failed to make config dir", e);
-		}
-		
-		return new FiberConfigBuilder(filename);
-	}
-	
-	private FiberConfigBuilder(String filename) {
+	public FiberConfigBuilder(String filename) {
 		this.filename = filename;
+		this.builder = ConfigTree.builder();
 	}
 	
 	private final String filename;
-	private ConfigTreeBuilder builder = ConfigTree.builder();
+	private ConfigTreeBuilder builder;
 	
 	@Override
 	public void pushCategory(String name) {
@@ -67,25 +55,33 @@ public class FiberConfigBuilder implements ConfigBuilder {
 		return boolMirror::getValue;
 	}
 	
-	
 	@Override
 	public void finish() {
 		setupConfig(builder.build(), Paths.get("config", filename + ".json5"), new JanksonValueSerializer(false));
 	}
 	
-	/// Copypaste of private methods from Botania, using my logger of course ///
-	
-	private static void writeDefaultConfig(ConfigTree config, Path path, JanksonValueSerializer serializer) {
-		try (OutputStream s = new BufferedOutputStream(Files.newOutputStream(path, StandardOpenOption.WRITE, StandardOpenOption.CREATE_NEW))) {
-			FiberSerialization.serialize(config, s, serializer);
-		} catch (FileAlreadyExistsException ignored) {} catch (IOException e) {
-			Inc.LOGGER.error("Error writing default config", e);
-		}
-	}
+	/// Copypaste of private methods from Botania, using my logger of course; inlined a few things, blah blah... ///
 	
 	private static void setupConfig(ConfigTree config, Path p, JanksonValueSerializer serializer) {
-		writeDefaultConfig(config, p, serializer);
+		//It's no one mod's responsibility to create the configuration directory in this world.
+		try {
+			Files.createDirectory(Paths.get("config"));
+		} catch (FileAlreadyExistsException ignored) {
+			//Someone else did it! Great.
+		} catch (IOException e) {
+			Inc.LOGGER.warn("Failed to make config dir", e);
+		}
 		
+		//Write the default config...
+		try (OutputStream s = new BufferedOutputStream(Files.newOutputStream(p, StandardOpenOption.WRITE, StandardOpenOption.CREATE_NEW))) {
+			FiberSerialization.serialize(config, s, serializer);
+		} catch (FileAlreadyExistsException ignored) {
+			//...but don't overwrite any existing config file
+		} catch (IOException e) {
+			Inc.LOGGER.error("Error writing default config", e);
+		}
+		
+		//Read the config values out of the file
 		try (InputStream s = new BufferedInputStream(Files.newInputStream(p, StandardOpenOption.READ, StandardOpenOption.CREATE))) {
 			FiberSerialization.deserialize(config, s, serializer);
 		} catch (IOException | ValueDeserializationException e) {

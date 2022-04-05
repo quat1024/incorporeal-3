@@ -29,7 +29,7 @@ public class IncBootstrapFabric implements IncBootstrapper {
 	
 	@Override
 	public ConfigBuilder createConfigBuilder(String filename) {
-		return FiberConfigBuilder.create(filename);
+		return new FiberConfigBuilder(filename);
 	}
 	
 	private static <T> BiConsumer<T, ResourceLocation> createRegistrar(Registry<T> reg) {
