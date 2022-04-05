@@ -12,6 +12,7 @@
 		"TileCorporeaIndexInputHandlerMixin",
 		"CorporeaItemStackMatcherAccessor",
 		"ItemFrameAccessor",
+		"ItemFrameMixin",
 		"ModTilesMixin",
 		"FarmBlockMixin",
 		"PistonStructureResolverMixin",
