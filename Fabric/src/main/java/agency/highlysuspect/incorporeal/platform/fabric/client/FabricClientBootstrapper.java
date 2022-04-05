@@ -15,9 +15,13 @@ import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.BotaniaFabricClientCapabilities;
 
 import java.util.function.Supplier;
@@ -25,7 +29,25 @@ import java.util.function.Supplier;
 public class FabricClientBootstrapper implements IncClientBootstrapper {
 	@Override
 	public void registerItemPropertyOverrides() {
-		IncClientProperties.registerPropertyOverrides((item, id, prop) -> FabricModelPredicateProviderRegistry.register(item.asItem(), id, prop));
+		IncClientProperties.registerPropertyOverrides((item, id, prop) -> {
+			ClampedItemPropertyFunction clamped;
+			if(prop instanceof ClampedItemPropertyFunction c) clamped = c;
+			else clamped = new ClampedItemPropertyFunction() {
+				//A ClampedItemPropertyFunction that delegates straight through, without actually clamping.
+				//This is needed due to a mistake in Fabric API: https://github.com/FabricMC/fabric/issues/2107
+				@Override
+				public float call(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
+					return prop.call(itemStack, clientLevel, livingEntity, i);
+				}
+				
+				@Override
+				public float unclampedCall(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i) {
+					return prop.call(itemStack, clientLevel, livingEntity, i);
+				}
+			};
+			
+			FabricModelPredicateProviderRegistry.register(item.asItem(), id, clamped);
+		});
 	}
 	
 	@Override

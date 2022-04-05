@@ -40,6 +40,12 @@ public interface DataType<T> {
 	}
 	
 	/**
+	 * Returns an integer globally unique per DataType that's passed into an item property override on the conjurer and ticket items....
+	 * Yea im not very good at item models
+	 */
+	int magicNumber();
+	
+	/**
 	 * Returns a color corresponding to this thing.
 	 * A value may not be provided, wherein a color corresponding to the data type should be returned instead.
 	 */

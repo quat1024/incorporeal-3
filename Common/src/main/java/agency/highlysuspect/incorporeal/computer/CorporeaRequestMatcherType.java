@@ -6,7 +6,6 @@ import agency.highlysuspect.incorporeal.corporea.MatcherUtils;
 import agency.highlysuspect.incorporeal.corporea.RequestParser;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 
@@ -26,6 +25,11 @@ public class CorporeaRequestMatcherType implements DataType<ICorporeaRequestMatc
 	@Override
 	public Optional<ICorporeaRequestMatcher> tryLoad(CompoundTag tag) {
 		return MatcherUtils.tryLoad(tag.getCompound("matcher"));
+	}
+	
+	@Override
+	public int magicNumber() {
+		return 2;
 	}
 	
 	@Override

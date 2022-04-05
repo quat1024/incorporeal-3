@@ -4,7 +4,6 @@ import agency.highlysuspect.incorporeal.computer.types.DataType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.ItemStack;
 
@@ -20,6 +19,11 @@ public class EmptyType implements DataType<Unit> {
 	@Override
 	public Unit infallibleLoad(CompoundTag tag) {
 		return Unit.INSTANCE;
+	}
+	
+	@Override
+	public int magicNumber() {
+		return 0;
 	}
 	
 	@Override

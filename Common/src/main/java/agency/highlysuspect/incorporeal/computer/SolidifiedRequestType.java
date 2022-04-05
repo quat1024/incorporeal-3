@@ -5,7 +5,6 @@ import agency.highlysuspect.incorporeal.corporea.RequestParser;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Optional;
@@ -22,6 +21,11 @@ public class SolidifiedRequestType implements DataType<SolidifiedRequest> {
 	@Override
 	public Optional<SolidifiedRequest> tryLoad(CompoundTag tag) {
 		return SolidifiedRequest.tryLoad(tag.getCompound("request"));
+	}
+	
+	@Override
+	public int magicNumber() {
+		return 3;
 	}
 	
 	@Override

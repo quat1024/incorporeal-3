@@ -5,7 +5,6 @@ import agency.highlysuspect.incorporeal.corporea.RequestParser;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 
@@ -21,6 +20,11 @@ public class IntegerType implements DataType<Integer> {
 	@Override
 	public Integer infallibleLoad(CompoundTag tag) {
 		return tag.getInt("int");
+	}
+	
+	@Override
+	public int magicNumber() {
+		return 1;
 	}
 	
 	@Override

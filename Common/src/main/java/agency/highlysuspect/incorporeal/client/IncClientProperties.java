@@ -10,6 +10,7 @@ import agency.highlysuspect.incorporeal.IncItems;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
+import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -114,11 +115,21 @@ public class IncClientProperties {
 	
 	/// Item property overrides ///
 	
-	public static void registerPropertyOverrides(TriConsumer<ItemLike, ResourceLocation, ClampedItemPropertyFunction> r) {
+	@SuppressWarnings("deprecation") //ItemPropertyFunction
+	public static void registerPropertyOverrides(TriConsumer<ItemLike, ResourceLocation, ItemPropertyFunction> r) {
 		//Returns 1 if the corporea ticket has a request written on it, and 0 otherwise.
 		//Now that I think about it, it's pretty much impossible to have a ticket with nothing written on it...
 		r.accept(IncItems.TICKET, Inc.id("written_ticket"),
-			(stack, level, ent, seed) -> !IncItems.TICKET.get(stack).isEmpty() ? 1 : 0);
+			(ClampedItemPropertyFunction) (stack, level, ent, seed) -> !IncItems.TICKET.get(stack).isEmpty() ? 1 : 0);
+		
+		//Returns the magic number of the datatype associated with the item.
+		//The magic number is a unique identifier for the data type.
+		//It's mainly used because ItemPropertyFunctions can only return integers...
+		//TODO: It would probably be better to represent these as different items, instead of this bullshit lol
+		r.accept(IncItems.TICKET, Inc.id("magic_number"),
+			(stack, level, ent, seed) -> IncItems.TICKET.get(stack).type().magicNumber());
+		r.accept(IncItems.TICKET_CONJURER, Inc.id("magic_number"),
+			(stack, level, ent, seed) -> IncItems.TICKET_CONJURER.getType(stack).magicNumber());
 	}
 	
 	/// Entity renderers ///
