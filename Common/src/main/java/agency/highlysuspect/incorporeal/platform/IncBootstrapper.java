@@ -8,6 +8,8 @@ package agency.highlysuspect.incorporeal.platform;
  * The purpose of breaking up IncBootstrapper into many methods is to allow easy comparison of the Fabric and Forge implementations.
  */
 public interface IncBootstrapper {
+	ConfigBuilder createConfigBuilder(String filename);
+	
 	void registerBlocks();
 	void registerBlockEntityTypes();
 	void registerItems();

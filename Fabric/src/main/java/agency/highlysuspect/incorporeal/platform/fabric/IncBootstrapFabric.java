@@ -7,9 +7,11 @@ import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.corporea.PlayerHeadHandler;
 import agency.highlysuspect.incorporeal.IncEntityTypes;
 import agency.highlysuspect.incorporeal.IncItems;
+import agency.highlysuspect.incorporeal.platform.ConfigBuilder;
 import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
 import agency.highlysuspect.incorporeal.platform.fabric.block.entity.EnderSoulCoreStorage;
 import agency.highlysuspect.incorporeal.platform.fabric.block.entity.FabricRedStringConstrictorBlockEntity;
+import agency.highlysuspect.incorporeal.platform.fabric.config.FiberConfigBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.core.Registry;
@@ -24,6 +26,11 @@ import java.util.function.BiConsumer;
 
 public class IncBootstrapFabric implements IncBootstrapper {
 	public static final ResourceLocation NETWORK_ID = new ResourceLocation(Inc.MODID, "net"); //Gotta put this somewhere
+	
+	@Override
+	public ConfigBuilder createConfigBuilder(String filename) {
+		return FiberConfigBuilder.create(filename);
+	}
 	
 	private static <T> BiConsumer<T, ResourceLocation> createRegistrar(Registry<T> reg) {
 		return (thing, name) -> Registry.register(reg, name, thing);

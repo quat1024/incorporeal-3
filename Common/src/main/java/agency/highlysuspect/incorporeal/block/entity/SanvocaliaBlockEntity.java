@@ -2,7 +2,6 @@ package agency.highlysuspect.incorporeal.block.entity;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
-import agency.highlysuspect.incorporeal.IncConfig;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.corporea.IndexFinder;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
@@ -108,7 +107,7 @@ public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 				
 				Inc.LOGGER.info("Sanvocalia message triggered at {} in dimension {}", pos.toShortString(), level.dimension().location().toString());
 				
-				if(IncConfig.INSTANCE.everyoneHearsSanvocalia) {
+				if(Inc.INSTANCE.config.everyoneHearsSanvocalia()) {
 					server.getPlayerList().broadcastMessage(msg, ChatType.CHAT, CHAT_SEND_UUID);
 				} else if(placerUuid != null) {
 					ServerPlayer player = server.getPlayerList().getPlayer(placerUuid);

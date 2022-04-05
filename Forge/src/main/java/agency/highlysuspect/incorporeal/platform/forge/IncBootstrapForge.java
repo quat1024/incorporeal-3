@@ -9,8 +9,10 @@ import agency.highlysuspect.incorporeal.client.IncClient;
 import agency.highlysuspect.incorporeal.corporea.PlayerHeadHandler;
 import agency.highlysuspect.incorporeal.IncEntityTypes;
 import agency.highlysuspect.incorporeal.IncItems;
+import agency.highlysuspect.incorporeal.platform.ConfigBuilder;
 import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
 import agency.highlysuspect.incorporeal.platform.forge.block.entity.EnderSoulCoreItemHandler;
+import agency.highlysuspect.incorporeal.platform.forge.config.ForgeConfigBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -37,6 +39,11 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class IncBootstrapForge implements IncBootstrapper {
+	@Override
+	public ConfigBuilder createConfigBuilder(String filename) {
+		return new ForgeConfigBuilder(filename);
+	}
+	
 	//Paste from botania
 	private static <T extends IForgeRegistryEntry<T>> void bind(IForgeRegistry<T> registry, Consumer<BiConsumer<T, ResourceLocation>> source) {
 		FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(registry.getRegistrySuperType(),
