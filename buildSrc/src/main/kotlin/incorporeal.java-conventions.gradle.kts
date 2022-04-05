@@ -1,3 +1,6 @@
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
 plugins {
     //Apply the Java plugin.
     java
@@ -56,6 +59,20 @@ tasks.jar {
 tasks.withType<JavaCompile>().configureEach { 
     options.encoding = "UTF-8"
     options.release.set(17)
+}
+
+//Compress JSON resources by parsing them as JSON, then writing them back out again using a writer that doesn't pretty-print.
+tasks.processResources {
+    doLast {
+        fileTree(baseDir = outputs.files.asPath) {
+            include("**/*.json")
+        }.forEach {
+            //Here using the Groovy JSON utilities.
+            val content = it.readText()
+            val out = JsonOutput.toJson(JsonSlurper().parseText(content))
+            it.writeText(out)
+        }
+    }
 }
 
 //I *believe* that the purpose of this bit is because projects like Loom and FG use a lot of magic (that you're
