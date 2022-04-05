@@ -9,7 +9,6 @@ import agency.highlysuspect.incorporeal.corporea.AndingCorporeaRequestMatcher;
 import agency.highlysuspect.incorporeal.corporea.EmptyCorporeaRequestMatcher;
 import agency.highlysuspect.incorporeal.corporea.InvertedCorporeaRequestMatcher;
 import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
-import agency.highlysuspect.incorporeal.platform.IncConfig;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;

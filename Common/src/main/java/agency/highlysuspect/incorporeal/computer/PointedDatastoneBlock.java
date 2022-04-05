@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.computer;
 
+import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -190,7 +191,8 @@ public class PointedDatastoneBlock extends BlockModWaterloggable implements Enti
 	
 	@Override
 	public PushReaction getPistonPushReaction(BlockState $$0) {
-		return PushReaction.DESTROY;
+		//Requires a "movable block entity" mod
+		return Inc.INSTANCE.config.pointedDatastoneIsPushable() ? PushReaction.NORMAL : PushReaction.DESTROY;
 	}
 	
 	@Nullable
