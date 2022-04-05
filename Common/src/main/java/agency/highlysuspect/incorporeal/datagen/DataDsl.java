@@ -57,10 +57,15 @@ public class DataDsl {
 		datagen.addProvider(new DataProvider() {
 			@Override
 			public void run(HashCache hashCache) throws IOException {
+				//create a bucket
 				List<JsonFile> bucket = new ArrayList<>();
+				
+				//allow the caller to fill it with json files
 				generator.accept(datagen, bucket::add);
+				
+				//write them all out
 				bucket.forEach(f -> {
-					Inc.LOGGER.info("Saving " + Strings.join(f.pathSegments(), '/')); //todo ugly ;)
+					Inc.LOGGER.info("Saving " + String.join("/", f.pathSegments()));
 					f.save(datagen, hashCache);
 				});
 			}
