@@ -1,7 +1,7 @@
 package agency.highlysuspect.incorporeal.mixin.client;
 
 import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
-import agency.highlysuspect.incorporeal.computer.DataFunnelBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.DataFunnelBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -14,7 +14,6 @@ import vazkii.botania.api.item.IWireframeCoordinateListProvider;
 import vazkii.botania.common.item.ItemTwigWand;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**

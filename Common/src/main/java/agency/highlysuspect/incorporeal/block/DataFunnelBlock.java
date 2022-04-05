@@ -1,6 +1,8 @@
-package agency.highlysuspect.incorporeal.computer;
+package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.block.entity.DataFunnelBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.DataStorageBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;

@@ -1,6 +1,7 @@
-package agency.highlysuspect.incorporeal.computer;
+package agency.highlysuspect.incorporeal.block;
 
 import agency.highlysuspect.incorporeal.IncBlocks;
+import agency.highlysuspect.incorporeal.block.entity.DataStorageBlockEntity;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

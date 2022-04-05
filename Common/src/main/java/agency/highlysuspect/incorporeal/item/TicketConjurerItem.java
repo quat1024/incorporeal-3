@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.computer;
+package agency.highlysuspect.incorporeal.item;
 
 import agency.highlysuspect.incorporeal.computer.types.DataType;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;

@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.computer;
+package agency.highlysuspect.incorporeal.item;
 
 import agency.highlysuspect.incorporeal.computer.types.DataLens;
 import vazkii.botania.common.item.lens.Lens;

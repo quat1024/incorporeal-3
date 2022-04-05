@@ -1,8 +1,8 @@
-package agency.highlysuspect.incorporeal.computer;
+package agency.highlysuspect.incorporeal.block.entity;
 
 import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
+import agency.highlysuspect.incorporeal.computer.DataRayClipContext;
 import agency.highlysuspect.incorporeal.computer.capabilities.DatumAcceptor;
-import agency.highlysuspect.incorporeal.computer.capabilities.DatumProvider;
 import agency.highlysuspect.incorporeal.computer.types.DataReducers;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
 import agency.highlysuspect.incorporeal.net.DataFunnelEffect;

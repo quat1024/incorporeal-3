@@ -1,9 +1,8 @@
 package agency.highlysuspect.incorporeal.computer.capabilities;
 
 import agency.highlysuspect.incorporeal.IncBlocks;
-import agency.highlysuspect.incorporeal.block.CorporeaSolidifierBlock;
-import agency.highlysuspect.incorporeal.computer.DatastoneBlock;
-import agency.highlysuspect.incorporeal.computer.NotManaLens;
+import agency.highlysuspect.incorporeal.block.DatastoneBlock;
+import agency.highlysuspect.incorporeal.item.NotManaLens;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
 import agency.highlysuspect.incorporeal.corporea.RetainerDuck;

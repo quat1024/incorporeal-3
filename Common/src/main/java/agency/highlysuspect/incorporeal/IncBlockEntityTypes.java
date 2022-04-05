@@ -7,8 +7,8 @@ import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEn
 import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.SanvocaliaBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.UnstableCubeBlockEntity;
-import agency.highlysuspect.incorporeal.computer.DataFunnelBlockEntity;
-import agency.highlysuspect.incorporeal.computer.DataStorageBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.DataFunnelBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.DataStorageBlockEntity;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;

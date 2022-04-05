@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.computer;
+package agency.highlysuspect.incorporeal.block.entity;
 
 import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.computer.capabilities.DatumAcceptor;

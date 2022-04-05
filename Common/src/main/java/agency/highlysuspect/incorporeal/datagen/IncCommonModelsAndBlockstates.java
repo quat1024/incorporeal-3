@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.datagen;
 
-import agency.highlysuspect.incorporeal.computer.PointedDatastoneBlock;
+import agency.highlysuspect.incorporeal.block.PointedDatastoneBlock;
 import agency.highlysuspect.incorporeal.mixin.datagen.IncAccessorBlockModelGenerators;
 import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.Inc;
