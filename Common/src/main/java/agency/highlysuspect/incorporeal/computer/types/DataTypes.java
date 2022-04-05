@@ -1,6 +1,10 @@
 package agency.highlysuspect.incorporeal.computer.types;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.computer.CorporeaRequestMatcherType;
+import agency.highlysuspect.incorporeal.computer.EmptyType;
+import agency.highlysuspect.incorporeal.computer.IntegerType;
+import agency.highlysuspect.incorporeal.computer.SolidifiedRequestType;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import agency.highlysuspect.incorporeal.util.SimplerRegistry;
 import net.minecraft.util.Unit;

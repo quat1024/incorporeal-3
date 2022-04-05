@@ -1,5 +1,6 @@
-package agency.highlysuspect.incorporeal.computer.types;
+package agency.highlysuspect.incorporeal.computer;
 
+import agency.highlysuspect.incorporeal.computer.types.DataType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;

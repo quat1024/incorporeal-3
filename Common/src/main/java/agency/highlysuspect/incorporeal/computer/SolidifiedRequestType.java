@@ -1,5 +1,6 @@
-package agency.highlysuspect.incorporeal.computer.types;
+package agency.highlysuspect.incorporeal.computer;
 
+import agency.highlysuspect.incorporeal.computer.types.DataType;
 import agency.highlysuspect.incorporeal.corporea.RequestParser;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import net.minecraft.nbt.CompoundTag;
