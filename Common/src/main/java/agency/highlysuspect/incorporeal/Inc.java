@@ -82,6 +82,7 @@ public class Inc {
 			
 			//platform specific post-botania init
 			bootstrapper.registerCorporeaIndexCallback();
+			bootstrapper.registerRedstoneRootPlaceEvent();
 			
 			//common post-botania init
 			//corporea matchers

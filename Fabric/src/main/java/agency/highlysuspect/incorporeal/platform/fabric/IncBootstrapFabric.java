@@ -12,15 +12,19 @@ import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
 import agency.highlysuspect.incorporeal.platform.fabric.block.entity.EnderSoulCoreStorage;
 import agency.highlysuspect.incorporeal.platform.fabric.block.entity.FabricRedStringConstrictorBlockEntity;
 import agency.highlysuspect.incorporeal.platform.fabric.config.FiberConfigBuilder;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import vazkii.botania.api.BotaniaFabricCapabilities;
 import vazkii.botania.api.block.IWandable;
 import vazkii.botania.api.corporea.CorporeaIndexRequestCallback;
 import vazkii.botania.api.mana.IManaReceiver;
+import vazkii.botania.common.item.ModItems;
 
 import java.util.function.BiConsumer;
 
@@ -104,5 +108,17 @@ public class IncBootstrapFabric implements IncBootstrapper {
 	@Override
 	public void registerCorporeaIndexCallback() {
 		CorporeaIndexRequestCallback.EVENT.register(PlayerHeadHandler::onIndexRequest);
+	}
+	
+	@Override
+	public void registerRedstoneRootPlaceEvent() {
+		UseBlockCallback.EVENT.register((player, level, hand, hitResult) -> {
+			if(player == null || level == null || player.isSpectator()) return InteractionResult.PASS; //idk??
+			
+			ItemStack held = player.getItemInHand(hand);
+			if(held.getItem() != ModItems.redstoneRoot) return InteractionResult.PASS;
+			
+			return IncBlocks.REDSTONE_ROOT_CROP.hookRedstoneRootClick(player, level, held, hand, hitResult);
+		});
 	}
 }

@@ -1,16 +1,30 @@
 package agency.highlysuspect.incorporeal.block;
 
 import net.minecraft.Util;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -18,8 +32,7 @@ import vazkii.botania.common.item.ModItems;
 
 /**
  * Incorporeal edits Botania's "redstone root" to be a plantable crop. This is the crop block.
- * 
- * @see agency.highlysuspect.incorporeal.mixin.ModItemsMixin for where this edit is done.
+ * The interaction is hooked through platform-specific use-item APIs.
  */
 public class RedstoneRootCropBlock extends CropBlock {
 	public RedstoneRootCropBlock(Properties props) {
@@ -69,13 +82,45 @@ public class RedstoneRootCropBlock extends CropBlock {
 	//Weird cropblock thing
 	@Override
 	protected ItemLike getBaseSeedId() {
-		return this;
+		return ModItems.redstoneRoot;
 	}
 	
-	//(super illegal)
-	@Override
-	public String getDescriptionId() {
-		//Noone will ever know!
-		return "item.botania.redstone_root";
+	//Hooked after Fabric's spectator check, and after checking that the player is holding a redstone root item.
+	public InteractionResult hookRedstoneRootClick(Player player, Level level, ItemStack held, InteractionHand hand, BlockHitResult hit) {
+		if(hit == null || hit.getType() != HitResult.Type.BLOCK) return InteractionResult.PASS;
+		
+		//From here on out, I'm basically copying BlockItem, inlining most of the customization points that aren't used
+		
+		//preparing
+		UseOnContext useContext = new UseOnContext(player, hand, hit);
+		BlockPlaceContext blockPlaceContext = new BlockPlaceContext(useContext);
+		BlockPos pos = blockPlaceContext.getClickedPos();
+		
+		if(!blockPlaceContext.canPlace()) return InteractionResult.FAIL;
+		
+		//updatePlacementContext -> skip
+		BlockState placementState = this.getStateForPlacement(blockPlaceContext);
+		if(placementState == null) return InteractionResult.FAIL;
+		
+		CollisionContext ctx = CollisionContext.of(player);
+		if(!placementState.canSurvive(level, pos) || !level.isUnobstructed(placementState, pos, ctx)) return InteractionResult.FAIL;
+		
+		//setBlock - doing it for real!!!
+		level.setBlock(pos, placementState, 11);
+		
+		//post placement
+		//block entity stuff -> skip
+		if(player instanceof ServerPlayer serverPlayer) {
+			CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos, held);
+		}
+		SoundType soundType = SoundType.CROP;
+		level.playSound(player, pos, soundType.getPlaceSound(), SoundSource.BLOCKS, (soundType.getVolume() + 1f) / 2f, soundType.getPitch() * 0.8f);
+		level.gameEvent(player, GameEvent.BLOCK_PLACE, pos);
+		if(!player.getAbilities().instabuild) {
+			held.shrink(1);
+		}
+		
+		//still do not understand the point of sidedSuccess
+		return InteractionResult.sidedSuccess(level.isClientSide);
 	}
 }

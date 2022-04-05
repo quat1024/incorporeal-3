@@ -18,7 +18,7 @@ Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-f
   * item frame tinkerer
   * rod of the fractured space
 * natural redstone circuitry
-  * redstone root crop (Broken in 1.18.2)
+  * redstone root crop
   * natural repeater
   * natural comparator
 * soul cores

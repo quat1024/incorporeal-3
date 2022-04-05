@@ -14,6 +14,7 @@ import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
 import agency.highlysuspect.incorporeal.platform.forge.block.entity.EnderSoulCoreItemHandler;
 import agency.highlysuspect.incorporeal.platform.forge.config.ForgeConfigBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -22,6 +23,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -33,6 +35,7 @@ import vazkii.botania.api.BotaniaForgeCapabilities;
 import vazkii.botania.api.block.IWandable;
 import vazkii.botania.api.corporea.CorporeaIndexRequestEvent;
 import vazkii.botania.api.mana.IManaReceiver;
+import vazkii.botania.common.item.ModItems;
 import vazkii.botania.forge.CapabilityUtil;
 
 import java.util.function.BiConsumer;
@@ -147,5 +150,21 @@ public class IncBootstrapForge implements IncBootstrapper {
 	public void registerCorporeaIndexCallback() {
 		MinecraftForge.EVENT_BUS.addListener((CorporeaIndexRequestEvent e) ->
 			e.setCanceled(PlayerHeadHandler.onIndexRequest(e.getRequester(), e.getMatcher(), e.getRequestCount(), e.getIndexSpark())));
+	}
+	
+	@Override
+	public void registerRedstoneRootPlaceEvent() {
+		MinecraftForge.EVENT_BUS.addListener((PlayerInteractEvent.RightClickBlock e) -> {
+			if(e.getPlayer() == null || e.getWorld() == null || e.getPlayer().isSpectator()) return;
+			
+			ItemStack held = e.getItemStack();
+			if(held.getItem() != ModItems.redstoneRoot) return;
+			
+			InteractionResult result = IncBlocks.REDSTONE_ROOT_CROP.hookRedstoneRootClick(e.getPlayer(), e.getWorld(), e.getItemStack(), e.getHand(), e.getHitVec());
+			if(result != InteractionResult.PASS) {
+				e.setCanceled(true);
+				e.setCancellationResult(result);
+			}
+		});
 	}
 }

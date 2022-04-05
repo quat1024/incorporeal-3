@@ -22,4 +22,5 @@ public interface IncBootstrapper {
 	void endSelfInit();
 	
 	void registerCorporeaIndexCallback();
+	void registerRedstoneRootPlaceEvent();
 }
