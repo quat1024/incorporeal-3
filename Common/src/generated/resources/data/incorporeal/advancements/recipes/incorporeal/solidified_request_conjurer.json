@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "incorporeal:ticket_conjurer"
+      "incorporeal:solidified_request_conjurer"
     ]
   },
   "criteria": {
@@ -41,7 +41,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "incorporeal:ticket_conjurer"
+        "recipe": "incorporeal:solidified_request_conjurer"
       }
     }
   },

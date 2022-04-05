@@ -36,7 +36,7 @@ public class CorporeaSolidifierBlock extends Block {
 		
 		//Based on copy and paste from TileCorporeaFunnel
 		
-		ItemStack ticket = IncItems.TICKET.produce(datum);
+		ItemStack ticket = datum.produceTicket();
 		BlockPos invPos = getInvPos(level, pos);
 		if (invPos != null
 			&& IXplatAbstractions.INSTANCE.insertToInventory(level, invPos, Direction.UP, ticket, true).isEmpty()) {

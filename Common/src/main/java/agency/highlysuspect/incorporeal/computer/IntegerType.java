@@ -1,7 +1,10 @@
 package agency.highlysuspect.incorporeal.computer;
 
+import agency.highlysuspect.incorporeal.IncItems;
 import agency.highlysuspect.incorporeal.computer.types.DataType;
 import agency.highlysuspect.incorporeal.corporea.RequestParser;
+import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
+import agency.highlysuspect.incorporeal.item.TicketItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -23,8 +26,18 @@ public class IntegerType implements DataType<Integer> {
 	}
 	
 	@Override
-	public int magicNumber() {
-		return 1;
+	public Integer defaultValue() {
+		return 0;
+	}
+	
+	@Override
+	public TicketItem<Integer> ticketItem() {
+		return IncItems.INTEGER_TICKET;
+	}
+	
+	@Override
+	public TicketConjurerItem<Integer> conjurerItem() {
+		return IncItems.INTEGER_CONJURER;
 	}
 	
 	@Override

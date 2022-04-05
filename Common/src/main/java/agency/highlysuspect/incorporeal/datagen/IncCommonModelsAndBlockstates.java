@@ -175,8 +175,12 @@ public class IncCommonModelsAndBlockstates {
 		/// Computer ///
 		//ticket (done manually)
 		
-		//ticket conjurer
-		itemGenerated(IncItems.TICKET_CONJURER, Inc.id("item/computer/ticket_conjurer"));
+		//ticket conjurers
+		//TODO use different models
+		itemGenerated(IncItems.EMPTY_CONJURER, Inc.id("item/computer/ticket_conjurer"));
+		itemGenerated(IncItems.INTEGER_CONJURER, Inc.id("item/computer/ticket_conjurer"));
+		itemGenerated(IncItems.MATCHER_CONJURER, Inc.id("item/computer/ticket_conjurer"));
+		itemGenerated(IncItems.SOLIDIFIED_REQUEST_CONJURER, Inc.id("item/computer/ticket_conjurer"));
 		
 		//funnel
 		singleVariantBlockState(IncBlocks.DATA_FUNNEL, Inc.id("block/computer/data_funnel"));

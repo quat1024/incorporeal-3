@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.item;
 
-import agency.highlysuspect.incorporeal.computer.types.DataTypes;
+import agency.highlysuspect.incorporeal.computer.types.DataType;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -15,33 +15,34 @@ import net.minecraft.world.item.ItemStack;
  * @see agency.highlysuspect.incorporeal.block.CorporeaSolidifierBlock for another producer
  * @see agency.highlysuspect.incorporeal.block.entity.SanvocaliaBlockEntity for a consumer
  */
-public class TicketItem extends Item {
-	public TicketItem(Properties properties) {
+public class TicketItem<T> extends Item {
+	public TicketItem(DataType<T> type, Properties properties) {
 		super(properties);
+		this.type = type;
 	}
 	
-	private static final String KEY = "datum";
+	public final DataType<T> type;
 	
-	public ItemStack produce(Datum<?> datum) {
+	public ItemStack produce(T thing) {
 		ItemStack stack = new ItemStack(this);
-		CompoundTag tag = stack.getOrCreateTag();
-		tag.put(KEY, datum.save());
+		
+		CompoundTag tag = stack.getOrCreateTagElement("datum");
+		type.save(thing, tag);
+		
 		return stack;
 	}
 	
 	public Datum<?> get(ItemStack stack) {
 		if(!stack.hasTag()) return Datum.EMPTY;
 		
-		CompoundTag tag = stack.getTagElement(KEY);
+		CompoundTag tag = stack.getTagElement("datum");
 		if(tag == null) return Datum.EMPTY;
-		else return Datum.load(tag);
+		
+		return type.datumOf(type.tryLoad(tag).orElse(type.defaultValue()));
 	}
 	
 	@Override
 	public Component getName(ItemStack stack) {
-		//Oops it's a mess I'm sorry
-		Datum<?> datum = get(stack);
-		String baseName = this.getDescriptionId(stack) + '.' + DataTypes.REGISTRY.getKey(datum.type()).toString();
-		return new TranslatableComponent(baseName, datum.describe());
+		return new TranslatableComponent(this.getDescriptionId(stack), get(stack).describe());
 	}
 }

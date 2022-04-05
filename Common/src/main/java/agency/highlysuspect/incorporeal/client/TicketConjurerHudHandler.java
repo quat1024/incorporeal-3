@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.client;
 
-import agency.highlysuspect.incorporeal.IncItems;
+import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -27,8 +27,8 @@ public class TicketConjurerHudHandler {
 		if(player == null) return;
 		
 		ItemStack conjurer;
-		if(player.getMainHandItem().getItem() == IncItems.TICKET_CONJURER) conjurer = player.getMainHandItem();
-		else if(player.getOffhandItem().getItem() == IncItems.TICKET_CONJURER) conjurer = player.getOffhandItem();
+		if(player.getMainHandItem().getItem() instanceof TicketConjurerItem) conjurer = player.getMainHandItem();
+		else if(player.getOffhandItem().getItem() instanceof TicketConjurerItem) conjurer = player.getOffhandItem();
 		else return;
 		
 		String txt0 = I18n.get("incorporeal.ticket_conjurer.hold0");

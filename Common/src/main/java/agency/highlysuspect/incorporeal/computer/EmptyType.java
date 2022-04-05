@@ -1,6 +1,9 @@
 package agency.highlysuspect.incorporeal.computer;
 
+import agency.highlysuspect.incorporeal.IncItems;
 import agency.highlysuspect.incorporeal.computer.types.DataType;
+import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
+import agency.highlysuspect.incorporeal.item.TicketItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -22,8 +25,18 @@ public class EmptyType implements DataType<Unit> {
 	}
 	
 	@Override
-	public int magicNumber() {
-		return 0;
+	public Unit defaultValue() {
+		return Unit.INSTANCE;
+	}
+	
+	@Override
+	public TicketItem<Unit> ticketItem() {
+		return IncItems.EMPTY_TICKET;
+	}
+	
+	@Override
+	public TicketConjurerItem<Unit> conjurerItem() {
+		return IncItems.EMPTY_CONJURER;
 	}
 	
 	@Override

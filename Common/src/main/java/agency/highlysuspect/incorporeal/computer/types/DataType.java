@@ -1,5 +1,7 @@
 package agency.highlysuspect.incorporeal.computer.types;
 
+import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
+import agency.highlysuspect.incorporeal.item.TicketItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -40,10 +42,26 @@ public interface DataType<T> {
 	}
 	
 	/**
-	 * Returns an integer globally unique per DataType that's passed into an item property override on the conjurer and ticket items....
-	 * Yea im not very good at item models
+	 * Returns a default value for this datatype.
+	 * This will be used in cases where tryLoad fails, but an item of the correct
+	 * datatype absolutely must be returned.
+	 * Yes this is sketchy. I want to rework the saving/loading system.
 	 */
-	int magicNumber();
+	T defaultValue();
+	
+	/**
+	 * Return the TicketItem instance corresponding to this type.
+	 */
+	TicketItem<T> ticketItem();
+	
+	default ItemStack produceTicket(T thing) {
+		return ticketItem().produce(thing);
+	}
+	
+	/**
+	 * Return the TicketConjurerItem instance corresponding to this type.
+	 */
+	TicketConjurerItem<T> conjurerItem();
 	
 	/**
 	 * Returns a color corresponding to this thing.

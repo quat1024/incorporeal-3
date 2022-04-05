@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.datagen;
 
+import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncBlocks;
@@ -19,10 +20,14 @@ import java.util.function.Consumer;
 public class IncCommonRecipeGen {
 	public static void doIt(DataGenerator datagen, Consumer<JsonFile> files) {
 		//Ticket Conjurer
-		RecipeDsl.shaped(IncItems.TICKET_CONJURER, "SES", "EIE", "SES")
+		RecipeDsl.shaped(IncItems.SOLIDIFIED_REQUEST_CONJURER, "SES", "EIE", "SES")
 			.define("S", ModTags.Items.INGOTS_MANASTEEL)
 			.define("E", ModTags.Items.INGOTS_ELEMENTIUM)
 			.define("I", ModBlocks.corporeaIndex)
+			.save(files);
+		//and a stonecutting group to convert between them, for good measure
+		RecipeDsl.stonecuttingGroup(DataTypes.allConjurerItems())
+			.group("conjurers")
 			.save(files);
 		
 		//Rod of the Fractured Space

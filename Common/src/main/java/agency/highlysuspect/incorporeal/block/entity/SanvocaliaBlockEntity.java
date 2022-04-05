@@ -85,14 +85,14 @@ public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 			if(ent == null || !ent.isAlive()) return false;
 			ItemStack stack = ent.getItem();
 			return !stack.isEmpty() &&
-				stack.getItem() == IncItems.TICKET &&
-				IncItems.TICKET.get(stack).type() == DataTypes.SOLIDIFIED_REQUEST;
+				stack.getItem() == IncItems.SOLIDIFIED_REQUEST_TICKET &&
+				!IncItems.SOLIDIFIED_REQUEST_TICKET.get(stack).isEmpty();
 		});
 		if(nearbyTicketEnts.isEmpty()) return;
 		
 		//Pick one at random and get its request. The DataType was filtered above.
 		ItemEntity ticketEnt = Inc.choose(nearbyTicketEnts, level.getRandom());
-		SolidifiedRequest request = IncItems.TICKET.get(ticketEnt.getItem()).castAndGet();
+		SolidifiedRequest request = IncItems.SOLIDIFIED_REQUEST_TICKET.get(ticketEnt.getItem()).castAndGet();
 		
 		//Find nearby Corporea Indices
 		List<TileCorporeaIndex> nearbyIndices = IndexFinder.findNearBlock(level, pos);

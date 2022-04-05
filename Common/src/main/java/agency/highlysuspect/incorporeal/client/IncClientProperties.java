@@ -7,6 +7,9 @@ import agency.highlysuspect.incorporeal.block.entity.AbstractSoulCoreBlockEntity
 import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.IncEntityTypes;
 import agency.highlysuspect.incorporeal.IncItems;
+import agency.highlysuspect.incorporeal.computer.types.DataTypes;
+import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
+import agency.highlysuspect.incorporeal.item.TicketItem;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
@@ -109,8 +112,9 @@ public class IncClientProperties {
 	}
 	
 	public static void registerItemColorProviders(ColorHandler.ItemHandlerConsumer r) {
-		r.register((stack, tintIndex) -> IncItems.TICKET.get(stack).color(), IncItems.TICKET);
-		r.register((stack, tintIndex) -> IncItems.TICKET_CONJURER.getType(stack).color(), IncItems.TICKET_CONJURER);
+		//todo delet once these have proper item models
+		for(TicketItem<?> ticket : DataTypes.allTicketItems()) r.register((stack, tintIndex) -> ticket.get(stack).color());
+		for(TicketConjurerItem<?> conjurer : DataTypes.allConjurerItems()) r.register((stack, tintIndex) -> conjurer.type.color(), conjurer);
 	}
 	
 	/// Item property overrides ///
@@ -119,17 +123,10 @@ public class IncClientProperties {
 	public static void registerPropertyOverrides(TriConsumer<ItemLike, ResourceLocation, ItemPropertyFunction> r) {
 		//Returns 1 if the corporea ticket has a request written on it, and 0 otherwise.
 		//Now that I think about it, it's pretty much impossible to have a ticket with nothing written on it...
-		r.accept(IncItems.TICKET, Inc.id("written_ticket"),
-			(ClampedItemPropertyFunction) (stack, level, ent, seed) -> !IncItems.TICKET.get(stack).isEmpty() ? 1 : 0);
-		
-		//Returns the magic number of the datatype associated with the item.
-		//The magic number is a unique identifier for the data type.
-		//It's mainly used because ItemPropertyFunctions can only return integers...
-		//TODO: It would probably be better to represent these as different items, instead of this bullshit lol
-		r.accept(IncItems.TICKET, Inc.id("magic_number"),
-			(stack, level, ent, seed) -> IncItems.TICKET.get(stack).type().magicNumber());
-		r.accept(IncItems.TICKET_CONJURER, Inc.id("magic_number"),
-			(stack, level, ent, seed) -> IncItems.TICKET_CONJURER.getType(stack).magicNumber());
+		for(TicketItem<?> ticket : DataTypes.allTicketItems()) {
+			r.accept(ticket, Inc.id("written_ticket"),
+				(ClampedItemPropertyFunction) (stack, level, ent, seed) -> !ticket.get(stack).isEmpty() ? 1 : 0);
+		}
 	}
 	
 	/// Entity renderers ///

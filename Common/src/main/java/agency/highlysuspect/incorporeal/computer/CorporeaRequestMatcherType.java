@@ -1,9 +1,12 @@
 package agency.highlysuspect.incorporeal.computer;
 
+import agency.highlysuspect.incorporeal.IncItems;
 import agency.highlysuspect.incorporeal.computer.types.DataType;
 import agency.highlysuspect.incorporeal.corporea.EmptyCorporeaRequestMatcher;
 import agency.highlysuspect.incorporeal.corporea.MatcherUtils;
 import agency.highlysuspect.incorporeal.corporea.RequestParser;
+import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
+import agency.highlysuspect.incorporeal.item.TicketItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -28,8 +31,18 @@ public class CorporeaRequestMatcherType implements DataType<ICorporeaRequestMatc
 	}
 	
 	@Override
-	public int magicNumber() {
-		return 2;
+	public ICorporeaRequestMatcher defaultValue() {
+		return EmptyCorporeaRequestMatcher.INSTANCE;
+	}
+	
+	@Override
+	public TicketItem<ICorporeaRequestMatcher> ticketItem() {
+		return IncItems.MATCHER_TICKET;
+	}
+	
+	@Override
+	public TicketConjurerItem<ICorporeaRequestMatcher> conjurerItem() {
+		return IncItems.MATCHER_CONJURER;
 	}
 	
 	@Override

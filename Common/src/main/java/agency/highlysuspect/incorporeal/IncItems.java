@@ -1,5 +1,8 @@
 package agency.highlysuspect.incorporeal;
 
+import agency.highlysuspect.incorporeal.computer.EmptyType;
+import agency.highlysuspect.incorporeal.computer.types.DataTypes;
+import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
 import agency.highlysuspect.incorporeal.item.TicketItem;
 import agency.highlysuspect.incorporeal.item.NotManaLens;
@@ -8,12 +11,14 @@ import agency.highlysuspect.incorporeal.item.FracturedSpaceRodItem;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Unit;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
+import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 import vazkii.botania.api.item.ICoordBoundItem;
 import vazkii.botania.common.item.block.ItemBlockSpecialFlower;
 import vazkii.botania.common.item.block.ItemBlockTinyPotato;
@@ -21,6 +26,7 @@ import vazkii.botania.common.item.lens.ItemLens;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -71,8 +77,15 @@ public class IncItems {
 	}
 	
 	//computer
-	public static final TicketItem TICKET = new TicketItem(props());
-	public static final TicketConjurerItem TICKET_CONJURER = new TicketConjurerItem(props().stacksTo(1));
+	public static final TicketItem<Unit> EMPTY_TICKET = new TicketItem<>(DataTypes.EMPTY, props());
+	public static final TicketItem<Integer> INTEGER_TICKET = new TicketItem<>(DataTypes.INTEGER, props());
+	public static final TicketItem<ICorporeaRequestMatcher> MATCHER_TICKET = new TicketItem<>(DataTypes.MATCHER, props());
+	public static final TicketItem<SolidifiedRequest> SOLIDIFIED_REQUEST_TICKET = new TicketItem<>(DataTypes.SOLIDIFIED_REQUEST, props());
+	
+	public static final TicketConjurerItem<Unit> EMPTY_CONJURER = new TicketConjurerItem<>(DataTypes.EMPTY, props().stacksTo(1));
+	public static final TicketConjurerItem<Integer> INTEGER_CONJURER = new TicketConjurerItem<>(DataTypes.INTEGER, props().stacksTo(1));
+	public static final TicketConjurerItem<ICorporeaRequestMatcher> MATCHER_CONJURER = new TicketConjurerItem<>(DataTypes.MATCHER, props().stacksTo(1));
+	public static final TicketConjurerItem<SolidifiedRequest> SOLIDIFIED_REQUEST_CONJURER = new TicketConjurerItem<>(DataTypes.SOLIDIFIED_REQUEST, props().stacksTo(1));
 	
 	public static final BlockItem DATA_FUNNEL = new BlockItem(IncBlocks.DATA_FUNNEL, props());
 	public static final ItemLens NUMBER_LENS = new ItemLens(props(), new NotManaLens(DataLenses.number), 0);
@@ -137,8 +150,14 @@ public class IncItems {
 		r.acceptBlockItems(COMPRESSED_TATERS.values());
 		
 		//Computer
-		r.accept(TICKET, Inc.id("ticket"));
-		r.accept(TICKET_CONJURER, Inc.id("ticket_conjurer"));
+		r.accept(EMPTY_TICKET, Inc.id("empty_ticket"));
+		r.accept(INTEGER_TICKET, Inc.id("integer_ticket"));
+		r.accept(MATCHER_TICKET, Inc.id("matcher_ticket"));
+		r.accept(SOLIDIFIED_REQUEST_TICKET, Inc.id("solidified_request_ticket"));
+		r.accept(EMPTY_CONJURER, Inc.id("empty_conjurer"));
+		r.accept(INTEGER_CONJURER, Inc.id("integer_conjurer"));
+		r.accept(MATCHER_CONJURER, Inc.id("matcher_conjurer"));
+		r.accept(SOLIDIFIED_REQUEST_CONJURER, Inc.id("solidified_request_conjurer"));
 		
 		r.acceptBlockItem(DATA_FUNNEL);
 		r.accept(NUMBER_LENS, Inc.id("number_lens"));

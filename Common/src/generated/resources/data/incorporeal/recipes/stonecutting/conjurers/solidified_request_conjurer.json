@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:stonecutting",
+  "group": "conjurers",
+  "ingredient": [
+    {
+      "item": "incorporeal:empty_conjurer"
+    },
+    {
+      "item": "incorporeal:integer_conjurer"
+    },
+    {
+      "item": "incorporeal:matcher_conjurer"
+    }
+  ],
+  "result": "incorporeal:solidified_request_conjurer",
+  "count": 1
+}

@@ -15,6 +15,8 @@ import net.minecraft.world.level.ItemLike;
 import vazkii.botania.common.lib.ModTags;
 import vazkii.botania.mixin.AccessorRecipeProvider;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -47,6 +49,14 @@ public class RecipeDsl {
 	
 	public static NiceShapelessRecipeBuilder uncompressTo9(ItemLike big, ItemLike small) {
 		return shapeless(small, 9).add(big);
+	}
+	
+	public static StonecuttingRecipeBuilder.Group stonecuttingGroup(Iterable<? extends ItemLike> inputs) {
+		//java pls
+		List<ItemLike> wow = new ArrayList<>();
+		inputs.forEach(wow::add);
+		
+		return StonecuttingRecipeBuilder.Group.create0(wow);
 	}
 	
 	public static NiceShapelessRecipeBuilder floatingFlower(ItemLike notFloating, ItemLike floating) {

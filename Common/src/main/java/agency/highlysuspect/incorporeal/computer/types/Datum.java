@@ -4,6 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Unit;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Optional;
@@ -30,6 +31,10 @@ public record Datum<T>(DataType<T> type, T thing) {
 	
 	public boolean isEmpty() {
 		return type == DataTypes.EMPTY;
+	}
+	
+	public ItemStack produceTicket() {
+		return type.produceTicket(thing);
 	}
 	
 	public int signal() {
@@ -98,6 +103,12 @@ public record Datum<T>(DataType<T> type, T thing) {
 		return tag;
 	}
 	
+	public CompoundTag saveWithoutTypeInformation() {
+		CompoundTag tag = new CompoundTag();
+		type.save(thing, tag);
+		return tag;
+	}
+	
 	/**
 	 * Load a Datum from an NBT tag, that includes information about what type it is.
 	 */
@@ -118,6 +129,10 @@ public record Datum<T>(DataType<T> type, T thing) {
 		if(thing.isEmpty()) return EMPTY.cast();
 		
 		return new Datum<>(type, thing.get());
+	}
+	
+	public static <T> Datum<T> loadAsType(DataType<T> type, CompoundTag tag) {
+		return new Datum<>(type, type.tryLoad(tag).orElseGet(type::defaultValue));
 	}
 	
 	/// Forwarding equals and hashcode through to virtual functions on DataType ///

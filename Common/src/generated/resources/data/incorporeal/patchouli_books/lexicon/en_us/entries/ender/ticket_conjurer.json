@@ -1,7 +1,7 @@
 {
-  "name": "item.incorporeal.ticket_conjurer",
+  "name": "item.incorporeal.solidified_request_conjurer",
   "category": "botania:ender",
-  "icon": "incorporeal:ticket_conjurer",
+  "icon": "incorporeal:solidified_request_conjurer",
   "advancement": "botania:main/elf_lexicon_pickup",
   "entry_color": "04759e",
   "pages": [
@@ -11,8 +11,12 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "incorporeal:ticket_conjurer",
+      "recipe": "incorporeal:solidified_request_conjurer",
       "text": "incorporeal.lexicon.ender.ticket_conjurer.1.text"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexicon.ender.ticket_conjurer.2.text"
     },
     {
       "type": "patchouli:relations",
