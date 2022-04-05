@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.mixin.client;
 
+import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.computer.DataFunnelBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -12,6 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import vazkii.botania.api.item.IWireframeCoordinateListProvider;
 import vazkii.botania.common.item.ItemTwigWand;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,14 +26,18 @@ public class ItemTwigWandMixin implements IWireframeCoordinateListProvider {
 	public List<BlockPos> getWireframesToDraw(Player player, ItemStack stack) {
 		Level level = player.level;
 		
-		HitResult pos = Minecraft.getInstance().hitResult;
-		if (pos != null && pos.getType() == HitResult.Type.BLOCK) {
-			if (level.getBlockEntity(((BlockHitResult) pos).getBlockPos()) instanceof DataFunnelBlockEntity dataFunnel) {
-				//botania api requires a List, but all i have is a set!!!!!!
-				return List.copyOf(dataFunnel.getBindings());
-			}
-		}
+		List<BlockPos> result = new ArrayList<>();
 		
-		return Collections.emptyList();
+		DataFunnelBlockEntity bindAttempt = ItemTwigWand.getBindingAttempt(stack)
+			.map(pos -> IncBlockEntityTypes.DATA_FUNNEL.getBlockEntity(level, pos))
+			.orElse(null);
+		if(bindAttempt != null) result.addAll(bindAttempt.getBindings());
+		
+		HitResult pos = Minecraft.getInstance().hitResult;
+		if(pos instanceof BlockHitResult bhr &&
+			level.getBlockEntity(bhr.getBlockPos()) instanceof DataFunnelBlockEntity dataFunnel &&
+			dataFunnel != bindAttempt) result.addAll(dataFunnel.getBindings());
+		
+		return result;
 	}
 }
