@@ -18,7 +18,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.block.IWandBindable;
 import vazkii.botania.api.internal.VanillaPacketDispatcher;
@@ -114,15 +113,13 @@ public class DataFunnelBlockEntity extends DataStorageBlockEntity implements IWa
 		return true;
 	}
 	
-	int lol;
-	
 	@Nullable
 	@Override
 	public BlockPos getBinding() {
-		//TODO: This is very silly, and is obviously temporary
-		// Look into something like IWireframeCoordinateListProvider but for blockentities and not items i guess?
-		if(bindTargets.size() == 0) return null;
-		return new ArrayList<>(bindTargets).get(lol++ % bindTargets.size());
+		//This method is required by IWandBindable. getBinding is typically used to render the overlay.
+		//Thing is, I can only return one BlockPos from this method, but I have possibly lots of bindings to render.
+		//So: bindings are rendered in a totally different way (see ItemTwigWandMixin) and the default rendering is suppressed.
+		return null;
 	}
 	
 	@Override

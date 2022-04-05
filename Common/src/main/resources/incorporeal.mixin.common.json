@@ -22,7 +22,8 @@
 	],
 	"client": [
 		"client.RenderTileTinyPotatoMixin",
-		"client.HUDHandlerMixin"
+		"client.HUDHandlerMixin",
+		"client.ItemTwigWandMixin"
 	],
 	"package": "agency.highlysuspect.incorporeal.mixin",
 	"required": true
