@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "botania:redstone_root"
+  },
+  "result": "incorporeal:natural_comparator",
+  "count": 1
+}

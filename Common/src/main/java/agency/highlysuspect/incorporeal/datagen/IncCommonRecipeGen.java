@@ -136,5 +136,9 @@ public class IncCommonRecipeGen {
 			RecipeDsl.compress9(small, big).save(files, compressId);
 			RecipeDsl.uncompressTo9(big, small).save(files, uncompressId);
 		}
+		
+		//Stonecutting for the Natural Devices so you dont have to get them randomly lol
+		RecipeDsl.stonecutting(IncBlocks.NATURAL_REPEATER).input(ModItems.redstoneRoot).save(files);
+		RecipeDsl.stonecutting(IncBlocks.NATURAL_COMPARATOR).input(ModItems.redstoneRoot).save(files);
 	}
 }

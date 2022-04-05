@@ -63,7 +63,7 @@ public class StonecuttingRecipeBuilder {
 		Ingredient coalescedIngredient = Ingredient.of(ingredients.stream());
 		
 		//Use vanilla machinery
-		return new SingleItemRecipeBuilder.Result(null, RecipeSerializer.STONECUTTER, group, coalescedIngredient, output.getItem(), output.getCount(), null, null)
+		return new SingleItemRecipeBuilder.Result(null, RecipeSerializer.STONECUTTER, group == null ? "" : group, coalescedIngredient, output.getItem(), output.getCount(), null, null)
 			.serializeRecipe();
 	}
 	

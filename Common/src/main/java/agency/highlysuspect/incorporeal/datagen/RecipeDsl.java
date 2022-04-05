@@ -59,6 +59,10 @@ public class RecipeDsl {
 		return StonecuttingRecipeBuilder.Group.create0(wow);
 	}
 	
+	public static StonecuttingRecipeBuilder stonecutting(ItemLike output) {
+		return StonecuttingRecipeBuilder.create(output);
+	}
+	
 	public static NiceShapelessRecipeBuilder floatingFlower(ItemLike notFloating, ItemLike floating) {
 		return shapeless(floating).add(notFloating).add(ModTags.Items.FLOATING_FLOWERS);
 	}

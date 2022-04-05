@@ -1,0 +1,30 @@
+{
+  "name": "incorporeal.lexicon.devices.natural.name",
+  "category": "botania:devices",
+  "icon": "botania:redstone_root",
+  "entry_color": "04759e",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "incorporeal.lexicon.devices.natural.0.text"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "incorporeal:natural_repeater",
+      "text": "incorporeal.lexicon.devices.natural.1.text",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "incorporeal:natural_comparator",
+      "text": "incorporeal.lexicon.devices.natural.2.text",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:relations",
+      "entries": [
+        "botania:functional_flowers/intro"
+      ]
+    }
+  ]
+}

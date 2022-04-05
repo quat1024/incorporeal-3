@@ -7,6 +7,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import org.apache.commons.lang3.mutable.MutableInt;
@@ -223,6 +224,18 @@ public class PatchouliEntryBuilder {
 		return this;
 	}
 	
+	public PatchouliEntryBuilder spotlight(ItemLike spotlight, boolean linkRecipe, String text) {
+		//n.b. there's also a "title" property, defaults to item name though, i dont need it yet
+		pages.add((json, langKeyMaker) -> {
+			json.addProperty("type", "patchouli:spotlight");
+			json.addProperty("item", itemStackString(new ItemStack(spotlight)));
+			json.addProperty("text", langKeyMaker.associate("text", text));
+			if(linkRecipe) json.addProperty("link_recipe", true);
+		});
+		
+		return this;
+	}
+	
 	//skeleton for various types of simple recipe pages
 	public PatchouliEntryBuilder recipe(String type, String recipeId, String text) {
 		pages.add((json, langKeyMaker) -> {
@@ -324,6 +337,11 @@ public class PatchouliEntryBuilder {
 	
 	public interface LangKeyMaker {
 		String associate(String keyPrefix, String value);
+	}
+	
+	private String itemStackString(ItemStack stack) {
+		//TODO implement this more
+		return Registry.ITEM.getKey(stack.getItem()).toString();
 	}
 	
 	/// misc helpers ///
