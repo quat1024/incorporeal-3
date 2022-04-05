@@ -94,6 +94,7 @@
 	
 	"incorporeal.solidified_request": "%sx %s",
 	"incorporeal.empty_matcher": "Nothing",
+	"incorporeal.full_matcher": "Everything",
 	
 	"incorporeal.head_not_on_network": "Your soul is not compatible with this Corporea Network.",
 	

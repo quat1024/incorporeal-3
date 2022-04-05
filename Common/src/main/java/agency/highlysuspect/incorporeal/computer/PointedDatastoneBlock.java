@@ -22,17 +22,12 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.common.block.BlockModWaterloggable;
 
 import java.util.Locale;
 import java.util.Random;
 
-/**
- * TODO OOOOOOOOOO, maybe let you place it on the floor? i guess?
- *  adds a LOT of complexity. i will need to work out TIP_MERGE stuff too
- */
 public class PointedDatastoneBlock extends BlockModWaterloggable implements EntityBlock {
 	public PointedDatastoneBlock(Properties props) {
 		super(props);

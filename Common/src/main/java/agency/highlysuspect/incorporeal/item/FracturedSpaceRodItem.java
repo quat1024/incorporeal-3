@@ -118,7 +118,8 @@ public class FracturedSpaceRodItem extends Item {
 	
 	public static boolean isCrate(BlockState state) {
 		//todo: in 1.12/16 this was a tag, i don't really remember why though lol
-		// also it checked the block entity type? for no reason lol
+		// i guess you could do things like, have compat with quark chute?
+		// also it checked the block entity type, for no reason lol
 		return state.is(ModBlocks.openCrate);
 	}
 	

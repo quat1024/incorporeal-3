@@ -67,6 +67,7 @@ public class Inc {
 	}
 	
 	//Call this after you're sure Botania is done initializing.
+	//It's okay to do this in like, "post init" / "common setup" as well, just do it before a world loads.
 	public void markBotaniaAsDoneInitializing() {
 		botaniaInit = true;
 		tryAfterBotaniaInitialization();
@@ -83,6 +84,7 @@ public class Inc {
 			//corporea matchers
 			CorporeaHelper.instance().registerRequestMatcher(id("empty"), EmptyCorporeaRequestMatcher.class, __ -> EmptyCorporeaRequestMatcher.INSTANCE);
 			CorporeaHelper.instance().registerRequestMatcher(id("not"), InvertedCorporeaRequestMatcher.class, InvertedCorporeaRequestMatcher::readFromNBT);
+			CorporeaHelper.instance().registerRequestMatcher(id("not-fallback"), InvertedCorporeaRequestMatcher.Fallback.class, __ -> InvertedCorporeaRequestMatcher.Fallback.INSTANCE);
 			CorporeaHelper.instance().registerRequestMatcher(id("and"), AndingCorporeaRequestMatcher.class, AndingCorporeaRequestMatcher::readFromNbt);
 			
 			//corporea node detectors

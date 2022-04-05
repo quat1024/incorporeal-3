@@ -50,7 +50,6 @@ public class FracturedSpaceCollector extends Entity {
 	}
 	
 	private BlockPos cratePos;
-	//todo: revisit this, if i want to add Avatar integration (lol)
 	private UUID ownerUuid;
 	
 	private static final EntityDataAccessor<Integer> DATA_AGE = SynchedEntityData.defineId(FracturedSpaceCollector.class, EntityDataSerializers.INT);

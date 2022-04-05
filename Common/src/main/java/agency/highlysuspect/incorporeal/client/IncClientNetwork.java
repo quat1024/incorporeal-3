@@ -41,7 +41,6 @@ public class IncClientNetwork {
 				
 				for(FunnyEffect.Line line : effect.lines()) {
 					Vec3 dst = Vec3.atCenterOf(line.dst());
-					//todo: port my own particle beam mayb?
 					ItemTwigWand.doParticleBeam(level, src, dst);
 					
 					byte[] notes = line.notes();

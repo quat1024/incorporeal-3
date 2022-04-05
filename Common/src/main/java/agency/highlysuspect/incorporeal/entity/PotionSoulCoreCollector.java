@@ -68,7 +68,7 @@ public class PotionSoulCoreCollector extends LivingEntity {
 	
 	@Override
 	public boolean hurt(DamageSource source, float howMuch) {
-		boolean happened = super.hurt(source, howMuch); //TODO: remove this super call? (will want to fire events on forge)
+		boolean happened = super.hurt(source, howMuch);
 		if(happened || level.isClientSide) return happened;
 		
 		Data data = findOrDiscard();
@@ -87,11 +87,12 @@ public class PotionSoulCoreCollector extends LivingEntity {
 	public void tick() {
 		if(level.isClientSide()) return;
 		
-		//Lock into position, etc
-		//TODO: compare to the Area Effect Cloud
+		//Lock into position, etc.
+		//Unlike the AreaEffectCloud, the PotionSoulCoreCollector is a LivingEntity. It has health, air meter, etc.
+		//I need to sort out some of those properties
 		setDeltaMovement(0, 0, 0);
 		setRot(0, 0);
-		setHealth(getMaxHealth() / 2);
+		setHealth(getMaxHealth() / 2); //provide enough headroom to heal and harm
 		setAirSupply(getMaxAirSupply());
 		setPos(Math.floor(position().x) + .5d, Math.floor(position().y) + DISTANCE_OFF_THE_GROUND, Math.floor(position().z) + .5d);
 		
@@ -107,7 +108,7 @@ public class PotionSoulCoreCollector extends LivingEntity {
 		
 		//Clear my own potion effects
 		removeAllEffects(); //nicely
-		getActiveEffects().clear(); //harshly (it's cancellable on forge)
+		getActiveEffects().clear(); //harshly (removeAllEffects is cancellable on forge)
 	}
 	
 	private record Data(PotionSoulCoreBlockEntity be, Player player) {}
