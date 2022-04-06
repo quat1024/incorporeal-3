@@ -96,9 +96,7 @@ public class IncItems {
 	public static final ItemLens NEGATING_LENS = new ItemLens(props(), new NotManaLens(DataLenses.negating), 0);
 	public static final BlockItem DATASTONE_BLOCK = new BlockItem(IncBlocks.DATASTONE_BLOCK, props());
 	public static final BlockItem POINTED_DATASTONE = new BlockItem(IncBlocks.POINTED_DATASTONE, props());
-	
-	//Instantiating ItemMonocle explodes if it happens before EquipmentHandler is ready, so this one is constructed late.
-	public static ItemMonocle DATA_MONOCLE;
+	public static ItemMonocle DATA_MONOCLE; //Gets constructed late, see other comment
 	
 	//Capability stuff.
 	public static final Map<Item, Function<ItemStack, ICoordBoundItem>> COORD_BOUND_ITEM_MAKERS = Map.of( //(N.B: Map.of caps at 10 entries)
@@ -108,7 +106,10 @@ public class IncItems {
 	public static void register(BiConsumer<Item, ResourceLocation> rRaw) {
 		//Instantiating any ItemBauble explodes if it happens before EquipmentHandler is ready.
 		//EquipmentHandlerMixin is used to ensure that, if EquipmentHandler is initialized once, it does not get initialized again.
-		if(EquipmentHandler.instance == null) EquipmentHandler.init();
+		if(EquipmentHandler.instance == null) {
+			Inc.LOGGER.warn("Initializing Botania EquipmentHandler early! https://github.com/VazkiiMods/Botania/issues/4001");
+			EquipmentHandler.init();
+		}
 		DATA_MONOCLE = new ItemMonocle(props().stacksTo(1));
 		
 		ItemRegistrar r = rRaw::accept;

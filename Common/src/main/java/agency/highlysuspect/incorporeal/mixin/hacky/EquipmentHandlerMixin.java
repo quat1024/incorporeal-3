@@ -12,12 +12,12 @@ import vazkii.botania.common.handler.EquipmentHandler;
 public class EquipmentHandlerMixin {
 	@Unique private static boolean hasBeenInitialized = false;
 	
-	@Inject(method = "init", at = @At("HEAD"), remap = false, cancellable = true)
+	@Inject(method = "init", at = @At("HEAD"), remap = false, cancellable = true, require = 0)
 	private static void onInit(CallbackInfo ci) {
-		Inc.LOGGER.info("SOMEONE CALLED EQUIPMENTHANDLER INIT!!!!!!!!!!!");
-		new Throwable().printStackTrace();
-		
-		if(hasBeenInitialized) ci.cancel();
+		if(hasBeenInitialized) {
+			Inc.LOGGER.warn("Cancelling EquipmentHandler double-initialization! https://github.com/VazkiiMods/Botania/issues/4001");
+			ci.cancel();
+		}
 		hasBeenInitialized = true;
 	}
 }
