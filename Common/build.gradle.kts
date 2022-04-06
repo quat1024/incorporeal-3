@@ -18,8 +18,3 @@ dependencies {
         botania.isChanging = true
     }
 }
-
-sourceSets["main"].resources {
-    //Include generated resources
-    srcDir("src/generated/resources")
-}

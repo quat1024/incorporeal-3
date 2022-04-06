@@ -74,3 +74,8 @@ tasks.processResources {
         expand("version" to project.version)
     }
 }
+
+sourceSets["main"].resources {
+    //Include Forge-specific generated resources
+    srcDir("src/generated/resources")
+}

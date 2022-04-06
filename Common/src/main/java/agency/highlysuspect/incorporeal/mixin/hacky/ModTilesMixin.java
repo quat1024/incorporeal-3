@@ -1,4 +1,4 @@
-package agency.highlysuspect.incorporeal.mixin;
+package agency.highlysuspect.incorporeal.mixin.hacky;
 
 import agency.highlysuspect.incorporeal.IncBlocks;
 import net.minecraft.world.level.block.Block;

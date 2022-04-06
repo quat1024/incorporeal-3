@@ -1,3 +1,5 @@
+import net.fabricmc.loom.configuration.ide.RunConfigSettings;
+
 plugins {
     //Apply the fabric-conventions plugin declared in buildSrc.
     id("incorporeal.fabric-conventions")
@@ -49,25 +51,36 @@ fun williePls(input: String): String {
 
 loom {
     runs {
-        //Common Datagen. One loader has to be the one in charge of it, and it'll be fabric.
         create("common-datagen") {
-            client()
-            runDir("./run/datagen_work")
-            vmArg("-Dfabric-api.datagen")
-            vmArg("-Dfabric-api.datagen.modid=incorporeal")
-            //vmArg("-Dfabric-api.datagen.output-dir=${project(":Common").relativePath("./src/generated/resources")}") //Doesn't work lol
-            vmArg("-Dfabric-api.datagen.output-dir=${file("../Common/src/generated/resources")}")
-            
-            //tell myself that this is the common datagen
-            vmArg("-Dbotania.xplat_datagen=1")
-            
-            //tell EnUsRewriter which file to stomp on
-            vmArg("-Dincorporeal.en-us=${file("../Common/src/main/resources/assets/incorporeal/lang/en_us.json")}")
+            configureDatagenRunConfig(this, file("../Common/src/generated/resources"), "common")
         }
-        
-        configureEach {
-            //Loom doesn't generate run configs by default in subprojects.
-            ideConfigGenerated(true)
+
+        create("fabric-datagen") {
+            configureDatagenRunConfig(this, file("../Fabric/src/generated/resources"), "fabric")
+        }
+
+        create("forge-datagen") {
+            configureDatagenRunConfig(this, file("../Forge/src/generated/resources"), "forge")
         }
     }
+}
+
+fun configureDatagenRunConfig(settings: RunConfigSettings, outDir: File, identifier: String) {
+    //Loom doesn't generate run configs by default in subprojects.
+    settings.ideConfigGenerated(true);
+
+    //Base it off the client run config.
+    settings.client()
+    settings.runDir("./run/datagen_work")
+    
+    //Configure fabric api datagen's settings.
+    settings.vmArg("-Dfabric-api.datagen")
+    settings.vmArg("-Dfabric-api.datagen.modid=incorporeal")
+    settings.vmArg("-Dfabric-api.datagen.output-dir=${outDir}")
+    
+    //Tell FabricDatagenEntrypoint which arm I'm generating resources for.
+    settings.vmArg("-Dincorporeal.datagen.which=${identifier}")
+    
+    //Tell EnUsRewriter where en_us.json is. This is used to permit automatic generation of language keys.
+    settings.vmArg("-Dincorporeal.en-us=${file("../Common/src/main/resources/assets/incorporeal/lang/en_us.json")}")
 }

@@ -12,6 +12,7 @@ import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Unit;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
@@ -20,8 +21,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 import vazkii.botania.api.item.ICoordBoundItem;
+import vazkii.botania.common.handler.EquipmentHandler;
 import vazkii.botania.common.item.block.ItemBlockSpecialFlower;
 import vazkii.botania.common.item.block.ItemBlockTinyPotato;
+import vazkii.botania.common.item.equipment.bauble.ItemMonocle;
 import vazkii.botania.common.item.lens.ItemLens;
 
 import java.util.Collection;
@@ -94,12 +97,20 @@ public class IncItems {
 	public static final BlockItem DATASTONE_BLOCK = new BlockItem(IncBlocks.DATASTONE_BLOCK, props());
 	public static final BlockItem POINTED_DATASTONE = new BlockItem(IncBlocks.POINTED_DATASTONE, props());
 	
+	//Instantiating ItemMonocle explodes if it happens before EquipmentHandler is ready, so this one is constructed late.
+	public static ItemMonocle DATA_MONOCLE;
+	
 	//Capability stuff.
 	public static final Map<Item, Function<ItemStack, ICoordBoundItem>> COORD_BOUND_ITEM_MAKERS = Map.of( //(N.B: Map.of caps at 10 entries)
 		FRACTURED_SPACE_ROD, FracturedSpaceRodItem.CoordBoundItem::new
 	);
 	
 	public static void register(BiConsumer<Item, ResourceLocation> rRaw) {
+		//Instantiating any ItemBauble explodes if it happens before EquipmentHandler is ready.
+		//EquipmentHandlerMixin is used to ensure that, if EquipmentHandler is initialized once, it does not get initialized again.
+		if(EquipmentHandler.instance == null) EquipmentHandler.init();
+		DATA_MONOCLE = new ItemMonocle(props().stacksTo(1));
+		
 		ItemRegistrar r = rRaw::accept;
 		
 		//Note that item registry order is significant, particularly when determining the ordering of the creative tab.
@@ -163,6 +174,8 @@ public class IncItems {
 		r.accept(NUMBER_LENS, Inc.id("number_lens"));
 		r.accept(MATCHER_LENS, Inc.id("matcher_lens"));
 		r.accept(NEGATING_LENS, Inc.id("negating_lens"));
+		
+		r.accept(DATA_MONOCLE, Inc.id("data_monocle"));
 		
 		r.acceptBlockItems(
 			DATASTONE_BLOCK,

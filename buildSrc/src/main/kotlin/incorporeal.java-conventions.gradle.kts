@@ -46,15 +46,6 @@ dependencies {
     implementation("org.jetbrains:annotations:16.0.2")
 }
 
-tasks.jar {
-    //Random things that might get left around if I'm sloppy.
-    exclude("**/*.bat", "**/*.psd", "**/*.exe", "**/*.kra")
-    //Anything explicitly marked unused.
-    exclude("**/unused")
-    //Vanilla datagenerator .cache file.
-    exclude(".cache")
-}
-
 //Not sure if this is needed, given the toolchian block above. Doesn't hurt?
 tasks.withType<JavaCompile>().configureEach { 
     options.encoding = "UTF-8"
@@ -63,6 +54,16 @@ tasks.withType<JavaCompile>().configureEach {
 
 //Compress JSON resources by parsing them as JSON, then writing them back out again using a writer that doesn't pretty-print.
 tasks.processResources {
+    //Random things that might get left around if I'm sloppy.
+    exclude("**/*.bat", "**/*.psd", "**/*.exe", "**/*.kra")
+    //Anything explicitly marked unused.
+    exclude("**/unused")
+    
+    //Vanilla datagenerator .cache file.
+    //NB: This also fixes processResources blowing up with DuplicatedHandlingStrategy stuff
+    //when merging the loader-specific jar with the Common jars
+    exclude(".cache")
+    
     doLast {
         fileTree(baseDir = outputs.files.asPath) {
             include("**/*.json")

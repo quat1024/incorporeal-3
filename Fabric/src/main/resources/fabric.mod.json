@@ -30,7 +30,7 @@
 			"agency.highlysuspect.incorporeal.platform.fabric.client.FabricClientEntrypoint"
 		],
 		"fabric-datagen": [
-			"agency.highlysuspect.incorporeal.platform.fabric.FabricDatagenEntrypoint"
+			"agency.highlysuspect.incorporeal.platform.fabric.datagen.FabricDatagenEntrypoint"
 		]
 	},
 	

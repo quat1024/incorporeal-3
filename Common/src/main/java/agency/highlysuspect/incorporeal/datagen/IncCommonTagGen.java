@@ -45,6 +45,11 @@ public class IncCommonTagGen {
 			IncBlocks.FLOATING_SANVOCALIA, IncBlocks.FLOATING_SANVOCALIA_SMALL
 		).save(files);
 		
+		//burst viewers (Manaseer Monocle-like items)
+		DataDsl.itemTag(ModTags.Items.BURST_VIEWERS)
+			.addItems(IncItems.DATA_MONOCLE)
+			.save(files);
+		
 		//mineability
 		DataDsl.blockTag(BlockTags.MINEABLE_WITH_PICKAXE).addBlocks(
 			IncBlocks.CORPOREA_SOLIDIFIER,

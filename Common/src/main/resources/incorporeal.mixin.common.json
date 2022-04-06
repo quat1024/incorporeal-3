@@ -13,9 +13,10 @@
 		"CorporeaItemStackMatcherAccessor",
 		"ItemFrameAccessor",
 		"ItemFrameMixin",
-		"ModTilesMixin",
 		"FarmBlockMixin",
 		"PistonStructureResolverMixin",
+		"hacky.ModTilesMixin",
+		"hacky.EquipmentHandlerMixin",
 		"datagen.DataGeneratorMixin",
 		"datagen.TextureSlotAccessor",
 		"datagen.IncAccessorBlockModelGenerators"
