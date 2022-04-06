@@ -74,7 +74,7 @@ See:
 
 Keep in mind:
 * The ["xxx: Type by project" syntax](https://docs.gradle.org/current/userguide/kotlin_dsl.html#kotdsl:properties) plucks a value out of `gradle.properties`, I use this file for many project-wide properties.
-* The current version of Botania being depended on is `1.18.2-430-SNAPSHOT`, a.k.a, basically Botania `1.18.x` `HEAD`.
+* The current version of Botania being depended on is `1.18.2-431-SNAPSHOT`, a.k.a, basically Botania `1.18.x` `HEAD`.
   * Jared's jenkins doesn't store `-SNAPSHOT` versions for an indefinite amount of time, so the build may break.
   * The API surface may change out from under me, which will also cause the build to break.
   * The Botania version may be set in `gradle.properties`.
