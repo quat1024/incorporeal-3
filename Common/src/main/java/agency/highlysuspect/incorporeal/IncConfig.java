@@ -11,12 +11,6 @@ public class IncConfig {
 			"If 'true', Pointed Datastone will be pushable with a Piston. Else, it will break off when pushed, like a pumpkin.",
 			"This REQUIRES some sort of 'movable block entity' mod to do anything!!!!!!!!!!!"
 		);
-		
-		pointedDatastoneIsSticky = builder.addBooleanProperty("pointedDatastoneIsSticky", true,
-			"If 'true', Pointed Datastone will stick to itself, allowing the entire stalactite to be moved with one piston.",
-			"This REQUIRES pointedDatastoneIsPushable AND some sort of 'movable block entity' mod, to do anything!!!!!!!",
-			"Also it is kind of experimental. I'm not really sure if this leads to interesting gameplay possibilities."
-		);
 		builder.popCategory();
 		
 		builder.pushCategory("silly");
@@ -32,15 +26,10 @@ public class IncConfig {
 	}
 	
 	private final Supplier<Boolean> pointedDatastoneIsPushable;
-	private final Supplier<Boolean> pointedDatastoneIsSticky;
 	private final Supplier<Boolean> everyoneHearsSanvocalia;
 	
 	public boolean pointedDatastoneIsPushable() {
 		return pointedDatastoneIsPushable.get();
-	}
-	
-	public boolean pointedDatastoneIsSticky() {
-		return pointedDatastoneIsSticky.get();
 	}
 	
 	public boolean everyoneHearsSanvocalia() {
