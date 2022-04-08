@@ -27,5 +27,6 @@
 		"client.ItemTwigWandMixin"
 	],
 	"package": "agency.highlysuspect.incorporeal.mixin",
+	"refmap": "incorporeal.refmap.json",
 	"required": true
 }
