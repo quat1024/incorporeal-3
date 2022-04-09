@@ -3,6 +3,7 @@ package agency.highlysuspect.incorporeal;
 import agency.highlysuspect.incorporeal.computer.EmptyType;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
+import agency.highlysuspect.incorporeal.item.BoundEnderPearlItem;
 import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
 import agency.highlysuspect.incorporeal.item.TicketItem;
 import agency.highlysuspect.incorporeal.item.NotManaLens;
@@ -45,6 +46,7 @@ public class IncItems {
 	public static final BlockItem RED_STRING_CONSTRICTOR = new BlockItem(IncBlocks.RED_STRING_CONSTRICTOR, props());
 	public static final BlockItem FRAME_TINKERER = new BlockItem(IncBlocks.FRAME_TINKERER, props());
 	public static final BlockItem CORPOREA_PYLON = new BlockItem(IncBlocks.CORPOREA_PYLON, props());
+	public static final BoundEnderPearlItem BOUND_ENDER_PEARL = new BoundEnderPearlItem(props());
 	
 	//soul cores
 	public static final Item SOUL_CORE_FRAME = new Item(props());
@@ -128,6 +130,7 @@ public class IncItems {
 			FRAME_TINKERER,
 			CORPOREA_PYLON
 		);
+		r.accept(BOUND_ENDER_PEARL, Inc.id("bound_ender_pearl"));
 		
 		//soul cores
 		r.accept(SOUL_CORE_FRAME, Inc.id("soul_core_frame"));

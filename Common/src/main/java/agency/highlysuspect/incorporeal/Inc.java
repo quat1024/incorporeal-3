@@ -13,6 +13,7 @@ import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.DispenserBlock;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vazkii.botania.api.corporea.CorporeaHelper;
@@ -95,6 +96,11 @@ public class Inc {
 			CorporeaNodeDetectors.register(new RedStringLiarBlockEntity.NodeDetector());
 			CorporeaNodeDetectors.register(new EnderSoulCoreBlockEntity.NodeDetector());
 		}
+	}
+	
+	//calling this is WEIRD as fuck on forge due to shit parallel dispatch garbage
+	public void registerDispenserBehaviors() {
+		DispenserBlock.registerBehavior(IncItems.BOUND_ENDER_PEARL, IncItems.BOUND_ENDER_PEARL.new DispenseBehavior());
 	}
 	
 	//Very commonly used helpers

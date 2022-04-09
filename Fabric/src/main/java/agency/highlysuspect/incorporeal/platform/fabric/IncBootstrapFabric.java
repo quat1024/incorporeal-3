@@ -102,7 +102,7 @@ public class IncBootstrapFabric implements IncBootstrapper {
 	
 	@Override
 	public void endSelfInit() {
-		//Nothing else to do.
+		Inc.INSTANCE.registerDispenserBehaviors();
 	}
 	
 	@Override

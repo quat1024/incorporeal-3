@@ -142,8 +142,12 @@ public class IncBootstrapForge implements IncBootstrapper {
 		//Ok so Forge ostensibly has mod load ordering, but it also has parallel-dispatch events, so who fucking knows anymore!
 		//Loading after FMLCommonSetupEvent should be good enough?? i guess??
 		FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) ->
-			e.enqueueWork(() -> //this bit puts it on the singlethreaded pool, after all the normal CommonSetup stuff happens
-				Inc.INSTANCE.markBotaniaAsDoneInitializing()));
+			e.enqueueWork(() -> {
+				//this bit puts it on the singlethreaded pool, after all the normal CommonSetup stuff happens
+				Inc.INSTANCE.markBotaniaAsDoneInitializing();
+				//Also I need to do this in an enqueueWork because lmao thread safety
+				Inc.INSTANCE.registerDispenserBehaviors();
+			}));
 	}
 	
 	@Override
