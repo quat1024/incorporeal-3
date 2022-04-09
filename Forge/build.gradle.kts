@@ -20,7 +20,7 @@ dependencies {
     //botania-forge's transitive dependencies as of Mar 23, 2022; https://github.com/VazkiiMods/Botania/blob/901045768a3637c8dd64a929837ec12672a11f5a/Forge/build.gradle
     //Botania does not (currently) publish transitive dependency information for its artifacts.
     //See the bottom of java-conventions for a possible reason why.
-    implementation(fgDeobf(group = "vazkii.patchouli"        , name = "Patchouli"   , version = "1.18.2-66-SNAPSHOT"                    ))
+    implementation(fgDeobf(group = "vazkii.patchouli"        , name = "Patchouli"   , version = "1.18.2-67"                             ))
     compileOnly   (fgDeobf(group = "mezz.jei"                , name = "jei-1.18.2"  , version = "9.4.3.122"         , classifier = "api"))
     runtimeOnly   (fgDeobf(group = "mezz.jei"                , name = "jei-1.18.2"  , version = "9.4.3.122"                             ))
     compileOnly   (fgDeobf(group = "top.theillusivec4.curios", name = "curios-forge", version = "1.18.2-5.0.6.3"    , classifier = "api"))
