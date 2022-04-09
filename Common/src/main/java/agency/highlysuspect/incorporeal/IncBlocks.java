@@ -41,7 +41,7 @@ public class IncBlocks {
 	public static final RedStringLiarBlock RED_STRING_LIAR = new RedStringLiarBlock(Properties.copy(ModBlocks.livingrock));
 	public static final RedStringConstrictorBlock RED_STRING_CONSTRICTOR = new RedStringConstrictorBlock(Properties.copy(ModBlocks.livingrock));
 	public static final FrameTinkererBlock FRAME_TINKERER = new FrameTinkererBlock(Properties.copy(Blocks.OAK_PLANKS));
-	public static final CorporeaPylonBlock CORPOREA_PYLON = new CorporeaPylonBlock(Properties.copy(ModBlocks.corporeaBlock));
+	public static final CorporeaPylonBlock CORPOREA_PYLON = new CorporeaPylonBlock(Properties.copy(ModBlocks.corporeaBlock).strength(3f));
 	
 	//soul cores
 	private static final Properties soulCoreProps = Properties.of(Material.NETHER_WOOD).sound(SoundType.NETHER_SPROUTS).strength(1f).isSuffocating((__, ___, ____) -> false).noOcclusion();

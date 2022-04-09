@@ -66,6 +66,7 @@ public class IncCommonTagGen {
 			IncBlocks.RED_STRING_LIAR,
 			IncBlocks.RED_STRING_CONSTRICTOR,
 			IncBlocks.FRAME_TINKERER,
+			IncBlocks.CORPOREA_PYLON,
 			
 			IncBlocks.ENDER_SOUL_CORE,
 			IncBlocks.POTION_SOUL_CORE,
