@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.DirectionalPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,7 +24,10 @@ public class DatastoneBlock extends HalfTransparentBlock {
 		super(props);
 	}
 	
-	public void extendColumn(ServerLevel level, BlockPos pos, Datum<?> newDatum) {
+	public void extendColumn(Level level, BlockPos pos, Datum<?> newDatum) {
+		//dont do anything on the client world
+		if(level.isClientSide()) return;
+		
 		//Find the bottom of the pointed datastone column (or the block below myself, if there aren't any)
 		List<DataStorageBlockEntity> stones = new ArrayList<>();
 		BlockPos.MutableBlockPos cursor = pos.mutable().move(Direction.DOWN);
@@ -56,7 +60,7 @@ public class DatastoneBlock extends HalfTransparentBlock {
 		}
 	}
 	
-	public Datum<?> retractColumn(ServerLevel level, BlockPos pos) {
+	public Datum<?> retractColumn(Level level, BlockPos pos, boolean doIt) {
 		//Find the bottom of the pointed datastone column (or the block below myself, if there aren't any)
 		List<DataStorageBlockEntity> stones = new ArrayList<>();
 		BlockPos.MutableBlockPos cursor = pos.mutable().move(Direction.DOWN);
@@ -67,6 +71,11 @@ public class DatastoneBlock extends HalfTransparentBlock {
 		
 		//If there are no pointed datastones, do not perform any removals
 		if(stones.isEmpty()) return Datum.EMPTY;
+		
+		//if simulating, or on the client world, just return the datum of the first stone
+		if(!doIt || level.isClientSide()) {
+			return stones.get(0).readDatum();
+		}
 		
 		//Cursor is one past the end of the pointed datastones column.
 		//Move the cursor to the datastone to be removed
@@ -81,7 +90,7 @@ public class DatastoneBlock extends HalfTransparentBlock {
 		}
 		
 		//Remove the end of the datastone column
-		IncBlocks.POINTED_DATASTONE.fallOrBreak(level, cursor);
+		if(level instanceof ServerLevel slevel)	IncBlocks.POINTED_DATASTONE.fallOrBreak(slevel, cursor);
 		
 		return toReturn;
 	}

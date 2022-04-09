@@ -39,7 +39,7 @@ public class DataStorageBlockEntity extends TileMod implements DatumAcceptor, Da
 	}
 	
 	@Override
-	public @NotNull Datum<?> readDatum() {
+	public @NotNull Datum<?> readDatum(boolean doIt) {
 		return datum;
 	}
 	

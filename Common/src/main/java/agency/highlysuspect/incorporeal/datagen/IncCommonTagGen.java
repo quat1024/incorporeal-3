@@ -2,6 +2,7 @@ package agency.highlysuspect.incorporeal.datagen;
 
 import agency.highlysuspect.incorporeal.IncBlocks;
 import agency.highlysuspect.incorporeal.IncItems;
+import agency.highlysuspect.incorporeal.IncTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
@@ -11,6 +12,13 @@ import java.util.function.Consumer;
 
 public class IncCommonTagGen {
 	public static void doIt(DataGenerator datagen, Consumer<JsonFile> files) {
+		//data viewers
+		DataDsl.itemTag(IncTags.Items.DATA_VIEWERS)
+			.addItems(IncItems.DATA_MONOCLE)
+			.save(files);
+		
+		///
+		
 		//rods
 		DataDsl.itemTag(ModTags.Items.RODS)
 			.addItems(IncItems.FRACTURED_SPACE_ROD)

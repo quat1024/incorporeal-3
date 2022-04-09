@@ -90,6 +90,12 @@
 	"incorporeal.ticket_conjurer.hold1": "Anything you say will",
 	"incorporeal.ticket_conjurer.hold2": "create a Ticket",
 	
+	"incorporeal.empty_datum": "<nothing>",
+	"incorporeal.integer_datum": "Number: %s",
+	"incorporeal.matcher_datum": "Corporea Matcher: %s",
+	"incorporeal.solidified_request_datum": "Corporea Request: %s",
+	"incorporeal.lens_hud": "Lens: %s",
+	
 	"incorporeal.solidified_request": "%sx %s",
 	"incorporeal.empty_matcher": "Nothing",
 	"incorporeal.full_matcher": "Everything",

@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.computer.capabilities;
 
 import agency.highlysuspect.incorporeal.computer.types.DataLens;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -9,4 +10,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface DataLensProvider extends PositionTweakable {
 	@NotNull DataLens getLens();
+	
+	default ItemStack hahaOopsLeakyAbstraction() {
+		return ItemStack.EMPTY;
+	}
 }

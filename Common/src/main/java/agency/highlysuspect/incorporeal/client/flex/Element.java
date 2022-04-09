@@ -1,10 +1,12 @@
 package agency.highlysuspect.incorporeal.client.flex;
 
-import com.google.common.base.Preconditions;
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.function.Consumer;
 
 public abstract class Element {
 	public Element(String name) {
@@ -14,106 +16,57 @@ public abstract class Element {
 	//for debugging mainly lol
 	public final String name;
 	
-	//children
-	public List<Element> children = new ArrayList<>();
+	public int relativeX, relativeY; //position (set from parent)
+	public int width, height; //size (set by self)
 	
-	//properties relevant to being stuck into a FlexElement
+	//properties relevant to being stuck into a FlexElement (Wow! It's Janky)
 	public int flexGrow;
-	public @Nullable FlexElement.Alignment alignSelf = null;
+	public @Nullable Alignment alignSelf = null;
+	
+	/**
+	 * Recursively visit child elements
+	 */
+	public void visitChildren(Consumer<Element> visitor) {
+		//no-op by default
+	}
 	
 	/**
 	 * Walk the tree of child elements.
-	 * On the way up, Layout needs to be told about:
-	 * - each child's position relative to myself,
-	 * - my own width and height;
+	 * On the way up, set each child's position relative to myself, and set my own width and height.
 	 * 
 	 * Elements do not directly set the width and height of their own children, but that behavior
 	 * can be requested by refining BoxConstraints on the way down the tree traversal.
 	 * 
 	 * Elements never know their absolute position, and do not set their own relative position.
 	 */
-	public abstract void solve(Constraints constraints, Layout layout);
+	public abstract void solve(Constraints constraints);
 	
-	public record Constraints(int minWidth, int maxWidth, int minHeight, int maxHeight) {
-		public Constraints {
-			Preconditions.checkArgument(minWidth != INFINITY, "Infinite minimum width");
-			Preconditions.checkArgument(minHeight != INFINITY, "Infinite minimum height");
-			Preconditions.checkArgument(minWidth <= maxWidth, "minWidth > maxWidth");
-			Preconditions.checkArgument(minHeight <= maxHeight, "minHeight > maxHeight");
-		}
-		
-		public static int INFINITY = 99999999; //close enough right?
-		
-		public static Constraints tight(int width, int height) {
-			return new Constraints(width, width, height, height);
-		}
-		
-		public Constraints withWidthBounds(int newMinWidth, int newMaxWidth) {
-			return new Constraints(newMinWidth, newMaxWidth, minHeight, maxHeight);
-		}
-		
-		public Constraints withTightWidth(int newWidth) {
-			return withWidthBounds(newWidth, newWidth);
-		}
-		
-		public Constraints withInfiniteWidth() {
-			return withWidthBounds(0, INFINITY);
-		}
-		
-		public Constraints withHeightBounds(int newMinHeight, int newMaxHeight) {
-			return new Constraints(minWidth, maxWidth, newMinHeight, newMaxHeight);
-		}
-		
-		public Constraints withTightHeight(int newHeight) {
-			return withHeightBounds(newHeight, newHeight);
-		}
-		
-		public Constraints withInfiniteHeight() {
-			return withHeightBounds(0, INFINITY);
-		}
-		
-		public Constraints withBoundsAlong(FlexElement.Direction dir, int newMin, int newMax) {
-			return switch(dir) {
-				case ROW -> withWidthBounds(newMin, newMax);
-				case COLUMN -> withHeightBounds(newMin, newMax);
-			};
-		}
-		
-		public Constraints withTightBoundsAlong(FlexElement.Direction dir, int newSize) {
-			return switch(dir) {
-				case ROW -> withTightWidth(newSize);
-				case COLUMN -> withTightHeight(newSize);
-			};
-		}
-		
-		public Constraints withInfiniteAlong(FlexElement.Direction dir) {
-			return switch(dir) {
-				case ROW -> withInfiniteWidth();
-				case COLUMN -> withInfiniteHeight();
-			};
-		}
-		
-		public int maxAlong(FlexElement.Direction dir) {
-			return switch(dir) {
-				case ROW -> maxWidth;
-				case COLUMN -> maxHeight;
-			};
-		}
-		
-		public int minAlong(FlexElement.Direction dir) {
-			return switch(dir) {
-				case ROW -> minWidth;
-				case COLUMN -> minHeight;
-			};
-		}
-		
-		public boolean isInfiniteAlong(FlexElement.Direction dir) {
-			return switch(dir) {
-				case ROW -> maxWidth == INFINITY;
-				case COLUMN -> maxHeight == INFINITY;
-			};
-		}
+	public void drawRecursively(PoseStack pose, float partialTicks) {
+		//Draw myself before drawing children, because backgrounds are usually parents of things-that-go-on-the-background
+		draw(pose, partialTicks);
+		visitChildren(child -> {
+			pose.translate(child.relativeX, child.relativeY, 0);
+			child.drawRecursively(pose, partialTicks);
+			pose.translate(-child.relativeX, -child.relativeY, 0);
+		});
 	}
 	
-	public record Size(int width, int height) {}
+	public void draw(PoseStack pose, float partialTicks) {
+		
+	}
+	
+	public void debugDrawRecursively(PoseStack pose, float partialTicks, int wow) {
+		int realColor = (0x00FFFFFF & Mth.hsvToRgb(wow / 30f, 1f, 0.5f)) | 0x77000000;
+		//blah blah blah
+	}
+	
+	//println debug it lolol
+	public void dump() {
+		dump(0);
+	}
+	
+	public void dump(int depth) {
+		System.out.printf("%s%s - x: %s, y: %s, width: %s, height: %s%n", " ".repeat(depth), name, relativeX, relativeY, width, height);
+		visitChildren(child -> child.dump(depth + 1));
+	}
 }

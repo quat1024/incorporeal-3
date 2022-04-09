@@ -2,6 +2,7 @@ package agency.highlysuspect.incorporeal.computer.capabilities;
 
 import agency.highlysuspect.incorporeal.IncBlocks;
 import agency.highlysuspect.incorporeal.block.DatastoneBlock;
+import agency.highlysuspect.incorporeal.computer.types.DataLens;
 import agency.highlysuspect.incorporeal.item.NotManaLens;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
@@ -12,6 +13,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.decoration.ItemFrame;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -45,7 +47,7 @@ import java.util.List;
 public class NotCapabilities {
 	//Pass state/be if you already have them, otherwise they'll be looked up from level/pos by the usual methods.
 	//Yes, this has the same shape as fabric block-api-lookup stuff. I mean, it's good stuff, lol.
-	public static @Nullable DatumAcceptor findDatumAcceptor(ServerLevel level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be, @Nullable List<Entity> entitiesInTheBlockspace, boolean directBind) {
+	public static @Nullable DatumAcceptor findDatumAcceptor(Level level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be, @Nullable List<Entity> entitiesInTheBlockspace, boolean directBind) {
 		//Lookup the block entity if it wasn't provided
 		if(be == null) be = level.getBlockEntity(pos);
 		if(be != null) {
@@ -126,27 +128,27 @@ public class NotCapabilities {
 		return null;
 	}
 	
-	public static @Nullable DatumProvider findDatumProvider(ServerLevel level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be, @Nullable List<Entity> entitiesInTheBlockspace, boolean directBind) {
+	public static @Nullable DatumProvider findDatumProvider(Level level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be, @Nullable List<Entity> entitiesInTheBlockspace, boolean directBind) {
 		if(be == null) be = level.getBlockEntity(pos);
 		if(be != null) {
 			//If it implements, self return
 			if(be instanceof DatumProvider provider) return provider;
 			
 			//Corporea retainers -> their pending request, if they have one
-			if(be instanceof RetainerDuck quack) return () -> {
+			if(be instanceof RetainerDuck quack) return (doIt) -> {
 				if(quack.inc$hasPendingRequest()) return DataTypes.SOLIDIFIED_REQUEST.datumOf(quack.inc$asSolidifiedRequest());
 				else return Datum.EMPTY;
 			};
 			
 			//Corporea crystal cubes -> a corporea request, encapsulating its displayed item + count
-			if(be instanceof TileCorporeaCrystalCube cube) return () -> {
+			if(be instanceof TileCorporeaCrystalCube cube) return (doIt) -> {
 				ItemStack target = cube.getRequestTarget();
 				if(target.isEmpty()) return Datum.EMPTY;
 				else return DataTypes.SOLIDIFIED_REQUEST.datumOf(SolidifiedRequest.create(target, cube.getItemCount()));
 			};
 			
 			//Comparators -> their output signal (mojang use a blockstate for this plsssssssss)
-			if(be instanceof ComparatorBlockEntity comparator) return () -> DataTypes.INTEGER.datumOf(comparator.getOutputSignal());
+			if(be instanceof ComparatorBlockEntity comparator) return (doIt) -> DataTypes.INTEGER.datumOf(comparator.getOutputSignal());
 		}
 		
 		//Read the blockstate if it's needed
@@ -158,10 +160,10 @@ public class NotCapabilities {
 		final BlockPos posCopy = pos.immutable(); //also watch out for this
 		
 		//Mana voids -> empty
-		if(s.getBlock() == ModBlocks.manaVoid) return () -> Datum.EMPTY;
+		if(s.getBlock() == ModBlocks.manaVoid) return (doIt) -> Datum.EMPTY;
 		
 		//Datastone blocks -> retract the column of pointed datastone
-		if(s.getBlock() instanceof DatastoneBlock db) return () -> db.retractColumn(level, posCopy); 
+		if(s.getBlock() instanceof DatastoneBlock db) return (doIt) -> db.retractColumn(level, posCopy, doIt); 
 		
 		//Blockstate property reading is only possible when the funnel is directly bound to this block.
 		//This helps prevent accidentally triggering the behavior, because it can be somewhat surprising.
@@ -171,12 +173,12 @@ public class NotCapabilities {
 			//Lots of fun stuff about power levels, crop ages, note block tunings, ...
 			Collection<Property<?>> props = s.getProperties(); //This method allocates smh
 			for(Property<?> prop : props) {
-				if(prop instanceof IntegerProperty intProp) return () -> DataTypes.INTEGER.datumOf(s.getValue(intProp));
+				if(prop instanceof IntegerProperty intProp) return (doIt) -> DataTypes.INTEGER.datumOf(s.getValue(intProp));
 			}
 			
 			//Iterating twice is intentional btw; I want to prefer numbers to booleans if there's both
 			for(Property<?> prop : props) {
-				if(prop instanceof BooleanProperty boolProp) return () -> DataTypes.INTEGER.datumOf(s.getValue(boolProp) ? 1 : 0);
+				if(prop instanceof BooleanProperty boolProp) return (doIt) -> DataTypes.INTEGER.datumOf(s.getValue(boolProp) ? 1 : 0);
 			}
 		}
 		
@@ -198,7 +200,17 @@ public class NotCapabilities {
 	public static @Nullable DataLensProvider findDataLensProvider(Level level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be, boolean directBind) {
 		if(be != null) be = level.getBlockEntity(pos);
 		if(be instanceof TilePrism prism && ItemLens.getLens(prism.getItem(0)) instanceof NotManaLens dataLens) {
-			return dataLens::getDataLens;
+			return new DataLensProvider() {
+				@Override
+				public @NotNull DataLens getLens() {
+					return dataLens.getDataLens();
+				}
+				
+				@Override
+				public ItemStack hahaOopsLeakyAbstraction() {
+					return prism.getItem(0);
+				}
+			};
 		}
 		
 		return null;
@@ -255,7 +267,7 @@ public class NotCapabilities {
 		}
 		
 		@Override
-		public @NotNull Datum<?> readDatum() {
+		public @NotNull Datum<?> readDatum(boolean doIt) {
 			return DataTypes.SOLIDIFIED_REQUEST.datumOf(SolidifiedRequest.create(
 				frame.getItem(),
 				frameRotationToMagicNumber(frame.getRotation())

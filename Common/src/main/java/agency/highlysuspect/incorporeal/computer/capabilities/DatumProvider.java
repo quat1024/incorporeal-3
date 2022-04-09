@@ -8,5 +8,9 @@ import org.jetbrains.annotations.NotNull;
  * Not null, but may be Datum.EMPTY.
  */
 public interface DatumProvider extends PositionTweakable {
-	@NotNull Datum<?> readDatum();
+	@NotNull default Datum<?> readDatum() {
+		return readDatum(true);
+	}
+	
+	@NotNull Datum<?> readDatum(boolean doIt);
 }

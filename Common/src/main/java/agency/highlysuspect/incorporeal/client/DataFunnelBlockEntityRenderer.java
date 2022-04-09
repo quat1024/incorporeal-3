@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import vazkii.botania.client.core.handler.ClientTickHandler;
 import vazkii.botania.common.helper.MathHelper;
@@ -30,6 +31,8 @@ public class DataFunnelBlockEntityRenderer implements BlockEntityRenderer<DataFu
 	
 	@Override
 	public void render(DataFunnelBlockEntity be, float partialTicks, PoseStack pose, MultiBufferSource bufs, int light, int overlay) {
+		int hash = Mth.murmurHash3Mixer(be.getBlockPos().hashCode()) & 0xFFFF;
+		
 		pose.pushPose();
 		pose.translate(.5, .5, .5);
 		
@@ -93,7 +96,8 @@ public class DataFunnelBlockEntityRenderer implements BlockEntityRenderer<DataFu
 			transform.mul(Vector3f.XP.rotationDegrees(pitch));
 			pose.mulPose(transform);
 			
-			float wow = Inc.rangeRemap(Inc.sinDegrees(ClientTickHandler.total() * 4 + (i * 27)), -1, 1, 0.9f, 1.2f);
+			//pulse
+			float wow = Inc.rangeRemap(Inc.sinDegrees(ClientTickHandler.total() * 4 + (i * 27) + hash), -1, 1, 0.9f, 1.2f);
 			pose.scale(wow, wow, wow);
 			
 			//draw the cube. (it's in the center of the blockmodel, that's why the translation)

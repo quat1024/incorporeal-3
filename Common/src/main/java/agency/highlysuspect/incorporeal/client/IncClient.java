@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.client;
 
+import agency.highlysuspect.incorporeal.client.computer.DatumRenderers;
 import agency.highlysuspect.incorporeal.platform.IncClientBootstrapper;
 import agency.highlysuspect.incorporeal.platform.IncClientXplat;
 
@@ -29,5 +30,6 @@ public class IncClient {
 		
 		//common init
 		IncClientNetwork.initialize();
+		DatumRenderers.registerBuiltinRenderers();
 	}
 }
