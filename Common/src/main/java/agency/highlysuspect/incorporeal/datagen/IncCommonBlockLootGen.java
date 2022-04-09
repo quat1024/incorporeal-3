@@ -28,6 +28,7 @@ public class IncCommonBlockLootGen {
 		//Blocks that don't drop themselves:
 		Set<Block> selfDropExceptions = new HashSet<>();
 		selfDropExceptions.add(IncBlocks.REDSTONE_ROOT_CROP); //Done manually
+		selfDropExceptions.add(IncBlocks.CORPOREA_PYLON); //Done manually
 		selfDropExceptions.addAll(IncBlocks.COMPRESSED_TATERS.values());
 		
 		for(Block b : INC_BLOCKS) {
