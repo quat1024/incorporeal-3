@@ -43,6 +43,11 @@ public class TicketItem<T> extends Item {
 	
 	@Override
 	public Component getName(ItemStack stack) {
-		return new TranslatableComponent(this.getDescriptionId(stack), get(stack).describe());
+		String key = getDescriptionId(stack);
+		
+		Datum<?> datum = get(stack);
+		if(datum.isEmpty()) key += ".blank";
+		
+		return new TranslatableComponent(key, datum.describe());
 	}
 }
