@@ -68,39 +68,8 @@ public class CorporeaPylonBlock extends BlockMod implements EntityBlock {
 	
 	@Override
 	public BlockState updateShape(BlockState state, Direction side, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
-		if(true) return super.updateShape(state, side, facingState, level, pos, facingPos);
 		if(!state.canSurvive(level, pos)) return Blocks.AIR.defaultBlockState();
-		
-		BlockState top, middle, bottom;
-		switch(state.getValue(WHICH)) {
-			case TOP -> {
-				top = state;
-				middle = level.getBlockState(pos.below(1));
-				bottom = level.getBlockState(pos.below(2));
-			}
-			case MIDDLE -> {
-				top = level.getBlockState(pos.above(1));
-				middle = state;
-				bottom = level.getBlockState(pos.below(1));
-			}
-			case BOTTOM -> {
-				top = level.getBlockState(pos.above(2));
-				middle = level.getBlockState(pos.above(1));
-				bottom = state;
-			}
-			//without this, java says top/middle/bottom "might not have been initialized"
-			//even though the point of switch expressions is to force all cases to be covered
-			//reh!
-			default -> throw new IllegalStateException();
-		}
-		
-		if(top.is(this) && top.getValue(WHICH) == Which.TOP &&
-			middle.is(this) && middle.getValue(WHICH) == Which.MIDDLE &&
-			bottom.is(this) && bottom.getValue(WHICH) == Which.BOTTOM) {
-			return super.updateShape(state, side, facingState, level, pos, facingPos);
-		} else {
-			return Blocks.AIR.defaultBlockState();
-		}
+		else return super.updateShape(state, side, facingState, level, pos, facingPos);
 	}
 	
 	@Nullable
