@@ -16,9 +16,13 @@ public class Layout {
 	}
 	
 	public void dump() {
+		if(layoutResults.isEmpty()) {
+			System.out.println("<empty>");
+			return;
+		}
+		
 		//i deserve to see a nice table!!
 		int widestChungus = layoutResults.keySet().stream().max(Comparator.comparingInt(e -> e.name.length())).get().name.length();
-		
 		layoutResults.forEach((element, result) -> {
 			String pad = " ".repeat(widestChungus - element.name.length());
 			System.out.println(element.name + pad + " -> " + result);
