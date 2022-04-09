@@ -17,6 +17,10 @@
 	"block.incorporeal.red_string_liar": "Red Stringed Liar",
 	"block.incorporeal.red_string_constrictor": "Red Stringed Constrictor",
 	"block.incorporeal.frame_tinkerer": "Frame Tinkerer",
+	"block.incorporeal.corporea_pylon": "Corporea Pylon",
+	"item.incorporeal.bound_ender_pearl": "Bound Ender Pearl",
+	"incorporeal.bound_ender_pearl.notBound": "Not bound to anyone",
+	"incorporeal.bound_ender_pearl.boundTo": "Bound to %s",
 	
 	"item.incorporeal.soul_core_frame": "Soul Core Frame",
 	"block.incorporeal.ender_soul_core": "Ender Soul Core",
@@ -31,10 +35,15 @@
 	"block.incorporeal.sanvocalia_chibi": "Sanvocalia Petite",
 	"block.incorporeal.floating_sanvocalia": "Floating Sanvocalia",
 	"block.incorporeal.floating_sanvocalia_chibi": "Floating Sanvocalia Petite",
+	"block.incorporeal.sanvocalia.reference": "Do you still remember?",
+	"block.incorporeal.sanvocalia_chibi.reference": "Do you still remember?",
+	
 	"block.incorporeal.funny": "Sweet Alexum",
 	"block.incorporeal.funny_chibi": "Sweet Alexum Petite",
 	"block.incorporeal.floating_funny": "Floating Sweet Alexum",
 	"block.incorporeal.floating_funny_chibi": "Floating Sweet Alexum Petite",
+	"block.incorporeal.funny.reference": "This is so sad.",
+	"block.incorporeal.funny_chibi.reference": "Alexa play Despacito.",
 	
 	"block.incorporeal.black_unstable_cube": "Black Unstable Cube",
 	"block.incorporeal.red_unstable_cube": "Red Unstable Cube",
@@ -89,12 +98,14 @@
 	"incorporeal.ticket_conjurer.hold0": "Holding Ticket Conjurer!",
 	"incorporeal.ticket_conjurer.hold1": "Anything you say will",
 	"incorporeal.ticket_conjurer.hold2": "create a Ticket",
+	"item.incorporeal.data_monocle": "Data Monocle",
+	"block.incorporeal.datastone_block": "Datastone Block",
+	"block.incorporeal.pointed_datastone": "Pointed Datastone",
 	
 	"incorporeal.empty_datum": "<nothing>",
 	"incorporeal.integer_datum": "Number: %s",
 	"incorporeal.matcher_datum": "Corporea Matcher: %s",
 	"incorporeal.solidified_request_datum": "Corporea Request: %s",
-	"incorporeal.lens_hud": "Lens: %s",
 	
 	"incorporeal.solidified_request": "%sx %s",
 	"incorporeal.empty_matcher": "Nothing",
