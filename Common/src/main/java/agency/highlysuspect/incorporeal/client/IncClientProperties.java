@@ -8,6 +8,7 @@ import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.IncEntityTypes;
 import agency.highlysuspect.incorporeal.IncItems;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
+import agency.highlysuspect.incorporeal.computer.types.Datum;
 import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
 import agency.highlysuspect.incorporeal.item.TicketItem;
 import net.minecraft.client.renderer.RenderType;
@@ -122,8 +123,12 @@ public class IncClientProperties {
 		//Returns 1 if the corporea ticket has a request written on it, and 0 otherwise.
 		//Now that I think about it, it's pretty much impossible to have a ticket with nothing written on it...
 		for(TicketItem<?> ticket : DataTypes.allTicketItems()) {
-			r.accept(ticket, Inc.id("written_ticket"),
-				(ClampedItemPropertyFunction) (stack, level, ent, seed) -> !ticket.get(stack).isEmpty() ? 1 : 0);
+			r.accept(ticket, Inc.id("written_ticket"), (ClampedItemPropertyFunction) (stack, level, ent, seed) -> {
+				Datum<?> datum = ticket.get(stack);
+				//specil case the empty ticket for no reason (WOW SPAGHETTI!!!!!!!!!!)
+				if(datum.type() == DataTypes.EMPTY) return stack.hasTag() ? 1 : 0;
+				else return datum.isEmpty() ? 0 : 1;
+			});
 		}
 	}
 	
