@@ -112,9 +112,7 @@ public class IncClientProperties {
 	}
 	
 	public static void registerItemColorProviders(ColorHandler.ItemHandlerConsumer r) {
-		//todo delet once these have proper item models
-		for(TicketItem<?> ticket : DataTypes.allTicketItems()) r.register((stack, tintIndex) -> ticket.get(stack).color());
-		for(TicketConjurerItem<?> conjurer : DataTypes.allConjurerItems()) r.register((stack, tintIndex) -> conjurer.type.color(), conjurer);
+		// *crickets*
 	}
 	
 	/// Item property overrides ///
