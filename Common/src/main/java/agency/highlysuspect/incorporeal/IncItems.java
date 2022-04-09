@@ -44,6 +44,7 @@ public class IncItems {
 	public static final BlockItem RED_STRING_LIAR = new BlockItem(IncBlocks.RED_STRING_LIAR, props());
 	public static final BlockItem RED_STRING_CONSTRICTOR = new BlockItem(IncBlocks.RED_STRING_CONSTRICTOR, props());
 	public static final BlockItem FRAME_TINKERER = new BlockItem(IncBlocks.FRAME_TINKERER, props());
+	public static final BlockItem CORPOREA_PYLON = new BlockItem(IncBlocks.CORPOREA_PYLON, props());
 	
 	//soul cores
 	public static final Item SOUL_CORE_FRAME = new Item(props());
@@ -124,7 +125,8 @@ public class IncItems {
 			CORPOREA_SOLIDIFIER,
 			RED_STRING_LIAR,
 			RED_STRING_CONSTRICTOR,
-			FRAME_TINKERER
+			FRAME_TINKERER,
+			CORPOREA_PYLON
 		);
 		
 		//soul cores

@@ -2,6 +2,7 @@ package agency.highlysuspect.incorporeal;
 
 import agency.highlysuspect.incorporeal.block.ClearlyBlock;
 import agency.highlysuspect.incorporeal.block.CompressedTinyPotatoBlock;
+import agency.highlysuspect.incorporeal.block.CorporeaPylonBlock;
 import agency.highlysuspect.incorporeal.block.CorporeaSolidifierBlock;
 import agency.highlysuspect.incorporeal.block.CrappyComparatorBlock;
 import agency.highlysuspect.incorporeal.block.CrappyRepeaterBlock;
@@ -40,6 +41,7 @@ public class IncBlocks {
 	public static final RedStringLiarBlock RED_STRING_LIAR = new RedStringLiarBlock(Properties.copy(ModBlocks.livingrock));
 	public static final RedStringConstrictorBlock RED_STRING_CONSTRICTOR = new RedStringConstrictorBlock(Properties.copy(ModBlocks.livingrock));
 	public static final FrameTinkererBlock FRAME_TINKERER = new FrameTinkererBlock(Properties.copy(Blocks.OAK_PLANKS));
+	public static final CorporeaPylonBlock CORPOREA_PYLON = new CorporeaPylonBlock(Properties.copy(ModBlocks.corporeaBlock));
 	
 	//soul cores
 	private static final Properties soulCoreProps = Properties.of(Material.NETHER_WOOD).sound(SoundType.NETHER_SPROUTS).strength(1f).isSuffocating((__, ___, ____) -> false).noOcclusion();
@@ -100,6 +102,7 @@ public class IncBlocks {
 		r.accept(RED_STRING_LIAR, Inc.id("red_string_liar"));
 		r.accept(RED_STRING_CONSTRICTOR, Inc.id("red_string_constrictor"));
 		r.accept(FRAME_TINKERER, Inc.id("frame_tinkerer"));
+		r.accept(CORPOREA_PYLON, Inc.id("corporea_pylon"));
 		
 		//soul cores
 		r.accept(ENDER_SOUL_CORE, Inc.id("ender_soul_core"));

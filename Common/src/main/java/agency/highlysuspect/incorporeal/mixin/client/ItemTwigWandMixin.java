@@ -1,7 +1,6 @@
 package agency.highlysuspect.incorporeal.mixin.client;
 
-import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
-import agency.highlysuspect.incorporeal.block.entity.DataFunnelBlockEntity;
+import agency.highlysuspect.incorporeal.block.entity.Multibindable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -27,15 +26,16 @@ public class ItemTwigWandMixin implements IWireframeCoordinateListProvider {
 		
 		List<BlockPos> result = new ArrayList<>();
 		
-		DataFunnelBlockEntity bindAttempt = ItemTwigWand.getBindingAttempt(stack)
-			.map(pos -> IncBlockEntityTypes.DATA_FUNNEL.getBlockEntity(level, pos))
+		Multibindable bindAttempt = (Multibindable) ItemTwigWand.getBindingAttempt(stack)
+			.map(level::getBlockEntity)
+			.filter(be -> be instanceof Multibindable)
 			.orElse(null);
 		if(bindAttempt != null) result.addAll(bindAttempt.getBindings());
 		
 		HitResult pos = Minecraft.getInstance().hitResult;
 		if(pos instanceof BlockHitResult bhr &&
-			level.getBlockEntity(bhr.getBlockPos()) instanceof DataFunnelBlockEntity dataFunnel &&
-			dataFunnel != bindAttempt) result.addAll(dataFunnel.getBindings());
+			level.getBlockEntity(bhr.getBlockPos()) instanceof Multibindable multibindable &&
+			multibindable != bindAttempt) result.addAll(multibindable.getBindings());
 		
 		return result;
 	}

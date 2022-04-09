@@ -31,6 +31,8 @@ public class IncCommonTagGen {
 				IncBlocks.RED_STRING_LIAR, IncBlocks.ENDER_SOUL_CORE,
 				//for the "sparks on player heads" access control mechanic
 				Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD,
+				//let you place sparks on the hacky-as-hell corporea pylon
+				IncBlocks.CORPOREA_PYLON,
 				//literally no reason
 				IncBlocks.CLEARLY
 			).save(files);

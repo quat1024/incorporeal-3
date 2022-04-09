@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal;
 
+import agency.highlysuspect.incorporeal.block.entity.CorporeaPylonBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.FunnyBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.PotionSoulCoreBlockEntity;
@@ -37,6 +38,7 @@ public class IncBlockEntityTypes {
 	//corporetics
 	public static final BlockEntityType<RedStringLiarBlockEntity> RED_STRING_LIAR = make(IncXplat.INSTANCE.redStringLiarMaker()::create, IncBlocks.RED_STRING_LIAR);
 	public static final BlockEntityType<RedStringConstrictorBlockEntity> RED_STRING_CONSTRICTOR = make(IncXplat.INSTANCE.redStringConstrictorMaker()::create, IncBlocks.RED_STRING_CONSTRICTOR);
+	public static final BlockEntityType<CorporeaPylonBlockEntity> CORPOREA_PYLON = make(CorporeaPylonBlockEntity::new, IncBlocks.CORPOREA_PYLON);
 	
 	//soul cores
 	public static final BlockEntityType<EnderSoulCoreBlockEntity> ENDER_SOUL_CORE = make(EnderSoulCoreBlockEntity::new, IncBlocks.ENDER_SOUL_CORE);
@@ -67,6 +69,7 @@ public class IncBlockEntityTypes {
 	public static void register(BiConsumer<BlockEntityType<?>, ResourceLocation> r) {
 		r.accept(RED_STRING_LIAR, Inc.id("red_string_liar"));
 		r.accept(RED_STRING_CONSTRICTOR, Inc.id("red_string_constrictor"));
+		r.accept(CORPOREA_PYLON, Inc.id("corporea_pylon"));
 		
 		r.accept(ENDER_SOUL_CORE, Inc.id("ender_soul_core"));
 		r.accept(POTION_SOUL_CORE, Inc.id("potion_soul_core"));
