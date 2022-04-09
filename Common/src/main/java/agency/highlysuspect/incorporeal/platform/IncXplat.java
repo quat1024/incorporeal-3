@@ -23,7 +23,7 @@ public interface IncXplat {
 	//(Kept in a separate class mainly to keep IncXplat to a reasonable size.) 
 	IncBootstrapper createBootstrapper();
 	
-	//One of those random things that happens to be different across loaders! Wow
+	//TODO: Move to IncBootstrapper I think
 	CreativeModeTab createCreativeTab();
 	
 	//The named DamageSource constructor is not public on Fabric

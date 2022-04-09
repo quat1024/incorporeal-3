@@ -1,5 +1,5 @@
 {
-	"itemGroup.incorporeal": "Incorporeal",
+	"itemGroup.incorporeal.tab": "Incorporeal",
 	
 	"item.incorporeal.fractured_space_rod": "Rod of the Fractured Space",
 	"entity.incorporeal.fractured_space_collector": "Fractured Space (collector)",

@@ -9,8 +9,8 @@ import agency.highlysuspect.incorporeal.platform.IncXplat;
 import agency.highlysuspect.incorporeal.platform.fabric.block.entity.FabricRedStringConstrictorBlockEntity;
 import agency.highlysuspect.incorporeal.platform.fabric.block.entity.FabricRedStringLiarBlockEntity;
 import agency.highlysuspect.incorporeal.platform.fabric.mixin.FabricAccessorDamageSource;
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.fabricmc.fabric.impl.item.group.ItemGroupExtensions;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -25,25 +25,11 @@ public class IncXplatFabric implements IncXplat {
 	
 	@Override
 	public CreativeModeTab createCreativeTab() {
-		return new Tab();
-	}
-	
-	private static class Tab extends CreativeModeTab {
-		public Tab() {
-			super(computeIndex(), Inc.MODID);
-			hideTitle();
-			setBackgroundSuffix("incorporeal.png");
-		}
-		
-		private static int computeIndex() {
-			((ItemGroupExtensions) CreativeModeTab.TAB_BUILDING_BLOCKS).fabric_expandArray();
-			return CreativeModeTab.TABS.length - 1;
-		}
-		
-		@Override
-		public ItemStack makeIcon() {
-			return new ItemStack(IncItems.CREATIVE_MODE_TAB_ICON);
-		}
+		return FabricItemGroupBuilder.create(Inc.id("tab"))
+			.icon(() -> new ItemStack(IncItems.CREATIVE_MODE_TAB_ICON))
+			.build() //end of FabricItemGroupBuilder, beginning of vanilla CreativeModeTab
+			.hideTitle()
+			.setBackgroundSuffix("incorporeal.png");
 	}
 	
 	@Override

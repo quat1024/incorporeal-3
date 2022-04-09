@@ -28,7 +28,7 @@ public class IncXplatForge implements IncXplat {
 	
 	private static class Tab extends CreativeModeTab {
 		public Tab() {
-			super(Inc.MODID);
+			super(Inc.MODID + ".tab"); //same name as on fabric
 			hideTitle();
 			//forge pls. I do what i want
 			//noinspection deprecation
