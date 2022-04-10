@@ -1,5 +1,6 @@
 package agency.highlysuspect.incorporeal.datagen;
 
+import agency.highlysuspect.incorporeal.block.CorporeaPylonBlock;
 import agency.highlysuspect.incorporeal.block.PointedDatastoneBlock;
 import agency.highlysuspect.incorporeal.mixin.datagen.IncAccessorBlockModelGenerators;
 import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
@@ -76,6 +77,13 @@ public class IncCommonModelsAndBlockstates {
 			Inc.id("block/frame_tinkerer/side")
 		);
 		itemBlockModelParent(IncBlocks.FRAME_TINKERER);
+		
+		stateGenerators.add(MultiVariantGenerator.multiVariant(IncBlocks.CORPOREA_PYLON)
+			.with(PropertyDispatch.property(CorporeaPylonBlock.WHICH)
+				.select(CorporeaPylonBlock.Which.TOP, modelv(Inc.id("block/corporea_pylon/top")))
+				.select(CorporeaPylonBlock.Which.MIDDLE, modelv(Inc.id("block/corporea_pylon/middle")))
+				.select(CorporeaPylonBlock.Which.BOTTOM, modelv(Inc.id("block/corporea_pylon/bottom")))));
+		//item done manually
 		
 		/// Soul cores ///
 		TextureSlot TX_INNER = txslot("inner");

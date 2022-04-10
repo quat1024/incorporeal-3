@@ -12,7 +12,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
@@ -23,7 +22,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.common.block.BlockMod;
@@ -47,9 +48,9 @@ public class CorporeaPylonBlock extends BlockMod implements EntityBlock {
 	
 	public static final EnumProperty<Which> WHICH = EnumProperty.create("which", Which.class);
 	
-	private static final VoxelShape TOP_SHAPE    = box(6, 0, 6, 10, 16, 10);
-	private static final VoxelShape MIDDLE_SHAPE = box(4, 0, 4, 12, 16, 12);
-	private static final VoxelShape BOTTOM_SHAPE = box(2, 0, 2, 14, 16, 14);
+	private static final VoxelShape TOP_SHAPE    = makeTopShape();
+	private static final VoxelShape MIDDLE_SHAPE = makeMiddleShape();
+	private static final VoxelShape BOTTOM_SHAPE = makeBottomShape();
 	
 	public enum Which implements StringRepresentable {
 		TOP, MIDDLE, BOTTOM;
@@ -164,5 +165,37 @@ public class CorporeaPylonBlock extends BlockMod implements EntityBlock {
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
 		if(state.getValue(WHICH) == Which.BOTTOM) return createTickerHelper(type, IncBlockEntityTypes.CORPOREA_PYLON, CorporeaPylonBlockEntity::tick);
 		else return null;
+	}
+	
+	//based on that blockbench "export voxel shape" plugin lol
+	private static VoxelShape makeTopShape() {
+		VoxelShape shape = Shapes.empty();
+		shape = Shapes.joinUnoptimized(shape, Shapes.box(0.375, 0, 0.375, 0.625, 0.5625, 0.625), BooleanOp.OR);
+		shape = Shapes.joinUnoptimized(shape, Shapes.box(0.625, 0.75, 0.25, 0.75, 1.0625, 0.375), BooleanOp.OR);
+		shape = Shapes.joinUnoptimized(shape, Shapes.box(0.625, 0.625, 0.625, 0.75, 0.9375, 0.75), BooleanOp.OR);
+		shape = Shapes.joinUnoptimized(shape, Shapes.box(0.25, 0.75, 0.625, 0.375, 1.0625, 0.75), BooleanOp.OR);
+		shape = Shapes.joinUnoptimized(shape, Shapes.box(0.25, 0.625, 0.25, 0.375, 0.9375, 0.375), BooleanOp.OR);
+		
+		return shape.optimize();
+	}
+	
+	private static VoxelShape makeMiddleShape() {
+		VoxelShape shape = Shapes.empty();
+		shape = Shapes.joinUnoptimized(shape, Shapes.box(0.25, 0, 0.25, 0.75, 0.375, 0.75), BooleanOp.OR);
+		shape = Shapes.joinUnoptimized(shape, Shapes.box(0.25, 0.625, 0.25, 0.75, 1, 0.75), BooleanOp.OR);
+		
+		return shape.optimize();
+	}
+	
+	private static VoxelShape makeBottomShape() {
+		VoxelShape shape = Shapes.empty();
+		shape = Shapes.joinUnoptimized(shape, Shapes.box(0.125, 0.5, 0.75, 0.25, 1, 0.875), BooleanOp.OR);
+		shape = Shapes.joinUnoptimized(shape, Shapes.box(0.75, 0.5, 0.75, 0.875, 1, 0.875), BooleanOp.OR);
+		shape = Shapes.joinUnoptimized(shape, Shapes.box(0.125, 0.5, 0.125, 0.25, 1, 0.25), BooleanOp.OR);
+		shape = Shapes.joinUnoptimized(shape, Shapes.box(0.75, 0.5, 0.125, 0.875, 1, 0.25), BooleanOp.OR);
+		shape = Shapes.joinUnoptimized(shape, Shapes.box(0.125, 0, 0.125, 0.875, 0.5, 0.875), BooleanOp.OR);
+		shape = Shapes.joinUnoptimized(shape, Shapes.box(0.25, 0.5, 0.25, 0.75, 1, 0.75), BooleanOp.OR);
+		
+		return shape.optimize();
 	}
 }

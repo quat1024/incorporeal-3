@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "which=bottom": {
+      "model": "incorporeal:block/corporea_pylon/bottom"
+    },
+    "which=middle": {
+      "model": "incorporeal:block/corporea_pylon/middle"
+    },
+    "which=top": {
+      "model": "incorporeal:block/corporea_pylon/top"
+    }
+  }
+}

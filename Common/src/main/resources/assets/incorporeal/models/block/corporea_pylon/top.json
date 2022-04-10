@@ -1,0 +1,73 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"corporea": "botania:block/corporea_block",
+		"particle": "#corporea"
+	},
+	"elements": [
+		{
+			"name": "base",
+			"from": [6, 0, 6],
+			"to": [10, 9, 10],
+			"faces": {
+				"north": {"uv": [0, 0, 4, 9], "texture": "#corporea"},
+				"east": {"uv": [4, 0, 8, 9], "texture": "#corporea"},
+				"south": {"uv": [8, 0, 12, 9], "texture": "#corporea"},
+				"west": {"uv": [12, 0, 16, 9], "texture": "#corporea"},
+				"up": {"uv": [6, 6, 10, 10], "texture": "#corporea"}
+			}
+		},
+		{
+			"name": "what1",
+			"from": [10, 12, 4],
+			"to": [12, 17, 6],
+			"faces": {
+				"north": {"uv": [5, 5, 7, 10], "texture": "#corporea"},
+				"east": {"uv": [5, 5, 7, 10], "texture": "#corporea"},
+				"south": {"uv": [5, 5, 7, 10], "texture": "#corporea"},
+				"west": {"uv": [5, 5, 7, 10], "texture": "#corporea"},
+				"up": {"uv": [3, 5, 5, 7], "texture": "#corporea"},
+				"down": {"uv": [7, 5, 9, 7], "texture": "#corporea"}
+			}
+		},
+		{
+			"name": "what2",
+			"from": [10, 10, 10],
+			"to": [12, 15, 12],
+			"faces": {
+				"north": {"uv": [0, 11, 2, 16], "texture": "#corporea"},
+				"east": {"uv": [0, 11, 2, 16], "texture": "#corporea"},
+				"south": {"uv": [0, 11, 2, 16], "texture": "#corporea"},
+				"west": {"uv": [0, 11, 2, 16], "texture": "#corporea"},
+				"up": {"uv": [2, 13, 4, 15], "texture": "#corporea"},
+				"down": {"uv": [2, 11, 4, 13], "texture": "#corporea"}
+			}
+		},
+		{
+			"name": "what3",
+			"from": [4, 12, 10],
+			"to": [6, 17, 12],
+			"faces": {
+				"north": {"uv": [13, 8, 15, 13], "texture": "#corporea"},
+				"east": {"uv": [13, 8, 15, 13], "texture": "#corporea"},
+				"south": {"uv": [13, 8, 15, 13], "texture": "#corporea"},
+				"west": {"uv": [13, 8, 15, 13], "texture": "#corporea"},
+				"up": {"uv": [11, 10, 13, 12], "texture": "#corporea"},
+				"down": {"uv": [11, 8, 13, 10], "texture": "#corporea"}
+			}
+		},
+		{
+			"name": "what4",
+			"from": [4, 10, 4],
+			"to": [6, 15, 6],
+			"faces": {
+				"north": {"uv": [11, 2, 13, 7], "texture": "#corporea"},
+				"east": {"uv": [11, 2, 13, 7], "texture": "#corporea"},
+				"south": {"uv": [11, 2, 13, 7], "texture": "#corporea"},
+				"west": {"uv": [11, 2, 13, 7], "texture": "#corporea"},
+				"up": {"uv": [13, 2, 15, 4], "texture": "#corporea"},
+				"down": {"uv": [9, 2, 11, 4], "texture": "#corporea"}
+			}
+		}
+	]
+}

@@ -1,0 +1,32 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"corporea": "botania:block/corporea_block",
+		"particle": "#corporea"
+	},
+	"elements": [
+		{
+			"from": [4, 0, 4],
+			"to": [12, 6, 12],
+			"faces": {
+				"north": {"uv": [4, 10, 12, 16], "texture": "#corporea"},
+				"east": {"uv": [4, 10, 12, 16], "texture": "#corporea"},
+				"south": {"uv": [4, 10, 12, 16], "texture": "#corporea"},
+				"west": {"uv": [4, 10, 12, 16], "texture": "#corporea"},
+				"up": {"uv": [4, 4, 12, 12], "texture": "#corporea"}
+			}
+		},
+		{
+			"from": [4, 10, 4],
+			"to": [12, 16, 12],
+			"faces": {
+				"north": {"uv": [4, 0, 12, 6], "texture": "#corporea"},
+				"east": {"uv": [4, 0, 12, 6], "texture": "#corporea"},
+				"south": {"uv": [4, 0, 12, 6], "texture": "#corporea"},
+				"west": {"uv": [4, 0, 12, 6], "texture": "#corporea"},
+				"up": {"uv": [4, 4, 12, 12], "texture": "#corporea"},
+				"down": {"uv": [4, 4, 12, 12], "texture": "#corporea"}
+			}
+		}
+	]
+}
