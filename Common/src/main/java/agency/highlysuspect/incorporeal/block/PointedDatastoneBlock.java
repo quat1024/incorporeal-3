@@ -30,6 +30,13 @@ import vazkii.botania.common.block.BlockModWaterloggable;
 import java.util.Locale;
 import java.util.Random;
 
+/**
+ * BECAUSE I KEEP HAVING TO LOOK IT UP!!!!!!!!!!!!!
+ * 
+ * STALACTITES ARE THE ONES THAT ARE ON THE CEILING, AND POINT DOWN
+ * 
+ * STALAGMITES ARE THE ONES ON THE GROUND, THAT POINT UP
+ */
 public class PointedDatastoneBlock extends BlockModWaterloggable implements EntityBlock {
 	public PointedDatastoneBlock(Properties props) {
 		super(props);
@@ -88,6 +95,7 @@ public class PointedDatastoneBlock extends BlockModWaterloggable implements Enti
 	@Override
 	public BlockState updateShape(BlockState state, Direction side, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
 		state = super.updateShape(state, side, facingState, level, pos, facingPos);
+		BlockState shit = state;
 		
 		//ignore changes from sides that will never be relevant
 		if(side != Direction.UP && side != Direction.DOWN) return state;
@@ -102,7 +110,7 @@ public class PointedDatastoneBlock extends BlockModWaterloggable implements Enti
 			return state;
 		}
 		
-		//count how many dripstones are directly below me. Sorry for this loop btw
+		//count how many dripstones are directly below me
 		BlockPos.MutableBlockPos cursor = pos.mutable().move(Direction.DOWN);
 		int dripstonesBelowMe = 0;
 		while(dripstonesBelowMe <= 3) { //dont care about any past 3, might as well be "a lot"
@@ -125,7 +133,8 @@ public class PointedDatastoneBlock extends BlockModWaterloggable implements Enti
 		if(above.getBlock() != this) {
 			//check that this block actually supports dripstone
 			if(!canSurvive(state, level, pos) && !level.getBlockTicks().hasScheduledTick(pos, this)) {
-				level.scheduleTick(pos, this, 2);
+				level.scheduleTick(pos, this, 1);
+				return shit;
 			}
 			
 			//check if I should be a base
@@ -137,18 +146,13 @@ public class PointedDatastoneBlock extends BlockModWaterloggable implements Enti
 	
 	@Override
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
-		//find the bottom of the stalactite
-		BlockPos.MutableBlockPos cursor = pos.mutable();
-		int count = 0;
-		while(isHangingDatastone(level.getBlockState(cursor))) {
-			count++;
-			cursor.move(Direction.DOWN);
-		}
-		
-		//moving upwards towards myself, create falling blocks along the way
-		for(int i = 0; i < count; i++) {
-			cursor.move(Direction.UP);
-			fall(level, cursor);
+		breakOff(state, level, pos);
+	}
+	
+	public void breakOff(BlockState state, ServerLevel level, BlockPos pos) {
+		for(BlockPos.MutableBlockPos cursor = pos.mutable(); isHangingDatastone(state); state = level.getBlockState(cursor), cursor.move(Direction.DOWN)) {
+			System.out.println(pos + "cursor at " + cursor + " state " + state);
+			fall(level, pos, state);
 		}
 	}
 	
