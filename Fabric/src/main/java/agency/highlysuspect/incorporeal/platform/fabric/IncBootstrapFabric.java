@@ -92,6 +92,10 @@ public class IncBootstrapFabric implements IncBootstrapper {
 		IncItems.COORD_BOUND_ITEM_MAKERS.forEach((item, maker) ->
 			BotaniaFabricCapabilities.COORD_BOUND_ITEM.registerForItems((stack, context) -> maker.apply(stack), item));
 		
+		//IManaItem
+		IncItems.MANA_ITEM_MAKERS.forEach((item, maker) ->
+			BotaniaFabricCapabilities.MANA_ITEM.registerForItems((stack, context) -> maker.apply(stack), item));
+		
 		//Add an item handler capability to the Ender Soul Core
 		ItemStorage.SIDED.registerForBlockEntity(EnderSoulCoreStorage::new, IncBlockEntityTypes.ENDER_SOUL_CORE);
 		

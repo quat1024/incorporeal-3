@@ -16,18 +16,21 @@ import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import vazkii.botania.api.block.IWandHUD;
+import vazkii.botania.api.mana.IManaItem;
 import vazkii.botania.api.subtile.TileEntityFunctionalFlower;
 import vazkii.botania.client.render.ColorHandler;
 import vazkii.botania.client.render.entity.EntityRenderers;
 import vazkii.botania.client.render.tile.RenderTileRedString;
 import vazkii.botania.client.render.tile.RenderTileSpecialFlower;
 import vazkii.botania.network.TriConsumer;
+import vazkii.botania.xplat.IXplatAbstractions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,16 +43,17 @@ public class IncClientProperties {
 	/// Dynamic item renderers ///
 	
 	public static final Map<Item, Supplier<MyDynamicItemRenderer>> MY_DYNAMIC_ITEM_RENDERERS = new HashMap<>();
+	private static final ResourceLocation SOUL_CORE_FRAME_MODEL = Inc.id("block/soul_core_frame");
 	static {
 		IncItems.UNSTABLE_CUBES.forEach((color, cube) ->
 			MY_DYNAMIC_ITEM_RENDERERS.put(cube, () -> UnstableCubeRenderers.createItemRenderer(color)));
 		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.ENDER_SOUL_CORE, () -> SoulCoreRenderers.createItemRenderer(IncBlocks.ENDER_SOUL_CORE.defaultBlockState()));
 		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.POTION_SOUL_CORE, () -> SoulCoreRenderers.createItemRenderer(IncBlocks.POTION_SOUL_CORE.defaultBlockState()));
-		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.SOUL_CORE_FRAME, () -> SoulCoreRenderers.createItemRendererForNamedModel(Inc.id("block/soul_core_frame")));
+		MY_DYNAMIC_ITEM_RENDERERS.put(IncItems.SOUL_CORE_FRAME, () -> SoulCoreRenderers.createItemRendererForNamedModel(SOUL_CORE_FRAME_MODEL));
 	}
 	
 	public static void registerExtraModelsToBake(Consumer<ResourceLocation> r) {
-		r.accept(Inc.id("block/soul_core_frame"));
+		r.accept(SOUL_CORE_FRAME_MODEL);
 	}
 	
 	/// Block render layers ///
@@ -113,7 +117,15 @@ public class IncClientProperties {
 	}
 	
 	public static void registerItemColorProviders(ColorHandler.ItemHandlerConsumer r) {
-		// *crickets*
+		r.register((stack, tintIndex) -> {
+			if(tintIndex != 0) return 0xFFFFFF;
+			
+			IManaItem manaItem = IXplatAbstractions.INSTANCE.findManaItem(stack);
+			if(manaItem == null || manaItem.getMaxMana() == 0) return 0xFF0000;
+			
+			float percentageFull = (float) manaItem.getMana() / manaItem.getMaxMana();
+			return Mth.hsvToRgb(percentageFull / 3f, 1, 1);
+		}, IncItems.BOUND_ENDER_PEARL);
 	}
 	
 	/// Item property overrides ///
@@ -130,6 +142,12 @@ public class IncClientProperties {
 				else return datum.isEmpty() ? 0 : 1;
 			});
 		}
+		
+		r.accept(IncItems.BOUND_ENDER_PEARL, Inc.id("mana_charge"), (ClampedItemPropertyFunction) (stack, level, ent, seed) -> {
+			IManaItem manaItem = IXplatAbstractions.INSTANCE.findManaItem(stack);
+			if(manaItem == null || manaItem.getMaxMana() == 0) return 0f;
+			else return (float) Mth.clamp(manaItem.getMana() / manaItem.getMaxMana(), 0, 1);
+		});
 	}
 	
 	/// Entity renderers ///

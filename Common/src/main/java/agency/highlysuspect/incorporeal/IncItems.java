@@ -22,6 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 import vazkii.botania.api.item.ICoordBoundItem;
+import vazkii.botania.api.mana.IManaItem;
 import vazkii.botania.common.handler.EquipmentHandler;
 import vazkii.botania.common.item.block.ItemBlockSpecialFlower;
 import vazkii.botania.common.item.block.ItemBlockTinyPotato;
@@ -45,7 +46,7 @@ public class IncItems {
 	public static final BlockItem RED_STRING_CONSTRICTOR = new BlockItem(IncBlocks.RED_STRING_CONSTRICTOR, props());
 	public static final BlockItem FRAME_TINKERER = new BlockItem(IncBlocks.FRAME_TINKERER, props());
 	public static final BlockItem CORPOREA_PYLON = new BlockItem(IncBlocks.CORPOREA_PYLON, props());
-	public static final BoundEnderPearlItem BOUND_ENDER_PEARL = new BoundEnderPearlItem(props());
+	public static final BoundEnderPearlItem BOUND_ENDER_PEARL = new BoundEnderPearlItem(props().stacksTo(1));
 	
 	//soul cores
 	public static final Item SOUL_CORE_FRAME = new Item(props());
@@ -105,9 +106,14 @@ public class IncItems {
 		FRACTURED_SPACE_ROD, FracturedSpaceRodItem.CoordBoundItem::new
 	);
 	
+	public static final Map<Item, Function<ItemStack, IManaItem>> MANA_ITEM_MAKERS = Map.of(
+		BOUND_ENDER_PEARL, stack -> new BoundEnderPearlItem.ManaItem(BOUND_ENDER_PEARL, stack)
+	);
+	
 	public static void register(BiConsumer<Item, ResourceLocation> rRaw) {
 		//Instantiating any ItemBauble explodes if it happens before EquipmentHandler is ready.
 		//EquipmentHandlerMixin is used to ensure that, if EquipmentHandler is initialized once, it does not get initialized again.
+		//In practice, this only happens in dev instances on Fabric if we get unlucky and load before Botania.
 		if(EquipmentHandler.instance == null) {
 			Inc.LOGGER.warn("Initializing Botania EquipmentHandler early! https://github.com/VazkiiMods/Botania/issues/4001");
 			EquipmentHandler.init();

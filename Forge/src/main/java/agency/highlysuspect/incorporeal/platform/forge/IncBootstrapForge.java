@@ -127,8 +127,16 @@ public class IncBootstrapForge implements IncBootstrapper {
 			if(IncItems.COORD_BOUND_ITEM_MAKERS.containsKey(item)) {
 				event.addCapability(Inc.id("coord_bound_item"), CapabilityUtil.makeProvider(
 					BotaniaForgeCapabilities.COORD_BOUND_ITEM,
-					IncItems.COORD_BOUND_ITEM_MAKERS.get(item).apply(stack))
-				);
+					IncItems.COORD_BOUND_ITEM_MAKERS.get(item).apply(stack)
+				));
+			}
+			
+			//IManaItem
+			if(IncItems.MANA_ITEM_MAKERS.containsKey(item)) {
+				event.addCapability(Inc.id("mana_item"), CapabilityUtil.makeProvider(
+					BotaniaForgeCapabilities.MANA_ITEM,
+					IncItems.MANA_ITEM_MAKERS.get(item).apply(stack)
+				));
 			}
 		});
 	}

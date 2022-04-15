@@ -7,7 +7,6 @@ import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -17,17 +16,25 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrownEnderpearl;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.Nullable;
+import vazkii.botania.api.mana.IManaItem;
+import vazkii.botania.api.mana.ManaBarTooltip;
+import vazkii.botania.api.mana.ManaItemHandler;
 import vazkii.botania.common.helper.ItemNBTHelper;
+import vazkii.botania.xplat.IXplatAbstractions;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Consumer;
 
@@ -39,6 +46,12 @@ public class BoundEnderPearlItem extends Item {
 	public static final String OWNER_KEY = "BoundOwner";
 	public static final String OWNER_NAME_KEY = "BoundOwnerName"; //Used in the tooltip
 	
+	public static final int TOTAL_CHARGES = 10;
+	public static final int MANA_PER_CHARGE = 1000;
+	public static final int MANA_CONTAINER_SIZE = TOTAL_CHARGES * MANA_PER_CHARGE;
+	//how much mana it draws into itself per tick
+	public static final int MANA_RECHARGE_RATE = MANA_PER_CHARGE / 20 / 5;
+	
 	public @Nullable UUID getOwnerUuid(ItemStack stack) {
 		return MoreNbtHelpers.getUuid(stack, OWNER_KEY, null);
 	}
@@ -47,9 +60,48 @@ public class BoundEnderPearlItem extends Item {
 		return ItemNBTHelper.getString(stack, OWNER_NAME_KEY, null);
 	}
 	
+	@Override
+	public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
+		return Optional.of(ManaBarTooltip.fromManaItem(stack));
+	}
+	
 	public void bindTo(ItemStack stack, Player player) {
 		MoreNbtHelpers.setUuid(stack, OWNER_KEY, player.getUUID());
 		ItemNBTHelper.setString(stack, OWNER_NAME_KEY, player.getGameProfile().getName());
+	}
+	
+	public void payMana(@Nullable Player player, ItemStack stack) {
+		IManaItem manaItem = IXplatAbstractions.INSTANCE.findManaItem(stack);
+		if(manaItem == null) return;
+		
+		//Try drawing from the player's own mana inventory first
+		if(player != null && ManaItemHandler.instance().requestManaExactForTool(stack, player, MANA_PER_CHARGE, false)) {
+			ManaItemHandler.instance().requestManaExactForTool(stack, player, MANA_PER_CHARGE, true);
+			return;
+		}
+		
+		//There was not enough mana in the player inventory. Remove mana from my own inventory
+		manaItem.addMana(-MANA_PER_CHARGE);
+		
+		//If there is no more mana, break
+		if(manaItem.getMana() <= 0) {
+			stack.setCount(0);
+			if(player != null) player.broadcastBreakEvent(InteractionHand.MAIN_HAND); //i guess
+		}
+	}
+	
+	@Override
+	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
+		IManaItem manaItem = IXplatAbstractions.INSTANCE.findManaItem(stack);
+		if(manaItem == null) return;
+		
+		//yes, this slighly overfills it. i think it's fine
+		if (!world.isClientSide && entity instanceof Player player &&
+			manaItem.getMana() <= manaItem.getMaxMana() &&
+			ManaItemHandler.instance().requestManaExactForTool(stack, player, MANA_RECHARGE_RATE, true) //yooo armor mana discounts?? :real:
+		) {
+			manaItem.addMana(MANA_RECHARGE_RATE);
+		}
 	}
 	
 	@Override
@@ -58,23 +110,12 @@ public class BoundEnderPearlItem extends Item {
 		
 		UUID ownerUuid = getOwnerUuid(held);
 		if(ownerUuid == null) {
-			//Unbound. Bind it to the player
-			ItemStack ya;
-			if(player.getAbilities().instabuild) {
-				ya = held.copy();
-				ya.setCount(1);
-			} else ya = held.split(1);
-			
-			bindTo(ya, player);
-			
+			bindTo(held, player);
 			if(!player.level.isClientSide()) player.hurt(AbstractSoulCoreBlockEntity.SOUL, 2f);
-			if(!player.getInventory().add(ya)) player.drop(ya, false);
-			
 			return InteractionResultHolder.success(held);
 		}
 		
 		//Already bound; act like a working enderpearl that teleports the bound player
-		
 		level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDER_PEARL_THROW, SoundSource.NEUTRAL, .5f, .4f / (level.getRandom().nextFloat() * .4f + .8f));
 		
 		if(level instanceof ServerLevel slevel) {
@@ -86,8 +127,8 @@ public class BoundEnderPearlItem extends Item {
 			//basically paste from EnderpearlItem
 			//note that owner does't necessarily equal "player", the thrower
 			yeetEnderpearl(slevel, owner, held, pearl -> pearl.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 1.5f, 1));
-			
-			if(!player.getAbilities().instabuild) held.shrink(1);
+			payMana(player, held);
+			if(!player.getAbilities().instabuild) player.getCooldowns().addCooldown(this, 20); //no spam
 		}
 		
 		return InteractionResultHolder.success(held);
@@ -143,7 +184,8 @@ public class BoundEnderPearlItem extends Item {
 				pearl.shoot(dir.getStepX(), dir.getStepY() + 0.1f, dir.getStepZ(), 1.1f, 6f);
 			});
 			
-			stack.shrink(1);
+			payMana(null, stack);
+			
 			setSuccess(true);
 			return stack;
 		}
@@ -154,5 +196,49 @@ public class BoundEnderPearlItem extends Item {
 		pearlConfigurator.accept(pearl);
 		pearl.setItem(stack);
 		slevel.addFreshEntity(pearl);
+	}
+	
+	public record ManaItem(BoundEnderPearlItem item, ItemStack stack) implements IManaItem {
+		public static final String MANA_KEY = "Mana";
+		
+		@Override
+		public int getMana() {
+			return ItemNBTHelper.getInt(stack, MANA_KEY, 0);
+		}
+		
+		@Override
+		public int getMaxMana() {
+			return MANA_CONTAINER_SIZE;
+		}
+		
+		@Override
+		public void addMana(int mana) {
+			ItemNBTHelper.setInt(stack, MANA_KEY, getMana() + mana);
+		}
+		
+		@Override
+		public boolean canReceiveManaFromPool(BlockEntity be) {
+			return item.getOwnerUuid(stack) != null;
+		}
+		
+		@Override
+		public boolean canReceiveManaFromItem(ItemStack otherStack) {
+			return item.getOwnerUuid(stack) != null;
+		}
+		
+		@Override
+		public boolean canExportManaToPool(BlockEntity pool) {
+			return false;
+		}
+		
+		@Override
+		public boolean canExportManaToItem(ItemStack otherStack) {
+			return false;
+		}
+		
+		@Override
+		public boolean isNoExport() {
+			return true;
+		}
 	}
 }
