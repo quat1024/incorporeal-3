@@ -52,7 +52,7 @@ public class IncHudHandler {
 			"incorporeal.red_string_constrictor.tooltip." +
 				(cons.removesSlotsFromFront() ? "start" : "end") +
 				(cons.removedSlotCount() == 1 ? "" : ".plural"),
-			cons.removedSlotCount()
+			new TextComponent(String.valueOf(cons.removedSlotCount())).withStyle(ChatFormatting.RED)
 		);
 		int strlen = mc.font.width(txt);
 		
@@ -60,10 +60,10 @@ public class IncHudHandler {
 		int w = mc.getWindow().getGuiScaledWidth();
 		int h = mc.getWindow().getGuiScaledHeight();
 		int boxH = h / 2 + 10;
-		GuiComponent.fill(pose, w / 2 + 8, h / 2 - 12, w / 2 + strlen + 32, boxH, 0x44000000);
-		GuiComponent.fill(pose, w / 2 + 6, h / 2 - 14, w / 2 + strlen + 34, boxH + 2, 0x44000000);
+		GuiComponent.fill(pose, w / 2 + 8, h / 2 - 12, w / 2 + strlen + 21, boxH, 0x44000000);
+		GuiComponent.fill(pose, w / 2 + 6, h / 2 - 14, w / 2 + strlen + 23, boxH + 2, 0x44000000);
 		//noinspection IntegerDivisionInFloatingPointContext
-		mc.font.drawShadow(pose, txt, w / 2 + 30, h / 2 - 5, 0x6666FF);
+		mc.font.drawShadow(pose, txt, w / 2 + 15, h / 2 - 5, 0x9999FF);
 	}
 	
 	private static void doTicketConjurerHud(Minecraft mc, PoseStack pose, float partialTicks, Player player) {
