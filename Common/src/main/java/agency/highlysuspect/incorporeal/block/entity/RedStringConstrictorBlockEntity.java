@@ -8,6 +8,10 @@ import vazkii.botania.common.block.tile.string.TileRedString;
 
 import java.util.function.Supplier;
 
+/**
+ * The Block Entity for the Red String Constrictor.
+ * Abstract, because a bespoke implementation is created for each loader.
+ */
 public abstract class RedStringConstrictorBlockEntity extends TileRedString {
 	public RedStringConstrictorBlockEntity(BlockPos pos, BlockState state) {
 		super(IncBlockEntityTypes.RED_STRING_CONSTRICTOR, pos, state);

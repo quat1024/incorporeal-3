@@ -1,6 +1,6 @@
 package agency.highlysuspect.incorporeal.mixin.client;
 
-import agency.highlysuspect.incorporeal.client.TicketConjurerHudHandler;
+import agency.highlysuspect.incorporeal.client.IncHudHandler;
 import agency.highlysuspect.incorporeal.client.computer.DataseerMonocleHudHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,17 +13,17 @@ import vazkii.botania.client.gui.HUDHandler;
 public class HUDHandlerMixin {
 	@Inject(method = "onDrawScreenPost", remap = false, at = @At("HEAD"))
 	private static void startOnDrawScreenPost(PoseStack ms, float partialTicks, CallbackInfo ci) {
-		TicketConjurerHudHandler.botaniaDrewNearIndexDisplay = false;
+		IncHudHandler.botaniaDrewNearIndexDisplay = false;
 	}
 	
 	@Inject(method = "renderNearIndexDisplay", remap = false, at = @At("HEAD"))
 	private static void startRenderNearIndexDisplay(PoseStack ms, CallbackInfo ci) {
-		TicketConjurerHudHandler.botaniaDrewNearIndexDisplay = true;
+		IncHudHandler.botaniaDrewNearIndexDisplay = true;
 	}
 	
 	@Inject(method = "onDrawScreenPost", remap = false, at = @At("TAIL"))
 	private static void endOnDrawScreenPost(PoseStack ms, float partialTicks, CallbackInfo ci) {
-		TicketConjurerHudHandler.doIt(ms, partialTicks);
+		IncHudHandler.doIt(ms, partialTicks);
 		DataseerMonocleHudHandler.doIt(ms, partialTicks);
 	}
 }
