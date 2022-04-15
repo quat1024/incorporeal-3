@@ -49,9 +49,9 @@ public record EnderSoulCoreStorage(EnderSoulCoreBlockEntity be) implements Stora
 	
 	//feel free to yell at me for this
 	@Override
-	public Iterator<StorageView<ItemVariant>> iterator(TransactionContext transaction) {
+	public Iterator<? extends StorageView<ItemVariant>> iterator(TransactionContext transaction) {
 		Storage<ItemVariant> delegate = getDelegate();
-		Iterator<StorageView<ItemVariant>> delegaterator = delegate.iterator(transaction);
+		Iterator<? extends StorageView<ItemVariant>> delegaterator = delegate.iterator(transaction);
 		
 		return new Iterator<>() {
 			@Override
