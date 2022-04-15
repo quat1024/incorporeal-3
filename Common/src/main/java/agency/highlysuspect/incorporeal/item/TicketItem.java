@@ -1,12 +1,18 @@
 package agency.highlysuspect.incorporeal.item;
 
+import agency.highlysuspect.incorporeal.computer.capabilities.DatumAcceptor;
+import agency.highlysuspect.incorporeal.computer.capabilities.NotCapabilities;
 import agency.highlysuspect.incorporeal.computer.types.DataType;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * An item that may carry a Datum<?>.
@@ -49,5 +55,15 @@ public class TicketItem<T> extends Item {
 		if(datum.isEmpty()) key += ".blank";
 		
 		return new TranslatableComponent(key, datum.describe());
+	}
+	
+	@Override
+	public InteractionResult useOn(UseOnContext ctx) {
+		@Nullable DatumAcceptor acceptor = NotCapabilities.findDatumAcceptor(ctx.getLevel(), ctx.getClickedPos(), null, null, null, true);
+		if(acceptor != null) {
+			acceptor.acceptDatum(get(ctx.getItemInHand()));
+			return InteractionResult.SUCCESS;
+		}
+		return InteractionResult.PASS;
 	}
 }
