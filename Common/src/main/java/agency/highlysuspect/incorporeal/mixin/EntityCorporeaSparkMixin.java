@@ -24,7 +24,7 @@ public abstract class EntityCorporeaSparkMixin implements CorporeaPylonBlockEnti
 	//the value is "world time since a corporea pylon last pinged me about this remote binding"
 	@Unique WeakHashMap<ICorporeaSpark, Long> remoteBindings = new WeakHashMap<>();
 	
-	@Shadow protected abstract void findNetwork();
+	@Shadow(remap = false) protected abstract void findNetwork();
 	
 	@Override
 	public boolean registerRemoteBinding(ICorporeaSpark other) {
