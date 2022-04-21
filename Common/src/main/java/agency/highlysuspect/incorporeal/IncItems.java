@@ -112,12 +112,9 @@ public class IncItems {
 	
 	public static void register(BiConsumer<Item, ResourceLocation> rRaw) {
 		//Instantiating any ItemBauble explodes if it happens before EquipmentHandler is ready.
-		//EquipmentHandlerMixin is used to ensure that, if EquipmentHandler is initialized once, it does not get initialized again.
 		//In practice, this only happens in dev instances on Fabric if we get unlucky and load before Botania.
-		if(EquipmentHandler.instance == null) {
-			Inc.LOGGER.warn("Initializing Botania EquipmentHandler early! https://github.com/VazkiiMods/Botania/issues/4001");
-			EquipmentHandler.init();
-		}
+		//These days EquipmentHandler.init is sorta idempotent. It's ok if I call it and then botania calls it as part of its init process.
+		EquipmentHandler.init();
 		DATA_MONOCLE = new ItemMonocle(props().stacksTo(1));
 		
 		ItemRegistrar r = rRaw::accept;
