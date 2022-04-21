@@ -65,7 +65,6 @@ public class IncCommonTagGen {
 			IncBlocks.CORPOREA_SOLIDIFIER,
 			IncBlocks.RED_STRING_LIAR,
 			IncBlocks.RED_STRING_CONSTRICTOR,
-			IncBlocks.FRAME_TINKERER,
 			IncBlocks.CORPOREA_PYLON,
 			
 			IncBlocks.ENDER_SOUL_CORE,
@@ -82,5 +81,9 @@ public class IncCommonTagGen {
 			//tatoes -> left out because botania does too
 			//(and also because i think their long breaking times are funny)
 			.save(files);
+		
+		DataDsl.blockTag(BlockTags.MINEABLE_WITH_AXE).addBlocks(
+			IncBlocks.FRAME_TINKERER
+		).save(files);
 	}
 }

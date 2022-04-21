@@ -16,13 +16,13 @@
         ]
       }
     },
-    "livingrock": {
+    "livingwood_planks": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "botania:livingrock"
+              "botania:livingwood_planks"
             ]
           }
         ]
@@ -50,7 +50,7 @@
   "requirements": [
     [
       "manasteel_ingots",
-      "livingrock",
+      "livingwood_planks",
       "item_frame",
       "has_the_recipe"
     ]

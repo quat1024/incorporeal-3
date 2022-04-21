@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "SLS",
+    "LSL",
     "LFL"
   ],
   "key": {
@@ -9,7 +9,7 @@
       "tag": "botania:manasteel_ingots"
     },
     "L": {
-      "item": "botania:livingrock"
+      "item": "botania:livingwood_planks"
     },
     "F": {
       "item": "minecraft:item_frame"

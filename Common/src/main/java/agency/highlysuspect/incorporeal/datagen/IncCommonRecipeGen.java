@@ -48,9 +48,9 @@ public class IncCommonRecipeGen {
 			.save(files);
 		
 		//Frame Tinkerer
-		RecipeDsl.shaped(IncBlocks.FRAME_TINKERER, "SLS", "LFL")
+		RecipeDsl.shaped(IncBlocks.FRAME_TINKERER, "LSL", "LFL")
 			.define("S", ModTags.Items.INGOTS_MANASTEEL)
-			.define("L", ModBlocks.livingrock)
+			.define("L", ModBlocks.livingwoodPlanks)
 			.define("F", Items.ITEM_FRAME)
 			.save(files);
 		
