@@ -1,0 +1,14 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "incorporeal:item/bound_ender_pearl/base"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"incorporeal:is_bound": 1
+			},
+			"model": "incorporeal:item/bound_ender_pearl_bound"
+		}
+	]
+}

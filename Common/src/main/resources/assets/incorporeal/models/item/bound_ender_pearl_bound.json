@@ -1,0 +1,7 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "incorporeal:item/bound_ender_pearl/base",
+		"layer1": "incorporeal:item/bound_ender_pearl/cycle"
+	}
+}

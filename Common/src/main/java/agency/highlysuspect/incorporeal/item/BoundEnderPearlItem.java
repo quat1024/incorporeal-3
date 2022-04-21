@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
@@ -49,8 +50,7 @@ public class BoundEnderPearlItem extends Item {
 	public static final int TOTAL_CHARGES = 10;
 	public static final int MANA_PER_CHARGE = 1000;
 	public static final int MANA_CONTAINER_SIZE = TOTAL_CHARGES * MANA_PER_CHARGE;
-	//how much mana it draws into itself per tick
-	public static final int MANA_RECHARGE_RATE = MANA_PER_CHARGE / 20 / 5;
+	public static final int MANA_RECHARGE_RATE = MANA_PER_CHARGE / 20 / 5; //5 seconds per charge is fair i think
 	
 	public @Nullable UUID getOwnerUuid(ItemStack stack) {
 		return MoreNbtHelpers.getUuid(stack, OWNER_KEY, null);
@@ -68,25 +68,24 @@ public class BoundEnderPearlItem extends Item {
 	public void bindTo(ItemStack stack, Player player) {
 		MoreNbtHelpers.setUuid(stack, OWNER_KEY, player.getUUID());
 		ItemNBTHelper.setString(stack, OWNER_NAME_KEY, player.getGameProfile().getName());
+		
+		IManaItem manaItem = IXplatAbstractions.INSTANCE.findManaItem(stack);
+		if(manaItem != null) manaItem.addMana(manaItem.getMaxMana()); //free mana woo
 	}
 	
-	public void payMana(@Nullable Player player, ItemStack stack) {
+	public void payMana(@Nullable Player player, @Nullable InteractionHand hand, ItemStack stack) {
 		IManaItem manaItem = IXplatAbstractions.INSTANCE.findManaItem(stack);
 		if(manaItem == null) return;
 		
-		//Try drawing from the player's own mana inventory first
-		if(player != null && ManaItemHandler.instance().requestManaExactForTool(stack, player, MANA_PER_CHARGE, false)) {
-			ManaItemHandler.instance().requestManaExactForTool(stack, player, MANA_PER_CHARGE, true);
-			return;
-		}
-		
-		//There was not enough mana in the player inventory. Remove mana from my own inventory
 		manaItem.addMana(-MANA_PER_CHARGE);
 		
 		//If there is no more mana, break
 		if(manaItem.getMana() <= 0) {
 			stack.setCount(0);
-			if(player != null) player.broadcastBreakEvent(InteractionHand.MAIN_HAND); //i guess
+			if(player != null && hand != null) {
+				player.setItemInHand(hand, ItemStack.EMPTY);
+				player.broadcastBreakEvent(hand);
+			}
 		}
 	}
 	
@@ -95,12 +94,12 @@ public class BoundEnderPearlItem extends Item {
 		IManaItem manaItem = IXplatAbstractions.INSTANCE.findManaItem(stack);
 		if(manaItem == null) return;
 		
-		//yes, this slighly overfills it. i think it's fine
+		int howMuchToRequest = Math.min(manaItem.getMaxMana() - manaItem.getMana(), MANA_RECHARGE_RATE);
 		if (!world.isClientSide && entity instanceof Player player &&
 			manaItem.getMana() <= manaItem.getMaxMana() &&
-			ManaItemHandler.instance().requestManaExactForTool(stack, player, MANA_RECHARGE_RATE, true) //yooo armor mana discounts?? :real:
+			ManaItemHandler.instance().requestManaExactForTool(stack, player, howMuchToRequest, true) //yooo armor mana discounts?? :real:
 		) {
-			manaItem.addMana(MANA_RECHARGE_RATE);
+			manaItem.addMana(howMuchToRequest);
 		}
 	}
 	
@@ -127,16 +126,11 @@ public class BoundEnderPearlItem extends Item {
 			//basically paste from EnderpearlItem
 			//note that owner does't necessarily equal "player", the thrower
 			yeetEnderpearl(slevel, owner, held, pearl -> pearl.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 1.5f, 1));
-			payMana(player, held);
-			if(!player.getAbilities().instabuild) player.getCooldowns().addCooldown(this, 20); //no spam
+			payMana(player, hand, held);
+			//if(!player.getAbilities().instabuild) player.getCooldowns().addCooldown(this, 20); //slow mana recharge rate takes care of this imo
 		}
 		
 		return InteractionResultHolder.success(held);
-	}
-	
-	@Override
-	public boolean isFoil(ItemStack stack) {
-		return super.isFoil(stack) || getOwnerUuid(stack) != null;
 	}
 	
 	@Override
@@ -184,7 +178,7 @@ public class BoundEnderPearlItem extends Item {
 				pearl.shoot(dir.getStepX(), dir.getStepY() + 0.1f, dir.getStepZ(), 1.1f, 6f);
 			});
 			
-			payMana(null, stack);
+			payMana(null, null, stack);
 			
 			setSuccess(true);
 			return stack;
@@ -213,7 +207,7 @@ public class BoundEnderPearlItem extends Item {
 		
 		@Override
 		public void addMana(int mana) {
-			ItemNBTHelper.setInt(stack, MANA_KEY, getMana() + mana);
+			ItemNBTHelper.setInt(stack, MANA_KEY, Mth.clamp(getMana() + mana, 0, getMaxMana()));
 		}
 		
 		@Override

@@ -117,14 +117,17 @@ public class IncClientProperties {
 	}
 	
 	public static void registerItemColorProviders(ColorHandler.ItemHandlerConsumer r) {
+		//Tint the Bound Ender Pearl based on how much mana it contains
 		r.register((stack, tintIndex) -> {
 			if(tintIndex != 0) return 0xFFFFFF;
+			if(IncItems.BOUND_ENDER_PEARL.getOwnerUuid(stack) == null) return 0x777777;
 			
 			IManaItem manaItem = IXplatAbstractions.INSTANCE.findManaItem(stack);
 			if(manaItem == null || manaItem.getMaxMana() == 0) return 0xFF0000;
 			
 			float percentageFull = (float) manaItem.getMana() / manaItem.getMaxMana();
-			return Mth.hsvToRgb(percentageFull / 3f, 1, 1);
+			percentageFull = Mth.clamp(percentageFull, 0, 1); //This blew up in my face before idk, hsvtorgb is kinda picky
+			return Mth.hsvToRgb(percentageFull / 2f, 1, 1);
 		}, IncItems.BOUND_ENDER_PEARL);
 	}
 	
@@ -143,11 +146,9 @@ public class IncClientProperties {
 			});
 		}
 		
-		r.accept(IncItems.BOUND_ENDER_PEARL, Inc.id("mana_charge"), (ClampedItemPropertyFunction) (stack, level, ent, seed) -> {
-			IManaItem manaItem = IXplatAbstractions.INSTANCE.findManaItem(stack);
-			if(manaItem == null || manaItem.getMaxMana() == 0) return 0f;
-			else return (float) Mth.clamp(manaItem.getMana() / manaItem.getMaxMana(), 0, 1);
-		});
+		//Eonly draw the wueiwoieuoi eroeurutueiuuuey thing if its actively bound
+		r.accept(IncItems.BOUND_ENDER_PEARL, Inc.id("is_bound"), (ClampedItemPropertyFunction) (stack, level, ent, seed) -> 
+			IncItems.BOUND_ENDER_PEARL.getOwnerUuid(stack) == null ? 0 : 1);
 	}
 	
 	/// Entity renderers ///
