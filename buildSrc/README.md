@@ -22,6 +22,8 @@ So here I declare four Gradle plugins. `java-conventions` is the root plugin, an
 
 In the subprojects, I have a dedicated space to put mod dependencies (botania, trinkets, etc) separate from other dependencies like minecraft or fabric-loader deps, and I can add any other bits that are *specific* to building Incorporeal 3 the Botania addon, as opposed to any other multiloader mod. That's the goal of this whole scheme, really, I can separate things special about building my mod, from things special about building multiloader mods, from things special about building Java applications in general.
 
+Ideally you should be able to lift all of the `-conventions` gradle scripts out of this project, place them unmodified into another project, and have everything Just Work Tm.
+
 Of course the downside of this splitting scheme is, well, things are split, the build process is now scattered across 10 different files. I hope it makes enough sense to be navigable.
 
 ## `build.gradle.kts`
@@ -51,14 +53,19 @@ Here is where I apply and configure the Loom and ForgeGradle/MixinGradle plugins
 * set `archivesName` to include a `-fabric` or `-forge` suffix,
 * set up a `processResources` block, to substitute in the mod version into the `fabric.mod.json`/`mods.toml` (this is kinda crappy because im bad at gradle).
 
-In fabric-conventions I add a dep on fabric-loader. FG requires manually declaring run configs so this is also where that happens (TODO).
-
-Basically just, all the stuff you do any time you write any mod (with mixins).
-
-(TODO: in forge conventions I need to mention my mixin.jsons) 
+In fabric-conventions I add a dep on fabric-loader. FG requires manually declaring run configs so this is also where that happens. Basically just, all the stuff you do any time you write any mod with mixins.
 
 ## `incorporeal.repositories.gradle.kts`
 
 ok this is less "Gradle plugin", more "huge `repositories { }` block that gets included in everything so I don't have half a dozen `repositories` blocks scattered all over the place". Each one is configured with `includeGroup`, filtering it to the things that actually come out of that repository.
 
 The only other `repositories` block is in `build.gradle.kts`, used to fetch VanillaGradle/Loom/ForgeGradle itself. Those are also filtered, except for `gradlePluginPortal()` because gradle plugins tend to have 100 million transitive deps.
+
+# Things to do
+
+* I don't have a forge server run config. This should be trivial to add, I just have to do it.
+* Maven publication is not set up.
+* When I tried this on 1.16 projects, it didn't seem to work very well.
+* non-`Common` `-sources` jars don't contain `Common` sources
+  * https://github.com/VazkiiMods/Botania/commit/48103b54fe2ff2c9b34b021fb3a8c7ca106fdb67 but i need to make it work on kotlin buildscripts lmao
+* Not actually sure what's the difference between "depending on `:Common`" and "adding its source set to the compilation classpath", and if i need to do either or both

@@ -48,15 +48,13 @@ builds every 48 hours (to account for botania updates): [![the fake](https://git
   * gameplay tweaks
   * documentation
   * models and textures
-  * entity support for the thingies
 * release:)
 
 ## Things that will not be ported
 
 * frame screw
   * I don't like it and didn't port it for 1.16 either
-  * n.b., computermod can probably read/write its rotation
-    * will need a mixin to make it properly serialize rotation when the frame is empty
+  * Computermod can read/write the rotation of frames
 * Rhododendrite
   * I want to go in a different direction
   * will be integrated into the main addon, and not its own thing
@@ -79,9 +77,11 @@ See:
 * `(Common|Fabric|Forge)/build.gradle.kts` for settings relevant to "being a Botania addon"
 * `gradle.properties` for build variables like name and version number
 
+See `buildSrc/README.md` for more information.
+
 Keep in mind:
 * The ["xxx: Type by project" syntax](https://docs.gradle.org/current/userguide/kotlin_dsl.html#kotdsl:properties) plucks a value out of `gradle.properties`, I use this file for many project-wide properties.
-* The current version of Botania being depended on is `1.18.2-431-SNAPSHOT`, a.k.a, basically Botania `1.18.x` `HEAD`.
+* The current version of Botania being depended on is `1.18.2-432-SNAPSHOT`, a.k.a, basically Botania `1.18.x` `HEAD`.
   * Jared's jenkins doesn't store `-SNAPSHOT` versions for an indefinite amount of time, so the build may break.
   * The API surface may change out from under me, which will also cause the build to break.
   * The Botania version may be set in `gradle.properties`.
@@ -96,14 +96,6 @@ If you're using Eclipse:
 * Good luck!
 * I heard turning off the Kotlin integration and letting buildship treat it as a black-box might help?
 * Sorry about that.
-
-## things i need to add to the buildscript
-
-* forge server run configuration
-* TEST IT MORE, test remapping, test refmaps in prod, test test !!
-* non-`Common` `-sources` jars don't contain `Common` sources
-  * https://github.com/VazkiiMods/Botania/commit/48103b54fe2ff2c9b34b021fb3a8c7ca106fdb67 but i need to make it work on kotlin buildscripts lmao
-* figure out what's the difference between depending on `:Common` and adding its source set to the compilation classpath, and if you need to do both
 
 ### Why are you using kotlin buildscripts
 
