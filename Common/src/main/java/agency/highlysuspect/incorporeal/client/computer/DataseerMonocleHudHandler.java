@@ -70,7 +70,7 @@ public class DataseerMonocleHudHandler {
 		int halfwidth = mc.getWindow().getGuiScaledWidth() / 2;
 		int halfheight = mc.getWindow().getGuiScaledHeight() / 2;
 		
-		DatumRenderers.drawCentered(mc, pose, new TextComponent("i know the hud is trash"), halfwidth, 10, 0xFF0000);
+		//DatumRenderers.drawCentered(mc, pose, new TextComponent("i know the hud is trash"), halfwidth, 10, 0xFF0000);
 		
 		if(provider != null) {
 			pose.pushPose();
