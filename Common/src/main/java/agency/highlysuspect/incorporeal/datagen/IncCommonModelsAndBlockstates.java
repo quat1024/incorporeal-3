@@ -181,6 +181,9 @@ public class IncCommonModelsAndBlockstates {
 		}
 		
 		/// Computer ///
+		itemGenerated(IncItems.ENTERBRILLIANCE, Inc.id("item/computer/enterbrilliance"));
+		itemGenerated(IncItems.DATA_MONOCLE, Inc.id("item/computer/monocle"));
+		
 		//tickets (done manually, i cba to figure out datagenning item property overrides)
 		
 		//ticket conjurers
@@ -199,6 +202,7 @@ public class IncCommonModelsAndBlockstates {
 		itemLens(IncItems.NUMBER_LENS, lensGlassDark, Inc.id("item/computer/number_lens"));
 		itemLens(IncItems.MATCHER_LENS, lensGlassDark, Inc.id("item/computer/matcher_lens"));
 		itemLens(IncItems.NEGATING_LENS, lensGlassDarkSmall, Inc.id("item/computer/negating_lens"));
+		itemLens(IncItems.COMPUTATIONAL_LENS_PATTERN, lensGlassDark, Inc.botaniaId("item/lens_normal"));
 		
 		//datastone
 		singleVariantCubeAll(IncBlocks.DATASTONE_BLOCK, Inc.id("block/computer/datastone"));

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "botania:lens_normal"
+    },
+    {
+      "item": "incorporeal:enterbrilliance"
+    }
+  ],
+  "result": {
+    "item": "incorporeal:computational_lens_pattern"
+  }
+}

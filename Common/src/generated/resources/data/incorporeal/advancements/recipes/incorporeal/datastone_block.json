@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:datastone_block"
+    ]
+  },
+  "criteria": {
+    "dripstone_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:dripstone_block"
+            ]
+          }
+        ]
+      }
+    },
+    "enterbrilliance": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "incorporeal:enterbrilliance"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:datastone_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "dripstone_block",
+      "enterbrilliance",
+      "has_the_recipe"
+    ]
+  ]
+}

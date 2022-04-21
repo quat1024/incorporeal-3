@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    " C ",
+    "TCT"
+  ],
+  "key": {
+    "P": {
+      "item": "botania:corporea_spark"
+    },
+    "C": {
+      "item": "botania:corporea_block"
+    },
+    "T": {
+      "item": "botania:terrasteel_ingot"
+    }
+  },
+  "result": {
+    "item": "incorporeal:corporea_pylon",
+    "count": 4
+  }
+}

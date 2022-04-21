@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:dripstone_block"
+    },
+    {
+      "item": "incorporeal:enterbrilliance"
+    }
+  ],
+  "result": {
+    "item": "incorporeal:datastone_block"
+  }
+}

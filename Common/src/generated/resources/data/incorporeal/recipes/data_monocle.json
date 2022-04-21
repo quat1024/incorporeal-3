@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "botania:monocle"
+    },
+    {
+      "item": "incorporeal:enterbrilliance"
+    }
+  ],
+  "result": {
+    "item": "incorporeal:data_monocle"
+  }
+}

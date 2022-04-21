@@ -54,6 +54,20 @@ public class IncCommonRecipeGen {
 			.define("F", Items.ITEM_FRAME)
 			.save(files);
 		
+		//Corporea Pylon
+		RecipeDsl.shaped(IncBlocks.CORPOREA_PYLON, 4, " P ", " C ", "TCT")
+			.define("P", ModItems.corporeaSpark)
+			.define("C", ModBlocks.corporeaBlock)
+			.define("T", ModItems.terrasteel) //this mf expensive
+			.save(files);
+		
+		//Bound Ender Pearl
+		RecipeDsl.runic(IncItems.BOUND_ENDER_PEARL, RunicAltarRecipeBuilder.TIER_2)
+			.add(ModItems.manaPearl)
+			.add(ModItems.terrasteelNugget)
+			.add(IncItems.ENTERBRILLIANCE)
+			.save(files);
+		
 		//Soul Core Frame
 		RecipeDsl.runic(IncItems.SOUL_CORE_FRAME, RunicAltarRecipeBuilder.TIER_3)
 			//done in this funny way because runic altar recipes have an ingredient order -
@@ -130,6 +144,26 @@ public class IncCommonRecipeGen {
 			RecipeDsl.uncompressTo9(big, small).save(files, uncompressId);
 		}
 		
+		/// Computer ///
+		
+		//Enterbrilliance
+		//idk lol!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! maybe as a mechanic instead
+		
+		//Computational lenses
+		RecipeDsl.shapeless(IncItems.COMPUTATIONAL_LENS_PATTERN)
+			.add(ModItems.lensNormal)
+			.add(IncItems.ENTERBRILLIANCE)
+			.save(files);
+		RecipeDsl.stonecutting(IncItems.NUMBER_LENS).input(IncItems.COMPUTATIONAL_LENS_PATTERN).save(files);
+		RecipeDsl.stonecutting(IncItems.MATCHER_LENS).input(IncItems.COMPUTATIONAL_LENS_PATTERN).save(files);
+		RecipeDsl.stonecutting(IncItems.NEGATING_LENS).input(IncItems.COMPUTATIONAL_LENS_PATTERN).save(files);
+		
+		//Monocle
+		RecipeDsl.shapeless(IncItems.DATA_MONOCLE)
+			.add(ModItems.monocle)
+			.add(IncItems.ENTERBRILLIANCE)
+			.save(files);
+		
 		//Ticket Conjurer
 		RecipeDsl.shaped(IncItems.SOLIDIFIED_REQUEST_CONJURER, "SES", "EIE", "SES")
 			.define("S", ModTags.Items.INGOTS_MANASTEEL)
@@ -140,5 +174,15 @@ public class IncCommonRecipeGen {
 		RecipeDsl.stonecuttingGroup(DataTypes.allConjurerItems())
 			.group("conjurers")
 			.save(files);
+		
+		//Datastone Block
+		RecipeDsl.shapeless(IncBlocks.DATASTONE_BLOCK)
+			.add(Blocks.DRIPSTONE_BLOCK)
+			.add(IncItems.ENTERBRILLIANCE)
+			.save(files);
+		RecipeDsl.shaped(IncBlocks.DATASTONE_BLOCK, "PP", "PP")
+			.define("P", IncItems.POINTED_DATASTONE)
+			.save(files, Inc.id("datastone_block_alt"));
+		//pointed datastone itself doesnt need to be craftable because you can make it grow with the game mechanics
 	}
 }

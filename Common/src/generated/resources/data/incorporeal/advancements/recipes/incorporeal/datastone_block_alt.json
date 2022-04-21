@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:datastone_block_alt"
+    ]
+  },
+  "criteria": {
+    "pointed_datastone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "incorporeal:pointed_datastone"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:datastone_block_alt"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "pointed_datastone",
+      "has_the_recipe"
+    ]
+  ]
+}

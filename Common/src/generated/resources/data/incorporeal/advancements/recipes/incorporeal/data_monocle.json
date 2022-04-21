@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:data_monocle"
+    ]
+  },
+  "criteria": {
+    "monocle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "botania:monocle"
+            ]
+          }
+        ]
+      }
+    },
+    "enterbrilliance": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "incorporeal:enterbrilliance"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:data_monocle"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "monocle",
+      "enterbrilliance",
+      "has_the_recipe"
+    ]
+  ]
+}

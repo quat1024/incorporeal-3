@@ -1,0 +1,60 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:corporea_pylon"
+    ]
+  },
+  "criteria": {
+    "corporea_spark": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "botania:corporea_spark"
+            ]
+          }
+        ]
+      }
+    },
+    "corporea_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "botania:corporea_block"
+            ]
+          }
+        ]
+      }
+    },
+    "terrasteel_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "botania:terrasteel_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:corporea_pylon"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "corporea_spark",
+      "corporea_block",
+      "terrasteel_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

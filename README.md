@@ -38,6 +38,9 @@ builds every 48 hours (to account for botania updates): [![the fake](https://git
 * clearly you do not own an air fryer
 * Red String Constrictor
 * Compressed Tiny Potatoes from botania tweaks 1.12 (as well as some uncompressed ones)
+* All new computermod that isnt like rhododendrite
+* Corporea Pylon
+* Bound Ender Pearl
 
 ## Things left to do
 

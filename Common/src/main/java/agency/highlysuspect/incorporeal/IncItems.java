@@ -1,9 +1,9 @@
 package agency.highlysuspect.incorporeal;
 
-import agency.highlysuspect.incorporeal.computer.EmptyType;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import agency.highlysuspect.incorporeal.item.BoundEnderPearlItem;
+import agency.highlysuspect.incorporeal.item.ShinyItem;
 import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
 import agency.highlysuspect.incorporeal.item.TicketItem;
 import agency.highlysuspect.incorporeal.item.NotManaLens;
@@ -13,7 +13,6 @@ import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Unit;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
@@ -82,24 +81,29 @@ public class IncItems {
 			COMPRESSED_TATERS.put(level, new ItemBlockTinyPotato(block, props().rarity(level == 8 ? Rarity.EPIC : Rarity.UNCOMMON))));
 	}
 	
-	//computer
+	/// computer ///
+	//crafting and misc
+	public static final ShinyItem ENTERBRILLIANCE = new ShinyItem(props().rarity(Rarity.RARE));
+	public static final Item COMPUTATIONAL_LENS_PATTERN = new Item(props().stacksTo(16));
+	public static ItemMonocle DATA_MONOCLE; //Gets constructed late, see other comment
+	
+	//tickets and conjurers
 	public static final TicketItem<Unit> EMPTY_TICKET = new TicketItem<>(DataTypes.EMPTY, props());
 	public static final TicketItem<Integer> INTEGER_TICKET = new TicketItem<>(DataTypes.INTEGER, props());
 	public static final TicketItem<ICorporeaRequestMatcher> MATCHER_TICKET = new TicketItem<>(DataTypes.MATCHER, props());
 	public static final TicketItem<SolidifiedRequest> SOLIDIFIED_REQUEST_TICKET = new TicketItem<>(DataTypes.SOLIDIFIED_REQUEST, props());
-	
 	public static final TicketConjurerItem<Unit> EMPTY_CONJURER = new TicketConjurerItem<>(DataTypes.EMPTY, props().stacksTo(1));
 	public static final TicketConjurerItem<Integer> INTEGER_CONJURER = new TicketConjurerItem<>(DataTypes.INTEGER, props().stacksTo(1));
 	public static final TicketConjurerItem<ICorporeaRequestMatcher> MATCHER_CONJURER = new TicketConjurerItem<>(DataTypes.MATCHER, props().stacksTo(1));
 	public static final TicketConjurerItem<SolidifiedRequest> SOLIDIFIED_REQUEST_CONJURER = new TicketConjurerItem<>(DataTypes.SOLIDIFIED_REQUEST, props().stacksTo(1));
 	
+	//funnel and lenses
 	public static final BlockItem DATA_FUNNEL = new BlockItem(IncBlocks.DATA_FUNNEL, props());
-	public static final ItemLens NUMBER_LENS = new ItemLens(props(), new NotManaLens(DataLenses.number), 0);
-	public static final ItemLens MATCHER_LENS = new ItemLens(props(), new NotManaLens(DataLenses.matcher), 0);
-	public static final ItemLens NEGATING_LENS = new ItemLens(props(), new NotManaLens(DataLenses.negating), 0);
+	public static final ItemLens NUMBER_LENS = new ItemLens(props().stacksTo(16), new NotManaLens(DataLenses.number), 0);
+	public static final ItemLens MATCHER_LENS = new ItemLens(props().stacksTo(16), new NotManaLens(DataLenses.matcher), 0);
+	public static final ItemLens NEGATING_LENS = new ItemLens(props().stacksTo(16), new NotManaLens(DataLenses.negating), 0);
 	public static final BlockItem DATASTONE_BLOCK = new BlockItem(IncBlocks.DATASTONE_BLOCK, props());
 	public static final BlockItem POINTED_DATASTONE = new BlockItem(IncBlocks.POINTED_DATASTONE, props());
-	public static ItemMonocle DATA_MONOCLE; //Gets constructed late, see other comment
 	
 	//Capability stuff.
 	public static final Map<Item, Function<ItemStack, ICoordBoundItem>> COORD_BOUND_ITEM_MAKERS = Map.of( //(N.B: Map.of caps at 10 entries)
@@ -169,6 +173,9 @@ public class IncItems {
 		r.acceptBlockItems(COMPRESSED_TATERS.values());
 		
 		//Computer
+		r.accept(ENTERBRILLIANCE, Inc.id("enterbrilliance"));
+		r.accept(COMPUTATIONAL_LENS_PATTERN, Inc.id("computational_lens_pattern"));
+		
 		r.accept(EMPTY_TICKET, Inc.id("empty_ticket"));
 		r.accept(INTEGER_TICKET, Inc.id("integer_ticket"));
 		r.accept(MATCHER_TICKET, Inc.id("matcher_ticket"));
