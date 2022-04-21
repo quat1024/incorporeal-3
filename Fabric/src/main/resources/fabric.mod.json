@@ -16,10 +16,13 @@
 		"everyone who puts up with me"
 	],
 	"contact": {
-		"homepage": "https://highlysuspect.agency"
+		"homepage": "https://highlysuspect.agency",
+		"sources": "https://github.com/quat1024/incorporeal-3",
+		"issues": "https://github.com/quat1024/incorporeal-3/issues"
 	},
 	
 	"license": "LGPL-3.0-or-later",
+	"icon": "square_lores_banner.png",
 	
 	"environment": "*",
 	"entrypoints": {

@@ -1,6 +1,8 @@
 modLoader = "javafml"
 loaderVersion = "[39,)"
 license = "LGPL-3.0-or-later"
+issueTrackerURL = "https://github.com/quat1024/incorporeal-3/issues"
+logoFile = "wide_lores_banner.png"
 
 [[mods]]
 modId = "incorporeal"
