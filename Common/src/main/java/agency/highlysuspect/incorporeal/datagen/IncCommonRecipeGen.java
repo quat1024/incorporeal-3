@@ -19,17 +19,6 @@ import java.util.function.Consumer;
 
 public class IncCommonRecipeGen {
 	public static void doIt(DataGenerator datagen, Consumer<JsonFile> files) {
-		//Ticket Conjurer
-		RecipeDsl.shaped(IncItems.SOLIDIFIED_REQUEST_CONJURER, "SES", "EIE", "SES")
-			.define("S", ModTags.Items.INGOTS_MANASTEEL)
-			.define("E", ModTags.Items.INGOTS_ELEMENTIUM)
-			.define("I", ModBlocks.corporeaIndex)
-			.save(files);
-		//and a stonecutting group to convert between them, for good measure
-		RecipeDsl.stonecuttingGroup(DataTypes.allConjurerItems())
-			.group("conjurers")
-			.save(files);
-		
 		//Rod of the Fractured Space
 		RecipeDsl.shaped(IncItems.FRACTURED_SPACE_ROD, " EG", " TE", "T  ")
 			.define("E", Items.ENDER_EYE)
@@ -64,6 +53,33 @@ public class IncCommonRecipeGen {
 			.define("L", ModBlocks.livingrock)
 			.define("F", Items.ITEM_FRAME)
 			.save(files);
+		
+		//Soul Core Frame
+		RecipeDsl.runic(IncItems.SOUL_CORE_FRAME, RunicAltarRecipeBuilder.TIER_3)
+			//done in this funny way because runic altar recipes have an ingredient order -
+			//it's cosmetic only, ofc, but i like this symmetrical ordering
+			.add(Blocks.ICE, 4).add(ModItems.pixieDust).add(Blocks.ICE, 4).add(ModItems.pixieDust)
+			.save(files);
+		
+		//Ender Soul Core
+		RecipeDsl.runic(IncBlocks.ENDER_SOUL_CORE, RunicAltarRecipeBuilder.TIER_3 * 2)
+			.add(IncItems.SOUL_CORE_FRAME)
+			.add(ModTags.Items.GEMS_DRAGONSTONE, 2)
+			.add(ModItems.manaweaveCloth, 2)
+			.add(ModItems.enderHand)
+			.save(files);
+		
+		//Potion Soul Core
+		RecipeDsl.runic(IncBlocks.POTION_SOUL_CORE, RunicAltarRecipeBuilder.TIER_3 * 2)
+			.add(IncItems.SOUL_CORE_FRAME)
+			.add(ModTags.Items.GEMS_DRAGONSTONE, 2)
+			.add(ModItems.manaweaveCloth, 2)
+			.add(ModItems.bloodPendant)
+			.save(files);
+		
+		//Stonecutting for the Natural Devices so you dont have to get them randomly lol
+		RecipeDsl.stonecutting(IncBlocks.NATURAL_REPEATER).input(ModItems.redstoneRoot).save(files);
+		RecipeDsl.stonecutting(IncBlocks.NATURAL_COMPARATOR).input(ModItems.redstoneRoot).save(files);
 		
 		//Sanvocalia
 		RecipeDsl.apothecary(IncBlocks.SANVOCALIA)
@@ -102,29 +118,6 @@ public class IncCommonRecipeGen {
 			.group("unstable_cubes")
 			.save(files);
 		
-		//Soul Core Frame
-		RecipeDsl.runic(IncItems.SOUL_CORE_FRAME, RunicAltarRecipeBuilder.TIER_3)
-			//done in this funny way because runic altar recipes have an ingredient order -
-			//it's cosmetic only, ofc, but i like this symmetrical ordering
-			.add(Blocks.ICE, 4).add(ModItems.pixieDust).add(Blocks.ICE, 4).add(ModItems.pixieDust)
-			.save(files);
-		
-		//Ender Soul Core
-		RecipeDsl.runic(IncBlocks.ENDER_SOUL_CORE, RunicAltarRecipeBuilder.TIER_3 * 2)
-			.add(IncItems.SOUL_CORE_FRAME)
-			.add(ModTags.Items.GEMS_DRAGONSTONE, 2)
-			.add(ModItems.manaweaveCloth, 2)
-			.add(ModItems.enderHand)
-			.save(files);
-		
-		//Potion Soul Core
-		RecipeDsl.runic(IncBlocks.POTION_SOUL_CORE, RunicAltarRecipeBuilder.TIER_3 * 2)
-			.add(IncItems.SOUL_CORE_FRAME)
-			.add(ModTags.Items.GEMS_DRAGONSTONE, 2)
-			.add(ModItems.manaweaveCloth, 2)
-			.add(ModItems.bloodPendant)
-			.save(files);
-		
 		//Compressed Tiny Potatoes
 		for(int i = CompressedTaterUtil.SMALLEST; i < CompressedTaterUtil.LARGEST; i++) {
 			Block small = CompressedTaterUtil.getPotato(i);
@@ -137,8 +130,15 @@ public class IncCommonRecipeGen {
 			RecipeDsl.uncompressTo9(big, small).save(files, uncompressId);
 		}
 		
-		//Stonecutting for the Natural Devices so you dont have to get them randomly lol
-		RecipeDsl.stonecutting(IncBlocks.NATURAL_REPEATER).input(ModItems.redstoneRoot).save(files);
-		RecipeDsl.stonecutting(IncBlocks.NATURAL_COMPARATOR).input(ModItems.redstoneRoot).save(files);
+		//Ticket Conjurer
+		RecipeDsl.shaped(IncItems.SOLIDIFIED_REQUEST_CONJURER, "SES", "EIE", "SES")
+			.define("S", ModTags.Items.INGOTS_MANASTEEL)
+			.define("E", ModTags.Items.INGOTS_ELEMENTIUM)
+			.define("I", ModBlocks.corporeaIndex)
+			.save(files);
+		//and a stonecutting group to convert between them, for good measure
+		RecipeDsl.stonecuttingGroup(DataTypes.allConjurerItems())
+			.group("conjurers")
+			.save(files);
 	}
 }
