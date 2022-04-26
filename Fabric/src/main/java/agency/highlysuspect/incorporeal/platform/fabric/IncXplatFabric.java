@@ -8,7 +8,6 @@ import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import agency.highlysuspect.incorporeal.platform.fabric.block.entity.FabricRedStringConstrictorBlockEntity;
 import agency.highlysuspect.incorporeal.platform.fabric.block.entity.FabricRedStringLiarBlockEntity;
-import agency.highlysuspect.incorporeal.platform.fabric.mixin.FabricAccessorDamageSource;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.FriendlyByteBuf;
@@ -34,7 +33,8 @@ public class IncXplatFabric implements IncXplat {
 	
 	@Override
 	public DamageSource createDamageSource(String name) {
-		return FabricAccessorDamageSource.inc$new(name);
+		//Protected constructor
+		return new DamageSource(name) {};
 	}
 	
 	@Override

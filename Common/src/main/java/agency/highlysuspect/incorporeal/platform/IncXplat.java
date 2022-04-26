@@ -26,7 +26,7 @@ public interface IncXplat {
 	//TODO: Move to IncBootstrapper I think
 	CreativeModeTab createCreativeTab();
 	
-	//The named DamageSource constructor is not public on Fabric
+	//The named DamageSource constructor is protected on Fabric
 	DamageSource createDamageSource(String name);
 	
 	//Send a block of data from server to client, using the incorporeal packet abstraction
