@@ -8,10 +8,9 @@ plugins {
 
 //Set the artifact's version.
 //Here I use the Botania convention of "<game version>-<sequentially increasing number>", which is not actually Semver or anything. Sue me.
+//You could also set "version" directly in gradle.properties, but i like having the mc version thrown in there too.
 val minecraftVersion: String by project
 val buildNumber: String by project
-
-//You could also set "version" directly in gradle.properties, but i like having the mc version thrown in there too.
 val githubActionsCommitHash: String? = System.getenv("GITHUB_SHA")
 version = if(githubActionsCommitHash != null) {
     "$minecraftVersion-$buildNumber-SNAPSHOT-${githubActionsCommitHash.substring(0, 8)}"
