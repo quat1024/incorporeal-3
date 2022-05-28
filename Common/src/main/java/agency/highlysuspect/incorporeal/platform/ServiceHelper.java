@@ -1,7 +1,5 @@
 package agency.highlysuspect.incorporeal.platform;
 
-import agency.highlysuspect.incorporeal.Inc;
-
 import java.util.List;
 import java.util.ServiceLoader;
 import java.util.stream.Collectors;

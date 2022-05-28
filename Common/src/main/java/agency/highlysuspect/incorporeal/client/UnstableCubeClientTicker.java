@@ -26,6 +26,16 @@ public class UnstableCubeClientTicker {
 		self.bump *= self.bumpDecay;
 		
 		if(level.getGameTime() >= self.nextLightningTick) {
+			boolean firstie = self.nextLightningTick == 0;
+			
+			//set the time until the next one
+			self.nextLightningTick = level.getGameTime() + (self.speed > 1.1f ?
+				(int) (60 - Math.min(60, self.speed)) + 3 :
+				level.random.nextInt(60) + 50);
+			
+			//prevent effects from appearing from Every Cube Ever when you first log in (duct tape for https://github.com/quat1024/incorporeal-3/issues/10)
+			if(firstie) return;
+			
 			//add ligtning particle
 			DyeColor color = state.getBlock() instanceof UnstableCubeBlock ub ? ub.color : DyeColor.WHITE;
 			int colorPacked = color.getTextColor();
@@ -37,11 +47,6 @@ public class UnstableCubeClientTicker {
 			Vec3 start = Vec3.atCenterOf(pos);
 			Vec3 end = start.add(level.random.nextDouble() * 2 - 1, level.random.nextDouble() * 2 - 1, level.random.nextDouble() * 2 - 1);
 			IProxy.INSTANCE.lightningFX(start, end, 0.5f, colorPacked, colorDarker);
-			
-			//set the time until the next one
-			self.nextLightningTick = level.getGameTime() + (self.speed > 1.1f ?
-				(int) (60 - Math.min(60, self.speed)) + 3 :
-				level.random.nextInt(60) + 50);
 			
 			//play a sound
 			float volume = self.speed > 1.1f ? self.speed / 170f : 0.1f;
