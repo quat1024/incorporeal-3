@@ -1,3 +1,7 @@
 {
-  "parent": "incorporeal:block/floating_funny"
+  "parent": "minecraft:block/block",
+  "loader": "botania:floating_flower",
+  "flower": {
+    "parent": "incorporeal:block/funny"
+  }
 }

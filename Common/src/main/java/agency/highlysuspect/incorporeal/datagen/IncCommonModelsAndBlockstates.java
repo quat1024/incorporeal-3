@@ -285,8 +285,8 @@ public class IncCommonModelsAndBlockstates {
 		modelOutput.accept(floatingModelId, () -> json);
 		//add a blockstate pointing at it
 		singleVariantBlockState(floating, floatingModelId);
-		//and add an item model pointing at the block model
-		itemBlockModelParent(floating);
+		//output it with the item models (the whole model again without "parent", see https://github.com/quat1024/incorporeal-3/issues/4)
+		modelOutput.accept(DataDsl.prefixPath(Registry.BLOCK.getKey(floating), "item"), () -> json);
 	}
 	
 	/// more complicated blockstates ///
