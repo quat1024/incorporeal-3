@@ -12,12 +12,14 @@ import java.util.function.Consumer;
 
 public class IncCommonTagGen {
 	public static void doIt(DataGenerator datagen, Consumer<JsonFile> files) {
+		/// INCORPOREAL TAGS ///
+		
 		//data viewers
 		DataDsl.itemTag(IncTags.Items.DATA_VIEWERS)
 			.addItems(IncItems.DATA_MONOCLE)
 			.save(files);
 		
-		///
+		/// BOTANIA TAGS ///
 		
 		//rods
 		DataDsl.itemTag(ModTags.Items.RODS)
@@ -58,6 +60,13 @@ public class IncCommonTagGen {
 		//burst viewers (Manaseer Monocle-like items)
 		DataDsl.itemTag(ModTags.Items.BURST_VIEWERS)
 			.addItems(IncItems.DATA_MONOCLE)
+			.save(files);
+		
+		/// VANILLA TAGS ///
+		
+		//carpets
+		DataDsl.blockAndItemTag(BlockTags.CARPETS)
+			.add(IncBlocks.PETAL_CARPETS.values())
 			.save(files);
 		
 		//mineability

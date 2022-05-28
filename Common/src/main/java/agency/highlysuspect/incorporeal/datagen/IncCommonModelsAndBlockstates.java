@@ -160,6 +160,13 @@ public class IncCommonModelsAndBlockstates {
 		singleVariantCubeColumn(IncBlocks.CLEARLY, Inc.id("block/clearly"), Inc.id("black"));
 		itemBlockModelParent(IncBlocks.CLEARLY);
 		
+		ModelTemplate carpetTintindex = template(Inc.id("block/carpet_tintindex"), TextureSlot.WOOL);
+		ResourceLocation petalCarpetModel = carpetTintindex.create(Inc.id("block/petal_block_carpet"), txmap(TextureSlot.WOOL, Inc.botaniaId("block/petal_block")), modelOutput);
+		IncBlocks.PETAL_CARPETS.forEach((color, carpet) -> {
+			singleVariantBlockState(carpet, petalCarpetModel);
+			itemDelegatedTo(carpet, petalCarpetModel);
+		});
+		
 		/// Taters ///
 		for(CompressedTinyPotatoBlock tater : IncBlocks.COMPRESSED_TATERS.values()) {
 			ResourceLocation modelId = ModelLocationUtils.getModelLocation(tater);
@@ -251,7 +258,7 @@ public class IncCommonModelsAndBlockstates {
 	public static void singleVariantThreeHighBottomTop(Block b, ResourceLocation bottom, ResourceLocation top, ResourceLocation side) {
 		singleVariantBlockState(b, threeHighBottomTopTemplate.create(b, txmap(TextureSlot.BOTTOM, bottom, TextureSlot.TOP, top).put(TextureSlot.SIDE, side), modelOutput));
 	}
-		
+	
 	/// generates a flower, and also generates an item model to go with it ///
 	
 	public static final ModelTemplate crossTemplate = template(Inc.botaniaId("block/shapes/cross"), TextureSlot.CROSS);

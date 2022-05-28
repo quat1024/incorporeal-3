@@ -88,6 +88,12 @@ public class NiceTagBuilder {
 			return this;
 		}
 		
+		public Duplex add(Collection<? extends Block> wah) {
+			blocks.addBlocks(wah);
+			items.addItems(wah);
+			return this;
+		}
+		
 		public void save(Consumer<JsonFile> fileConsumer) {
 			blocks.save(fileConsumer);
 			items.save(fileConsumer);

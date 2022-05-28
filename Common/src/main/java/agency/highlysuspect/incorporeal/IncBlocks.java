@@ -7,6 +7,7 @@ import agency.highlysuspect.incorporeal.block.CorporeaSolidifierBlock;
 import agency.highlysuspect.incorporeal.block.CrappyComparatorBlock;
 import agency.highlysuspect.incorporeal.block.CrappyRepeaterBlock;
 import agency.highlysuspect.incorporeal.block.FrameTinkererBlock;
+import agency.highlysuspect.incorporeal.block.PetalCarpetBlock;
 import agency.highlysuspect.incorporeal.block.RedStringConstrictorBlock;
 import agency.highlysuspect.incorporeal.block.RedStringLiarBlock;
 import agency.highlysuspect.incorporeal.block.RedstoneRootCropBlock;
@@ -22,6 +23,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CarpetBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.Material;
@@ -75,8 +77,10 @@ public class IncBlocks {
 			.strength(5f)
 			.noOcclusion()));
 	
-	//clearly
+	//clearly, and other silliness
 	public static final Block CLEARLY = new ClearlyBlock(Properties.of(Material.METAL).sound(SoundType.NETHER_SPROUTS).strength(1f));
+	public static final Map<DyeColor, PetalCarpetBlock> PETAL_CARPETS = Inc.sixteenColors(color -> 
+		new PetalCarpetBlock(color, Properties.copy(getCarpet(color))));
 	
 	//taters
 	public static final Map<Integer, CompressedTinyPotatoBlock> COMPRESSED_TATERS = new LinkedHashMap<>();
@@ -129,6 +133,7 @@ public class IncBlocks {
 		
 		//clearly
 		r.accept(CLEARLY, Inc.id("clearly"));
+		PETAL_CARPETS.forEach((color, block) -> r.accept(block, Inc.id(color.getName() + "_petal_block_carpet")));
 		
 		//taters
 		COMPRESSED_TATERS.forEach((level, block) -> r.accept(block, Inc.id(CompressedTaterUtil.prefix(level))));
@@ -137,5 +142,27 @@ public class IncBlocks {
 		r.accept(DATA_FUNNEL, Inc.id("data_funnel"));
 		r.accept(DATASTONE_BLOCK, Inc.id("datastone_block"));
 		r.accept(POINTED_DATASTONE, Inc.id("pointed_datastone"));
+	}
+	
+	//im sure theres a vanilla method for this hiding somewhere
+	private static Block getCarpet(DyeColor color) {
+		return switch(color) {
+			case WHITE -> Blocks.WHITE_CARPET;
+			case ORANGE -> Blocks.ORANGE_CARPET;
+			case MAGENTA -> Blocks.MAGENTA_CARPET;
+			case LIGHT_BLUE -> Blocks.LIGHT_BLUE_CARPET;
+			case YELLOW -> Blocks.YELLOW_CARPET;
+			case LIME -> Blocks.LIME_CARPET;
+			case PINK -> Blocks.PINK_CARPET;
+			case GRAY -> Blocks.GRAY_CARPET;
+			case LIGHT_GRAY -> Blocks.LIGHT_GRAY_CARPET;
+			case CYAN -> Blocks.CYAN_CARPET;
+			case PURPLE -> Blocks.PURPLE_CARPET;
+			case BLUE -> Blocks.BLUE_CARPET;
+			case BROWN -> Blocks.BROWN_CARPET;
+			case GREEN -> Blocks.GREEN_CARPET;
+			case RED -> Blocks.RED_CARPET;
+			case BLACK -> Blocks.BLACK_CARPET;
+		};
 	}
 }

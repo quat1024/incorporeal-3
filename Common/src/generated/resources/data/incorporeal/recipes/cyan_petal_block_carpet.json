@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "petal_carpets",
+  "pattern": [
+    "XX"
+  ],
+  "key": {
+    "X": {
+      "item": "botania:cyan_petal_block"
+    }
+  },
+  "result": {
+    "item": "incorporeal:cyan_petal_block_carpet",
+    "count": 3
+  }
+}

@@ -71,8 +71,10 @@ public class IncItems {
 	public static final Map<DyeColor, BlockItem> UNSTABLE_CUBES = Inc.sixteenColors(
 		color -> new BlockItem(IncBlocks.UNSTABLE_CUBES.get(color), props()));
 	
-	//Clearly
+	//clearly, and other silliness
 	public static final BlockItem CLEARLY = new BlockItem(IncBlocks.CLEARLY, props());
+	public static final Map<DyeColor, BlockItem> PETAL_CARPETS = Inc.sixteenColors(
+		color -> new BlockItem(IncBlocks.PETAL_CARPETS.get(color), props()));
 	
 	//taters
 	public static final Map<Integer, ItemBlockTinyPotato> COMPRESSED_TATERS = new LinkedHashMap<>();
@@ -166,8 +168,9 @@ public class IncItems {
 		//unstable cubes
 		r.acceptBlockItems(UNSTABLE_CUBES.values());
 		
-		//Clearly
+		//clearly, and other silliness
 		r.acceptBlockItem(CLEARLY);
+		r.acceptBlockItems(PETAL_CARPETS.values());
 		
 		//Taters
 		r.acceptBlockItems(COMPRESSED_TATERS.values());

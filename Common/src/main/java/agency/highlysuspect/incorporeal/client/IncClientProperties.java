@@ -2,6 +2,7 @@ package agency.highlysuspect.incorporeal.client;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncBlocks;
+import agency.highlysuspect.incorporeal.block.PetalCarpetBlock;
 import agency.highlysuspect.incorporeal.block.UnstableCubeBlock;
 import agency.highlysuspect.incorporeal.block.entity.AbstractSoulCoreBlockEntity;
 import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
@@ -17,6 +18,7 @@ import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -29,6 +31,7 @@ import vazkii.botania.client.render.ColorHandler;
 import vazkii.botania.client.render.entity.EntityRenderers;
 import vazkii.botania.client.render.tile.RenderTileRedString;
 import vazkii.botania.client.render.tile.RenderTileSpecialFlower;
+import vazkii.botania.common.helper.ColorHelper;
 import vazkii.botania.network.TriConsumer;
 import vazkii.botania.xplat.IXplatAbstractions;
 
@@ -114,6 +117,12 @@ public class IncClientProperties {
 			if(state.getBlock() instanceof UnstableCubeBlock cube) return cube.color.getFireworkColor();
 			else return 0xFFFFFF;
 		}, IncBlocks.UNSTABLE_CUBES.values().toArray(Block[]::new));
+		
+		//Tint petal carpets
+		r.register((state, level, pos, tintIndex) -> {
+			if(state.getBlock() instanceof PetalCarpetBlock carpet) return ColorHelper.getColorValue(carpet.getColor());
+			else return 0xFFFFFF;
+		}, IncBlocks.PETAL_CARPETS.values().toArray(Block[]::new));
 	}
 	
 	public static void registerItemColorProviders(ColorHandler.ItemHandlerConsumer r) {
@@ -129,6 +138,11 @@ public class IncClientProperties {
 			percentageFull = Mth.clamp(percentageFull, 0, 1); //This blew up in my face before idk, hsvtorgb is kinda picky
 			return Mth.hsvToRgb(percentageFull / 2f, 1, 1);
 		}, IncItems.BOUND_ENDER_PEARL);
+		
+		//Tint petal carpets
+		r.register((stack, tintIndex) ->
+			//beautiful. I love java
+			ColorHelper.getColorValue(((PetalCarpetBlock) ((BlockItem) stack.getItem()).getBlock()).getColor()), IncItems.PETAL_CARPETS.values().toArray(BlockItem[]::new));
 	}
 	
 	/// Item property overrides ///

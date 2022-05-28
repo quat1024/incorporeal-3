@@ -1,0 +1,6 @@
+{
+  "parent": "incorporeal:block/carpet_tintindex",
+  "textures": {
+    "wool": "botania:block/petal_block"
+  }
+}

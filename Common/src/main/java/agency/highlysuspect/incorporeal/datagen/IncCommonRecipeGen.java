@@ -132,6 +132,13 @@ public class IncCommonRecipeGen {
 			.group("unstable_cubes")
 			.save(files);
 		
+		//Petal block carpets
+		IncBlocks.PETAL_CARPETS.forEach((color, carpet) ->
+			RecipeDsl.shaped(carpet, 3, "XX")
+				.group("petal_carpets")
+				.define("X", ModBlocks.getPetalBlock(color))
+				.save(files));
+		
 		//Compressed Tiny Potatoes
 		for(int i = CompressedTaterUtil.SMALLEST; i < CompressedTaterUtil.LARGEST; i++) {
 			Block small = CompressedTaterUtil.getPotato(i);

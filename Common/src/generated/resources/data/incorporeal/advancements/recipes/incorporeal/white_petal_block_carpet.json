@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "incorporeal:white_petal_block_carpet"
+    ]
+  },
+  "criteria": {
+    "white_petal_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "botania:white_petal_block"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "incorporeal:white_petal_block_carpet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "white_petal_block",
+      "has_the_recipe"
+    ]
+  ]
+}
