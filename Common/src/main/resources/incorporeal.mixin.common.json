@@ -10,6 +10,7 @@
 		"FarmBlockMixin",
 		"ItemFrameAccessor",
 		"ItemFrameMixin",
+		"ServerPlayerMixin",
 		"TileCorporeaIndexAccessor",
 		"TileCorporeaIndexInputHandlerMixin",
 		"TileCorporeaInterceptorMixin",

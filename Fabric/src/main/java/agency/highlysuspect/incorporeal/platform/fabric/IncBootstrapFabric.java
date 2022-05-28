@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.platform.fabric;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.IncCommands;
 import agency.highlysuspect.incorporeal.IncSounds;
 import agency.highlysuspect.incorporeal.IncBlocks;
 import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
@@ -12,6 +13,7 @@ import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
 import agency.highlysuspect.incorporeal.platform.fabric.block.entity.EnderSoulCoreStorage;
 import agency.highlysuspect.incorporeal.platform.fabric.block.entity.FabricRedStringConstrictorBlockEntity;
 import agency.highlysuspect.incorporeal.platform.fabric.config.FiberConfigBuilder;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
@@ -102,6 +104,11 @@ public class IncBootstrapFabric implements IncBootstrapper {
 		//Add an item handler capability to the Red String Constrictor
 		//(This line has no equiv on Forge because it's done inside ForgeRedStringConstrictorBlockEntity)
 		ItemStorage.SIDED.registerForBlockEntity(FabricRedStringConstrictorBlockEntity::getStorageWithDowncast, IncBlockEntityTypes.RED_STRING_CONSTRICTOR);
+	}
+	
+	@Override
+	public void registerCommands() {
+		CommandRegistrationCallback.EVENT.register(IncCommands::register);
 	}
 	
 	@Override

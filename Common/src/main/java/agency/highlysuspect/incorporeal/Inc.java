@@ -58,6 +58,7 @@ public class Inc {
 		bootstrapper.registerSoundEvents();
 		bootstrapper.registerServerToClientNetworkChannelSender();
 		bootstrapper.registerCapabilities();
+		bootstrapper.registerCommands();
 		
 		//common init
 		DataTypes.registerBuiltinTypes();

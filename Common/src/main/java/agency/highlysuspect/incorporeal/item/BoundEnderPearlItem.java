@@ -2,6 +2,7 @@ package agency.highlysuspect.incorporeal.item;
 
 import agency.highlysuspect.incorporeal.block.entity.AbstractSoulCoreBlockEntity;
 import agency.highlysuspect.incorporeal.util.MoreNbtHelpers;
+import agency.highlysuspect.incorporeal.util.ServerPlayerDuck;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
@@ -46,6 +47,7 @@ public class BoundEnderPearlItem extends Item {
 	
 	public static final String OWNER_KEY = "BoundOwner";
 	public static final String OWNER_NAME_KEY = "BoundOwnerName"; //Used in the tooltip
+	public static final String EPOCH_KEY = "BoundEpoch";
 	
 	public static final int TOTAL_CHARGES = 10;
 	public static final int MANA_PER_CHARGE = 1000;
@@ -60,14 +62,19 @@ public class BoundEnderPearlItem extends Item {
 		return ItemNBTHelper.getString(stack, OWNER_NAME_KEY, null);
 	}
 	
+	public int getEpoch(ItemStack stack) {
+		return ItemNBTHelper.getInt(stack, EPOCH_KEY, 0);
+	}
+	
 	@Override
 	public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
 		return Optional.of(ManaBarTooltip.fromManaItem(stack));
 	}
 	
-	public void bindTo(ItemStack stack, Player player) {
+	public void bindTo(ItemStack stack, ServerPlayer player) {
 		MoreNbtHelpers.setUuid(stack, OWNER_KEY, player.getUUID());
 		ItemNBTHelper.setString(stack, OWNER_NAME_KEY, player.getGameProfile().getName());
+		ItemNBTHelper.setInt(stack, EPOCH_KEY, ((ServerPlayerDuck) player).inc$getEpoch());
 		
 		IManaItem manaItem = IXplatAbstractions.INSTANCE.findManaItem(stack);
 		if(manaItem != null) manaItem.addMana(manaItem.getMaxMana()); //free mana woo
@@ -105,32 +112,44 @@ public class BoundEnderPearlItem extends Item {
 	
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-		ItemStack held = player.getItemInHand(hand);
+		ItemStack stack = player.getItemInHand(hand);
 		
-		UUID ownerUuid = getOwnerUuid(held);
+		UUID ownerUuid = getOwnerUuid(stack);
 		if(ownerUuid == null) {
-			bindTo(held, player);
-			if(!player.level.isClientSide()) player.hurt(AbstractSoulCoreBlockEntity.SOUL, 2f);
-			return InteractionResultHolder.success(held);
-		}
-		
-		//Already bound; act like a working enderpearl that teleports the bound player
-		level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDER_PEARL_THROW, SoundSource.NEUTRAL, .5f, .4f / (level.getRandom().nextFloat() * .4f + .8f));
-		
-		if(level instanceof ServerLevel slevel) {
-			ServerPlayer owner = slevel.getServer().getPlayerList().getPlayer(ownerUuid);
-			if(owner == null || owner.level != level) {
-				return InteractionResultHolder.fail(held);
+			//Not bound; bind to the player holding the item
+			if(player instanceof ServerPlayer splayer) {
+				bindTo(stack, splayer);
+				player.hurt(AbstractSoulCoreBlockEntity.SOUL, 2f);	
+			}
+		} else {
+			//Already bound; act like a working enderpearl that teleports the bound player
+			//sound play on the clientside, but the rest happens serverside only
+			level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDER_PEARL_THROW, SoundSource.NEUTRAL, .5f, .4f / (level.getRandom().nextFloat() * .4f + .8f));
+			
+			if(level instanceof ServerLevel slevel) {
+				ServerPlayer owner = slevel.getServer().getPlayerList().getPlayer(ownerUuid);
+				//Is the owner online and in the dimension?
+				if(owner == null || owner.level != level) {
+					return InteractionResultHolder.fail(stack);
+				}
+				
+				//Has the owner not broken the link to this enderpearl?
+				if(getEpoch(stack) != ((ServerPlayerDuck) owner).inc$getEpoch()) {
+					player.displayClientMessage(new TranslatableComponent("incorporeal.bound_ender_pearl.dissolve").withStyle(ChatFormatting.BLUE), true);
+					player.broadcastBreakEvent(hand);
+					player.setItemInHand(hand, ItemStack.EMPTY);
+					return InteractionResultHolder.success(ItemStack.EMPTY);
+				}
+				
+				//basically a paste from EnderpearlItem
+				//note that owner does't necessarily equal "player", the thrower
+				yeetEnderpearl(slevel, owner, stack, pearl -> pearl.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 1.5f, 1));
+				payMana(player, hand, stack);
+				//if(!player.getAbilities().instabuild) player.getCooldowns().addCooldown(this, 20); //slow mana recharge rate takes care of this imo
 			}
 			
-			//basically paste from EnderpearlItem
-			//note that owner does't necessarily equal "player", the thrower
-			yeetEnderpearl(slevel, owner, held, pearl -> pearl.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 1.5f, 1));
-			payMana(player, hand, held);
-			//if(!player.getAbilities().instabuild) player.getCooldowns().addCooldown(this, 20); //slow mana recharge rate takes care of this imo
 		}
-		
-		return InteractionResultHolder.success(held);
+		return InteractionResultHolder.success(stack);
 	}
 	
 	@Override
@@ -149,6 +168,7 @@ public class BoundEnderPearlItem extends Item {
 		if(whyTho.isAdvanced()) {
 			UUID ownerUuid = getOwnerUuid(stack);
 			if(ownerUuid != null) tooltip.add(new TextComponent(ownerUuid.toString()).withStyle(ChatFormatting.DARK_GRAY));
+			tooltip.add(new TranslatableComponent("incorporeal.bound_ender_pearl.epoch", getEpoch(stack)).withStyle(ChatFormatting.DARK_GRAY));
 		}
 	}
 	
@@ -164,8 +184,15 @@ public class BoundEnderPearlItem extends Item {
 			}
 			
 			ServerPlayer owner = slevel.getServer().getPlayerList().getPlayer(ownerUuid);
+			//Is the owner online and in the dimension?
 			if(owner == null || owner.level != slevel) {
 				setSuccess(false);
+				return stack;
+			}
+			
+			//Has the owner not broken the link to this enderpearl?
+			if(getEpoch(stack) != ((ServerPlayerDuck) owner).inc$getEpoch()) {
+				setSuccess(true);
 				return stack;
 			}
 			

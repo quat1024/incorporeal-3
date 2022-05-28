@@ -18,6 +18,7 @@ public interface IncBootstrapper {
 	void registerSoundEvents();
 	void registerServerToClientNetworkChannelSender();
 	void registerCapabilities();
+	void registerCommands();
 	
 	void endSelfInit();
 	

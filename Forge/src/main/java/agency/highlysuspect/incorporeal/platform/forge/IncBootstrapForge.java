@@ -1,6 +1,7 @@
 package agency.highlysuspect.incorporeal.platform.forge;
 
 import agency.highlysuspect.incorporeal.Inc;
+import agency.highlysuspect.incorporeal.IncCommands;
 import agency.highlysuspect.incorporeal.IncSounds;
 import agency.highlysuspect.incorporeal.IncBlocks;
 import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
@@ -13,6 +14,7 @@ import agency.highlysuspect.incorporeal.platform.ConfigBuilder;
 import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
 import agency.highlysuspect.incorporeal.platform.forge.block.entity.EnderSoulCoreItemHandler;
 import agency.highlysuspect.incorporeal.platform.forge.config.ForgeConfigBuilder;
+import net.minecraft.commands.Commands;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -21,6 +23,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -139,6 +142,12 @@ public class IncBootstrapForge implements IncBootstrapper {
 				));
 			}
 		});
+	}
+	
+	@Override
+	public void registerCommands() {
+		FMLJavaModLoadingContext.get().getModEventBus().addListener((RegisterCommandsEvent e) ->
+			IncCommands.register(e.getDispatcher(), e.getEnvironment() == Commands.CommandSelection.DEDICATED));
 	}
 	
 	@Override

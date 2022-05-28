@@ -23,8 +23,10 @@
 	"block.incorporeal.frame_tinkerer": "Frame Tinkerer",
 	"block.incorporeal.corporea_pylon": "Corporea Pylon",
 	"item.incorporeal.bound_ender_pearl": "Bound Ender Pearl",
+	"incorporeal.bound_ender_pearl.dissolve": "The pearl dissolves between your fingers",
 	"incorporeal.bound_ender_pearl.notBound": "Not bound to anyone",
 	"incorporeal.bound_ender_pearl.boundTo": "Bound to %s",
+	"incorporeal.bound_ender_pearl.epoch": "Binding epoch %s",
 	
 	"item.incorporeal.soul_core_frame": "Soul Core Frame",
 	"block.incorporeal.ender_soul_core": "Ender Soul Core",
