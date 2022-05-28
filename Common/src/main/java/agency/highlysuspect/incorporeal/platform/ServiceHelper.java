@@ -17,7 +17,6 @@ public class ServiceHelper {
 			throw new IllegalStateException("There should be exactly one %s implementation on the classpath. Found: %s".formatted(serviceClass.getSimpleName(), providersListMessage));
 		} else {
 			ServiceLoader.Provider<T> provider = providers.get(0);
-			Inc.LOGGER.info("Instantiating %s via %s".formatted(serviceClass.getSimpleName(), provider.type().getName()));
 			return provider.get();
 		}
 	}
