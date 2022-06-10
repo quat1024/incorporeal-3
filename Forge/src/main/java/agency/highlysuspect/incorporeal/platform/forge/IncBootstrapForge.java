@@ -146,7 +146,7 @@ public class IncBootstrapForge implements IncBootstrapper {
 	
 	@Override
 	public void registerCommands() {
-		FMLJavaModLoadingContext.get().getModEventBus().addListener((RegisterCommandsEvent e) ->
+		MinecraftForge.EVENT_BUS.addListener((RegisterCommandsEvent e) ->
 			IncCommands.register(e.getDispatcher(), e.getEnvironment() == Commands.CommandSelection.DEDICATED));
 	}
 	
