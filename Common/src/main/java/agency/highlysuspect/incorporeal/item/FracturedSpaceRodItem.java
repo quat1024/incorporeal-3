@@ -6,26 +6,21 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.network.chat.BaseComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.TicketType;
-import net.minecraft.util.Unit;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.item.ICoordBoundItem;
 import vazkii.botania.common.block.ModBlocks;
-import vazkii.botania.common.entity.EntityDoppleganger;
 import vazkii.botania.common.helper.ItemNBTHelper;
+import vazkii.botania.common.helper.PlayerHelper;
 
 import java.util.List;
 
@@ -41,7 +36,7 @@ public class FracturedSpaceRodItem extends Item {
 	@Override
 	public InteractionResult useOn(UseOnContext ctx) {
 		Player player = ctx.getPlayer();
-		if(!EntityDoppleganger.isTruePlayer(player)) return InteractionResult.FAIL;
+		if(!PlayerHelper.isTruePlayer(player)) return InteractionResult.FAIL;
 		
 		Level level = ctx.getLevel();
 		ItemStack held = ctx.getItemInHand();

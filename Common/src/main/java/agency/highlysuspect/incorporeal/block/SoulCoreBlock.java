@@ -19,7 +19,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.common.block.BlockMod;
-import vazkii.botania.common.entity.EntityDoppleganger;
+import vazkii.botania.common.helper.PlayerHelper;
 
 import java.util.function.Supplier;
 
@@ -50,7 +50,7 @@ public class SoulCoreBlock extends BlockMod implements EntityBlock {
 	//initial activation
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if(!EntityDoppleganger.isTruePlayer(player)) return InteractionResult.PASS;
+		if(!PlayerHelper.isTruePlayer(player)) return InteractionResult.PASS;
 		
 		return level.getBlockEntity(pos) instanceof AbstractSoulCoreBlockEntity soul ? soul.activate(player, hand) : InteractionResult.PASS;
 	}
