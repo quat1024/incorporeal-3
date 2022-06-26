@@ -11,7 +11,10 @@ plugins {
 //You could also set "version" directly in gradle.properties, but i like having the mc version thrown in there too.
 val minecraftVersion: String by project
 val buildNumber: String by project
-val githubActionsCommitHash: String? = System.getenv("GITHUB_SHA")
+
+//val githubActionsCommitHash: String? = System.getenv("GITHUB_SHA")
+val githubActionsCommitHash: String? = null
+
 version = if(githubActionsCommitHash != null) {
     "$minecraftVersion-$buildNumber-SNAPSHOT-${githubActionsCommitHash.substring(0, 8)}"
 } else {
