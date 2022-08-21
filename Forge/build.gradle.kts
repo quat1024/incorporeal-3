@@ -17,7 +17,7 @@ dependencies {
         botania.isChanging = true
     }
     
-    //botania-forge's transitive dependencies as of Mar 23, 2022; https://github.com/VazkiiMods/Botania/blob/901045768a3637c8dd64a929837ec12672a11f5a/Forge/build.gradle
+    //botania-forge's transitive dependencies as of Aug 20, 2022; https://github.com/VazkiiMods/Botania/blob/05e734c439d1b77985f4cb9a9b1cf414ceebbdbf/Forge/build.gradle
     //Botania does not (currently) publish transitive dependency information for its artifacts.
     //See the bottom of java-conventions for a possible reason why.
     implementation(fgDeobf(group = "vazkii.patchouli"        , name = "Patchouli"   , version = "1.18.2-67"                             ))
@@ -25,6 +25,8 @@ dependencies {
     runtimeOnly   (fgDeobf(group = "mezz.jei"                , name = "jei-1.18.2"  , version = "9.4.3.122"                             ))
     compileOnly   (fgDeobf(group = "top.theillusivec4.curios", name = "curios-forge", version = "1.18.2-5.0.6.3"    , classifier = "api"))
     runtimeOnly   (fgDeobf(group = "top.theillusivec4.curios", name = "curios-forge", version = "1.18.2-5.0.6.3"                        ))
+    compileOnly   (fgDeobf(group = "com.blamejared.crafttweaker", name = "CraftTweaker-forge-1.18.2", version = "9.1.123"))
+    compileOnly   (fgDeobf(group = "com.unascribed", name = "ears-api", version = "1.4.5"))
 }
 
 //Let me have my fun, ok? fg.deobf only supports the ugly one-string form

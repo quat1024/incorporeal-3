@@ -1,11 +1,12 @@
 repositories {
-    //botania-xplat, botania-fabric, patchouli
+    //botania-xplat, botania-fabric, patchouli, CraftTweaker
     maven {
         name = "Jared"
         url = uri("https://maven.blamejared.com/")
         content {
             includeGroup("vazkii.botania")
             includeGroup("vazkii.patchouli")
+            includeGroup("com.blamejared.crafttweaker")
         }
     }
     
@@ -85,6 +86,15 @@ repositories {
         url = uri("https://maven.theillusivec4.top/")
         content {
             includeGroup("top.theillusivec4.curios")
+        }
+    }
+    
+    //Ears
+    maven {
+        name = "Sleeping Town"
+        url = uri("https://repo.sleeping.town")
+        content {
+            includeGroup("com.unascribed")
         }
     }
 }
