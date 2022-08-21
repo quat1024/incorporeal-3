@@ -5,11 +5,7 @@ Magic mod addon in which an old dragon yells at a corporea spark. I don't think 
 
 Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-forge), Incorporeal 1 (1.12/Forge) is [here](https://github.com/quat1024/incorporeal), and because I keep wanting to click on it, Botania is [here](https://github.com/vazkiimods/botania).
 
-#### Build status
-
-builds on every commit: [![the real](https://github.com/quat1024/incorporeal-3/actions/workflows/yeaaa.yml/badge.svg)](https://github.com/quat1024/incorporeal-3/actions/workflows/yeaaa.yml) 
-
-builds every 48 hours (to account for botania updates): [![the fake](https://github.com/quat1024/incorporeal-3/actions/workflows/periodically.yml/badge.svg)](https://github.com/quat1024/incorporeal-3/actions/workflows/periodically.yml)
+[![the real](https://github.com/quat1024/incorporeal-3/actions/workflows/yeaaa.yml/badge.svg)](https://github.com/quat1024/incorporeal-3/actions/workflows/yeaaa.yml)
 
 ## Things that have been ported
 
