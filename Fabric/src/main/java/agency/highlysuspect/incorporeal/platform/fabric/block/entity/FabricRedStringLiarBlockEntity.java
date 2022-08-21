@@ -2,6 +2,7 @@ package agency.highlysuspect.incorporeal.platform.fabric.block.entity;
 
 import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
 import agency.highlysuspect.incorporeal.corporea.LyingCorporeaNode;
+import agency.highlysuspect.incorporeal.util.ContainerUtil;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -72,16 +73,19 @@ public class FabricRedStringLiarBlockEntity extends RedStringLiarBlockEntity {
 	@Override
 	public boolean acceptBlock(BlockPos pos) {
 		assert level != null;
-		BlockEntity be = level.getBlockEntity(pos);
-		return be instanceof Container;
+		return ContainerUtil.getBlockContainerAt(level, pos) != null;
 	}
 	
 	@Override
 	public @NotNull ICorporeaNode createCorporeaNode(ICorporeaSpark spark) {
 		assert level != null;
-		BlockEntity be = getTileAtBinding();
-		if(!(be instanceof Container container)) return new DummyCorporeaNode(level, spark.getAttachPos(), spark);
-		else return new Node(level, spark.getAttachPos(), spark, readSpoofStacks(), container);
+		BlockPos binding = getBinding();
+		if(binding == null) return new DummyCorporeaNode(level, spark.getAttachPos(), spark);
+		
+		Container cont = ContainerUtil.getBlockContainerAt(level, binding);
+		if(cont == null) return new DummyCorporeaNode(level, spark.getAttachPos(), spark);
+		
+		else return new Node(level, spark.getAttachPos(), spark, readSpoofStacks(), cont);
 	}
 	
 	public static class Node extends LyingCorporeaNode {
