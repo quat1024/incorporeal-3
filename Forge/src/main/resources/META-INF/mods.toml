@@ -10,7 +10,7 @@ version = "${version}"
 displayName = "Incorporeal 3"
 description = "Addon to a magic mod. More toys for Botania corporea dorks."
 authors = "quaternary"
-credits = "the Artemis System, Dudblockman, SnazzGass, jaredlll08, Darkhax, all the Botania nerds, and everyone who puts up with me"
+credits = "artemisSystem, Dudblockman, SnazzGass, jaredlll08, Darkhax, all the Botania nerds, and everyone who puts up with me"
 
 [[dependencies.incorporeal]]
 modId="forge"
