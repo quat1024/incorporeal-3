@@ -112,7 +112,7 @@ public class PatchouliEntryBuilder {
 		//Extra recipe mappings
 		if(!extraRecipeMappings.isEmpty()) {
 			JsonObject mappings = new JsonObject();
-			extraRecipeMappings.forEach((k, v) -> mappings.addProperty(k, v));
+			extraRecipeMappings.forEach(mappings::addProperty);
 			json.add("extra_recipe_mappings", mappings);
 		}
 		

@@ -1,3 +1,4 @@
 {
+  "name": "Incorporeal Botania lexicon extension",
   "extend": "botania:lexicon"
 }

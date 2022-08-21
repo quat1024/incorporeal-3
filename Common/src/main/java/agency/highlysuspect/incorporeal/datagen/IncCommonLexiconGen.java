@@ -23,9 +23,11 @@ public class IncCommonLexiconGen {
 	
 	public static void doIt(DataGenerator generator, Consumer<JsonFile> files) {
 		//Book.json
-		JsonObject lol = new JsonObject();
-		lol.addProperty("extend", "botania:lexicon");
-		files.accept(JsonFile.create(lol, "data", BOOK_ID.getNamespace(), "patchouli_books", BOOK_ID.getPath(), "book"));
+		JsonObject bookJson = new JsonObject();
+		bookJson.addProperty("name", "Incorporeal Botania lexicon extension");
+		bookJson.addProperty("version", 1);
+		bookJson.addProperty("extend", "botania:lexicon");
+		files.accept(JsonFile.create(bookJson, "data", BOOK_ID.getNamespace(), "patchouli_books", BOOK_ID.getPath(), "book"));
 		
 		//Devices
 		PatchouliEntryBuilder frameTinkerer = builder("devices/frame_tinkerer")
