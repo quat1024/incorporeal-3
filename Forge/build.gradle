@@ -13,7 +13,7 @@ apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
-archivesBaseName = "${rootProject.name}-forge"
+archivesBaseName = "${rootProject.name}-forge-${project.minecraftVersion}"
 
 dependencies {
 	minecraft "net.minecraftforge:forge:${project.forgeVersion}"

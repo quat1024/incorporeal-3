@@ -3,8 +3,6 @@ subprojects {
 	java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 	java.withSourcesJar()
 	
-	version = "${project.minecraftVersion}-${project.buildNumber}"
-	
 	tasks.withType(JavaCompile).configureEach {
 		it.options.encoding = "UTF-8"
 		it.options.release = 17
@@ -52,9 +50,9 @@ subprojects {
 			name = "Jared"
 			url = "https://maven.blamejared.com/"
 			content {
-				includeGroup("vazkii.botania")
-				includeGroup("vazkii.patchouli")
-				includeGroup("com.blamejared.crafttweaker")
+				includeGroup "vazkii.botania"
+				includeGroup "vazkii.patchouli"
+				includeGroup "com.blamejared.crafttweaker"
 			}
 		}
 		
@@ -63,7 +61,7 @@ subprojects {
 			name = "modmuss50"
 			url = "https://maven.modmuss50.me"
 			content {
-				includeGroup("me.zeroeightsix")
+				includeGroup "me.zeroeightsix"
 			}
 		}
 		
@@ -72,8 +70,8 @@ subprojects {
 			name = "Ladysnake"
 			url = "https://ladysnake.jfrog.io/artifactory/mods"
 			content {
-				includeGroup("io.github.onyxstudios.Cardinal-Components-API")
-				includeGroup("dev.onyxstudios.cardinal-components-api") //i guess they moved it
+				includeGroup "io.github.onyxstudios.Cardinal-Components-API"
+				includeGroup "dev.onyxstudios.cardinal-components-api" //i guess they moved it
 			}
 		}
 		
@@ -82,11 +80,11 @@ subprojects {
 			name = "Terraformers"
 			url = "https://maven.terraformersmc.com/"
 			content {
-				includeGroup("dev.emi")
+				includeGroup "dev.emi"
 				
 				//At the moment, required to pick up Mod Menu
 				// https://github.com/emilyploszaj/trinkets/issues/159
-				includeGroup("com.terraformersmc")
+				includeGroup "com.terraformersmc"
 			}
 		}
 		
@@ -95,7 +93,7 @@ subprojects {
 			name = "jamieswhiteshirt"
 			url = "https://maven.jamieswhiteshirt.com/libs-release/"
 			content {
-				includeGroup("com.jamieswhiteshirt")
+				includeGroup "com.jamieswhiteshirt"
 			}
 		}
 		
@@ -104,7 +102,7 @@ subprojects {
 			name = "jitpack :("
 			url = "https://jitpack.io"
 			content {
-				includeGroup("com.github.emilyploszaj")
+				includeGroup "com.github.emilyploszaj"
 			}
 		}
 		
@@ -113,9 +111,9 @@ subprojects {
 			name = "shedaniel"
 			url = "https://maven.shedaniel.me"
 			content {
-				includeGroup("me.shedaniel")
-				includeGroup("me.shedaniel.cloth")
-				includeGroup("dev.architectury")
+				includeGroup "me.shedaniel"
+				includeGroup "me.shedaniel.cloth"
+				includeGroup "dev.architectury"
 			}
 		}
 		
@@ -124,7 +122,7 @@ subprojects {
 			name = "progwml6"
 			url = "https://dvs1.progwml6.com/files/maven"
 			content {
-				includeGroup("mezz.jei")
+				includeGroup "mezz.jei"
 			}
 		}
 		
@@ -133,7 +131,7 @@ subprojects {
 			name = "theillusivec4"
 			url = "https://maven.theillusivec4.top/"
 			content {
-				includeGroup("top.theillusivec4.curios")
+				includeGroup "top.theillusivec4.curios"
 			}
 		}
 		
@@ -142,7 +140,7 @@ subprojects {
 			name = "Sleeping Town"
 			url = "https://repo.sleeping.town"
 			content {
-				includeGroup("com.unascribed")
+				includeGroup "com.unascribed"
 			}
 		}
 	}
