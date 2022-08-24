@@ -1,0 +1,91 @@
+import java.util.stream.Collectors
+
+plugins {
+	id 'fabric-loom' version '0.10-SNAPSHOT'
+}
+
+archivesBaseName = "${rootProject.name}-fabric"
+
+dependencies {
+	//Minecraft
+	minecraft "com.mojang:minecraft:${project.minecraftVersion}"
+	mappings loom.officialMojangMappings()
+	
+	//Fabric loader and API
+	modImplementation "net.fabricmc:fabric-loader:${project.fabricLoaderVersion}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabricApiVersion}"
+	
+	//Botnio (Actually has transitive deps for some reason)
+	def botania = modImplementation "vazkii.botania:Botania:${williePls(project.botaniaVersion)}"
+	
+	if (project.declareBotaniaAsChanging == "true" && botania instanceof ExternalModuleDependency) {
+		((ExternalModuleDependency) botania).changing = true;
+	}
+	
+	//Common
+	implementation project(":Common")
+}
+
+//Ok so botnio forge and fabric are published under the same maven group, but the fabric one has a differently formatted version string
+//1.18.1-428 -> 1.18.1-428-FABRIC
+//1.18.1-429-SNAPSHOT -> 1.18.1-429-FABRIC-SNAPSHOT
+static String williePls(String input) {
+	def parts = new ArrayList<>(Arrays.asList(input.split('-')));
+	parts.add(2, "FABRIC")
+	return parts.stream().collect(Collectors.joining("-"))
+}
+
+//fold in xplat resources and sources
+processResources {
+	from project(":Common").sourceSets.main.resources
+}
+
+tasks.withType(JavaCompile) {
+	source(project(":Common").sourceSets.main.allSource)
+}
+
+loom {
+	runs {
+		commondatagen { configureDatagenRunConfig(it, file("../Common/src/generated/resources"), "common") }
+		fabricdatagen { configureDatagenRunConfig(it, file("../Fabric/src/generated/resources"), "fabric") }
+		forgedatagen { configureDatagenRunConfig(it, file("../Forge/src/generated/resources"), "forge") }
+		
+		client {
+			ideConfigGenerated(true)
+			client()
+			runDir("./run")
+		}
+		
+		server {
+			ideConfigGenerated(true)
+			server()
+			runDir("./run")
+		}
+	}
+	
+	mixin {
+		defaultRefmapName = "${project.modId}.refmap.json"
+	}
+}
+
+static void configureDatagenRunConfig(settings, File outDir, String identifier) {
+	//Loom doesn't generate run configs by default in subprojects.
+	settings.ideConfigGenerated(true)
+	
+	//Base it off the client run config.
+	settings.client()
+	settings.runDir("./run/datagen_work")
+	
+	//Configure fabric api datagen's settings.
+	settings.vmArg("-Dfabric-api.datagen")
+	settings.vmArg("-Dfabric-api.datagen.modid=incorporeal")
+	settings.vmArg("-Dfabric-api.datagen.output-dir=${outDir}")
+	
+	//Tell FabricDatagenEntrypoint which arm I'm generating resources for.
+	settings.vmArg("-Dincorporeal.datagen.which=${identifier}")
+	
+	//Tell EnUsRewriter where en_us.json is. This is used to permit automatic generation of language keys.
+	//TODO need to test that this works after rewriting without kotlin buildscripts
+	def whatzit = new File("../Common/src/main/resources/assets/incorporeal/lang/en_us.json")
+	settings.vmArg("-Dincorporeal.en-us=${whatzit.getCanonicalPath()}")
+}

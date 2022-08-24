@@ -66,19 +66,7 @@ Incorporeal 2 (1.16/Forge) is [here](https://github.com/quat1024/incorporeal-2-f
 
 # Build information
 
-Ok so, this is by far the most cursed buildscript i've had the pleasure of messing with.
-
-See:
-* `buildSrc/src/main/kotlin/incorporeal.java-conventions.gradle.kts` for settings common to all artifacts
-* The other files in that folder, for settings common to Fabricness, Forgeness, or commonness
-* `(Common|Fabric|Forge)/build.gradle.kts` for settings relevant to "being a Botania addon"
-* `gradle.properties` for build variables like name and version number
-
-See `buildSrc/README.md` for more information.
-
-Keep in mind:
-* The ["xxx: Type by project" syntax](https://docs.gradle.org/current/userguide/kotlin_dsl.html#kotdsl:properties) plucks a value out of `gradle.properties`, I use this file for many project-wide properties including the Botania version and the loader versions.
-* I prefer to develop on Fabric first and fix Forge later.
+Keep in mind I prefer to develop on Fabric first and fix Forge later.
 
 Having weird build issues:
 * If `/build` cropped up again (not `/Fabric/build`, just `/build`), yeet it
@@ -87,12 +75,11 @@ Having weird build issues:
 
 If you're using Eclipse:
 * Good luck!
-* I heard turning off the Kotlin integration and letting buildship treat it as a black-box might help?
 * Sorry about that.
 
-### Why are you using kotlin buildscripts
+### ~~Why are you using kotlin buildscripts~~
 
-Just to feel something
+~~Just to feel something~~ NOT ANYMORE!!!! Was a fun learning project but got really sick of it.
 
 # License
 
