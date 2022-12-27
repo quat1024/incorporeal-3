@@ -21,7 +21,7 @@ subprojects {
 		}
 		
 		//Random things that might get left around if I'm sloppy.
-		exclude("**/*.bat", "**/*.psd", "**/*.exe", "**/*.kra")
+		exclude("**/*.bat", "**/*.psd", "**/*.exe", "**/*.kra", "**/*.ase")
 		//Anything explicitly marked unused.
 		exclude("**/unused")
 		//Vanilla datagenerator .cache file.
@@ -36,6 +36,9 @@ subprojects {
 	}
 	
 	repositories {
+		// Temporary for intermediate botania build
+		mavenLocal()
+		
 		//Spongfrog
 		maven {
 			name = "spunchbob"

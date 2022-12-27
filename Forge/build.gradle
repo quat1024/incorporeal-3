@@ -20,23 +20,21 @@ dependencies {
 	annotationProcessor "org.spongepowered:mixin:0.8.4-SNAPSHOT:processor"
 	compileOnly project(":Common")
 	
-	def botania = implementation "vazkii.botania:Botania:${project.botaniaVersion}"
+	def botania = implementation "vazkii.botania:Botania:${project.botaniaVersion}-FORGE${project.botaniaSnapshotStr}"
 	if (project.declareBotaniaAsChanging == "true" && botania instanceof ExternalModuleDependency) {
 		((ExternalModuleDependency) botania).changing = true
 	}
 	
-	//botania-forge's transitive dependencies as of Aug 20, 2022; https://github.com/VazkiiMods/Botania/blob/05e734c439d1b77985f4cb9a9b1cf414ceebbdbf/Forge/build.gradle
+	//botania-forge's transitive dependencies as of Sep 16, 2022; https://github.com/artemisSystem/Botania/blob/c18a609fd90e17853a55fa822e15042b5470673d/Forge/build.gradle#L103-L116
 	//Botania does not (currently) publish transitive dependency information for its artifacts.
 	
-	//Actually use a newer patchouli, to test https://github.com/quat1024/incorporeal-3/issues/13
-	// (at least on forge, getting this into the fabric arm would be handy)
-	implementation "vazkii.patchouli:Patchouli:1.18.2-71.1"
+	implementation "vazkii.patchouli:Patchouli:1.19.2-76"
 	
-	compileOnly "mezz.jei:jei-1.18.2:9.4.3.122:api"
-	runtimeOnly "mezz.jei:jei-1.18.2:9.4.3.122"
-	compileOnly "top.theillusivec4.curios:curios-forge:1.18.2-5.0.6.3:api"
-	runtimeOnly "top.theillusivec4.curios:curios-forge:1.18.2-5.0.6.3"
-	compileOnly "com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:9.1.123"
+	compileOnly "mezz.jei:jei-1.19.2-common-api:11.2.0.247"
+	runtimeOnly "mezz.jei:jei-1.19.2-forge:11.2.0.247"
+	compileOnly "top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0:api"
+	runtimeOnly "top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0"
+	// compileOnly "com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:9.1.123"
 	compileOnly "com.unascribed:ears-api:1.4.5"
 }
 

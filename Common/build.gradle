@@ -13,7 +13,7 @@ dependencies {
 	compileOnly "org.spongepowered:mixin:0.8.5"
 	
 	//Botnio
-	def botania = implementation "vazkii.botania:Botania-xplat:${project.botaniaVersion}"
+	def botania = implementation "vazkii.botania:Botania-xplat:${project.botaniaVersion}${project.botaniaSnapshotStr}"
 	if (project.declareBotaniaAsChanging == "true" && botania instanceof ExternalModuleDependency) {
 		((ExternalModuleDependency) botania).changing = true
 	}

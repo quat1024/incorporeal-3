@@ -1,7 +1,5 @@
-import java.util.stream.Collectors
-
 plugins {
-	id 'fabric-loom' version '0.10-SNAPSHOT'
+	id 'fabric-loom' version '1.0.16'
 }
 
 archivesBaseName = "${rootProject.name}-fabric-${project.minecraftVersion}"
@@ -16,7 +14,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabricApiVersion}"
 	
 	//Botnio (Actually has transitive deps for some reason)
-	def botania = modImplementation "vazkii.botania:Botania:${williePls(project.botaniaVersion)}"
+	def botania = modImplementation "vazkii.botania:Botania:${project.botaniaVersion}-FABRIC${project.botaniaSnapshotStr}"
 	
 	if (project.declareBotaniaAsChanging == "true" && botania instanceof ExternalModuleDependency) {
 		((ExternalModuleDependency) botania).changing = true
@@ -26,14 +24,6 @@ dependencies {
 	implementation project(":Common")
 }
 
-//Ok so botnio forge and fabric are published under the same maven group, but the fabric one has a differently formatted version string
-//1.18.1-428 -> 1.18.1-428-FABRIC
-//1.18.1-429-SNAPSHOT -> 1.18.1-429-FABRIC-SNAPSHOT
-static String williePls(String input) {
-	def parts = new ArrayList<>(Arrays.asList(input.split('-')))
-	parts.add(2, "FABRIC")
-	return parts.stream().collect(Collectors.joining("-"))
-}
 
 //fold in xplat resources and sources
 processResources {
