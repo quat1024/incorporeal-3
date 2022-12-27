@@ -20,8 +20,9 @@ import java.util.Objects;
 public abstract class TileCorporeaRetainerMixin implements RetainerDuck {
 	@Shadow(remap = false) @Nullable private ICorporeaRequestMatcher request;
 	@Shadow(remap = false) private int requestCount;
-	@Shadow(remap = false) private int compValue;
-	
+
+	@Shadow public abstract int getComparatorValue();
+
 	@Override
 	@Nullable
 	public ICorporeaRequestMatcher inc$getMatcher() {
@@ -45,15 +46,12 @@ public abstract class TileCorporeaRetainerMixin implements RetainerDuck {
 	@SuppressWarnings("ConstantConditions") //doublecast
 	@Override
 	public void inc$setCount(int newCount) {
+		int oldComparatorValue = getComparatorValue();
 		requestCount = newCount;
-		
-		int oldComparatorValue = compValue;
-		int newComparatorValue = CorporeaHelper.instance().signalStrengthForRequestSize(newCount);
-		
+		int newComparatorValue = getComparatorValue();
+
 		if(oldComparatorValue != newComparatorValue) {
-			compValue = newComparatorValue;
-			
-			if(compValue == 0) {
+			if(newComparatorValue == 0) {
 				request = null; //clears the request
 			}
 			

@@ -17,6 +17,7 @@ import vazkii.botania.api.corporea.ICorporeaSpark;
 import vazkii.botania.common.block.tile.corporea.TileCorporeaInterceptor;
 
 import java.util.List;
+import java.util.Set;
 
 @Mixin(TileCorporeaInterceptor.class)
 public class TileCorporeaInterceptorMixin {
@@ -39,7 +40,7 @@ public class TileCorporeaInterceptorMixin {
 		)
 	)
 	@SuppressWarnings("ConstantConditions") //Doublecasts
-	private void whenIntercepting(ICorporeaRequestMatcher request, int count, ICorporeaSpark spark, ICorporeaSpark source, List<ItemStack> stacks, List<ICorporeaNode> nodes, boolean doit, CallbackInfo ci) {
+	private void whenIntercepting(ICorporeaRequestMatcher request, int count, ICorporeaSpark spark, ICorporeaSpark source, List<ItemStack> stacks, Set<ICorporeaNode> nodes, boolean doit, CallbackInfo ci) {
 		Level level = ((TileCorporeaInterceptor) (Object) this).getLevel();
 		assert level != null;
 		BlockPos pos = ((TileCorporeaInterceptor) (Object) this).getBlockPos();

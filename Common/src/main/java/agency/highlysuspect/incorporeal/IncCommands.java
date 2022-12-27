@@ -4,14 +4,15 @@ import agency.highlysuspect.incorporeal.util.ServerPlayerDuck;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 
 public class IncCommands {
-	public static void register(CommandDispatcher<CommandSourceStack> dispatcher, boolean dedicatedServer) {
+	public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandBuildContext, Commands.CommandSelection commandSelection) {
 		var rootBuilder = Commands.literal(Inc.MODID);
 		
 		rootBuilder = rootBuilder.then(Commands.literal("break-bound-pearls")
@@ -33,7 +34,7 @@ public class IncCommands {
 		((ServerPlayerDuck) player).inc$bumpEpoch();
 		
 		int epoch = ((ServerPlayerDuck) player).inc$getEpoch();
-		ctx.getSource().sendSuccess(new TextComponent("Bumped bound pearl epoch from " + (epoch - 1) + " to " + epoch), false);
+		ctx.getSource().sendSuccess(Component.literal("Bumped bound pearl epoch from " + (epoch - 1) + " to " + epoch), false);
 		return 0;
 	}
 }

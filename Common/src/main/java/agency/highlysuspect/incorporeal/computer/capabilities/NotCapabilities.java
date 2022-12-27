@@ -36,6 +36,7 @@ import vazkii.botania.common.item.lens.ItemLens;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Hey look, it's stuff that I used forge capailities/AttachCapabilitiesEvent for in 1.12 and 1.16.
@@ -117,8 +118,9 @@ public class NotCapabilities {
 		if(entitiesInTheBlockspace == null) {
 			entitiesInTheBlockspace = level.getEntities(null, new AABB(pos));
 		}
-		
-		Collections.shuffle(entitiesInTheBlockspace, level.getRandom()); //don't prefer any given entity ordering
+
+		// TODO 1.19 is there a better way
+		Collections.shuffle(entitiesInTheBlockspace, new Random(level.getRandom().nextInt())); //don't prefer any given entity ordering
 		
 		for(Entity ent : entitiesInTheBlockspace) {
 			//item frames: rotate according to the number passed in
@@ -181,13 +183,14 @@ public class NotCapabilities {
 				if(prop instanceof BooleanProperty boolProp) return (doIt) -> DataTypes.INTEGER.datumOf(s.getValue(boolProp) ? 1 : 0);
 			}
 		}
-		
+
 		//Read the list of entities if it's needed
 		if(entitiesInTheBlockspace == null) {
 			entitiesInTheBlockspace = level.getEntities(null, new AABB(pos));
 		}
-		
-		Collections.shuffle(entitiesInTheBlockspace, level.getRandom()); //don't prefer any given entity ordering
+
+		// TODO 1.19 is there a better way
+		Collections.shuffle(entitiesInTheBlockspace, new Random(level.getRandom().nextInt())); //don't prefer any given entity ordering
 		
 		for(Entity ent : entitiesInTheBlockspace) {
 			//item frames -> request, as a Corporea Funnel would

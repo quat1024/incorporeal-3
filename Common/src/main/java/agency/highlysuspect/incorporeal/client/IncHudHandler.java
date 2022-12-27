@@ -10,8 +10,6 @@ import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -48,11 +46,11 @@ public class IncHudHandler {
 	
 	private static void doRedStringConstrictorHud(Minecraft mc, PoseStack pose, float partialTicks, RedStringConstrictorBlockEntity cons) {
 		//i know this isnt the correct way to localize plurals but, rrrrreh
-		Component txt = new TranslatableComponent(
+		Component txt = Component.translatable(
 			"incorporeal.red_string_constrictor.tooltip." +
 				(cons.removesSlotsFromFront() ? "start" : "end") +
 				(cons.removedSlotCount() == 1 ? "" : ".plural"),
-			new TextComponent(String.valueOf(cons.removedSlotCount())).withStyle(ChatFormatting.RED)
+			Component.literal(String.valueOf(cons.removedSlotCount())).withStyle(ChatFormatting.RED)
 		);
 		int strlen = mc.font.width(txt);
 		

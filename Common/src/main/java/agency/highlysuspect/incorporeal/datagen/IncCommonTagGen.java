@@ -65,7 +65,7 @@ public class IncCommonTagGen {
 		/// VANILLA TAGS ///
 		
 		//carpets
-		DataDsl.blockAndItemTag(BlockTags.CARPETS)
+		DataDsl.blockAndItemTag(BlockTags.WOOL_CARPETS)
 			.add(IncBlocks.PETAL_CARPETS.values())
 			.save(files);
 		

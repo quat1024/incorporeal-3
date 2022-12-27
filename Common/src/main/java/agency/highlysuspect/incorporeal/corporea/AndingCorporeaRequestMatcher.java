@@ -4,7 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentUtils;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 
@@ -60,6 +60,6 @@ public record AndingCorporeaRequestMatcher(List<ICorporeaRequestMatcher> others)
 	
 	@Override
 	public Component getRequestName() {
-		return ComponentUtils.formatList(others, new TextComponent(" & "), ICorporeaRequestMatcher::getRequestName);
+		return ComponentUtils.formatList(others, Component.literal(" & "), ICorporeaRequestMatcher::getRequestName);
 	}
 }

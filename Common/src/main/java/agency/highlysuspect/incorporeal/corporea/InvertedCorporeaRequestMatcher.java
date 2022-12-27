@@ -3,8 +3,6 @@ package agency.highlysuspect.incorporeal.corporea;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 
@@ -34,7 +32,7 @@ public record InvertedCorporeaRequestMatcher(ICorporeaRequestMatcher inner) impl
 	
 	@Override
 	public Component getRequestName() {
-		return new TextComponent("!").withStyle(ChatFormatting.RED).append(inner.getRequestName());
+		return Component.literal("!").withStyle(ChatFormatting.RED).append(inner.getRequestName());
 	}
 	
 	//The fallback matcher, used when the inner matcher of InvertedCorporeaRequestMatcher can't load from NBT.
@@ -61,7 +59,7 @@ public record InvertedCorporeaRequestMatcher(ICorporeaRequestMatcher inner) impl
 		
 		@Override
 		public Component getRequestName() {
-			return new TranslatableComponent("incorporeal.full_matcher");
+			return Component.translatable("incorporeal.full_matcher");
 		}
 	}
 }

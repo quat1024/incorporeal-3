@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.decoration.ItemFrame;
@@ -175,7 +176,7 @@ public class CrappyComparatorBlock extends CrappyDiodeBlock {
 	
 	//copypaste
 	@Override
-	public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		refreshOutputState(level, pos, state);
 	}
 	

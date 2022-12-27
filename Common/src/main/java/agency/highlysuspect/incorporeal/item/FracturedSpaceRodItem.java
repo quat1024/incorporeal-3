@@ -7,7 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -126,8 +126,8 @@ public class FracturedSpaceRodItem extends Item {
 		player.displayClientMessage(component, true);
 	}
 	
-	private static TranslatableComponent t(String key, Object... formatStringArgs) {
-		return new TranslatableComponent(key, formatStringArgs);
+	private static MutableComponent t(String key, Object... formatStringArgs) {
+		return Component.translatable(key, formatStringArgs);
 	}
 	
 	public static record CoordBoundItem(ItemStack stack) implements ICoordBoundItem {

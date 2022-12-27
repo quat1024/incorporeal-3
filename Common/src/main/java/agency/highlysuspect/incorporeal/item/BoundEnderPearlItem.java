@@ -9,8 +9,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -135,7 +133,7 @@ public class BoundEnderPearlItem extends Item {
 				
 				//Has the owner not broken the link to this enderpearl?
 				if(getEpoch(stack) != ((ServerPlayerDuck) owner).inc$getEpoch()) {
-					player.displayClientMessage(new TranslatableComponent("incorporeal.bound_ender_pearl.dissolve").withStyle(ChatFormatting.BLUE), true);
+					player.displayClientMessage(Component.translatable("incorporeal.bound_ender_pearl.dissolve").withStyle(ChatFormatting.BLUE), true);
 					player.broadcastBreakEvent(hand);
 					player.setItemInHand(hand, ItemStack.EMPTY);
 					return InteractionResultHolder.success(ItemStack.EMPTY);
@@ -159,16 +157,16 @@ public class BoundEnderPearlItem extends Item {
 		
 		String ownerName = getOwnerName(stack);
 		if(ownerName == null) {
-			tooltip.add(new TranslatableComponent("incorporeal.bound_ender_pearl.notBound").withStyle(ChatFormatting.RED));
+			tooltip.add(Component.translatable("incorporeal.bound_ender_pearl.notBound").withStyle(ChatFormatting.RED));
 		} else {
-			Component ownerComponent = new TextComponent(ownerName).withStyle(ChatFormatting.GOLD);
-			tooltip.add(new TranslatableComponent("incorporeal.bound_ender_pearl.boundTo", ownerComponent));
+			Component ownerComponent = Component.literal(ownerName).withStyle(ChatFormatting.GOLD);
+			tooltip.add(Component.translatable("incorporeal.bound_ender_pearl.boundTo", ownerComponent));
 		}
 		
 		if(whyTho.isAdvanced()) {
 			UUID ownerUuid = getOwnerUuid(stack);
-			if(ownerUuid != null) tooltip.add(new TextComponent(ownerUuid.toString()).withStyle(ChatFormatting.DARK_GRAY));
-			tooltip.add(new TranslatableComponent("incorporeal.bound_ender_pearl.epoch", getEpoch(stack)).withStyle(ChatFormatting.DARK_GRAY));
+			if(ownerUuid != null) tooltip.add(Component.literal(ownerUuid.toString()).withStyle(ChatFormatting.DARK_GRAY));
+			tooltip.add(Component.translatable("incorporeal.bound_ender_pearl.epoch", getEpoch(stack)).withStyle(ChatFormatting.DARK_GRAY));
 		}
 	}
 	

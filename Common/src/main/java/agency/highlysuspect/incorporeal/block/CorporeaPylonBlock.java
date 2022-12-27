@@ -5,6 +5,7 @@ import agency.highlysuspect.incorporeal.block.entity.CorporeaPylonBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -109,7 +110,7 @@ public class CorporeaPylonBlock extends BlockMod implements EntityBlock {
 	}
 	
 	@Override
-	public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		//Check that the multiblock is intact around myself
 		for(Direction dir : List.of(Direction.UP, Direction.DOWN)) {
 			BlockState expected = expectedNeighbor(state, dir);

@@ -7,7 +7,6 @@ import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
 import agency.highlysuspect.incorporeal.item.TicketItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 
@@ -52,7 +51,7 @@ public class IntegerType implements DataType<Integer> {
 	
 	@Override
 	public Component describe(Integer thing) {
-		return new TextComponent(Integer.toString(thing));
+		return Component.literal(Integer.toString(thing));
 	}
 	
 	@Override

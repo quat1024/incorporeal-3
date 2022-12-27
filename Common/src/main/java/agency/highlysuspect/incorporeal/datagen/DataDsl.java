@@ -3,6 +3,7 @@ package agency.highlysuspect.incorporeal.datagen;
 import agency.highlysuspect.incorporeal.Inc;
 import com.google.gson.JsonElement;
 import net.minecraft.core.Registry;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import org.apache.logging.log4j.util.Strings;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,9 +56,10 @@ public class DataDsl {
 	//It gives you a bucket to throw JsonFiles into, you fill the bucket, and they get written to disk.
 	//Simple as that.
 	public static void addProvider(DataGenerator datagen, String name, BiConsumer<DataGenerator, Consumer<JsonFile>> generator) {
-		datagen.addProvider(new DataProvider() {
+		// TODO 1.19 investigate if we want 'true' here
+		datagen.addProvider(true, new DataProvider() {
 			@Override
-			public void run(HashCache hashCache) throws IOException {
+			public void run(@NotNull CachedOutput cache) throws IOException {
 				//create a bucket
 				List<JsonFile> bucket = new ArrayList<>();
 				
@@ -66,7 +69,7 @@ public class DataDsl {
 				//write them all out
 				bucket.forEach(f -> {
 					Inc.LOGGER.info("Saving " + String.join("/", f.pathSegments()));
-					f.save(datagen, hashCache);
+					f.save(datagen, cache);
 				});
 			}
 			

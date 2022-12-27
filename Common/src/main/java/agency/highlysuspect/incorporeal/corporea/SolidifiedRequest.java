@@ -2,7 +2,6 @@ package agency.highlysuspect.incorporeal.corporea;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -64,7 +63,7 @@ public final class SolidifiedRequest {
 	}
 	
 	public Component toComponent() {
-		return new TranslatableComponent("incorporeal.solidified_request", count, matcher.getRequestName());
+		return Component.translatable("incorporeal.solidified_request", count, matcher.getRequestName());
 	}
 	
 	public int signalStrength() {

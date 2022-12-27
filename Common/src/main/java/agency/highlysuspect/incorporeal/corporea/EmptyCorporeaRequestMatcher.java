@@ -2,7 +2,6 @@ package agency.highlysuspect.incorporeal.corporea;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
 
@@ -26,6 +25,6 @@ public class EmptyCorporeaRequestMatcher implements ICorporeaRequestMatcher {
 	
 	@Override
 	public Component getRequestName() {
-		return new TranslatableComponent("incorporeal.empty_matcher");
+		return Component.translatable("incorporeal.empty_matcher");
 	}
 }

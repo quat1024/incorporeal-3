@@ -12,6 +12,7 @@ import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.DispenserBlock;
 import org.apache.logging.log4j.LogManager;
@@ -114,7 +115,7 @@ public class Inc {
 		return new ResourceLocation(LibMisc.MOD_ID, path);
 	}
 	
-	public static <T> T choose(List<T> list, Random random) {
+	public static <T> T choose(List<T> list, RandomSource random) {
 		return list.get(random.nextInt(list.size()));
 	}
 	

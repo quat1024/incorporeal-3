@@ -14,7 +14,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -101,17 +100,19 @@ public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 			//Yammer in chat
 			MinecraftServer server = level.getServer();
 			if(server != null && getMana() >= CHAT_COST) {
-				Component msg = new TranslatableComponent("chat.type.text",
-					name == null ? new TranslatableComponent("block.incorporeal.sanvocalia") : name,
+				Component msg = Component.translatable("chat.type.text",
+					name == null ? Component.translatable("block.incorporeal.sanvocalia") : name,
 					request.toComponent());
 				
 				Inc.LOGGER.info("Sanvocalia message triggered at {} in dimension {}", pos.toShortString(), level.dimension().location().toString());
 				
 				if(Inc.INSTANCE.config.everyoneHearsSanvocalia()) {
-					server.getPlayerList().broadcastMessage(msg, ChatType.CHAT, CHAT_SEND_UUID);
+					// TODO 1.19 figure out what botania does for this
+					// server.getPlayerList().broadcastMessage(msg, ChatType.CHAT, CHAT_SEND_UUID);
 				} else if(placerUuid != null) {
 					ServerPlayer player = server.getPlayerList().getPlayer(placerUuid);
-					if(player != null) player.sendMessage(msg, CHAT_SEND_UUID);
+					// TODO 1.19 this too
+					// if(player != null) player.sendMessage(msg, CHAT_SEND_UUID);
 				}
 				
 				addMana(-CHAT_COST);

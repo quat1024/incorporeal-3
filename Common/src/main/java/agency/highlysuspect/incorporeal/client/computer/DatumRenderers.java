@@ -7,7 +7,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.IdentityHashMap;
@@ -33,17 +32,17 @@ public class DatumRenderers {
 	public static void registerBuiltinRenderers() {
 		//sigh
 		register(DataTypes.EMPTY, (mc, pose, partialTicks, datum) ->
-			drawCentered(mc, pose, new TranslatableComponent("incorporeal.empty_datum"), datum.color()));
+			drawCentered(mc, pose, Component.translatable("incorporeal.empty_datum"), datum.color()));
 		
 		register(DataTypes.INTEGER, (mc, pose, partialTicks, datum) ->
-			drawCentered(mc, pose, new TranslatableComponent("incorporeal.integer_datum", datum.thing()), datum.color()));
+			drawCentered(mc, pose, Component.translatable("incorporeal.integer_datum", datum.thing()), datum.color()));
 		
 		//i say this every time, but... these are temporary
 		register(DataTypes.MATCHER, (mc, pose, partialTicks, datum) ->
-			drawCentered(mc, pose, new TranslatableComponent("incorporeal.matcher_datum", datum.thing().getRequestName()), datum.color()));
+			drawCentered(mc, pose, Component.translatable("incorporeal.matcher_datum", datum.thing().getRequestName()), datum.color()));
 		
 		register(DataTypes.SOLIDIFIED_REQUEST, (mc, pose, partialTicks, datum) ->
-			drawCentered(mc, pose, new TranslatableComponent("incorporeal.solidified_request_datum", datum.thing().toComponent()), datum.color()));
+			drawCentered(mc, pose, Component.translatable("incorporeal.solidified_request_datum", datum.thing().toComponent()), datum.color()));
 	}
 	
 	public static void drawCentered(Minecraft mc, PoseStack pose, Component yes, int color) {

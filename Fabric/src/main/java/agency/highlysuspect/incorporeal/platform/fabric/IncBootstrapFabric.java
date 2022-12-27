@@ -13,7 +13,7 @@ import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
 import agency.highlysuspect.incorporeal.platform.fabric.block.entity.EnderSoulCoreStorage;
 import agency.highlysuspect.incorporeal.platform.fabric.block.entity.FabricRedStringConstrictorBlockEntity;
 import agency.highlysuspect.incorporeal.platform.fabric.config.FiberConfigBuilder;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;

@@ -6,7 +6,6 @@ import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
 import agency.highlysuspect.incorporeal.item.TicketItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.ItemStack;
 
@@ -51,7 +50,7 @@ public class EmptyType implements DataType<Unit> {
 	
 	@Override
 	public Component describe(Unit thing) {
-		return TextComponent.EMPTY;
+		return Component.empty();
 	}
 	
 	@Override

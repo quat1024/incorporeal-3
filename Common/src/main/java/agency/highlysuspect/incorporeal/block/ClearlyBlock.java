@@ -1,7 +1,6 @@
 package agency.highlysuspect.incorporeal.block;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
@@ -21,6 +20,6 @@ public class ClearlyBlock extends Block {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag piss) {
 		super.appendHoverText(stack, level, tooltip, piss);
-		tooltip.add(new TranslatableComponent("block.incorporeal.clearly.fryer"));
+		tooltip.add(Component.translatable("block.incorporeal.clearly.fryer"));
 	}
 }

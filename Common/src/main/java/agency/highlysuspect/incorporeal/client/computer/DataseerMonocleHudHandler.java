@@ -9,7 +9,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -70,7 +69,7 @@ public class DataseerMonocleHudHandler {
 		int halfwidth = mc.getWindow().getGuiScaledWidth() / 2;
 		int halfheight = mc.getWindow().getGuiScaledHeight() / 2;
 		
-		//DatumRenderers.drawCentered(mc, pose, new TextComponent("i know the hud is trash"), halfwidth, 10, 0xFF0000);
+		//DatumRenderers.drawCentered(mc, pose, Component.literal("i know the hud is trash"), halfwidth, 10, 0xFF0000);
 		
 		if(provider != null) {
 			pose.pushPose();
@@ -80,7 +79,7 @@ public class DataseerMonocleHudHandler {
 		}
 		
 		if(acceptor != null) {
-			DatumRenderers.drawCentered(mc, pose, new TextComponent("Can accept"), halfwidth, halfheight - 35, 0xFF8800);
+			DatumRenderers.drawCentered(mc, pose, Component.literal("Can accept"), halfwidth, halfheight - 35, 0xFF8800);
 		}
 		
 		if(lensProvider != null) {

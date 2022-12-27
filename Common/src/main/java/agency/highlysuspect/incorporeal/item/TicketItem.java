@@ -6,7 +6,6 @@ import agency.highlysuspect.incorporeal.computer.types.DataType;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -54,7 +53,7 @@ public class TicketItem<T> extends Item {
 		Datum<?> datum = get(stack);
 		if(datum.isEmpty()) key += ".blank";
 		
-		return new TranslatableComponent(key, datum.describe());
+		return Component.translatable(key, datum.describe());
 	}
 	
 	@Override

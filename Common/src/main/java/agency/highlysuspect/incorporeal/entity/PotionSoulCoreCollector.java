@@ -139,7 +139,7 @@ public class PotionSoulCoreCollector extends LivingEntity {
 	}
 	
 	@Override
-	protected boolean shouldDropExperience() {
+	public boolean shouldDropExperience() {
 		return false;
 	}
 	
@@ -149,7 +149,7 @@ public class PotionSoulCoreCollector extends LivingEntity {
 	}
 	
 	@Override
-	protected int getExperienceReward(Player $$0) {
+	public int getExperienceReward() {
 		return 0;
 	}
 	

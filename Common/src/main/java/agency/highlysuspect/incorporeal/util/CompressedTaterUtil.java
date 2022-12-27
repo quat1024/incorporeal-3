@@ -2,7 +2,7 @@ package agency.highlysuspect.incorporeal.util;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncBlocks;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Block;
 import vazkii.botania.common.block.ModBlocks;
 
@@ -33,13 +33,13 @@ public class CompressedTaterUtil {
 		return prefixes.get(compressionLevel) + "_tiny_potato";
 	}
 	
-	public static TranslatableComponent formatCount(int compressionLevel, int root) {
+	public static Component formatCount(int compressionLevel, int root) {
 		int num = (int) Math.pow(root, Math.abs(compressionLevel));
 		String niceFormatted = String.format("%,d", num);
 		
 		if(compressionLevel < 0)
-			return new TranslatableComponent("block.incorporeal.compressed_tiny_potatoes.tooltip.fraction", niceFormatted);
-		else return new TranslatableComponent("block.incorporeal.compressed_tiny_potatoes.tooltip", niceFormatted);
+			return Component.translatable("block.incorporeal.compressed_tiny_potatoes.tooltip.fraction", niceFormatted);
+		else return Component.translatable("block.incorporeal.compressed_tiny_potatoes.tooltip", niceFormatted);
 	}
 	
 	//radius of each tater. default tater is 2/16 blocks wide

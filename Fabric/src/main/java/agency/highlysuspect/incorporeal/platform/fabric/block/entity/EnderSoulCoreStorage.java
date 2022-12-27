@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.core.Direction;
 import net.minecraft.world.inventory.PlayerEnderChestContainer;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
@@ -49,9 +50,9 @@ public record EnderSoulCoreStorage(EnderSoulCoreBlockEntity be) implements Stora
 	
 	//feel free to yell at me for this
 	@Override
-	public Iterator<? extends StorageView<ItemVariant>> iterator(TransactionContext transaction) {
+	public @NotNull Iterator<StorageView<ItemVariant>> iterator() {
 		Storage<ItemVariant> delegate = getDelegate();
-		Iterator<? extends StorageView<ItemVariant>> delegaterator = delegate.iterator(transaction);
+		Iterator<? extends StorageView<ItemVariant>> delegaterator = delegate.iterator();
 		
 		return new Iterator<>() {
 			@Override

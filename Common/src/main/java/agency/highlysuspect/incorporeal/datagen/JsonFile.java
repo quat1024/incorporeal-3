@@ -3,6 +3,7 @@ package agency.highlysuspect.incorporeal.datagen;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
@@ -39,9 +40,10 @@ public record JsonFile(JsonElement value, List<String> pathSegments) {
 	
 	//Wrapper for DataProvider#save that doesn't throw IOException, mainly so you don't have to slap "throws IOException" on the whole mod
 	//and so you can use them inside lambdas (for the same reason)
-	public void save(DataGenerator datagen, HashCache cache) {
+	public void save(DataGenerator datagen, CachedOutput cache) {
 		try {
-			DataProvider.save(PRETTY_GSON, cache, value, getOutputPath(datagen));
+			// TODO 1.19 figure out why this doesnt take the GSON and figure out how to make it
+			DataProvider.saveStable(cache, value, getOutputPath(datagen));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
