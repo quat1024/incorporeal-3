@@ -1,7 +1,6 @@
 package agency.highlysuspect.incorporeal.platform.forge.client;
 
 import agency.highlysuspect.incorporeal.Inc;
-import agency.highlysuspect.incorporeal.client.IncClient;
 import agency.highlysuspect.incorporeal.client.IncClientNetwork;
 import agency.highlysuspect.incorporeal.client.IncClientProperties;
 import agency.highlysuspect.incorporeal.platform.IncClientBootstrapper;
@@ -9,10 +8,9 @@ import agency.highlysuspect.incorporeal.platform.forge.mixin.client.ForgeItemAcc
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ForgeModelBakery;
+import net.minecraftforge.client.event.ModelEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -26,28 +24,29 @@ import java.util.function.Function;
 public class ForgeClientBootstrapper implements IncClientBootstrapper {
 	@Override
 	public void registerItemPropertyOverrides() {
-		FMLJavaModLoadingContext.get().getModEventBus().addListener((ModelRegistryEvent e) -> {
+		FMLJavaModLoadingContext.get().getModEventBus().addListener((ModelEvent.RegisterGeometryLoaders e) -> {
 			IncClientProperties.registerPropertyOverrides((item, id, prop) -> ItemProperties.register(item.asItem(), id, prop));
 		});
 	}
-	
+
+	@SuppressWarnings("removal")
 	@Override
 	public void registerBlockRenderLayers() {
-		FMLJavaModLoadingContext.get().getModEventBus().addListener((ModelRegistryEvent e) -> {
+		FMLJavaModLoadingContext.get().getModEventBus().addListener((ModelEvent.RegisterGeometryLoaders e) -> {
 			IncClientProperties.registerRenderTypes(ItemBlockRenderTypes::setRenderLayer);
 		});
 	}
 	
 	@Override
 	public void registerColorProviders() {
-		FMLJavaModLoadingContext.get().getModEventBus().addListener((ColorHandlerEvent.Block e) -> IncClientProperties.registerBlockColorProviders(e.getBlockColors()::register));
-		FMLJavaModLoadingContext.get().getModEventBus().addListener((ColorHandlerEvent.Item e) -> IncClientProperties.registerItemColorProviders(e.getItemColors()::register));
+		FMLJavaModLoadingContext.get().getModEventBus().addListener((RegisterColorHandlersEvent.Block e) -> IncClientProperties.registerBlockColorProviders(e.getBlockColors()::register));
+		FMLJavaModLoadingContext.get().getModEventBus().addListener((RegisterColorHandlersEvent.Item e) -> IncClientProperties.registerItemColorProviders(e.getItemColors()::register));
 	}
 	
 	@Override
 	public void registerExtraModelsToBake() {
-		FMLJavaModLoadingContext.get().getModEventBus().addListener((ModelRegistryEvent e) -> {
-			IncClientProperties.registerExtraModelsToBake(ForgeModelBakery::addSpecialModel);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener((ModelEvent.RegisterAdditional e) -> {
+			IncClientProperties.registerExtraModelsToBake(e::register);
 		});
 	}
 	
@@ -70,7 +69,7 @@ public class ForgeClientBootstrapper implements IncClientBootstrapper {
 		//You're supposed to override Item#initializeClient, but like, it really sucks to need a special implementation
 		//of each item class you want a renderer for, *just* to override that one method, because Forge is weird.
 		//So, alright, fine. I'll make my own setter.
-		FMLJavaModLoadingContext.get().getModEventBus().addListener((ModelRegistryEvent e) -> //Just some random, kinda-related event
+		FMLJavaModLoadingContext.get().getModEventBus().addListener((ModelEvent.RegisterGeometryLoaders e) -> //Just some random, kinda-related event
 			IncClientProperties.MY_DYNAMIC_ITEM_RENDERERS.keySet().forEach(item ->
 				((ForgeItemAccessor) item).inc$setRenderProperties(IncForgeBlockEntityItemRendererHelper.PROPS)));
 	}

@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.IItemRenderProperties;
 
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.IdentityHashMap;
@@ -42,9 +42,9 @@ public class IncForgeBlockEntityItemRendererHelper {
 		}
 	};
 	
-	public static final IItemRenderProperties PROPS = new IItemRenderProperties() {
+	public static final IClientItemExtensions PROPS = new IClientItemExtensions() {
 		@Override
-		public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+		public BlockEntityWithoutLevelRenderer getCustomRenderer() {
 			return IncForgeBlockEntityItemRendererHelper.RENDERER;
 		}
 	};

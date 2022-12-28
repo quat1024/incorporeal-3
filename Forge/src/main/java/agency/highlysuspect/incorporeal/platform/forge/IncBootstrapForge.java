@@ -14,7 +14,8 @@ import agency.highlysuspect.incorporeal.platform.ConfigBuilder;
 import agency.highlysuspect.incorporeal.platform.IncBootstrapper;
 import agency.highlysuspect.incorporeal.platform.forge.block.entity.EnderSoulCoreItemHandler;
 import agency.highlysuspect.incorporeal.platform.forge.config.ForgeConfigBuilder;
-import net.minecraft.commands.Commands;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -24,16 +25,13 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.RegisterEvent;
 import vazkii.botania.api.BotaniaForgeCapabilities;
 import vazkii.botania.api.block.IWandable;
 import vazkii.botania.api.corporea.CorporeaIndexRequestEvent;
@@ -51,35 +49,32 @@ public class IncBootstrapForge implements IncBootstrapper {
 	}
 	
 	//Paste from botania
-	private static <T extends IForgeRegistryEntry<T>> void bind(IForgeRegistry<T> registry, Consumer<BiConsumer<T, ResourceLocation>> source) {
-		FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(registry.getRegistrySuperType(),
-			(RegistryEvent.Register<T> event) -> {
-				IForgeRegistry<T> forgeRegistry = event.getRegistry();
-				source.accept((thing, name) -> {
-					thing.setRegistryName(name);
-					forgeRegistry.register(thing);
-				});
-			});
+	private static <T> void bind(ResourceKey<Registry<T>> registry, Consumer<BiConsumer<T, ResourceLocation>> source) {
+		FMLJavaModLoadingContext.get().getModEventBus().addListener((RegisterEvent event) -> {
+			if (registry.equals(event.getRegistryKey())) {
+				source.accept((t, rl) -> event.register(registry, rl, () -> t));
+			}
+		});
 	}
 	
 	@Override
 	public void registerBlocks() {
-		bind(ForgeRegistries.BLOCKS, IncBlocks::register);
+		bind(Registry.BLOCK_REGISTRY, IncBlocks::register);
 	}
 	
 	@Override
 	public void registerBlockEntityTypes() {
-		bind(ForgeRegistries.BLOCK_ENTITIES, IncBlockEntityTypes::register);
+		bind(Registry.BLOCK_ENTITY_TYPE_REGISTRY, IncBlockEntityTypes::register);
 	}
 	
 	@Override
 	public void registerItems() {
-		bind(ForgeRegistries.ITEMS, IncItems::register);
+		bind(Registry.ITEM_REGISTRY, IncItems::register);
 	}
 	
 	@Override
 	public void registerEntityTypes() {
-		bind(ForgeRegistries.ENTITIES, IncEntityTypes::register);
+		bind(Registry.ENTITY_TYPE_REGISTRY, IncEntityTypes::register);
 	}
 	
 	@Override
@@ -90,7 +85,7 @@ public class IncBootstrapForge implements IncBootstrapper {
 	
 	@Override
 	public void registerSoundEvents() {
-		bind(ForgeRegistries.SOUND_EVENTS, IncSounds::register);
+		bind(Registry.SOUND_EVENT_REGISTRY, IncSounds::register);
 	}
 	
 	@Override
@@ -147,7 +142,7 @@ public class IncBootstrapForge implements IncBootstrapper {
 	@Override
 	public void registerCommands() {
 		MinecraftForge.EVENT_BUS.addListener((RegisterCommandsEvent e) ->
-			IncCommands.register(e.getDispatcher(), e.getEnvironment() == Commands.CommandSelection.DEDICATED));
+			IncCommands.register(e.getDispatcher(), e.getBuildContext(), e.getCommandSelection()));
 	}
 	
 	@Override
@@ -176,12 +171,12 @@ public class IncBootstrapForge implements IncBootstrapper {
 	@Override
 	public void registerRedstoneRootPlaceEvent() {
 		MinecraftForge.EVENT_BUS.addListener((PlayerInteractEvent.RightClickBlock e) -> {
-			if(e.getPlayer() == null || e.getWorld() == null || e.getPlayer().isSpectator()) return;
+			if(e.getEntity() == null || e.getLevel() == null || e.getEntity().isSpectator()) return;
 			
 			ItemStack held = e.getItemStack();
 			if(held.getItem() != ModItems.redstoneRoot) return;
 			
-			InteractionResult result = IncBlocks.REDSTONE_ROOT_CROP.hookRedstoneRootClick(e.getPlayer(), e.getWorld(), e.getItemStack(), e.getHand(), e.getHitVec());
+			InteractionResult result = IncBlocks.REDSTONE_ROOT_CROP.hookRedstoneRootClick(e.getEntity(), e.getLevel(), e.getItemStack(), e.getHand(), e.getHitVec());
 			if(result != InteractionResult.PASS) {
 				e.setCanceled(true);
 				e.setCancellationResult(result);
