@@ -20,7 +20,7 @@ dependencies {
 	annotationProcessor "org.spongepowered:mixin:0.8.4-SNAPSHOT:processor"
 	compileOnly project(":Common")
 	
-	def botania = implementation "vazkii.botania:Botania:${project.botaniaVersion}-FORGE${project.botaniaSnapshotStr}"
+	def botania = implementation fg.deobf("vazkii.botania:Botania:${project.botaniaVersion}-FORGE${project.botaniaSnapshotStr}")
 	if (project.declareBotaniaAsChanging == "true" && botania instanceof ExternalModuleDependency) {
 		((ExternalModuleDependency) botania).changing = true
 	}
@@ -28,14 +28,14 @@ dependencies {
 	//botania-forge's transitive dependencies as of Sep 16, 2022; https://github.com/artemisSystem/Botania/blob/c18a609fd90e17853a55fa822e15042b5470673d/Forge/build.gradle#L103-L116
 	//Botania does not (currently) publish transitive dependency information for its artifacts.
 	
-	implementation "vazkii.patchouli:Patchouli:1.19.2-76"
+	implementation fg.deobf("vazkii.patchouli:Patchouli:1.19.2-76")
 	
-	compileOnly "mezz.jei:jei-1.19.2-common-api:11.2.0.247"
-	runtimeOnly "mezz.jei:jei-1.19.2-forge:11.2.0.247"
-	compileOnly "top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0:api"
-	runtimeOnly "top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0"
-	// compileOnly "com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:9.1.123"
-	compileOnly "com.unascribed:ears-api:1.4.5"
+	compileOnly fg.deobf("mezz.jei:jei-1.19.2-common-api:11.2.0.247")
+	runtimeOnly fg.deobf("mezz.jei:jei-1.19.2-forge:11.2.0.247")
+	compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0:api")
+	runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0")
+	// compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:9.1.123")
+	compileOnly fg.deobf("com.unascribed:ears-api:1.4.5")
 }
 
 mixin {
