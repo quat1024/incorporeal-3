@@ -72,7 +72,7 @@ public class NotCapabilities {
 			if(be instanceof CorporeaIndexBlockEntity index) return datum -> {
 				if(datum.type() == DataTypes.SOLIDIFIED_REQUEST) {
 					SolidifiedRequest request = datum.castAndGet();
-					index.doCorporeaRequest(request.matcher(), request.count(), index.getSpark());
+					index.doCorporeaRequest(request.matcher(), request.count(), index.getSpark(), null);
 				}
 			};
 			

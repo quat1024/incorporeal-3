@@ -126,7 +126,7 @@ public class SanvocaliaBlockEntity extends FunctionalFlowerBlockEntity {
 				if(getMana() < REDEEM_COST) break;
 				addMana(-REDEEM_COST);
 				
-				index.doCorporeaRequest(request.matcher(), request.count(), index.getSpark());
+				index.doCorporeaRequest(request.matcher(), request.count(), index.getSpark(), null);
 				
 				indexPositions.add(index.getBlockPos());
 				didAnything = true;

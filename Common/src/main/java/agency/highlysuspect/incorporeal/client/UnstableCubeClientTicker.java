@@ -46,8 +46,8 @@ public class UnstableCubeClientTicker {
 			
 			Vec3 start = Vec3.atCenterOf(pos);
 			Vec3 end = start.add(level.random.nextDouble() * 2 - 1, level.random.nextDouble() * 2 - 1, level.random.nextDouble() * 2 - 1);
-			Proxy.INSTANCE.lightningFX(start, end, 0.5f, colorPacked, colorDarker);
-			
+			Proxy.INSTANCE.lightningFX(level, start, end, 0.5f, colorPacked, colorDarker);
+
 			//play a sound
 			float volume = self.speed > 1.1f ? self.speed / 170f : 0.1f;
 			float pitch = basePitches[color.getId()] + (self.speed / 600f);
