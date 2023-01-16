@@ -9,6 +9,10 @@ minecraft {
 	version project.minecraftVersion
 }
 
+sourceSets.main.resources {
+	srcDir 'src/generated/resources'
+}
+
 dependencies {
 	compileOnly "org.spongepowered:mixin:0.8.5"
 	
