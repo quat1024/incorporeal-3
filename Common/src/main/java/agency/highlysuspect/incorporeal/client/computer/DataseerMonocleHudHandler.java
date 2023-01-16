@@ -21,7 +21,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.api.item.ICosmeticAttachable;
+import vazkii.botania.api.item.CosmeticAttachable;
 import vazkii.botania.common.handler.EquipmentHandler;
 
 import java.util.Collections;
@@ -97,7 +97,7 @@ public class DataseerMonocleHudHandler {
 				if (stack.is(IncTags.Items.DATA_VIEWERS)) { //change
 					return true;
 				}
-				if (item instanceof ICosmeticAttachable attach) {
+				if (item instanceof CosmeticAttachable attach) {
 					ItemStack cosmetic = attach.getCosmeticItem(stack);
 					return !cosmetic.isEmpty() && cosmetic.is(IncTags.Items.DATA_VIEWERS); //change
 				}

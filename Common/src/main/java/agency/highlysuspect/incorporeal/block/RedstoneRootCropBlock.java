@@ -4,7 +4,6 @@ import net.minecraft.Util;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -28,7 +27,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import vazkii.botania.common.item.ModItems;
+import vazkii.botania.common.item.BotaniaItems;
 
 /**
  * Incorporeal edits Botania's "redstone root" to be a plantable crop. This is the crop block.
@@ -76,13 +75,13 @@ public class RedstoneRootCropBlock extends CropBlock {
 	
 	@Override
 	public Item asItem() {
-		return ModItems.redstoneRoot;
+		return BotaniaItems.redstoneRoot;
 	}
 	
 	//Weird cropblock thing
 	@Override
 	protected ItemLike getBaseSeedId() {
-		return ModItems.redstoneRoot;
+		return BotaniaItems.redstoneRoot;
 	}
 	
 	//Hooked after Fabric's spectator check, and after checking that the player is holding a redstone root item.

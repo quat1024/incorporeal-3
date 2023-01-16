@@ -4,7 +4,7 @@ import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import vazkii.botania.common.block.tile.string.TileRedString;
+import vazkii.botania.common.block.block_entity.red_string.RedStringBlockEntity;
 
 import java.util.function.Supplier;
 
@@ -12,7 +12,7 @@ import java.util.function.Supplier;
  * The Block Entity for the Red String Constrictor.
  * Abstract, because a bespoke implementation is created for each loader.
  */
-public abstract class RedStringConstrictorBlockEntity extends TileRedString {
+public abstract class RedStringConstrictorBlockEntity extends RedStringBlockEntity {
 	public RedStringConstrictorBlockEntity(BlockPos pos, BlockState state) {
 		super(IncBlockEntityTypes.RED_STRING_CONSTRICTOR, pos, state);
 	}

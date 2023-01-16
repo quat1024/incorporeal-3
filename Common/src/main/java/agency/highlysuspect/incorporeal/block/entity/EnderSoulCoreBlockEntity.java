@@ -11,10 +11,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.api.corporea.ICorporeaNode;
-import vazkii.botania.api.corporea.ICorporeaNodeDetector;
-import vazkii.botania.api.corporea.ICorporeaRequest;
-import vazkii.botania.api.corporea.ICorporeaSpark;
+import vazkii.botania.api.corporea.CorporeaNode;
+import vazkii.botania.api.corporea.CorporeaNodeDetector;
+import vazkii.botania.api.corporea.CorporeaRequest;
+import vazkii.botania.api.corporea.CorporeaSpark;
 import vazkii.botania.common.impl.corporea.AbstractCorporeaNode;
 
 import java.util.Collections;
@@ -61,17 +61,17 @@ public class EnderSoulCoreBlockEntity extends AbstractSoulCoreBlockEntity {
 		return enderChest;
 	}
 	
-	public static class NodeDetector implements ICorporeaNodeDetector {
+	public static class NodeDetector implements CorporeaNodeDetector {
 		@Nullable
 		@Override
-		public ICorporeaNode getNode(Level world, ICorporeaSpark spark) {
+		public CorporeaNode getNode(Level world, CorporeaSpark spark) {
 			EnderSoulCoreBlockEntity be = IncBlockEntityTypes.ENDER_SOUL_CORE.getBlockEntity(world, spark.getAttachPos());
 			if(be == null) return null;
 			else return new Node(be, world, spark.getAttachPos(), spark);
 		}
 		
 		public static class Node extends AbstractCorporeaNode {
-			public Node(EnderSoulCoreBlockEntity be, Level world, BlockPos pos, ICorporeaSpark spark) {
+			public Node(EnderSoulCoreBlockEntity be, Level world, BlockPos pos, CorporeaSpark spark) {
 				super(world, pos, spark);
 				this.be = be;
 			}
@@ -79,14 +79,14 @@ public class EnderSoulCoreBlockEntity extends AbstractSoulCoreBlockEntity {
 			private final EnderSoulCoreBlockEntity be;
 			
 			@Override
-			public List<ItemStack> countItems(ICorporeaRequest request) {
+			public List<ItemStack> countItems(CorporeaRequest request) {
 				PlayerEnderChestContainer container = be.getEnderChest();
 				if(container == null) return Collections.emptyList();
 				else return iterateOverSlots(container, request, false);
 			}
 			
 			@Override
-			public List<ItemStack> extractItems(ICorporeaRequest request) {
+			public List<ItemStack> extractItems(CorporeaRequest request) {
 				PlayerEnderChestContainer container = be.getEnderChest();
 				if(container == null) return Collections.emptyList();
 				
@@ -96,7 +96,7 @@ public class EnderSoulCoreBlockEntity extends AbstractSoulCoreBlockEntity {
 			}
 			
 			//BotaniaCopy: VanillaCorporeaNode
-			protected List<ItemStack> iterateOverSlots(Container inv, ICorporeaRequest request, boolean doit) {
+			protected List<ItemStack> iterateOverSlots(Container inv, CorporeaRequest request, boolean doit) {
 				ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
 				
 				for (int i = inv.getContainerSize() - 1; i >= 0; i--) {

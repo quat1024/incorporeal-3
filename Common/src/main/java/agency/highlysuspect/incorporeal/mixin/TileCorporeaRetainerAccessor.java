@@ -4,8 +4,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
-import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
-import vazkii.botania.common.block.tile.corporea.TileCorporeaRetainer;
+import vazkii.botania.api.corporea.CorporeaRequestMatcher;
+import vazkii.botania.common.block.block_entity.corporea.CorporeaRetainerBlockEntity;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -22,15 +22,15 @@ import java.util.function.Function;
  * 
  * @see agency.highlysuspect.incorporeal.corporea.MatcherUtils
  */
-@Mixin(TileCorporeaRetainer.class)
+@Mixin(CorporeaRetainerBlockEntity.class)
 public interface TileCorporeaRetainerAccessor {
 	@Accessor(value = "corporeaMatcherDeserializers", remap = false)
-	static Map<ResourceLocation, Function<CompoundTag, ? extends ICorporeaRequestMatcher>> inc$getDeserializers() {
+	static Map<ResourceLocation, Function<CompoundTag, ? extends CorporeaRequestMatcher>> inc$getDeserializers() {
 		throw new AssertionError();
 	}
 	
 	@Accessor(value = "corporeaMatcherSerializers", remap = false)
-	static Map<Class<? extends ICorporeaRequestMatcher>, ResourceLocation> inc$getSerializers() {
+	static Map<Class<? extends CorporeaRequestMatcher>, ResourceLocation> inc$getSerializers() {
 		throw new AssertionError();
 	}
 }

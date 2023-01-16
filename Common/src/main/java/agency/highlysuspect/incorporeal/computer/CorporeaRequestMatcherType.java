@@ -10,59 +10,59 @@ import agency.highlysuspect.incorporeal.item.TicketItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
+import vazkii.botania.api.corporea.CorporeaRequestMatcher;
 
 import java.util.Optional;
 
 /**
  * A DataType representing corporea request matchers.
  */
-public class CorporeaRequestMatcherType implements DataType<ICorporeaRequestMatcher> {
+public class CorporeaRequestMatcherType implements DataType<CorporeaRequestMatcher> {
 	@Override
-	public void save(ICorporeaRequestMatcher thing, CompoundTag tag) {
+	public void save(CorporeaRequestMatcher thing, CompoundTag tag) {
 		//Nest it inside a further tag "matcher" because uhh, matcherutils also uses the key "type"
 		//This has caused 10000000 bugs and its ass to debug every single time
 		tag.put("matcher", MatcherUtils.save(thing));
 	}
 	
 	@Override
-	public Optional<ICorporeaRequestMatcher> tryLoad(CompoundTag tag) {
+	public Optional<CorporeaRequestMatcher> tryLoad(CompoundTag tag) {
 		return MatcherUtils.tryLoad(tag.getCompound("matcher"));
 	}
 	
 	@Override
-	public ICorporeaRequestMatcher defaultValue() {
+	public CorporeaRequestMatcher defaultValue() {
 		return EmptyCorporeaRequestMatcher.INSTANCE;
 	}
 	
 	@Override
-	public TicketItem<ICorporeaRequestMatcher> ticketItem() {
+	public TicketItem<CorporeaRequestMatcher> ticketItem() {
 		return IncItems.MATCHER_TICKET;
 	}
 	
 	@Override
-	public TicketConjurerItem<ICorporeaRequestMatcher> conjurerItem() {
+	public TicketConjurerItem<CorporeaRequestMatcher> conjurerItem() {
 		return IncItems.MATCHER_CONJURER;
 	}
 	
 	@Override
-	public int color(ICorporeaRequestMatcher thing) {
+	public int color(CorporeaRequestMatcher thing) {
 		return 0x6270f3;
 	}
 	
 	@Override
-	public int signal(ICorporeaRequestMatcher thing) {
-		if(thing == EmptyCorporeaRequestMatcher.INSTANCE || thing == ICorporeaRequestMatcher.Dummy.INSTANCE) return 0;
+	public int signal(CorporeaRequestMatcher thing) {
+		if(thing == EmptyCorporeaRequestMatcher.INSTANCE || thing == CorporeaRequestMatcher.Dummy.INSTANCE) return 0;
 		else return 15;
 	}
 	
 	@Override
-	public Component describe(ICorporeaRequestMatcher thing) {
+	public Component describe(CorporeaRequestMatcher thing) {
 		return thing.getRequestName();
 	}
 	
 	@Override
-	public ICorporeaRequestMatcher parse(String message, ItemStack otherHand) {
+	public CorporeaRequestMatcher parse(String message, ItemStack otherHand) {
 		return RequestParser.parseMatcher(message, otherHand);
 	}
 }

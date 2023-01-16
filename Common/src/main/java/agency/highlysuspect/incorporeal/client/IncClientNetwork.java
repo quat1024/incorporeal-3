@@ -13,8 +13,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import vazkii.botania.client.fx.SparkleParticleData;
-import vazkii.botania.common.item.ItemTwigWand;
-import vazkii.botania.common.proxy.IProxy;
+import vazkii.botania.common.item.WandOfTheForestItem;
+import vazkii.botania.common.proxy.Proxy;
 
 import java.util.function.BiConsumer;
 
@@ -41,7 +41,7 @@ public class IncClientNetwork {
 				
 				for(FunnyEffect.Line line : effect.lines()) {
 					Vec3 dst = Vec3.atCenterOf(line.dst());
-					ItemTwigWand.doParticleBeam(level, src, dst);
+					WandOfTheForestItem.doParticleBeam(level, src, dst);
 					
 					byte[] notes = line.notes();
 					if(notes.length == 1) {
@@ -60,7 +60,7 @@ public class IncClientNetwork {
 			mc.doRunTask(() -> {
 				Level level = mc.level;
 				if(level == null) return;
-				for(BlockPos dst : effect.ends()) ItemTwigWand.doParticleBeam(level, effect.start(), Vec3.atCenterOf(dst));
+				for(BlockPos dst : effect.ends()) WandOfTheForestItem.doParticleBeam(level, effect.start(), Vec3.atCenterOf(dst));
 			});
 		});
 		
@@ -91,7 +91,7 @@ public class IncClientNetwork {
 		Vec3 currentPos = orig;
 		for (int i = 0; i < iters; i++) {
 			SparkleParticleData data = SparkleParticleData.noClip(size, r, g, b, 4);
-			IProxy.INSTANCE.addParticleForceNear(world, data, currentPos.x, currentPos.y, currentPos.z, 0, 0, 0);
+			Proxy.INSTANCE.addParticleForceNear(world, data, currentPos.x, currentPos.y, currentPos.z, 0, 0, 0);
 			currentPos = currentPos.add(movement);
 		}
 	}

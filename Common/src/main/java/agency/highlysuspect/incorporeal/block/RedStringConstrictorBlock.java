@@ -15,10 +15,10 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.common.block.string.BlockRedString;
-import vazkii.botania.common.block.tile.string.TileRedString;
+import vazkii.botania.common.block.block_entity.red_string.RedStringBlockEntity;
+import vazkii.botania.common.block.red_string.RedStringBlock;
 
-public class RedStringConstrictorBlock extends BlockRedString {
+public class RedStringConstrictorBlock extends RedStringBlock {
 	public RedStringConstrictorBlock(Properties builder) {
 		super(builder);
 		
@@ -55,6 +55,6 @@ public class RedStringConstrictorBlock extends BlockRedString {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, IncBlockEntityTypes.RED_STRING_CONSTRICTOR, TileRedString::commonTick);
+		return createTickerHelper(type, IncBlockEntityTypes.RED_STRING_CONSTRICTOR, RedStringBlockEntity::commonTick);
 	}
 }

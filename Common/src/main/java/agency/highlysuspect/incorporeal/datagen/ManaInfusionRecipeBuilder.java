@@ -10,7 +10,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.recipe.StateIngredient;
-import vazkii.botania.common.block.ModBlocks;
+import vazkii.botania.common.block.BotaniaBlocks;
 import vazkii.botania.common.crafting.StateIngredientHelper;
 import vazkii.botania.common.helper.ItemNBTHelper;
 
@@ -61,11 +61,11 @@ public class ManaInfusionRecipeBuilder {
 	}
 	
 	public ManaInfusionRecipeBuilder alchemyCatalyst() {
-		return catalyst(StateIngredientHelper.of(ModBlocks.alchemyCatalyst));
+		return catalyst(StateIngredientHelper.of(BotaniaBlocks.alchemyCatalyst));
 	}
 	
 	public ManaInfusionRecipeBuilder conjurationCatalyst() {
-		return catalyst(StateIngredientHelper.of(ModBlocks.conjurationCatalyst));
+		return catalyst(StateIngredientHelper.of(BotaniaBlocks.conjurationCatalyst));
 	}
 	
 	public JsonObject toJson() {

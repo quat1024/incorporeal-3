@@ -27,11 +27,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.api.mana.IManaItem;
 import vazkii.botania.api.mana.ManaBarTooltip;
+import vazkii.botania.api.mana.ManaItem;
 import vazkii.botania.api.mana.ManaItemHandler;
 import vazkii.botania.common.helper.ItemNBTHelper;
-import vazkii.botania.xplat.IXplatAbstractions;
+import vazkii.botania.xplat.XplatAbstractions;
 
 import java.util.List;
 import java.util.Optional;
@@ -74,12 +74,12 @@ public class BoundEnderPearlItem extends Item {
 		ItemNBTHelper.setString(stack, OWNER_NAME_KEY, player.getGameProfile().getName());
 		ItemNBTHelper.setInt(stack, EPOCH_KEY, ((ServerPlayerDuck) player).inc$getEpoch());
 		
-		IManaItem manaItem = IXplatAbstractions.INSTANCE.findManaItem(stack);
+		vazkii.botania.api.mana.ManaItem manaItem = XplatAbstractions.INSTANCE.findManaItem(stack);
 		if(manaItem != null) manaItem.addMana(manaItem.getMaxMana()); //free mana woo
 	}
 	
 	public void payMana(@Nullable Player player, @Nullable InteractionHand hand, ItemStack stack) {
-		IManaItem manaItem = IXplatAbstractions.INSTANCE.findManaItem(stack);
+		vazkii.botania.api.mana.ManaItem manaItem = XplatAbstractions.INSTANCE.findManaItem(stack);
 		if(manaItem == null) return;
 		
 		manaItem.addMana(-MANA_PER_CHARGE);
@@ -96,7 +96,7 @@ public class BoundEnderPearlItem extends Item {
 	
 	@Override
 	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
-		IManaItem manaItem = IXplatAbstractions.INSTANCE.findManaItem(stack);
+		vazkii.botania.api.mana.ManaItem manaItem = XplatAbstractions.INSTANCE.findManaItem(stack);
 		if(manaItem == null) return;
 		
 		int howMuchToRequest = Math.min(manaItem.getMaxMana() - manaItem.getMana(), MANA_RECHARGE_RATE);
@@ -217,7 +217,7 @@ public class BoundEnderPearlItem extends Item {
 		slevel.addFreshEntity(pearl);
 	}
 	
-	public record ManaItem(BoundEnderPearlItem item, ItemStack stack) implements IManaItem {
+	public record ManaItem(BoundEnderPearlItem item, ItemStack stack) implements vazkii.botania.api.mana.ManaItem {
 		public static final String MANA_KEY = "Mana";
 		
 		@Override

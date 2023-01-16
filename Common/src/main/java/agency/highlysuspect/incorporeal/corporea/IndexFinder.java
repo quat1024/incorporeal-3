@@ -1,11 +1,10 @@
 package agency.highlysuspect.incorporeal.corporea;
 
-import agency.highlysuspect.incorporeal.mixin.TileCorporeaIndexAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
-import vazkii.botania.common.block.tile.ModTiles;
-import vazkii.botania.common.block.tile.corporea.TileCorporeaIndex;
+import vazkii.botania.common.block.block_entity.BotaniaBlockEntities;
+import vazkii.botania.common.block.block_entity.corporea.CorporeaIndexBlockEntity;
 import vazkii.botania.common.helper.MathHelper;
 
 import java.util.ArrayList;
@@ -17,11 +16,11 @@ import java.util.List;
  */
 public class IndexFinder {
 	//Radius rounded up to a full block.
-	public static int PESSIMISTIC_RADIUS = Mth.ceil(TileCorporeaIndex.RADIUS);
+	public static int PESSIMISTIC_RADIUS = Mth.ceil(CorporeaIndexBlockEntity.RADIUS);
 	public static int HEIGHT = 5;
 	
-	public static List<TileCorporeaIndex> findNearBlock(Level level, BlockPos pos) {
-		List<TileCorporeaIndex> result = new ArrayList<>();
+	public static List<CorporeaIndexBlockEntity> findNearBlock(Level level, BlockPos pos) {
+		List<CorporeaIndexBlockEntity> result = new ArrayList<>();
 		
 		BlockPos low = pos.offset(-PESSIMISTIC_RADIUS, -HEIGHT, -PESSIMISTIC_RADIUS);
 		BlockPos high = pos.offset(PESSIMISTIC_RADIUS, HEIGHT, PESSIMISTIC_RADIUS);
@@ -30,9 +29,9 @@ public class IndexFinder {
 			//Similar check that TileCorporeaIndex#isInRangeOfIndex uses.
 			//Here, I don't use a Y-level check, because I only iterate through Y-levels that are close enough in the first place?
 			//Hmmmm....
-			if(MathHelper.pointDistancePlane(tryPos.getX(), tryPos.getZ(), pos.getX(), pos.getZ()) > TileCorporeaIndex.RADIUS) continue;
+			if(MathHelper.pointDistancePlane(tryPos.getX(), tryPos.getZ(), pos.getX(), pos.getZ()) > CorporeaIndexBlockEntity.RADIUS) continue;
 			
-			TileCorporeaIndex index = ModTiles.CORPOREA_INDEX.getBlockEntity(level, tryPos);
+			CorporeaIndexBlockEntity index = BotaniaBlockEntities.CORPOREA_INDEX.getBlockEntity(level, tryPos);
 			if(index != null) result.add(index);
 		}
 		

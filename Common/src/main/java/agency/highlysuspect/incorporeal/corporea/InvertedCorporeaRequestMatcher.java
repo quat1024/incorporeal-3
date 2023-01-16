@@ -4,13 +4,13 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
+import vazkii.botania.api.corporea.CorporeaRequestMatcher;
 
 /**
  * A corporea request matcher that only matches things its inner matcher doesn't.
  */
-public record InvertedCorporeaRequestMatcher(ICorporeaRequestMatcher inner) implements ICorporeaRequestMatcher {
-	public static ICorporeaRequestMatcher invert(ICorporeaRequestMatcher other) {
+public record InvertedCorporeaRequestMatcher(CorporeaRequestMatcher inner) implements CorporeaRequestMatcher {
+	public static CorporeaRequestMatcher invert(CorporeaRequestMatcher other) {
 		//Avoid inverting twice in this simple case
 		if(other instanceof InvertedCorporeaRequestMatcher twoWrongsMakeARight) return twoWrongsMakeARight.inner;
 		else return new InvertedCorporeaRequestMatcher(other);
@@ -44,7 +44,7 @@ public record InvertedCorporeaRequestMatcher(ICorporeaRequestMatcher inner) impl
 	//
 	//Botania API restrictions mean that in my readFromNBT method I must always return an InvertedCorporeaRequestMatcher.
 	//So, here we are.
-	public static class Fallback implements ICorporeaRequestMatcher {
+	public static class Fallback implements CorporeaRequestMatcher {
 		public static final Fallback INSTANCE = new Fallback();
 		
 		@Override

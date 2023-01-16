@@ -3,12 +3,12 @@ package agency.highlysuspect.incorporeal.corporea;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
+import vazkii.botania.api.corporea.CorporeaRequestMatcher;
 
 /**
  * An ICorporeaRequestMatcher that rudely refuses to recognize any items.
  */
-public class EmptyCorporeaRequestMatcher implements ICorporeaRequestMatcher {
+public class EmptyCorporeaRequestMatcher implements CorporeaRequestMatcher {
 	public static final EmptyCorporeaRequestMatcher INSTANCE = new EmptyCorporeaRequestMatcher();
 	
 	private EmptyCorporeaRequestMatcher() {}

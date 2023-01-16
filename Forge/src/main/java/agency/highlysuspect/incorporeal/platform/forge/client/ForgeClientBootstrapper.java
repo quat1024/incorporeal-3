@@ -16,7 +16,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import vazkii.botania.api.BotaniaForgeClientCapabilities;
-import vazkii.botania.api.block.IWandHUD;
+import vazkii.botania.api.block.WandHUD;
 import vazkii.botania.forge.CapabilityUtil;
 
 import java.util.function.Function;
@@ -79,7 +79,7 @@ public class ForgeClientBootstrapper implements IncClientBootstrapper {
 		MinecraftForge.EVENT_BUS.addGenericListener(BlockEntity.class, (AttachCapabilitiesEvent<BlockEntity> e) -> {
 			BlockEntity be = e.getObject();
 			if(IncClientProperties.WAND_HUD_MAKERS.containsKey(be.getType())) {
-				Function<BlockEntity, IWandHUD> maker = IncClientProperties.WAND_HUD_MAKERS.get(be.getType());
+				Function<BlockEntity, WandHUD> maker = IncClientProperties.WAND_HUD_MAKERS.get(be.getType());
 				e.addCapability(Inc.id("wand_hud"), CapabilityUtil.makeProvider(BotaniaForgeClientCapabilities.WAND_HUD, maker.apply(be)));
 			}
 		});

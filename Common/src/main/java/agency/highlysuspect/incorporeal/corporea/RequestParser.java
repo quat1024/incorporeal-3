@@ -3,9 +3,8 @@ package agency.highlysuspect.incorporeal.corporea;
 import agency.highlysuspect.incorporeal.mixin.TileCorporeaIndexAccessor;
 import net.minecraft.world.item.ItemStack;
 import vazkii.botania.api.corporea.CorporeaHelper;
-import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
-import vazkii.botania.common.block.tile.corporea.TileCorporeaIndex;
-import vazkii.botania.common.impl.corporea.CorporeaItemStackMatcher;
+import vazkii.botania.api.corporea.CorporeaRequestMatcher;
+import vazkii.botania.common.block.block_entity.corporea.CorporeaIndexBlockEntity;
 
 import java.util.Locale;
 import java.util.Map;
@@ -13,11 +12,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RequestParser {
-	private static Map<Pattern, TileCorporeaIndex.IRegexStacker> patterns() {
+	private static Map<Pattern, CorporeaIndexBlockEntity.IRegexStacker> patterns() {
 		return TileCorporeaIndexAccessor.inc$getPatterns();
 	}
 	
-	public static ICorporeaRequestMatcher parseMatcher(String message, ItemStack thisOrderStack) {
+	public static CorporeaRequestMatcher parseMatcher(String message, ItemStack thisOrderStack) {
 		//Yeah, uh... You could say this is a little bit hacky.
 		return parseRequest("1 " + message, thisOrderStack).matcher();
 	}
@@ -37,7 +36,7 @@ public class RequestParser {
 		for(Pattern pattern : patterns().keySet()) {
 			Matcher matcher = pattern.matcher(msg);
 			if(matcher.matches()) {
-				TileCorporeaIndex.IRegexStacker stacker = patterns().get(pattern);
+				CorporeaIndexBlockEntity.IRegexStacker stacker = patterns().get(pattern);
 				count = stacker.getCount(matcher);
 				name = stacker.getName(matcher).toLowerCase(Locale.ROOT).trim();
 				//no "break", none in botania either tbh
@@ -45,7 +44,7 @@ public class RequestParser {
 		}
 		
 		//One difference from Botania is that "2 of this" will give you a matcher for literally that item stack.
-		ICorporeaRequestMatcher requestMatcher;
+		CorporeaRequestMatcher requestMatcher;
 		if(name.equals("this")) {
 			//Botania does something more like this:
 			//requestMatcher = CorporeaHelper.instance().createMatcher(thisOrderStack.getHoverName().getString().toLowerCase(Locale.ROOT).trim());

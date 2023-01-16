@@ -21,15 +21,15 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import vazkii.botania.common.block.BlockModWaterloggable;
-import vazkii.botania.mixin.AccessorItemEntity;
+import vazkii.botania.common.block.BotaniaWaterloggedBlock;
+import vazkii.botania.mixin.ItemEntityAccessor;
 
 import java.util.List;
 
 /**
  * The frame tinkerer. When powered, swaps any (single) items dropped on itself with the items in nearby Item Frames.
  */
-public class FrameTinkererBlock extends BlockModWaterloggable {
+public class FrameTinkererBlock extends BotaniaWaterloggedBlock {
 	public FrameTinkererBlock(Properties properties) {
 		super(properties);
 		
@@ -135,7 +135,7 @@ public class FrameTinkererBlock extends BlockModWaterloggable {
 		//Copy the frame's former item into the item entity
 		switchWith.setItem(formerlyInFrame);
 		switchWith.setPickUpDelay(30);
-		((AccessorItemEntity) switchWith).setAge(0); //botania accessor
+		((ItemEntityAccessor) switchWith).setAge(0); //botania accessor
 	}
 	
 	private static void spawnStack(Level level, BlockPos pos, ItemStack stack) {

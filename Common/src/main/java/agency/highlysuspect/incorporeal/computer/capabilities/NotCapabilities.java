@@ -10,10 +10,8 @@ import agency.highlysuspect.incorporeal.corporea.RetainerDuck;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import agency.highlysuspect.incorporeal.mixin.CorporeaItemStackMatcherAccessor;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.decoration.ItemFrame;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -26,12 +24,12 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
-import vazkii.botania.common.block.ModBlocks;
-import vazkii.botania.common.block.tile.corporea.TileCorporeaCrystalCube;
-import vazkii.botania.common.block.tile.corporea.TileCorporeaIndex;
-import vazkii.botania.common.block.tile.mana.TilePrism;
-import vazkii.botania.common.item.lens.ItemLens;
+import vazkii.botania.api.corporea.CorporeaRequestMatcher;
+import vazkii.botania.common.block.BotaniaBlocks;
+import vazkii.botania.common.block.block_entity.corporea.CorporeaCrystalCubeBlockEntity;
+import vazkii.botania.common.block.block_entity.corporea.CorporeaIndexBlockEntity;
+import vazkii.botania.common.block.block_entity.mana.ManaPrismBlockEntity;
+import vazkii.botania.common.item.lens.LensItem;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -71,7 +69,7 @@ public class NotCapabilities {
 			};
 			
 			//Corporea indices: perform corporea requests
-			if(be instanceof TileCorporeaIndex index) return datum -> {
+			if(be instanceof CorporeaIndexBlockEntity index) return datum -> {
 				if(datum.type() == DataTypes.SOLIDIFIED_REQUEST) {
 					SolidifiedRequest request = datum.castAndGet();
 					index.doCorporeaRequest(request.matcher(), request.count(), index.getSpark());
@@ -79,13 +77,13 @@ public class NotCapabilities {
 			};
 			
 			//Corporea crystal cubes: set (or clear) the item that they display
-			if(be instanceof TileCorporeaCrystalCube cube) return datum -> {
+			if(be instanceof CorporeaCrystalCubeBlockEntity cube) return datum -> {
 				if(datum.type() == DataTypes.EMPTY) {
 					cube.setRequestTarget(ItemStack.EMPTY); //Clear it
 					return;
 				}
 				
-				ICorporeaRequestMatcher matcher;
+				CorporeaRequestMatcher matcher;
 				if(datum.type() == DataTypes.SOLIDIFIED_REQUEST) matcher = datum.<SolidifiedRequest>castAndGet().matcher();
 				else if(datum.type() == DataTypes.MATCHER) matcher = datum.castAndGet();
 				else return;
@@ -106,7 +104,7 @@ public class NotCapabilities {
 		final BlockPos posCopy = pos.immutable();
 		
 		//mana voids: trash can
-		if(s.getBlock() == ModBlocks.manaVoid) return datum -> {};
+		if(s.getBlock() == BotaniaBlocks.manaVoid) return datum -> {};
 		
 		//Corporea solidifiers -> produce ticket
 		if(s.getBlock() == IncBlocks.CORPOREA_SOLIDIFIER) return datum -> IncBlocks.CORPOREA_SOLIDIFIER.receiveDatum(level, posCopy, datum);
@@ -143,7 +141,7 @@ public class NotCapabilities {
 			};
 			
 			//Corporea crystal cubes -> a corporea request, encapsulating its displayed item + count
-			if(be instanceof TileCorporeaCrystalCube cube) return (doIt) -> {
+			if(be instanceof CorporeaCrystalCubeBlockEntity cube) return (doIt) -> {
 				ItemStack target = cube.getRequestTarget();
 				if(target.isEmpty()) return Datum.EMPTY;
 				else return DataTypes.SOLIDIFIED_REQUEST.datumOf(SolidifiedRequest.create(target, cube.getItemCount()));
@@ -162,7 +160,7 @@ public class NotCapabilities {
 		final BlockPos posCopy = pos.immutable(); //also watch out for this
 		
 		//Mana voids -> empty
-		if(s.getBlock() == ModBlocks.manaVoid) return (doIt) -> Datum.EMPTY;
+		if(s.getBlock() == BotaniaBlocks.manaVoid) return (doIt) -> Datum.EMPTY;
 		
 		//Datastone blocks -> retract the column of pointed datastone
 		if(s.getBlock() instanceof DatastoneBlock db) return (doIt) -> db.retractColumn(level, posCopy, doIt); 
@@ -202,7 +200,7 @@ public class NotCapabilities {
 	
 	public static @Nullable DataLensProvider findDataLensProvider(Level level, BlockPos pos, @Nullable BlockState state, @Nullable BlockEntity be, boolean directBind) {
 		if(be != null) be = level.getBlockEntity(pos);
-		if(be instanceof TilePrism prism && ItemLens.getLens(prism.getItem(0)) instanceof NotManaLens dataLens) {
+		if(be instanceof ManaPrismBlockEntity prism && LensItem.getLens(prism.getItem(0)) instanceof NotManaLens dataLens) {
 			return new DataLensProvider() {
 				@Override
 				public @NotNull DataLens getLens() {

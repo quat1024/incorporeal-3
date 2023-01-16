@@ -10,9 +10,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import vazkii.botania.api.internal.VanillaPacketDispatcher;
-import vazkii.botania.common.block.tile.TileMod;
+import vazkii.botania.common.block.block_entity.BotaniaBlockEntity;
 
-public class DataStorageBlockEntity extends TileMod implements DatumAcceptor, DatumProvider {
+public class DataStorageBlockEntity extends BotaniaBlockEntity implements DatumAcceptor, DatumProvider {
 	public DataStorageBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}

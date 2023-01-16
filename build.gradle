@@ -36,8 +36,6 @@ subprojects {
 	}
 	
 	repositories {
-		// Temporary for intermediate botania build
-		mavenLocal()
 		
 		//Spongfrog
 		maven {
@@ -144,6 +142,15 @@ subprojects {
 			url = "https://repo.sleeping.town"
 			content {
 				includeGroup "com.unascribed"
+			}
+		}
+
+		// Various stuff, including some botania transitive deps
+		maven {
+			name = "Modrinth"
+			url = "https://api.modrinth.com/maven"
+			content {
+				includeGroup "maven.modrinth"
 			}
 		}
 	}

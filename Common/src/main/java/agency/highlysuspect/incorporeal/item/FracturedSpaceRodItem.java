@@ -17,8 +17,8 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.api.item.ICoordBoundItem;
-import vazkii.botania.common.block.ModBlocks;
+import vazkii.botania.api.item.CoordBoundItem;
+import vazkii.botania.common.block.BotaniaBlocks;
 import vazkii.botania.common.helper.ItemNBTHelper;
 import vazkii.botania.common.helper.PlayerHelper;
 
@@ -115,7 +115,7 @@ public class FracturedSpaceRodItem extends Item {
 		//todo: in 1.12/16 this was a tag, i don't really remember why though lol
 		// i guess you could do things like, have compat with quark chute?
 		// also it checked the block entity type, for no reason lol
-		return state.is(ModBlocks.openCrate);
+		return state.is(BotaniaBlocks.openCrate);
 	}
 	
 	private static String stringifyDimension(Level level) {
@@ -130,7 +130,7 @@ public class FracturedSpaceRodItem extends Item {
 		return Component.translatable(key, formatStringArgs);
 	}
 	
-	public static record CoordBoundItem(ItemStack stack) implements ICoordBoundItem {
+	public static record CoordBoundItem(ItemStack stack) implements vazkii.botania.api.item.CoordBoundItem {
 		@Nullable
 		@Override
 		public BlockPos getBinding(Level level) {

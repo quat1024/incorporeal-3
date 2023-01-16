@@ -2,7 +2,6 @@ package agency.highlysuspect.incorporeal.block.entity;
 
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
-import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.corporea.IndexFinder;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import agency.highlysuspect.incorporeal.IncItems;
@@ -12,7 +11,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -28,9 +26,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.api.subtile.RadiusDescriptor;
-import vazkii.botania.api.subtile.TileEntityFunctionalFlower;
-import vazkii.botania.common.block.tile.corporea.TileCorporeaIndex;
+import vazkii.botania.api.block_entity.FunctionalFlowerBlockEntity;
+import vazkii.botania.api.block_entity.RadiusDescriptor;
+import vazkii.botania.common.block.block_entity.corporea.CorporeaIndexBlockEntity;
 
 import java.util.HashSet;
 import java.util.List;
@@ -42,7 +40,7 @@ import java.util.UUID;
  * nearby Corporea Indices. If there are none nearby, it dumps the message into chat instead, as a
  * nod to when people do that on accident.
  */
-public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
+public class SanvocaliaBlockEntity extends FunctionalFlowerBlockEntity {
 	public SanvocaliaBlockEntity(int radius, BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 		this.radius = radius;
@@ -94,7 +92,7 @@ public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 		SolidifiedRequest request = IncItems.SOLIDIFIED_REQUEST_TICKET.get(ticketEnt.getItem()).castAndGet();
 		
 		//Find nearby Corporea Indices
-		List<TileCorporeaIndex> nearbyIndices = IndexFinder.findNearBlock(level, pos);
+		List<CorporeaIndexBlockEntity> nearbyIndices = IndexFinder.findNearBlock(level, pos);
 		
 		if(nearbyIndices.isEmpty()) {
 			//Yammer in chat
@@ -124,7 +122,7 @@ public class SanvocaliaBlockEntity extends TileEntityFunctionalFlower {
 			//Make requests to nearby Corporea Indices
 			boolean didAnything = false;
 			Set<BlockPos> indexPositions = new HashSet<>();
-			for(TileCorporeaIndex index : nearbyIndices) {
+			for(CorporeaIndexBlockEntity index : nearbyIndices) {
 				if(getMana() < REDEEM_COST) break;
 				addMana(-REDEEM_COST);
 				

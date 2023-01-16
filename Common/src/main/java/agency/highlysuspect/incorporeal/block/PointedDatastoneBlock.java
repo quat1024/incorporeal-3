@@ -26,10 +26,9 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.common.block.BlockModWaterloggable;
+import vazkii.botania.common.block.BotaniaWaterloggedBlock;
 
 import java.util.Locale;
-import java.util.Random;
 
 /**
  * BECAUSE I KEEP HAVING TO LOOK IT UP!!!!!!!!!!!!!
@@ -38,7 +37,7 @@ import java.util.Random;
  * 
  * STALAGMITES ARE THE ONES ON THE GROUND, THAT POINT UP
  */
-public class PointedDatastoneBlock extends BlockModWaterloggable implements EntityBlock {
+public class PointedDatastoneBlock extends BotaniaWaterloggedBlock implements EntityBlock {
 	public PointedDatastoneBlock(Properties props) {
 		super(props);
 		

@@ -4,7 +4,7 @@ import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncBlocks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Block;
-import vazkii.botania.common.block.ModBlocks;
+import vazkii.botania.common.block.BotaniaBlocks;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -58,7 +58,7 @@ public class CompressedTaterUtil {
 	}
 	
 	public static Block getPotato(int compressionLevel) {
-		if(compressionLevel == 0) return ModBlocks.tinyPotato;
+		if(compressionLevel == 0) return BotaniaBlocks.tinyPotato;
 		else return IncBlocks.COMPRESSED_TATERS.get(compressionLevel);
 	}
 }

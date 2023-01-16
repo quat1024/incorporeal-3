@@ -9,7 +9,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import vazkii.botania.common.proxy.IProxy;
+import vazkii.botania.common.proxy.Proxy;
 
 /**
  * You know how as of 1.17, you can register separate block entity tickers for the client and server?
@@ -46,7 +46,7 @@ public class UnstableCubeClientTicker {
 			
 			Vec3 start = Vec3.atCenterOf(pos);
 			Vec3 end = start.add(level.random.nextDouble() * 2 - 1, level.random.nextDouble() * 2 - 1, level.random.nextDouble() * 2 - 1);
-			IProxy.INSTANCE.lightningFX(start, end, 0.5f, colorPacked, colorDarker);
+			Proxy.INSTANCE.lightningFX(start, end, 0.5f, colorPacked, colorDarker);
 			
 			//play a sound
 			float volume = self.speed > 1.1f ? self.speed / 170f : 0.1f;

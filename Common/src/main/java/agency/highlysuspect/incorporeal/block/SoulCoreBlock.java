@@ -18,7 +18,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.common.block.BlockMod;
+import vazkii.botania.common.block.BotaniaBlock;
 import vazkii.botania.common.helper.PlayerHelper;
 
 import java.util.function.Supplier;
@@ -26,7 +26,7 @@ import java.util.function.Supplier;
 /**
  * The block used for all Soul Cores. Pass in the BlockEntity that the core uses.
  */
-public class SoulCoreBlock extends BlockMod implements EntityBlock {
+public class SoulCoreBlock extends BotaniaBlock implements EntityBlock {
 	public SoulCoreBlock(Supplier<BlockEntityType<? extends AbstractSoulCoreBlockEntity>> typeS, Properties props) {
 		super(props);
 		this.typeS = typeS;

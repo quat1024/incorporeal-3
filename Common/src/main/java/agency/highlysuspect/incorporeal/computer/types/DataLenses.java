@@ -4,7 +4,7 @@ import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.corporea.InvertedCorporeaRequestMatcher;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import agency.highlysuspect.incorporeal.util.SimplerRegistry;
-import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
+import vazkii.botania.api.corporea.CorporeaRequestMatcher;
 
 /**
  * N.B: the "registry" for these is not (currently?) used, just using it as a convenient place to stick them.
@@ -34,7 +34,7 @@ public class DataLenses {
 	
 	public static final DataLens negating = input -> {
 		if(input.type() == DataTypes.INTEGER) return input.<Integer>cast().map(i -> -i);
-		if(input.type() == DataTypes.MATCHER) return input.<ICorporeaRequestMatcher>cast().map(InvertedCorporeaRequestMatcher::invert);
+		if(input.type() == DataTypes.MATCHER) return input.<CorporeaRequestMatcher>cast().map(InvertedCorporeaRequestMatcher::invert);
 		if(input.type() == DataTypes.SOLIDIFIED_REQUEST) {
 			//negate both halves
 			SolidifiedRequest request = input.<SolidifiedRequest>cast().thing();

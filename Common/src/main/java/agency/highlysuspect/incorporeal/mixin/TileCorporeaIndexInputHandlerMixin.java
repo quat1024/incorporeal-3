@@ -6,10 +6,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import vazkii.botania.common.block.tile.corporea.TileCorporeaIndex;
+import vazkii.botania.common.block.block_entity.corporea.CorporeaIndexBlockEntity;
 
-@Mixin(TileCorporeaIndex.class)
+@Mixin(CorporeaIndexBlockEntity.class)
 public class TileCorporeaIndexInputHandlerMixin {
 	/**
 	 * Instead of making my own multi-loader abstraction for handling chat messages i will simply piggy back off Botania's :))

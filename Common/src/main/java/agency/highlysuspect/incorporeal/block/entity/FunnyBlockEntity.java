@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.api.subtile.RadiusDescriptor;
-import vazkii.botania.api.subtile.TileEntityFunctionalFlower;
+import vazkii.botania.api.block_entity.RadiusDescriptor;
+import vazkii.botania.api.block_entity.FunctionalFlowerBlockEntity;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ import java.util.Map;
  * All Botania flowers are required by intergalactic law to be named after a shitty pun off a
  * real life flower, and the Sweet Alexum is named after the Sweet Alyssum.
  */
-public class FunnyBlockEntity extends TileEntityFunctionalFlower {
+public class FunnyBlockEntity extends FunctionalFlowerBlockEntity {
 	public FunnyBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int range, int ticksBetweenNotes, int pitchShift, double sparkleHeight) {
 		super(type, pos, state);
 		this.range = range;

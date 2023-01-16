@@ -7,10 +7,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import vazkii.botania.api.block.IWandBindable;
+import vazkii.botania.api.block.WandBindable;
 import vazkii.botania.api.corporea.CorporeaHelper;
-import vazkii.botania.api.corporea.ICorporeaSpark;
-import vazkii.botania.common.block.tile.TileMod;
+import vazkii.botania.api.corporea.CorporeaSpark;
+import vazkii.botania.common.block.block_entity.BotaniaBlockEntity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,7 @@ import java.util.Set;
  * You can bind it to (multiple) other Corporea Pylons using the Wand of the Forest, over a very large range.
  * Any Corporea Sparks placed atop a pair of bound pylons act like they are connected.
  */
-public class CorporeaPylonBlockEntity extends TileMod implements IWandBindable, Multibindable {
+public class CorporeaPylonBlockEntity extends BotaniaBlockEntity implements WandBindable, Multibindable {
 	public CorporeaPylonBlockEntity(BlockPos pos, BlockState state) {
 		super(IncBlockEntityTypes.CORPOREA_PYLON, pos, state);
 	}
@@ -36,7 +36,7 @@ public class CorporeaPylonBlockEntity extends TileMod implements IWandBindable, 
 	private void tick() {
 		if(level == null) return;
 		
-		ICorporeaSpark mySpark = getSpark();
+		CorporeaSpark mySpark = getSpark();
 		if(mySpark == null) return; //Nothing to do
 		
 		for(BlockPos binding : wandBindings) {
@@ -47,7 +47,7 @@ public class CorporeaPylonBlockEntity extends TileMod implements IWandBindable, 
 			if(!(bindTarget instanceof CorporeaPylonBlockEntity otherPylon)) continue; 
 			
 			//...and it has a spark...
-			ICorporeaSpark theirSpark = otherPylon.getSpark();
+			CorporeaSpark theirSpark = otherPylon.getSpark();
 			if(theirSpark == null) continue;
 			
 			//...register a binding between them
@@ -63,10 +63,10 @@ public class CorporeaPylonBlockEntity extends TileMod implements IWandBindable, 
 		}
 	}
 	
-	public ICorporeaSpark getSpark() {
+	public CorporeaSpark getSpark() {
 		//The BlockEntity is at the bottom of the Corporea Pylon, which is three blocks tall.
 		//The corporea spark is attached to the block two blocks above myself.
-		ICorporeaSpark spark = CorporeaHelper.instance().getSparkForBlock(level, getBlockPos().above(2));
+		CorporeaSpark spark = CorporeaHelper.instance().getSparkForBlock(level, getBlockPos().above(2));
 		if(spark instanceof ICorporeaSparkExt) return spark; //Unchecked casts to this type are performed later
 		else return null;
 	}
@@ -97,7 +97,7 @@ public class CorporeaPylonBlockEntity extends TileMod implements IWandBindable, 
 		/**
 		 * Returns true if the extra binding is new, or false if it was already known
 		 */
-		boolean registerRemoteBinding(ICorporeaSpark other);
+		boolean registerRemoteBinding(CorporeaSpark other);
 		
 		//Invoker
 		void inc$findNetwork();

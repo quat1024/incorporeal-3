@@ -11,9 +11,9 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import vazkii.botania.common.block.ModBlocks;
-import vazkii.botania.common.item.ModItems;
-import vazkii.botania.common.lib.ModTags;
+import vazkii.botania.common.block.BotaniaBlocks;
+import vazkii.botania.common.item.BotaniaItems;
+import vazkii.botania.common.lib.BotaniaTags;
 
 import java.util.function.Consumer;
 
@@ -22,49 +22,49 @@ public class IncCommonRecipeGen {
 		//Rod of the Fractured Space
 		RecipeDsl.shaped(IncItems.FRACTURED_SPACE_ROD, " EG", " TE", "T  ")
 			.define("E", Items.ENDER_EYE)
-			.define("G", ModItems.lifeEssence)
-			.define("T", ModItems.dreamwoodTwig)
+			.define("G", BotaniaItems.lifeEssence)
+			.define("T", BotaniaItems.dreamwoodTwig)
 			.save(files);
 		
 		//Corporea Solidifier
 		RecipeDsl.shaped(IncBlocks.CORPOREA_SOLIDIFIER, "PPP", "EFE", "PPP")
 			.define("P", Items.PAPER)
-			.define("F", ModBlocks.corporeaFunnel)
-			.define("E", ModTags.Items.INGOTS_ELEMENTIUM)
+			.define("F", BotaniaBlocks.corporeaFunnel)
+			.define("E", BotaniaTags.Items.INGOTS_ELEMENTIUM)
 			.save(files);
 		
 		//Red Stringed Liar
 		RecipeDsl.shaped(IncBlocks.RED_STRING_LIAR, "RRR", "RCS", "RRR")
-			.define("R", ModBlocks.livingrock)
-			.define("S", ModItems.redString)
-			.define("C", ModBlocks.forestEye)
+			.define("R", BotaniaBlocks.livingrock)
+			.define("S", BotaniaItems.redString)
+			.define("C", BotaniaBlocks.forestEye)
 			.save(files);
 		
 		//Red Stringed Constrictor
 		RecipeDsl.shaped(IncBlocks.RED_STRING_CONSTRICTOR, "RRR", "RCS", "RRR")
-			.define("R", ModBlocks.livingrock)
-			.define("S", ModItems.redString)
-			.define("C", ModItems.dreamwoodTwig) //I never know which items to use for this stuff.
+			.define("R", BotaniaBlocks.livingrock)
+			.define("S", BotaniaItems.redString)
+			.define("C", BotaniaItems.dreamwoodTwig) //I never know which items to use for this stuff.
 			.save(files);
 		
 		//Frame Tinkerer
 		RecipeDsl.shaped(IncBlocks.FRAME_TINKERER, "LSL", "LFL")
-			.define("S", ModTags.Items.INGOTS_MANASTEEL)
-			.define("L", ModBlocks.livingwoodPlanks)
+			.define("S", BotaniaTags.Items.INGOTS_MANASTEEL)
+			.define("L", BotaniaBlocks.livingwoodPlanks)
 			.define("F", Items.ITEM_FRAME)
 			.save(files);
 		
 		//Corporea Pylon
 		RecipeDsl.shaped(IncBlocks.CORPOREA_PYLON, 4, " P ", " C ", "TCT")
-			.define("P", ModItems.corporeaSpark)
-			.define("C", ModBlocks.corporeaBlock)
-			.define("T", ModItems.terrasteel) //this mf expensive
+			.define("P", BotaniaItems.corporeaSpark)
+			.define("C", BotaniaBlocks.corporeaBlock)
+			.define("T", BotaniaItems.terrasteel) //this mf expensive
 			.save(files);
 		
 		//Bound Ender Pearl
 		RecipeDsl.runic(IncItems.BOUND_ENDER_PEARL, RunicAltarRecipeBuilder.TIER_2)
-			.add(ModItems.manaPearl)
-			.add(ModItems.terrasteelNugget)
+			.add(BotaniaItems.manaPearl)
+			.add(BotaniaItems.terrasteelNugget)
 			.add(IncItems.ENTERBRILLIANCE)
 			.save(files);
 		
@@ -72,41 +72,41 @@ public class IncCommonRecipeGen {
 		RecipeDsl.runic(IncItems.SOUL_CORE_FRAME, RunicAltarRecipeBuilder.TIER_3)
 			//done in this funny way because runic altar recipes have an ingredient order -
 			//it's cosmetic only, ofc, but i like this symmetrical ordering
-			.add(Blocks.ICE, 4).add(ModItems.pixieDust).add(Blocks.ICE, 4).add(ModItems.pixieDust)
+			.add(Blocks.ICE, 4).add(BotaniaItems.pixieDust).add(Blocks.ICE, 4).add(BotaniaItems.pixieDust)
 			.save(files);
 		
 		//Ender Soul Core
 		RecipeDsl.runic(IncBlocks.ENDER_SOUL_CORE, RunicAltarRecipeBuilder.TIER_3 * 2)
 			.add(IncItems.SOUL_CORE_FRAME)
-			.add(ModTags.Items.GEMS_DRAGONSTONE, 2)
-			.add(ModItems.manaweaveCloth, 2)
-			.add(ModItems.enderHand)
+			.add(BotaniaTags.Items.GEMS_DRAGONSTONE, 2)
+			.add(BotaniaItems.manaweaveCloth, 2)
+			.add(BotaniaItems.enderHand)
 			.save(files);
 		
 		//Potion Soul Core
 		RecipeDsl.runic(IncBlocks.POTION_SOUL_CORE, RunicAltarRecipeBuilder.TIER_3 * 2)
 			.add(IncItems.SOUL_CORE_FRAME)
-			.add(ModTags.Items.GEMS_DRAGONSTONE, 2)
-			.add(ModItems.manaweaveCloth, 2)
-			.add(ModItems.bloodPendant)
+			.add(BotaniaTags.Items.GEMS_DRAGONSTONE, 2)
+			.add(BotaniaItems.manaweaveCloth, 2)
+			.add(BotaniaItems.bloodPendant)
 			.save(files);
 		
 		//Stonecutting for the Natural Devices so you dont have to get them randomly lol
-		RecipeDsl.stonecutting(IncBlocks.NATURAL_REPEATER).input(ModItems.redstoneRoot).save(files);
-		RecipeDsl.stonecutting(IncBlocks.NATURAL_COMPARATOR).input(ModItems.redstoneRoot).save(files);
+		RecipeDsl.stonecutting(IncBlocks.NATURAL_REPEATER).input(BotaniaItems.redstoneRoot).save(files);
+		RecipeDsl.stonecutting(IncBlocks.NATURAL_COMPARATOR).input(BotaniaItems.redstoneRoot).save(files);
 		
 		//Sanvocalia
 		RecipeDsl.apothecary(IncBlocks.SANVOCALIA)
 			.addPetals(DyeColor.WHITE, DyeColor.ORANGE, DyeColor.ORANGE, DyeColor.RED)
-			.add(ModItems.runeLust)
-			.add(ModItems.pixieDust)
-			.add(ModItems.redstoneRoot)
+			.add(BotaniaItems.runeLust)
+			.add(BotaniaItems.pixieDust)
+			.add(BotaniaItems.redstoneRoot)
 			.save(files);
 		
 		//Funny
 		RecipeDsl.apothecary(IncBlocks.FUNNY)
 			.addPetals(DyeColor.RED, DyeColor.ORANGE, DyeColor.YELLOW, DyeColor.LIME, DyeColor.LIGHT_BLUE, DyeColor.PURPLE)
-			.add(ModItems.redstoneRoot)
+			.add(BotaniaItems.redstoneRoot)
 			.save(files);
 		
 		//X -> Mini X
@@ -124,7 +124,7 @@ public class IncCommonRecipeGen {
 			RecipeDsl.shaped(cube, 4, "OPO", "PEP", "OPO")
 				.group("unstable_cubes")
 				.define("O", Blocks.OBSIDIAN)
-				.define("P", ModItems.getPetal(color))
+				.define("P", BotaniaItems.getPetal(color))
 				.define("E", Items.ENDER_PEARL)
 				.save(files));
 		//eh fuck it why not
@@ -136,7 +136,7 @@ public class IncCommonRecipeGen {
 		IncBlocks.PETAL_CARPETS.forEach((color, carpet) ->
 			RecipeDsl.shaped(carpet, 3, "XX")
 				.group("petal_carpets")
-				.define("X", ModBlocks.getPetalBlock(color))
+				.define("X", BotaniaBlocks.getPetalBlock(color))
 				.save(files));
 		
 		//Compressed Tiny Potatoes
@@ -158,7 +158,7 @@ public class IncCommonRecipeGen {
 		
 		//Computational lenses
 		RecipeDsl.shapeless(IncItems.COMPUTATIONAL_LENS_PATTERN)
-			.add(ModItems.lensNormal)
+			.add(BotaniaItems.lensNormal)
 			.add(IncItems.ENTERBRILLIANCE)
 			.save(files);
 		RecipeDsl.stonecutting(IncItems.NUMBER_LENS).input(IncItems.COMPUTATIONAL_LENS_PATTERN).save(files);
@@ -167,15 +167,15 @@ public class IncCommonRecipeGen {
 		
 		//Monocle
 		RecipeDsl.shapeless(IncItems.DATA_MONOCLE)
-			.add(ModItems.monocle)
+			.add(BotaniaItems.monocle)
 			.add(IncItems.ENTERBRILLIANCE)
 			.save(files);
 		
 		//Ticket Conjurer
 		RecipeDsl.shaped(IncItems.SOLIDIFIED_REQUEST_CONJURER, "SES", "EIE", "SES")
-			.define("S", ModTags.Items.INGOTS_MANASTEEL)
-			.define("E", ModTags.Items.INGOTS_ELEMENTIUM)
-			.define("I", ModBlocks.corporeaIndex)
+			.define("S", BotaniaTags.Items.INGOTS_MANASTEEL)
+			.define("E", BotaniaTags.Items.INGOTS_ELEMENTIUM)
+			.define("I", BotaniaBlocks.corporeaIndex)
 			.save(files);
 		//and a stonecutting group to convert between them, for good measure
 		RecipeDsl.stonecuttingGroup(DataTypes.allConjurerItems())

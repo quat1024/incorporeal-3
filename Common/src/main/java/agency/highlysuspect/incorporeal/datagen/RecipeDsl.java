@@ -12,8 +12,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import vazkii.botania.common.lib.ModTags;
-import vazkii.botania.mixin.AccessorRecipeProvider;
+import vazkii.botania.common.lib.BotaniaTags;
+import vazkii.botania.mixin.RecipeProviderAccessor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +64,7 @@ public class RecipeDsl {
 	}
 	
 	public static NiceShapelessRecipeBuilder floatingFlower(ItemLike notFloating, ItemLike floating) {
-		return shapeless(floating).add(notFloating).add(ModTags.Items.FLOATING_FLOWERS);
+		return shapeless(floating).add(notFloating).add(BotaniaTags.Items.FLOATING_FLOWERS);
 	}
 	
 	public static RunicAltarRecipeBuilder runic(ItemLike out, int mana) {
@@ -177,10 +177,10 @@ public class RecipeDsl {
 	
 	//Uses botania's accessor for RecipeProvider#inventoryTrigger. also i copypasted this from botania.
 	public static InventoryChangeTrigger.TriggerInstance conditionsFromTag(TagKey<Item> tag) {
-		return AccessorRecipeProvider.botania_condition(ItemPredicate.Builder.item().of(tag).build());
+		return RecipeProviderAccessor.botania_condition(ItemPredicate.Builder.item().of(tag).build());
 	}
 	
 	public static InventoryChangeTrigger.TriggerInstance conditionsFromItem(ItemLike item) {
-		return AccessorRecipeProvider.botania_condition(ItemPredicate.Builder.item().of(item).build());
+		return RecipeProviderAccessor.botania_condition(ItemPredicate.Builder.item().of(item).build());
 	}
 }

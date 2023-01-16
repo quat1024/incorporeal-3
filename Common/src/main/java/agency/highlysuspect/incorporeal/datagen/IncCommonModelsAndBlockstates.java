@@ -31,8 +31,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import vazkii.botania.common.block.ModBlocks;
-import vazkii.botania.mixin.AccessorBlockModelGenerators;
+import vazkii.botania.common.block.BotaniaBlocks;
+import vazkii.botania.mixin.BlockModelGeneratorsAccessor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -173,7 +173,7 @@ public class IncCommonModelsAndBlockstates {
 			
 			//Manually produce a tato model. Set the parent to the botania tiny potato model
 			JsonObject json = new JsonObject();
-			json.addProperty("parent", ModelLocationUtils.getModelLocation(ModBlocks.tinyPotato).toString());
+			json.addProperty("parent", ModelLocationUtils.getModelLocation(BotaniaBlocks.tinyPotato).toString());
 			
 			//Customize the transforms to make it bigger or smaller :)
 			ItemTransforms transforms = ItemTransformUtil.scaleItemTransforms(ItemTransformUtil.BLOCK_BLOCK, CompressedTaterUtil.taterScaleFactor(tater.compressionLevel));
@@ -182,7 +182,7 @@ public class IncCommonModelsAndBlockstates {
 			//Write the model and a blockstate pointing to the model
 			modelOutput.accept(modelId, () -> json);
 			stateGenerators.add(MultiVariantGenerator.multiVariant(tater, modelv(modelId))
-				.with(AccessorBlockModelGenerators.horizontalDispatch()));
+				.with(BlockModelGeneratorsAccessor.horizontalDispatch()));
 			//Write an item model pointing at it
 			itemDelegatedTo(tater, modelId);
 		}
@@ -298,7 +298,7 @@ public class IncCommonModelsAndBlockstates {
 			TextureSlot.FRONT, Inc.botaniaId("block/red_string_sender")
 		), modelOutput);
 		
-		stateGenerators.add(MultiVariantGenerator.multiVariant(block, modelv(modelId)).with(AccessorBlockModelGenerators.facingDispatch()));
+		stateGenerators.add(MultiVariantGenerator.multiVariant(block, modelv(modelId)).with(BlockModelGeneratorsAccessor.facingDispatch()));
 	}
 	
 	public static final TextureSlot TX_TORCH = txslot("torch");

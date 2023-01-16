@@ -3,7 +3,6 @@ package agency.highlysuspect.incorporeal.client;
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncBlocks;
 import agency.highlysuspect.incorporeal.block.entity.AbstractSoulCoreBlockEntity;
-import agency.highlysuspect.incorporeal.block.entity.EnderSoulCoreBlockEntity;
 import com.mojang.authlib.GameProfile;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -29,7 +28,7 @@ import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import vazkii.botania.client.core.handler.ClientTickHandler;
-import vazkii.botania.mixin.client.AccessorModelManager;
+import vazkii.botania.mixin.client.ModelManagerAccessor;
 
 import java.util.Map;
 
@@ -152,7 +151,7 @@ public class SoulCoreRenderers {
 		public Item(ResourceLocation modelLocation, ModelManager modelManager, EntityModelSet modelSet) {
 			super(modelSet);
 			
-			Map<ResourceLocation, BakedModel> modelMap = ((AccessorModelManager) modelManager).getBakedRegistry();
+			Map<ResourceLocation, BakedModel> modelMap = ((ModelManagerAccessor) modelManager).getBakedRegistry();
 			this.model = modelMap.getOrDefault(modelLocation, modelManager.getMissingModel());
 			
 			//Minecraft rendering machinery still requires a BlockState to be provided to draw any blockmodel, so idk, i just picked one

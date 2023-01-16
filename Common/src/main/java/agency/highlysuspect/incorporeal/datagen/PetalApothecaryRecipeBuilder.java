@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import vazkii.botania.common.helper.ItemNBTHelper;
-import vazkii.botania.common.lib.ModTags;
+import vazkii.botania.common.lib.BotaniaTags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public record PetalApothecaryRecipeBuilder(ItemStack output, List<Ingredient> in
 	
 	public PetalApothecaryRecipeBuilder addPetals(DyeColor... petalColors) {
 		for(DyeColor petalColor : petalColors) {
-			add(ModTags.Items.getPetalTag(petalColor));
+			add(BotaniaTags.Items.getPetalTag(petalColor));
 		}
 		return this;
 	}

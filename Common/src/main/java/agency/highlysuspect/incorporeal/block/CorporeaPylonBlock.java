@@ -28,19 +28,18 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.common.block.BlockMod;
+import vazkii.botania.common.block.BotaniaBlock;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.Random;
 
 /**
  * A three-block tall multiblock structure that can accept Corporea Sparks.
  * Two sparked structures can be bound together using the Wand of the Forest.
  * Then, the Corporea Sparks on the pylons are considered connected, regardless of proximity.
  */
-public class CorporeaPylonBlock extends BlockMod implements EntityBlock {
+public class CorporeaPylonBlock extends BotaniaBlock implements EntityBlock {
 	public CorporeaPylonBlock(Properties props) {
 		super(props);
 		

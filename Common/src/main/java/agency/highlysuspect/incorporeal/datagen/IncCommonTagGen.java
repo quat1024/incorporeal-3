@@ -6,7 +6,7 @@ import agency.highlysuspect.incorporeal.IncTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
-import vazkii.botania.common.lib.ModTags;
+import vazkii.botania.common.lib.BotaniaTags;
 
 import java.util.function.Consumer;
 
@@ -22,12 +22,12 @@ public class IncCommonTagGen {
 		/// BOTANIA TAGS ///
 		
 		//rods
-		DataDsl.itemTag(ModTags.Items.RODS)
+		DataDsl.itemTag(BotaniaTags.Items.RODS)
 			.addItems(IncItems.FRACTURED_SPACE_ROD)
 			.save(files);
 		
 		//corporea spark override
-		DataDsl.blockTag(ModTags.Blocks.CORPOREA_SPARK_OVERRIDE)
+		DataDsl.blockTag(BotaniaTags.Blocks.CORPOREA_SPARK_OVERRIDE)
 			.addBlocks(
 				//things that aren't real inventories per se
 				IncBlocks.RED_STRING_LIAR, IncBlocks.ENDER_SOUL_CORE,
@@ -40,25 +40,25 @@ public class IncCommonTagGen {
 			).save(files);
 		
 		//functional special flowers
-		DataDsl.blockAndItemTag(ModTags.Blocks.FUNCTIONAL_SPECIAL_FLOWERS).add(
+		DataDsl.blockAndItemTag(BotaniaTags.Blocks.FUNCTIONAL_SPECIAL_FLOWERS).add(
 			IncBlocks.FUNNY, IncBlocks.FUNNY_SMALL, IncBlocks.FLOATING_FUNNY, IncBlocks.FLOATING_FUNNY_SMALL,
 			IncBlocks.SANVOCALIA, IncBlocks.SANVOCALIA_SMALL, IncBlocks.FLOATING_SANVOCALIA, IncBlocks.FLOATING_SANVOCALIA_SMALL
 		).save(files);
 		
 		//mini flowers
-		DataDsl.blockAndItemTag(ModTags.Blocks.MINI_FLOWERS).add(
+		DataDsl.blockAndItemTag(BotaniaTags.Blocks.MINI_FLOWERS).add(
 			IncBlocks.FUNNY_SMALL, IncBlocks.FLOATING_FUNNY_SMALL,
 			IncBlocks.SANVOCALIA_SMALL, IncBlocks.FLOATING_SANVOCALIA_SMALL
 		).save(files);
 		
 		//special floating flowers
-		DataDsl.blockAndItemTag(ModTags.Blocks.SPECIAL_FLOATING_FLOWERS).add(
+		DataDsl.blockAndItemTag(BotaniaTags.Blocks.SPECIAL_FLOATING_FLOWERS).add(
 			IncBlocks.FLOATING_FUNNY, IncBlocks.FLOATING_FUNNY_SMALL,
 			IncBlocks.FLOATING_SANVOCALIA, IncBlocks.FLOATING_SANVOCALIA_SMALL
 		).save(files);
 		
 		//burst viewers (Manaseer Monocle-like items)
-		DataDsl.itemTag(ModTags.Items.BURST_VIEWERS)
+		DataDsl.itemTag(BotaniaTags.Items.BURST_VIEWERS)
 			.addItems(IncItems.DATA_MONOCLE)
 			.save(files);
 		

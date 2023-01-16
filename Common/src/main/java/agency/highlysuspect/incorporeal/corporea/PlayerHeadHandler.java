@@ -1,8 +1,6 @@
 package agency.highlysuspect.incorporeal.corporea;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
@@ -14,9 +12,9 @@ import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import vazkii.botania.api.corporea.CorporeaHelper;
-import vazkii.botania.api.corporea.ICorporeaNode;
-import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
-import vazkii.botania.api.corporea.ICorporeaSpark;
+import vazkii.botania.api.corporea.CorporeaNode;
+import vazkii.botania.api.corporea.CorporeaRequestMatcher;
+import vazkii.botania.api.corporea.CorporeaSpark;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,13 +31,13 @@ import java.util.UUID;
 @SuppressWarnings("JavadocReference") //above
 public class PlayerHeadHandler {
 	//returns true to cancel the request
-	public static boolean onIndexRequest(ServerPlayer requester, ICorporeaRequestMatcher request, int requestCount, ICorporeaSpark indexSpark) {
+	public static boolean onIndexRequest(ServerPlayer requester, CorporeaRequestMatcher request, int requestCount, CorporeaSpark indexSpark) {
 		Set<UUID> headUuids = new HashSet<>();
 		
 		//i can feel the server tps dropping already. i'm not even in game yet, im just typing!
 		//the one saving grace is that getNodesOnNetwork is cached for one tick i guess
 		//iterate the whole network looking for player heads
-		for(ICorporeaNode node : CorporeaHelper.instance().getNodesOnNetwork(indexSpark)) {
+		for(CorporeaNode node : CorporeaHelper.instance().getNodesOnNetwork(indexSpark)) {
 			Level level = node.getWorld();
 			BlockPos pos = node.getPos();
 			BlockState state = level.getBlockState(pos);

@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
-import vazkii.botania.common.item.ModItems;
+import vazkii.botania.common.item.BotaniaItems;
 
 import java.util.function.Consumer;
 
@@ -41,7 +41,7 @@ public class IncCommonLexiconGen {
 		
 		PatchouliEntryBuilder naturalDevices = builder("devices/natural")
 			.name("Natural Devices")
-			.icon(ModItems.redstoneRoot)
+			.icon(BotaniaItems.redstoneRoot)
 			.devicesCategory()
 			.text("When planted in a farm plot, $(item)Redstone Roots$(0) appear to blossom into a (somewhat ugly, but perfectly functional) simulacra of a $(thing)mundane redstone element$(0). These elements are very cheap, but must be planted on $(thing)dirt or grass$(0) like any other plant. They can be harvested from the growing $(thing)redstone root Crop$(0), but a $(item)stonecutter$(0) will do in a pinch.")
 			.spotlight(IncItems.NATURAL_REPEATER, true, "The $(item)Natural Repeater$(0) has a delay of 1 second, and extends its pulse out to a minimum of 1 second.")
@@ -188,7 +188,7 @@ public class IncCommonLexiconGen {
 		
 		//Challenges
 		builder("challenges/corporea_sorting_hall")
-			.icon(ModItems.corporeaSparkMaster)
+			.icon(BotaniaItems.corporeaSparkMaster)
 			.challenge("Corporea Sorting Hall", "Create a $(thing)Corporea Network$(0) that doesn't simply store items out-of-sight, but organizes them into logical groups so you can manually access each item too, instead of relying on a $(item)Corporea Index$(0). Bonus points if it can unpack and sort $(item)Shulker Boxes$(0) too.")
 			.save(generator, files);
 
@@ -199,7 +199,7 @@ public class IncCommonLexiconGen {
 			.save(generator, files);
 		
 		builder("challenges/remote_corporea")
-			.icon(ModItems.corporeaSpark)
+			.icon(BotaniaItems.corporeaSpark)
 			.challenge("Remote Corporea", "Create a $(thing)Corporea Network$(0) capable of performing requests on your behalf, and delivering the items to you from anywhere in the same dimension. Bonus points if it works in at least one other dimension, and even more bonus points if it delivers information about failed requests too.")
 			.relations0(
 				"botania:ender/corporea",

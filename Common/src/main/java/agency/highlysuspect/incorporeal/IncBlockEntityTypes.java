@@ -17,9 +17,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import vazkii.botania.api.block.IWandable;
-import vazkii.botania.api.mana.IManaReceiver;
-import vazkii.botania.xplat.IXplatAbstractions;
+import vazkii.botania.api.block.Wandable;
+import vazkii.botania.api.mana.ManaReceiver;
+import vazkii.botania.xplat.XplatAbstractions;
 
 import java.util.Collection;
 import java.util.Set;
@@ -28,11 +28,11 @@ import java.util.function.BiFunction;
 
 public class IncBlockEntityTypes {
 	private static <T extends BlockEntity> BlockEntityType<T> make(BiFunction<BlockPos, BlockState, T> func, Block... blocks) {
-		return IXplatAbstractions.INSTANCE.createBlockEntityType(func, blocks);
+		return XplatAbstractions.INSTANCE.createBlockEntityType(func, blocks);
 	}
 	
 	private static <T extends BlockEntity> BlockEntityType<T> make(BiFunction<BlockPos, BlockState, T> func, Collection<? extends Block> blocks) {
-		return IXplatAbstractions.INSTANCE.createBlockEntityType(func, blocks.toArray(Block[]::new));
+		return XplatAbstractions.INSTANCE.createBlockEntityType(func, blocks.toArray(Block[]::new));
 	}
 	
 	//corporetics
@@ -58,11 +58,11 @@ public class IncBlockEntityTypes {
 	public static final BlockEntityType<DataStorageBlockEntity> POINTED_DATASTONE = make(DataStorageBlockEntity::makePointedDatastoneTbh, IncBlocks.POINTED_DATASTONE);
 	
 	//BlockEntityTypes that self-implement IManaReceiver.
-	public static final Set<BlockEntityType<? extends IManaReceiver>> SELF_MANA_RECEIVER_BLOCK_ENTITY_TYPES = Set.of(
+	public static final Set<BlockEntityType<? extends ManaReceiver>> SELF_MANA_RECEIVER_BLOCK_ENTITY_TYPES = Set.of(
 		ENDER_SOUL_CORE, POTION_SOUL_CORE
 	);
 	
-	public static final Set<BlockEntityType<? extends IWandable>> SELF_WANDABLE_BLOCK_ENTITY_TYPES = Set.of(
+	public static final Set<BlockEntityType<? extends Wandable>> SELF_WANDABLE_BLOCK_ENTITY_TYPES = Set.of(
 		UNSTABLE_CUBE
 	);
 	

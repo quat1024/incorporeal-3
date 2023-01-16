@@ -19,14 +19,14 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
-import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
-import vazkii.botania.api.item.ICoordBoundItem;
-import vazkii.botania.api.mana.IManaItem;
+import vazkii.botania.api.corporea.CorporeaRequestMatcher;
+import vazkii.botania.api.item.CoordBoundItem;
+import vazkii.botania.api.mana.ManaItem;
 import vazkii.botania.common.handler.EquipmentHandler;
-import vazkii.botania.common.item.block.ItemBlockSpecialFlower;
-import vazkii.botania.common.item.block.ItemBlockTinyPotato;
-import vazkii.botania.common.item.equipment.bauble.ItemMonocle;
-import vazkii.botania.common.item.lens.ItemLens;
+import vazkii.botania.common.item.block.SpecialFlowerBlockItem;
+import vazkii.botania.common.item.block.TinyPotatoBlockItem;
+import vazkii.botania.common.item.equipment.bauble.ManaseerMonocleItem;
+import vazkii.botania.common.item.lens.LensItem;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -57,15 +57,15 @@ public class IncItems {
 	public static final BlockItem NATURAL_COMPARATOR = new BlockItem(IncBlocks.NATURAL_COMPARATOR, props());
 	
 	//flowers
-	public static final ItemBlockSpecialFlower SANVOCALIA = new ItemBlockSpecialFlower(IncBlocks.SANVOCALIA, props());
-	public static final ItemBlockSpecialFlower SANVOCALIA_SMALL = new ItemBlockSpecialFlower(IncBlocks.SANVOCALIA_SMALL, props());
-	public static final ItemBlockSpecialFlower FLOATING_SANVOCALIA = new ItemBlockSpecialFlower(IncBlocks.FLOATING_SANVOCALIA, props());
-	public static final ItemBlockSpecialFlower FLOATING_SANVOCALIA_SMALL = new ItemBlockSpecialFlower(IncBlocks.FLOATING_SANVOCALIA_SMALL, props());
+	public static final SpecialFlowerBlockItem SANVOCALIA = new SpecialFlowerBlockItem(IncBlocks.SANVOCALIA, props());
+	public static final SpecialFlowerBlockItem SANVOCALIA_SMALL = new SpecialFlowerBlockItem(IncBlocks.SANVOCALIA_SMALL, props());
+	public static final SpecialFlowerBlockItem FLOATING_SANVOCALIA = new SpecialFlowerBlockItem(IncBlocks.FLOATING_SANVOCALIA, props());
+	public static final SpecialFlowerBlockItem FLOATING_SANVOCALIA_SMALL = new SpecialFlowerBlockItem(IncBlocks.FLOATING_SANVOCALIA_SMALL, props());
 	
-	public static final ItemBlockSpecialFlower FUNNY = new ItemBlockSpecialFlower(IncBlocks.FUNNY, props());
-	public static final ItemBlockSpecialFlower FUNNY_SMALL = new ItemBlockSpecialFlower(IncBlocks.FUNNY_SMALL, props());
-	public static final ItemBlockSpecialFlower FLOATING_FUNNY = new ItemBlockSpecialFlower(IncBlocks.FLOATING_FUNNY, props());
-	public static final ItemBlockSpecialFlower FLOATING_FUNNY_SMALL = new ItemBlockSpecialFlower(IncBlocks.FLOATING_FUNNY_SMALL, props());
+	public static final SpecialFlowerBlockItem FUNNY = new SpecialFlowerBlockItem(IncBlocks.FUNNY, props());
+	public static final SpecialFlowerBlockItem FUNNY_SMALL = new SpecialFlowerBlockItem(IncBlocks.FUNNY_SMALL, props());
+	public static final SpecialFlowerBlockItem FLOATING_FUNNY = new SpecialFlowerBlockItem(IncBlocks.FLOATING_FUNNY, props());
+	public static final SpecialFlowerBlockItem FLOATING_FUNNY_SMALL = new SpecialFlowerBlockItem(IncBlocks.FLOATING_FUNNY_SMALL, props());
 	
 	//unstable cubes
 	public static final Map<DyeColor, BlockItem> UNSTABLE_CUBES = Inc.sixteenColors(
@@ -77,42 +77,42 @@ public class IncItems {
 		color -> new BlockItem(IncBlocks.PETAL_CARPETS.get(color), props()));
 	
 	//taters
-	public static final Map<Integer, ItemBlockTinyPotato> COMPRESSED_TATERS = new LinkedHashMap<>();
+	public static final Map<Integer, TinyPotatoBlockItem> COMPRESSED_TATERS = new LinkedHashMap<>();
 	static {
 		IncBlocks.COMPRESSED_TATERS.forEach((level, block) ->
-			COMPRESSED_TATERS.put(level, new ItemBlockTinyPotato(block, props().rarity(level == 8 ? Rarity.EPIC : Rarity.UNCOMMON))));
+			COMPRESSED_TATERS.put(level, new TinyPotatoBlockItem(block, props().rarity(level == 8 ? Rarity.EPIC : Rarity.UNCOMMON))));
 	}
 	
 	/// computer ///
 	//crafting and misc
 	public static final ShinyItem ENTERBRILLIANCE = new ShinyItem(props().rarity(Rarity.RARE));
 	public static final Item COMPUTATIONAL_LENS_PATTERN = new Item(props().stacksTo(16));
-	public static ItemMonocle DATA_MONOCLE; //Gets constructed late, see other comment
+	public static ManaseerMonocleItem DATA_MONOCLE; //Gets constructed late, see other comment
 	
 	//tickets and conjurers
 	public static final TicketItem<Unit> EMPTY_TICKET = new TicketItem<>(DataTypes.EMPTY, props());
 	public static final TicketItem<Integer> INTEGER_TICKET = new TicketItem<>(DataTypes.INTEGER, props());
-	public static final TicketItem<ICorporeaRequestMatcher> MATCHER_TICKET = new TicketItem<>(DataTypes.MATCHER, props());
+	public static final TicketItem<CorporeaRequestMatcher> MATCHER_TICKET = new TicketItem<>(DataTypes.MATCHER, props());
 	public static final TicketItem<SolidifiedRequest> SOLIDIFIED_REQUEST_TICKET = new TicketItem<>(DataTypes.SOLIDIFIED_REQUEST, props());
 	public static final TicketConjurerItem<Unit> EMPTY_CONJURER = new TicketConjurerItem<>(DataTypes.EMPTY, props().stacksTo(1));
 	public static final TicketConjurerItem<Integer> INTEGER_CONJURER = new TicketConjurerItem<>(DataTypes.INTEGER, props().stacksTo(1));
-	public static final TicketConjurerItem<ICorporeaRequestMatcher> MATCHER_CONJURER = new TicketConjurerItem<>(DataTypes.MATCHER, props().stacksTo(1));
+	public static final TicketConjurerItem<CorporeaRequestMatcher> MATCHER_CONJURER = new TicketConjurerItem<>(DataTypes.MATCHER, props().stacksTo(1));
 	public static final TicketConjurerItem<SolidifiedRequest> SOLIDIFIED_REQUEST_CONJURER = new TicketConjurerItem<>(DataTypes.SOLIDIFIED_REQUEST, props().stacksTo(1));
 	
 	//funnel and lenses
 	public static final BlockItem DATA_FUNNEL = new BlockItem(IncBlocks.DATA_FUNNEL, props());
-	public static final ItemLens NUMBER_LENS = new ItemLens(props().stacksTo(16), new NotManaLens(DataLenses.number), 0);
-	public static final ItemLens MATCHER_LENS = new ItemLens(props().stacksTo(16), new NotManaLens(DataLenses.matcher), 0);
-	public static final ItemLens NEGATING_LENS = new ItemLens(props().stacksTo(16), new NotManaLens(DataLenses.negating), 0);
+	public static final LensItem NUMBER_LENS = new LensItem(props().stacksTo(16), new NotManaLens(DataLenses.number), 0);
+	public static final LensItem MATCHER_LENS = new LensItem(props().stacksTo(16), new NotManaLens(DataLenses.matcher), 0);
+	public static final LensItem NEGATING_LENS = new LensItem(props().stacksTo(16), new NotManaLens(DataLenses.negating), 0);
 	public static final BlockItem DATASTONE_BLOCK = new BlockItem(IncBlocks.DATASTONE_BLOCK, props());
 	public static final BlockItem POINTED_DATASTONE = new BlockItem(IncBlocks.POINTED_DATASTONE, props());
 	
 	//Capability stuff.
-	public static final Map<Item, Function<ItemStack, ICoordBoundItem>> COORD_BOUND_ITEM_MAKERS = Map.of( //(N.B: Map.of caps at 10 entries)
+	public static final Map<Item, Function<ItemStack, CoordBoundItem>> COORD_BOUND_ITEM_MAKERS = Map.of( //(N.B: Map.of caps at 10 entries)
 		FRACTURED_SPACE_ROD, FracturedSpaceRodItem.CoordBoundItem::new
 	);
 	
-	public static final Map<Item, Function<ItemStack, IManaItem>> MANA_ITEM_MAKERS = Map.of(
+	public static final Map<Item, Function<ItemStack, ManaItem>> MANA_ITEM_MAKERS = Map.of(
 		BOUND_ENDER_PEARL, stack -> new BoundEnderPearlItem.ManaItem(BOUND_ENDER_PEARL, stack)
 	);
 	
@@ -121,7 +121,7 @@ public class IncItems {
 		//In practice, this only happens in dev instances on Fabric if we get unlucky and load before Botania.
 		//These days EquipmentHandler.init is sorta idempotent. It's ok if I call it and then botania calls it as part of its init process.
 		EquipmentHandler.init();
-		DATA_MONOCLE = new ItemMonocle(props().stacksTo(1));
+		DATA_MONOCLE = new ManaseerMonocleItem(props().stacksTo(1));
 		
 		ItemRegistrar r = rRaw::accept;
 		

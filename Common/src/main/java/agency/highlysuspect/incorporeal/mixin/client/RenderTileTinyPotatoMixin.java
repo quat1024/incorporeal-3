@@ -9,12 +9,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import vazkii.botania.client.render.tile.RenderTileTinyPotato;
-import vazkii.botania.common.block.tile.TileTinyPotato;
+import vazkii.botania.client.render.block_entity.TinyPotatoBlockEntityRenderer;
+import vazkii.botania.common.block.block_entity.TinyPotatoBlockEntity;
 
 import javax.annotation.Nonnull;
 
-@Mixin(RenderTileTinyPotato.class)
+@Mixin(TinyPotatoBlockEntityRenderer.class)
 public class RenderTileTinyPotatoMixin {
 	@Inject(
 		method = "render(Lvazkii/botania/common/block/tile/TileTinyPotato;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
@@ -25,7 +25,7 @@ public class RenderTileTinyPotatoMixin {
 			ordinal = 0
 		)
 	)
-	public void afterTranslating(@Nonnull TileTinyPotato potato, float partialTicks, PoseStack ms, @Nonnull MultiBufferSource buffers, int light, int overlay, CallbackInfo ci) {
+	public void afterTranslating(@Nonnull TinyPotatoBlockEntity potato, float partialTicks, PoseStack ms, @Nonnull MultiBufferSource buffers, int light, int overlay, CallbackInfo ci) {
 		BlockState state = potato.getBlockState();
 		if(state.getBlock() instanceof CompressedTinyPotatoBlock compressed) {
 			float scaleFactor = CompressedTaterUtil.taterScaleFactor(compressed.compressionLevel);

@@ -23,7 +23,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.common.block.BlockModWaterloggable;
+import vazkii.botania.common.block.BotaniaWaterloggedBlock;
 
 /**
  * The Unstable Cube. This is a pointless decorative block that spawns lightning particles, somewhat inspired by
@@ -33,7 +33,7 @@ import vazkii.botania.common.block.BlockModWaterloggable;
  * @see UnstableCubeBlockEntity
  * @see UnstableCubeClientTicker
  */
-public class UnstableCubeBlock extends BlockModWaterloggable implements EntityBlock {
+public class UnstableCubeBlock extends BotaniaWaterloggedBlock implements EntityBlock {
 	public UnstableCubeBlock(DyeColor color, Properties props) {
 		super(props);
 		this.color = color;

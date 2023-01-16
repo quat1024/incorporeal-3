@@ -9,13 +9,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.api.corporea.ICorporeaNode;
-import vazkii.botania.api.corporea.ICorporeaRequest;
-import vazkii.botania.api.corporea.ICorporeaSpark;
+import vazkii.botania.api.corporea.CorporeaNode;
+import vazkii.botania.api.corporea.CorporeaRequest;
+import vazkii.botania.api.corporea.CorporeaSpark;
 import vazkii.botania.api.internal.VanillaPacketDispatcher;
 import vazkii.botania.common.impl.corporea.DummyCorporeaNode;
 
@@ -77,7 +76,7 @@ public class FabricRedStringLiarBlockEntity extends RedStringLiarBlockEntity {
 	}
 	
 	@Override
-	public @NotNull ICorporeaNode createCorporeaNode(ICorporeaSpark spark) {
+	public @NotNull CorporeaNode createCorporeaNode(CorporeaSpark spark) {
 		assert level != null;
 		BlockPos binding = getBinding();
 		if(binding == null) return new DummyCorporeaNode(level, spark.getAttachPos(), spark);
@@ -89,7 +88,7 @@ public class FabricRedStringLiarBlockEntity extends RedStringLiarBlockEntity {
 	}
 	
 	public static class Node extends LyingCorporeaNode {
-		public Node(Level world, BlockPos pos, ICorporeaSpark spark, List<ItemStack> spoofStacks, Container inv) {
+		public Node(Level world, BlockPos pos, CorporeaSpark spark, List<ItemStack> spoofStacks, Container inv) {
 			super(world, pos, spark, spoofStacks);
 			this.inv = inv;
 		}
@@ -108,7 +107,7 @@ public class FabricRedStringLiarBlockEntity extends RedStringLiarBlockEntity {
 		//Based on copy from VanillaCorporeaNode
 		//@formatter:off
 		@Override
-		protected List<ItemStack> extractEverything(ICorporeaRequest request) {
+		protected List<ItemStack> extractEverything(CorporeaRequest request) {
 			ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
 			
 			for (int i = inv.getContainerSize() - 1; i >= 0; i--) {

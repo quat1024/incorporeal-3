@@ -3,9 +3,9 @@ package agency.highlysuspect.incorporeal.corporea;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import vazkii.botania.api.corporea.ICorporeaRequest;
-import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
-import vazkii.botania.api.corporea.ICorporeaSpark;
+import vazkii.botania.api.corporea.CorporeaRequest;
+import vazkii.botania.api.corporea.CorporeaRequestMatcher;
+import vazkii.botania.api.corporea.CorporeaSpark;
 import vazkii.botania.common.impl.corporea.AbstractCorporeaNode;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class LyingCorporeaNode extends AbstractCorporeaNode {
-	public LyingCorporeaNode(Level world, BlockPos pos, ICorporeaSpark spark, List<ItemStack> spoofStacks) {
+	public LyingCorporeaNode(Level world, BlockPos pos, CorporeaSpark spark, List<ItemStack> spoofStacks) {
 		super(world, pos, spark);
 		this.spoofStacks = spoofStacks;
 	}
@@ -22,13 +22,13 @@ public abstract class LyingCorporeaNode extends AbstractCorporeaNode {
 	protected final List<ItemStack> spoofStacks;
 	
 	protected abstract int countItemsInInventory();
-	protected abstract List<ItemStack> extractEverything(ICorporeaRequest request);
+	protected abstract List<ItemStack> extractEverything(CorporeaRequest request);
 	
 	//"mocked request"
 	@Override
-	public List<ItemStack> countItems(ICorporeaRequest request) {
+	public List<ItemStack> countItems(CorporeaRequest request) {
 		//1. Filter the list of spoof items to the ones that match this corporea request.
-		ICorporeaRequestMatcher matcher = request.getMatcher();
+		CorporeaRequestMatcher matcher = request.getMatcher();
 		List<ItemStack> matchingSpoofStacks = spoofStacks.stream().filter(matcher).collect(Collectors.toList());
 		if(matchingSpoofStacks.isEmpty()) return Collections.emptyList();
 		
@@ -52,7 +52,7 @@ public abstract class LyingCorporeaNode extends AbstractCorporeaNode {
 	
 	//"real request"
 	@Override
-	public List<ItemStack> extractItems(ICorporeaRequest request) {
+	public List<ItemStack> extractItems(CorporeaRequest request) {
 		List<ItemStack> result = new ArrayList<>();
 		
 		for(ItemStack spoof : spoofStacks) {

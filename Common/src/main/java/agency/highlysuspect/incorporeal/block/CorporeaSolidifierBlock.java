@@ -3,7 +3,6 @@ package agency.highlysuspect.incorporeal.block;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
-import agency.highlysuspect.incorporeal.IncItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -11,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import vazkii.botania.common.helper.InventoryHelper;
-import vazkii.botania.xplat.IXplatAbstractions;
+import vazkii.botania.xplat.XplatAbstractions;
 
 import javax.annotation.Nullable;
 
@@ -39,9 +38,9 @@ public class CorporeaSolidifierBlock extends Block {
 		ItemStack ticket = datum.produceTicket();
 		BlockPos invPos = getInvPos(level, pos);
 		if (invPos != null
-			&& IXplatAbstractions.INSTANCE.insertToInventory(level, invPos, Direction.UP, ticket, true).isEmpty()) {
+			&& XplatAbstractions.INSTANCE.insertToInventory(level, invPos, Direction.UP, ticket, true).isEmpty()) {
 			InventoryHelper.checkEmpty(
-				IXplatAbstractions.INSTANCE.insertToInventory(level, invPos, Direction.UP, ticket, false)
+				XplatAbstractions.INSTANCE.insertToInventory(level, invPos, Direction.UP, ticket, false)
 			);
 		} else {
 			//Corporea funnel does this:
@@ -56,12 +55,12 @@ public class CorporeaSolidifierBlock extends Block {
 	@Nullable
 	private BlockPos getInvPos(Level level, BlockPos worldPosition) {
 		BlockPos downOne = worldPosition.below();
-		if (IXplatAbstractions.INSTANCE.hasInventory(level, downOne, Direction.UP)) {
+		if (XplatAbstractions.INSTANCE.hasInventory(level, downOne, Direction.UP)) {
 			return downOne;
 		}
 		
 		BlockPos downTwo = worldPosition.below(2);
-		if (IXplatAbstractions.INSTANCE.hasInventory(level, downTwo, Direction.UP)) {
+		if (XplatAbstractions.INSTANCE.hasInventory(level, downTwo, Direction.UP)) {
 			return downTwo;
 		}
 		

@@ -11,13 +11,12 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.api.block.IWandable;
+import vazkii.botania.api.block.Wandable;
 
 /**
  * The Unstable Cube block entity. This is a bit of a strange one, mainly because of how syncing the speed works.
@@ -37,7 +36,7 @@ import vazkii.botania.api.block.IWandable;
  * 
  * This is a lot of effort put into a block that mayyyybe 10 people will place in their world, ever.
  */
-public class UnstableCubeBlockEntity extends BlockEntity implements IWandable {
+public class UnstableCubeBlockEntity extends BlockEntity implements Wandable {
 	public UnstableCubeBlockEntity(BlockPos pos, BlockState state) {
 		super(IncBlockEntityTypes.UNSTABLE_CUBE, pos, state);
 	}

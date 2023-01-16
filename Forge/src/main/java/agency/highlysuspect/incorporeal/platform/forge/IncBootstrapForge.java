@@ -33,10 +33,10 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.registries.RegisterEvent;
 import vazkii.botania.api.BotaniaForgeCapabilities;
-import vazkii.botania.api.block.IWandable;
+import vazkii.botania.api.block.Wandable;
 import vazkii.botania.api.corporea.CorporeaIndexRequestEvent;
-import vazkii.botania.api.mana.IManaReceiver;
-import vazkii.botania.common.item.ModItems;
+import vazkii.botania.api.mana.ManaReceiver;
+import vazkii.botania.common.item.BotaniaItems;
 import vazkii.botania.forge.CapabilityUtil;
 
 import java.util.function.BiConsumer;
@@ -100,12 +100,12 @@ public class IncBootstrapForge implements IncBootstrapper {
 			BlockEntity be = event.getObject();
 			
 			//Block entities that self-implement IManaReceiver
-			if(IncBlockEntityTypes.SELF_MANA_RECEIVER_BLOCK_ENTITY_TYPES.contains(be.getType()) && be instanceof IManaReceiver receiver) {
+			if(IncBlockEntityTypes.SELF_MANA_RECEIVER_BLOCK_ENTITY_TYPES.contains(be.getType()) && be instanceof ManaReceiver receiver) {
 				event.addCapability(Inc.id("mana_receiver"), CapabilityUtil.makeProvider(BotaniaForgeCapabilities.MANA_RECEIVER, receiver));
 			}
 			
 			//Block entities that self-implement IWandable
-			if(IncBlockEntityTypes.SELF_WANDABLE_BLOCK_ENTITY_TYPES.contains(be.getType()) && be instanceof IWandable wandable) {
+			if(IncBlockEntityTypes.SELF_WANDABLE_BLOCK_ENTITY_TYPES.contains(be.getType()) && be instanceof Wandable wandable) {
 				event.addCapability(Inc.id("wandable"), CapabilityUtil.makeProvider(BotaniaForgeCapabilities.WANDABLE, wandable));
 			}
 			
@@ -174,7 +174,7 @@ public class IncBootstrapForge implements IncBootstrapper {
 			if(e.getEntity() == null || e.getLevel() == null || e.getEntity().isSpectator()) return;
 			
 			ItemStack held = e.getItemStack();
-			if(held.getItem() != ModItems.redstoneRoot) return;
+			if(held.getItem() != BotaniaItems.redstoneRoot) return;
 			
 			InteractionResult result = IncBlocks.REDSTONE_ROOT_CROP.hookRedstoneRootClick(e.getEntity(), e.getLevel(), e.getItemStack(), e.getHand(), e.getHitVec());
 			if(result != InteractionResult.PASS) {

@@ -9,8 +9,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.spongepowered.asm.mixin.Mixin;
-import vazkii.botania.api.item.IWireframeCoordinateListProvider;
-import vazkii.botania.common.item.ItemTwigWand;
+import vazkii.botania.api.item.WireframeCoordinateListProvider;
+import vazkii.botania.common.item.WandOfTheForestItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +18,15 @@ import java.util.List;
 /**
  * I am SOOOOOO SORRY for this one
  */
-@Mixin(ItemTwigWand.class)
-public class ItemTwigWandMixin implements IWireframeCoordinateListProvider {
+@Mixin(WandOfTheForestItem.class)
+public class ItemTwigWandMixin implements WireframeCoordinateListProvider {
 	@Override
 	public List<BlockPos> getWireframesToDraw(Player player, ItemStack stack) {
 		Level level = player.level;
 		
 		List<BlockPos> result = new ArrayList<>();
 		
-		Multibindable bindAttempt = (Multibindable) ItemTwigWand.getBindingAttempt(stack)
+		Multibindable bindAttempt = (Multibindable) WandOfTheForestItem.getBindingAttempt(stack)
 			.map(level::getBlockEntity)
 			.filter(be -> be instanceof Multibindable)
 			.orElse(null);

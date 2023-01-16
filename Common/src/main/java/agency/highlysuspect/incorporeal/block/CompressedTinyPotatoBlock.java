@@ -21,12 +21,12 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.common.block.decor.BlockTinyPotato;
-import vazkii.botania.common.block.tile.TileTinyPotato;
+import vazkii.botania.common.block.decor.TinyPotatoBlock;
+import vazkii.botania.common.block.block_entity.TinyPotatoBlockEntity;
 
 import java.util.List;
 
-public class CompressedTinyPotatoBlock extends BlockTinyPotato {
+public class CompressedTinyPotatoBlock extends TinyPotatoBlock {
 	public CompressedTinyPotatoBlock(int compressionLevel, Properties builder) {
 		super(builder);
 		this.compressionLevel = compressionLevel;
@@ -58,7 +58,7 @@ public class CompressedTinyPotatoBlock extends BlockTinyPotato {
 	@Override
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		BlockEntity tile = world.getBlockEntity(pos);
-		if (tile instanceof TileTinyPotato tater) {
+		if (tile instanceof TinyPotatoBlockEntity tater) {
 			tater.interact(player, hand, player.getItemInHand(hand), hit.getDirection());
 			if (!world.isClientSide) {
 				//AABB box = SHAPE.bounds(); //refers to the hardcoded default tiny potato shape. I need to change it

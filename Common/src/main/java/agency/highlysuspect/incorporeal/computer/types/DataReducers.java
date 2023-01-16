@@ -5,7 +5,7 @@ import agency.highlysuspect.incorporeal.corporea.AndingCorporeaRequestMatcher;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import agency.highlysuspect.incorporeal.util.SimplerRegistry;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.api.corporea.ICorporeaRequestMatcher;
+import vazkii.botania.api.corporea.CorporeaRequestMatcher;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +22,7 @@ public class DataReducers {
 	public static final DataReducer REQUEST_SUMMING_AND_ANDING = DataReducer.reduceSingleType(DataTypes.SOLIDIFIED_REQUEST, (a, b) ->
 		SolidifiedRequest.create(AndingCorporeaRequestMatcher.combine(List.of(a.matcher(), b.matcher())), a.count() + b.count()));
 	public static final DataReducer COMBINE_NUMBERS_AND_MATCHER = filteredData -> {
-		@Nullable ICorporeaRequestMatcher matcher = null;
+		@Nullable CorporeaRequestMatcher matcher = null;
 		int sum = 0;
 		
 		for(Datum<?> datum : filteredData) {

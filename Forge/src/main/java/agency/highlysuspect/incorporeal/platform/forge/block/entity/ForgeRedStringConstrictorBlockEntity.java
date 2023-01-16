@@ -16,7 +16,7 @@ import net.minecraftforge.items.wrapper.EmptyHandler;
 import net.minecraftforge.items.wrapper.RangedWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.xplat.IXplatAbstractions;
+import vazkii.botania.xplat.XplatAbstractions;
 
 import javax.annotation.Nonnull;
 
@@ -34,7 +34,7 @@ public class ForgeRedStringConstrictorBlockEntity extends RedStringConstrictorBl
 		assert level != null;
 		
 		BlockEntity be = level.getBlockEntity(pos);
-		return be != null && IXplatAbstractions.INSTANCE.isRedStringContainerTarget(be); //out of laziness
+		return be != null && XplatAbstractions.INSTANCE.isRedStringContainerTarget(be); //out of laziness
 	}
 	
 	@NotNull

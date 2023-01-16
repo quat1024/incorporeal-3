@@ -9,15 +9,15 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.common.block.string.BlockRedString;
-import vazkii.botania.common.block.tile.string.TileRedString;
+import vazkii.botania.common.block.block_entity.red_string.RedStringBlockEntity;
+import vazkii.botania.common.block.red_string.RedStringBlock;
 
 /**
  * The Red String Liar's block. Basically just red string boilerplate.
  * 
  * @see RedStringLiarBlockEntity for more info.
  */
-public class RedStringLiarBlock extends BlockRedString {
+public class RedStringLiarBlock extends RedStringBlock {
 	public RedStringLiarBlock(Properties props) {
 		super(props);
 	}
@@ -31,6 +31,6 @@ public class RedStringLiarBlock extends BlockRedString {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, IncBlockEntityTypes.RED_STRING_LIAR, TileRedString::commonTick);
+		return createTickerHelper(type, IncBlockEntityTypes.RED_STRING_LIAR, RedStringBlockEntity::commonTick);
 	}
 }

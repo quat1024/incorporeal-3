@@ -2,15 +2,11 @@ package agency.highlysuspect.incorporeal.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.NbtUtils;
-import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.api.block.IWandBindable;
+import vazkii.botania.api.block.WandBindable;
 import vazkii.botania.api.internal.VanillaPacketDispatcher;
 import vazkii.botania.common.helper.MathHelper;
 
@@ -23,7 +19,7 @@ import java.util.Set;
  * 
  * @see agency.highlysuspect.incorporeal.mixin.client.ItemTwigWandMixin
  */
-public interface Multibindable extends IWandBindable {
+public interface Multibindable extends WandBindable {
 	Set<BlockPos> getBindings(); //Make it mutable so the default implementations below work
 	
 	//Factoring out some common code...

@@ -20,17 +20,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import vazkii.botania.api.BotaniaAPIClient;
-import vazkii.botania.api.block.IWandHUD;
+import vazkii.botania.api.block.WandHUD;
 import vazkii.botania.api.internal.VanillaPacketDispatcher;
-import vazkii.botania.api.mana.IManaReceiver;
-import vazkii.botania.common.block.tile.TileMod;
+import vazkii.botania.api.mana.ManaReceiver;
+import vazkii.botania.common.block.block_entity.BotaniaBlockEntity;
 
 import java.util.Optional;
 
 /**
  * Parent class of all "soul cores", handling the soul-grabbing part and some mana logistics.
  */
-public abstract class AbstractSoulCoreBlockEntity extends TileMod implements IManaReceiver {
+public abstract class AbstractSoulCoreBlockEntity extends BotaniaBlockEntity implements ManaReceiver {
 	public AbstractSoulCoreBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}
@@ -195,7 +195,7 @@ public abstract class AbstractSoulCoreBlockEntity extends TileMod implements IMa
 		return worldPosition;
 	}
 	
-	public static class WandHud implements IWandHUD {
+	public static class WandHud implements WandHUD {
 		public WandHud(AbstractSoulCoreBlockEntity tile) {
 			this.tile = tile;
 		}

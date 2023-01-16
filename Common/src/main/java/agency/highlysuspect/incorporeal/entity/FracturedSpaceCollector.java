@@ -28,7 +28,7 @@ import net.minecraft.world.phys.Vec3;
 import vazkii.botania.api.mana.ManaItemHandler;
 import vazkii.botania.client.fx.SparkleParticleData;
 import vazkii.botania.client.fx.WispParticleData;
-import vazkii.botania.xplat.IXplatAbstractions;
+import vazkii.botania.xplat.XplatAbstractions;
 
 import java.util.List;
 import java.util.UUID;
@@ -159,7 +159,7 @@ public class FracturedSpaceCollector extends Entity {
 		ItemEntity item = new ItemEntity(level, worldPosition.getX() + 0.5, ejectY, worldPosition.getZ() + 0.5, stack);
 		item.setDeltaMovement(Vec3.ZERO);
 		if (redstone) {
-			IXplatAbstractions.INSTANCE.itemFlagsComponent(item).timeCounter = -200;
+			XplatAbstractions.INSTANCE.itemFlagsComponent(item).timeCounter = -200;
 		}
 		
 		//getItemHandler().setItem(0, ItemStack.EMPTY);

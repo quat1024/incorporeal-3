@@ -10,7 +10,6 @@ import agency.highlysuspect.incorporeal.IncEntityTypes;
 import agency.highlysuspect.incorporeal.IncItems;
 import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.computer.types.Datum;
-import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
 import agency.highlysuspect.incorporeal.item.TicketItem;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
@@ -24,16 +23,16 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import vazkii.botania.api.block.IWandHUD;
-import vazkii.botania.api.mana.IManaItem;
-import vazkii.botania.api.subtile.TileEntityFunctionalFlower;
+import vazkii.botania.api.block.WandHUD;
+import vazkii.botania.api.block_entity.FunctionalFlowerBlockEntity;
+import vazkii.botania.api.mana.ManaItem;
 import vazkii.botania.client.render.ColorHandler;
+import vazkii.botania.client.render.block_entity.RedStringBlockEntityRenderer;
+import vazkii.botania.client.render.block_entity.SpecialFlowerBlockEntityRenderer;
 import vazkii.botania.client.render.entity.EntityRenderers;
-import vazkii.botania.client.render.tile.RenderTileRedString;
-import vazkii.botania.client.render.tile.RenderTileSpecialFlower;
 import vazkii.botania.common.helper.ColorHelper;
 import vazkii.botania.network.TriConsumer;
-import vazkii.botania.xplat.IXplatAbstractions;
+import vazkii.botania.xplat.XplatAbstractions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -92,16 +91,16 @@ public class IncClientProperties {
 	/// Block entity renderers ///
 	
 	public static void registerBlockEntityRenderers(EntityRenderers.BERConsumer r) {
-		r.register(IncBlockEntityTypes.RED_STRING_LIAR, RenderTileRedString::new);
-		r.register(IncBlockEntityTypes.RED_STRING_CONSTRICTOR, RenderTileRedString::new);
+		r.register(IncBlockEntityTypes.RED_STRING_LIAR, RedStringBlockEntityRenderer::new);
+		r.register(IncBlockEntityTypes.RED_STRING_CONSTRICTOR, RedStringBlockEntityRenderer::new);
 		
 		r.register(IncBlockEntityTypes.ENDER_SOUL_CORE, SoulCoreRenderers::createBlockEntityRenderer);
 		r.register(IncBlockEntityTypes.POTION_SOUL_CORE, SoulCoreRenderers::createBlockEntityRenderer);
 		
-		r.register(IncBlockEntityTypes.SANVOCALIA_BIG, RenderTileSpecialFlower::new);
-		r.register(IncBlockEntityTypes.SANVOCALIA_SMALL, RenderTileSpecialFlower::new);
-		r.register(IncBlockEntityTypes.FUNNY_BIG, RenderTileSpecialFlower::new);
-		r.register(IncBlockEntityTypes.FUNNY_SMALL, RenderTileSpecialFlower::new);
+		r.register(IncBlockEntityTypes.SANVOCALIA_BIG, SpecialFlowerBlockEntityRenderer::new);
+		r.register(IncBlockEntityTypes.SANVOCALIA_SMALL, SpecialFlowerBlockEntityRenderer::new);
+		r.register(IncBlockEntityTypes.FUNNY_BIG, SpecialFlowerBlockEntityRenderer::new);
+		r.register(IncBlockEntityTypes.FUNNY_SMALL, SpecialFlowerBlockEntityRenderer::new);
 		
 		r.register(IncBlockEntityTypes.UNSTABLE_CUBE, UnstableCubeRenderers::createBlockEntityRenderer);
 		
@@ -131,7 +130,7 @@ public class IncClientProperties {
 			if(tintIndex != 0) return 0xFFFFFF;
 			if(IncItems.BOUND_ENDER_PEARL.getOwnerUuid(stack) == null) return 0x777777;
 			
-			IManaItem manaItem = IXplatAbstractions.INSTANCE.findManaItem(stack);
+			ManaItem manaItem = XplatAbstractions.INSTANCE.findManaItem(stack);
 			if(manaItem == null || manaItem.getMaxMana() == 0) return 0xFF0000;
 			
 			float percentageFull = (float) manaItem.getMana() / manaItem.getMaxMana();
@@ -174,7 +173,7 @@ public class IncClientProperties {
 	
 	/// Wand HUD capabilities ///
 	
-	public static final Map<BlockEntityType<?>, Function<BlockEntity, IWandHUD>> WAND_HUD_MAKERS = new HashMap<>();
+	public static final Map<BlockEntityType<?>, Function<BlockEntity, WandHUD>> WAND_HUD_MAKERS = new HashMap<>();
 	static {
 		//Downcasts are required because, in Java, I can't express the typing relationship between the keys and values of the map.
 		//I think it's like, a Map<BlockEntityType<? extends T>, Function<? super T, IWandHUD>>, but the T is scoped to the individual key/value pair, not the whole map.
@@ -187,11 +186,11 @@ public class IncClientProperties {
 		WAND_HUD_MAKERS.put(IncBlockEntityTypes.FUNNY_SMALL, IncClientProperties::functionalFlowerHudDowncast);
 	}
 	
-	private static IWandHUD soulCoreHudDowncast(BlockEntity be) {
+	private static WandHUD soulCoreHudDowncast(BlockEntity be) {
 		return new AbstractSoulCoreBlockEntity.WandHud((AbstractSoulCoreBlockEntity) be);
 	}
 	
-	private static IWandHUD functionalFlowerHudDowncast(BlockEntity be) {
-		return new TileEntityFunctionalFlower.FunctionalWandHud<>((TileEntityFunctionalFlower) be);
+	private static WandHUD functionalFlowerHudDowncast(BlockEntity be) {
+		return new FunctionalFlowerBlockEntity.FunctionalWandHud<>((FunctionalFlowerBlockEntity) be);
 	}
 }

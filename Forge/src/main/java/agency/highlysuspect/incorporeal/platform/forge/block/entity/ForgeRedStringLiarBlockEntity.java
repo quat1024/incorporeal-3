@@ -12,11 +12,11 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
-import vazkii.botania.api.corporea.ICorporeaNode;
-import vazkii.botania.api.corporea.ICorporeaRequest;
-import vazkii.botania.api.corporea.ICorporeaSpark;
+import vazkii.botania.api.corporea.CorporeaNode;
+import vazkii.botania.api.corporea.CorporeaRequest;
+import vazkii.botania.api.corporea.CorporeaSpark;
 import vazkii.botania.common.impl.corporea.DummyCorporeaNode;
-import vazkii.botania.xplat.IXplatAbstractions;
+import vazkii.botania.xplat.XplatAbstractions;
 
 import java.util.List;
 
@@ -34,11 +34,11 @@ public class ForgeRedStringLiarBlockEntity extends RedStringLiarBlockEntity {
 		assert level != null;
 		
 		BlockEntity be = level.getBlockEntity(pos);
-		return be != null && IXplatAbstractions.INSTANCE.isRedStringContainerTarget(be); //out of laziness
+		return be != null && XplatAbstractions.INSTANCE.isRedStringContainerTarget(be); //out of laziness
 	}
 	
 	@Override
-	public @NotNull ICorporeaNode createCorporeaNode(ICorporeaSpark spark) {
+	public @NotNull CorporeaNode createCorporeaNode(CorporeaSpark spark) {
 		BlockEntity be = getTileAtBinding();
 		if(be == null) return new DummyCorporeaNode(level, spark.getAttachPos(), spark);
 		
@@ -51,7 +51,7 @@ public class ForgeRedStringLiarBlockEntity extends RedStringLiarBlockEntity {
 	}
 	
 	public static class Node extends LyingCorporeaNode {
-		public Node(Level world, BlockPos pos, ICorporeaSpark spark, List<ItemStack> spoofStacks, IItemHandler inv) {
+		public Node(Level world, BlockPos pos, CorporeaSpark spark, List<ItemStack> spoofStacks, IItemHandler inv) {
 			super(world, pos, spark, spoofStacks);
 			this.inv = inv;
 		}
@@ -68,7 +68,7 @@ public class ForgeRedStringLiarBlockEntity extends RedStringLiarBlockEntity {
 		//Based on copy from ForgeCapCorporeaNode
 		//@formatter:off
 		@Override
-		protected List<ItemStack> extractEverything(ICorporeaRequest request) {
+		protected List<ItemStack> extractEverything(CorporeaRequest request) {
 			ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
 			
 			for(int i = this.inv.getSlots() - 1; i >= 0; --i) {
