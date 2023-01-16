@@ -19,22 +19,28 @@ import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.block.DataFunnelBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import vazkii.botania.api.block_entity.SpecialFlowerBlockEntity;
 import vazkii.botania.common.block.*;
-import vazkii.botania.common.block.SpecialFlowerBlock;
 import vazkii.botania.common.block.BotaniaFlowerBlocks;
 import vazkii.botania.common.block.FloatingSpecialFlowerBlock;
+import vazkii.botania.xplat.XplatAbstractions;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 public class IncBlocks {
 	//corporetics
@@ -59,14 +65,14 @@ public class IncBlocks {
 	private static final Properties flowerProps = Properties.copy(BotaniaFlowerBlocks.agricarnation);
 	private static final Properties floatingProps = Properties.copy(BotaniaFlowerBlocks.agricarnationFloating);
 	
-	public static final SpecialFlowerBlock SANVOCALIA = new SpecialFlowerBlock(MobEffects.GLOWING, 20, flowerProps, () -> IncBlockEntityTypes.SANVOCALIA_BIG);
-	public static final SpecialFlowerBlock SANVOCALIA_SMALL = new SpecialFlowerBlock(MobEffects.GLOWING, 5, flowerProps, () -> IncBlockEntityTypes.SANVOCALIA_SMALL);
+	public static final FlowerBlock SANVOCALIA = createSpecialFlowerBlock(MobEffects.GLOWING, 20, flowerProps, () -> IncBlockEntityTypes.SANVOCALIA_BIG);
+	public static final FlowerBlock SANVOCALIA_SMALL = createSpecialFlowerBlock(MobEffects.GLOWING, 5, flowerProps, () -> IncBlockEntityTypes.SANVOCALIA_SMALL);
 	public static final FloatingSpecialFlowerBlock FLOATING_SANVOCALIA = new FloatingSpecialFlowerBlock(floatingProps, () -> IncBlockEntityTypes.SANVOCALIA_BIG);
 	public static final FloatingSpecialFlowerBlock FLOATING_SANVOCALIA_SMALL = new FloatingSpecialFlowerBlock(floatingProps, () -> IncBlockEntityTypes.SANVOCALIA_SMALL);
 	
 	//I am aware that this sussy stew potion effect is a terrible idea, but i'm doing it anyway because it's funny as hell.
-	public static final SpecialFlowerBlock FUNNY = new SpecialFlowerBlock(MobEffects.BAD_OMEN, 20, flowerProps, () -> IncBlockEntityTypes.FUNNY_BIG);
-	public static final SpecialFlowerBlock FUNNY_SMALL = new SpecialFlowerBlock(MobEffects.BAD_OMEN, 5, flowerProps, () -> IncBlockEntityTypes.FUNNY_SMALL);
+	public static final FlowerBlock FUNNY = createSpecialFlowerBlock(MobEffects.BAD_OMEN, 20, flowerProps, () -> IncBlockEntityTypes.FUNNY_BIG);
+	public static final FlowerBlock FUNNY_SMALL = createSpecialFlowerBlock(MobEffects.BAD_OMEN, 5, flowerProps, () -> IncBlockEntityTypes.FUNNY_SMALL);
 	public static final FloatingSpecialFlowerBlock FLOATING_FUNNY = new FloatingSpecialFlowerBlock(floatingProps, () -> IncBlockEntityTypes.FUNNY_BIG);
 	public static final FloatingSpecialFlowerBlock FLOATING_FUNNY_SMALL = new FloatingSpecialFlowerBlock(floatingProps, () -> IncBlockEntityTypes.FUNNY_SMALL);
 	
@@ -141,6 +147,15 @@ public class IncBlocks {
 		r.accept(DATA_FUNNEL, Inc.id("data_funnel"));
 		r.accept(DATASTONE_BLOCK, Inc.id("datastone_block"));
 		r.accept(POINTED_DATASTONE, Inc.id("pointed_datastone"));
+	}
+
+	private static FlowerBlock createSpecialFlowerBlock(
+			MobEffect effect, int effectDuration,
+			BlockBehaviour.Properties props,
+			Supplier<BlockEntityType<? extends SpecialFlowerBlockEntity>> beType) {
+		return XplatAbstractions.INSTANCE.createSpecialFlowerBlock(
+				effect, effectDuration, props, beType
+		);
 	}
 	
 	//im sure theres a vanilla method for this hiding somewhere
