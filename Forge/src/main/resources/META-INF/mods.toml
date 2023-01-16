@@ -5,20 +5,20 @@ issueTrackerURL = "https://github.com/quat1024/incorporeal-3/issues"
 logoFile = "wide_lores_banner.png"
 
 [[mods]]
-modId = "incorporeal"
-version = "${version}"
-displayName = "Incorporeal 3"
-description = "Addon to a magic mod. More toys for Botania corporea dorks."
-authors = "quaternary"
-credits = "artemisSystem, Dudblockman, SnazzGass, jaredlll08, Darkhax, all the Botania nerds, and everyone who puts up with me"
+	modId = "incorporeal"
+	version = "${version}"
+	displayName = "Incorporeal 3"
+	description = "Addon to a magic mod. More toys for Botania corporea dorks."
+	authors = "quaternary, artemisSystem"
+	credits = "Dudblockman, SnazzGass, jaredlll08, Darkhax, all the Botania nerds, and everyone who puts up with me"
 
 [[dependencies.incorporeal]]
-modId="forge"
-mandatory=true
-versionRange="[40.0.35,)"
+	modId="forge"
+	mandatory=true
+	versionRange="[43.1.65,)"
 
 [[dependencies.incorporeal]]
-modId="botania"
-mandatory=true
-ordering="AFTER"
-versionRange="*"
+	modId="botania"
+	mandatory=true
+	ordering="AFTER"
+	versionRange="[1.19.2-436,)"

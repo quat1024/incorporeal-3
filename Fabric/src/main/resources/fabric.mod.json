@@ -43,8 +43,9 @@
 	],
 	
 	"depends": {
-		"fabricloader": "*",
-		"minecraft": ">=1.18.2",
-		"botania": "*"
+		"fabricloader": ">=0.12",
+		"fabric-api": ">=0.68",
+		"minecraft": ">=1.19.2",
+		"botania": ">=1.19.2-436"
 	}
 }
