@@ -36,9 +36,9 @@ tasks.withType(JavaCompile) {
 
 loom {
 	runs {
-		commondatagen { configureDatagenRunConfig(it, file("../Common/src/generated/resources"), "common") }
-		fabricdatagen { configureDatagenRunConfig(it, file("../Fabric/src/generated/resources"), "fabric") }
-		forgedatagen { configureDatagenRunConfig(it, file("../Forge/src/generated/resources"), "forge") }
+		common_datagen { configureDatagenRunConfig(it, file("../Common/src/generated/resources"), "common") }
+		fabric_datagen { configureDatagenRunConfig(it, file("../Fabric/src/generated/resources"), "fabric") }
+		forge_datagen { configureDatagenRunConfig(it, file("../Forge/src/generated/resources"), "forge") }
 		
 		client {
 			ideConfigGenerated(true)
