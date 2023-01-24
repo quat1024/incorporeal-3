@@ -1,7 +1,5 @@
 package agency.highlysuspect.incorporeal.block;
 
-import agency.highlysuspect.incorporeal.computer.types.DataTypes;
-import agency.highlysuspect.incorporeal.computer.types.Datum;
 import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,14 +25,14 @@ public class CorporeaSolidifierBlock extends Block {
 	}
 	
 	public void receiveRequest(Level level, BlockPos pos, SolidifiedRequest request) {
-		receiveDatum(level, pos, DataTypes.SOLIDIFIED_REQUEST.datumOf(request));
+		receiveDatum(level, pos);
 	}
 	
-	public void receiveDatum(Level level, BlockPos pos, Datum<?> datum) {
+	public void receiveDatum(Level level, BlockPos pos) {
 		if(level == null || level.isClientSide()) return;
 		
-		//Based on copy and paste from TileCorporeaFunnel
-		
+		//Based on copy and paste from CorporeaFunnelBlockEntity
+/*
 		ItemStack ticket = datum.produceTicket();
 		BlockPos invPos = getInvPos(level, pos);
 		if (invPos != null
@@ -48,7 +46,7 @@ public class CorporeaSolidifierBlock extends Block {
 			//I'm not sparked though, so I'll spawn the item in the same place as a spark would be, 1.25 blocks up
 			ItemEntity item = new ItemEntity(level, pos.getX() + .5, pos.getY() + 1.25, pos.getZ() + .5, ticket);
 			level.addFreshEntity(item);
-		}
+		}*/
 	}
 	
 	//Based on copy and paste from TileCorporeaFunnel

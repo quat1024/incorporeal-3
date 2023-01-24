@@ -1,7 +1,6 @@
 package agency.highlysuspect.incorporeal.datagen;
 
 import agency.highlysuspect.incorporeal.block.CorporeaPylonBlock;
-import agency.highlysuspect.incorporeal.block.PointedDatastoneBlock;
 import agency.highlysuspect.incorporeal.mixin.datagen.IncAccessorBlockModelGenerators;
 import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.Inc;
@@ -186,45 +185,6 @@ public class IncCommonModelsAndBlockstates {
 			//Write an item model pointing at it
 			itemDelegatedTo(tater, modelId);
 		}
-		
-		/// Computer ///
-		itemGenerated(IncItems.ENTERBRILLIANCE, Inc.id("item/computer/enterbrilliance"));
-		itemGenerated(IncItems.DATA_MONOCLE, Inc.id("item/computer/monocle"));
-		
-		//tickets (done manually, i cba to figure out datagenning item property overrides)
-		
-		//ticket conjurers
-		itemGenerated(IncItems.EMPTY_CONJURER, Inc.id("item/computer/ticket/empty_conjurer"));
-		itemGenerated(IncItems.INTEGER_CONJURER, Inc.id("item/computer/ticket/integer_conjurer"));
-		itemGenerated(IncItems.MATCHER_CONJURER, Inc.id("item/computer/ticket/matcher_conjurer"));
-		itemGenerated(IncItems.SOLIDIFIED_REQUEST_CONJURER, Inc.id("item/computer/ticket/solidified_request_conjurer"));
-		
-		//funnel
-		singleVariantBlockState(IncBlocks.DATA_FUNNEL, Inc.id("block/computer/data_funnel"));
-		itemDelegatedTo(IncBlocks.DATA_FUNNEL, Inc.id("block/computer/data_funnel"));
-		
-		//lenses
-		ResourceLocation lensGlassDark = Inc.id("item/computer/lens_glass_dark");
-		ResourceLocation lensGlassDarkSmall = Inc.id("item/computer/lens_glass_dark_small");
-		itemLens(IncItems.NUMBER_LENS, lensGlassDark, Inc.id("item/computer/number_lens"));
-		itemLens(IncItems.MATCHER_LENS, lensGlassDark, Inc.id("item/computer/matcher_lens"));
-		itemLens(IncItems.NEGATING_LENS, lensGlassDarkSmall, Inc.id("item/computer/negating_lens"));
-		itemLens(IncItems.COMPUTATIONAL_LENS_PATTERN, lensGlassDark, Inc.botaniaId("item/lens_normal"));
-		
-		//datastone
-		singleVariantCubeAll(IncBlocks.DATASTONE_BLOCK, Inc.id("block/computer/datastone"));
-		itemBlockModelParent(IncBlocks.DATASTONE_BLOCK);
-		
-		//pointed datastone
-		stateGenerators.add(MultiVariantGenerator.multiVariant(IncBlocks.POINTED_DATASTONE)
-			.with(PropertyDispatch.property(PointedDatastoneBlock.TYPE)
-				.generate(type -> {
-					ResourceLocation modelId = Inc.id("block/computer/pointed_datastone/" + type.getSerializedName());
-					ResourceLocation texture = Inc.id("block/computer/pointed_datastone_" + type.getSerializedName());
-					return modelv(pointedDripstoneModel(modelId, texture));
-				})));
-		//(pointed datastone item model done manually for weird mojang parity reasons!! lmao)
-		//itemGenerated(IncBlocks.POINTED_DATASTONE, new ResourceLocation("minecraft", "block/pointed_dripstone_down_tip"));
 		
 		/// Aaaand write out all the files now ///
 		stateGenerators.forEach(stateGenerator -> {

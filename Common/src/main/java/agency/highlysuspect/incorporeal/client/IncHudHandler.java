@@ -1,8 +1,6 @@
 package agency.highlysuspect.incorporeal.client;
 
-import agency.highlysuspect.incorporeal.block.RedStringConstrictorBlock;
 import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEntity;
-import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -65,7 +63,7 @@ public class IncHudHandler {
 	}
 	
 	private static void doTicketConjurerHud(Minecraft mc, PoseStack pose, float partialTicks, Player player) {
-		if(!(mc.screen instanceof ChatScreen)) return;
+		/* if(!(mc.screen instanceof ChatScreen)) return;
 		
 		ItemStack conjurer;
 		if(player.getMainHandItem().getItem() instanceof TicketConjurerItem) conjurer = player.getMainHandItem();
@@ -87,5 +85,6 @@ public class IncHudHandler {
 		mc.font.drawShadow(pose, txt0, x + 20, y, 0xFFFFFF);
 		mc.font.drawShadow(pose, txt1, x + 20, y + 14, 0xFFFFFF);
 		mc.font.drawShadow(pose, txt2, x + 20, y + 24, 0xFFFFFF);
+		*/
 	}
 }

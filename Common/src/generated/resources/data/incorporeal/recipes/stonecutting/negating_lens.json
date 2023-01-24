@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "incorporeal:computational_lens_pattern"
-  },
-  "result": "incorporeal:negating_lens",
-  "count": 1
-}

@@ -8,9 +8,6 @@ import agency.highlysuspect.incorporeal.block.entity.AbstractSoulCoreBlockEntity
 import agency.highlysuspect.incorporeal.IncBlockEntityTypes;
 import agency.highlysuspect.incorporeal.IncEntityTypes;
 import agency.highlysuspect.incorporeal.IncItems;
-import agency.highlysuspect.incorporeal.computer.types.DataTypes;
-import agency.highlysuspect.incorporeal.computer.types.Datum;
-import agency.highlysuspect.incorporeal.item.TicketItem;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
@@ -82,10 +79,6 @@ public class IncClientProperties {
 		r.accept(IncBlocks.FLOATING_FUNNY_SMALL, cutout);
 		
 		for(Block b : IncBlocks.COMPRESSED_TATERS.values()) r.accept(b, cutout);
-		
-		r.accept(IncBlocks.DATA_FUNNEL, translucent);
-		r.accept(IncBlocks.DATASTONE_BLOCK, translucent);
-		r.accept(IncBlocks.POINTED_DATASTONE, translucent);
 	}
 	
 	/// Block entity renderers ///
@@ -103,8 +96,6 @@ public class IncClientProperties {
 		r.register(IncBlockEntityTypes.FUNNY_SMALL, SpecialFlowerBlockEntityRenderer::new);
 		
 		r.register(IncBlockEntityTypes.UNSTABLE_CUBE, UnstableCubeRenderers::createBlockEntityRenderer);
-		
-		r.register(IncBlockEntityTypes.DATA_FUNNEL, DataFunnelBlockEntityRenderer::new);
 	}
 	
 	/// Color providers ///
@@ -148,16 +139,6 @@ public class IncClientProperties {
 	
 	@SuppressWarnings("deprecation") //ItemPropertyFunction
 	public static void registerPropertyOverrides(TriConsumer<ItemLike, ResourceLocation, ItemPropertyFunction> r) {
-		//Returns 1 if the corporea ticket has a request written on it, and 0 otherwise.
-		//Now that I think about it, it's pretty much impossible to have a ticket with nothing written on it...
-		for(TicketItem<?> ticket : DataTypes.allTicketItems()) {
-			r.accept(ticket, Inc.id("written_ticket"), (ClampedItemPropertyFunction) (stack, level, ent, seed) -> {
-				Datum<?> datum = ticket.get(stack);
-				//specil case the empty ticket for no reason (WOW SPAGHETTI!!!!!!!!!!)
-				if(datum.type() == DataTypes.EMPTY) return stack.hasTag() ? 1 : 0;
-				else return datum.isEmpty() ? 0 : 1;
-			});
-		}
 		
 		//Eonly draw the wueiwoieuoi eroeurutueiuuuey thing if its actively bound
 		r.accept(IncItems.BOUND_ENDER_PEARL, Inc.id("is_bound"), (ClampedItemPropertyFunction) (stack, level, ent, seed) -> 

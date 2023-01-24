@@ -1,6 +1,5 @@
 package agency.highlysuspect.incorporeal.mixin;
 
-import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
 import net.minecraft.server.level.ServerPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,11 +19,11 @@ public class TileCorporeaIndexInputHandlerMixin {
 		cancellable = true
 	)
 	private static void whenChatMessage(ServerPlayer player, String message, CallbackInfo ci) {
-		if(TicketConjurerItem.handleChatMessage(player, message)) {
+		/*if(TicketConjurerItem.handleChatMessage(player, message)) {
 			//cancelling at all: prevents Corporea Index code from handling it
 			//cancelling with specifically "true": botania machinery prevents the message from being sent to chat
 			// TODO this changed in 1.19, investigate
 			ci.cancel();
-		}
+		}*/
 	}
 }

@@ -8,8 +8,6 @@ import agency.highlysuspect.incorporeal.block.entity.RedStringConstrictorBlockEn
 import agency.highlysuspect.incorporeal.block.entity.RedStringLiarBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.SanvocaliaBlockEntity;
 import agency.highlysuspect.incorporeal.block.entity.UnstableCubeBlockEntity;
-import agency.highlysuspect.incorporeal.block.entity.DataFunnelBlockEntity;
-import agency.highlysuspect.incorporeal.block.entity.DataStorageBlockEntity;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -52,11 +50,7 @@ public class IncBlockEntityTypes {
 	
 	//unstable cubes
 	public static final BlockEntityType<UnstableCubeBlockEntity> UNSTABLE_CUBE = make(UnstableCubeBlockEntity::new, IncBlocks.UNSTABLE_CUBES.values());
-	
-	//computer
-	public static final BlockEntityType<DataFunnelBlockEntity> DATA_FUNNEL = make(DataFunnelBlockEntity::new, IncBlocks.DATA_FUNNEL);
-	public static final BlockEntityType<DataStorageBlockEntity> POINTED_DATASTONE = make(DataStorageBlockEntity::makePointedDatastoneTbh, IncBlocks.POINTED_DATASTONE);
-	
+
 	//BlockEntityTypes that self-implement IManaReceiver.
 	public static final Set<BlockEntityType<? extends ManaReceiver>> SELF_MANA_RECEIVER_BLOCK_ENTITY_TYPES = Set.of(
 		ENDER_SOUL_CORE, POTION_SOUL_CORE
@@ -80,8 +74,5 @@ public class IncBlockEntityTypes {
 		r.accept(FUNNY_SMALL, Inc.id("funny_small"));
 		
 		r.accept(UNSTABLE_CUBE, Inc.id("unstable_cube"));
-		
-		r.accept(DATA_FUNNEL, Inc.id("data_funnel"));
-		r.accept(POINTED_DATASTONE, Inc.id("pointed_datastone"));
 	}
 }

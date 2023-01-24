@@ -13,10 +13,7 @@ import agency.highlysuspect.incorporeal.block.RedStringLiarBlock;
 import agency.highlysuspect.incorporeal.block.RedstoneRootCropBlock;
 import agency.highlysuspect.incorporeal.block.SoulCoreBlock;
 import agency.highlysuspect.incorporeal.block.UnstableCubeBlock;
-import agency.highlysuspect.incorporeal.block.PointedDatastoneBlock;
-import agency.highlysuspect.incorporeal.block.DatastoneBlock;
 import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
-import agency.highlysuspect.incorporeal.block.DataFunnelBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
@@ -97,14 +94,7 @@ public class IncBlocks {
 				.strength(strength)));
 		});
 	}
-	
-	//computer
-	public static final DataFunnelBlock DATA_FUNNEL = new DataFunnelBlock(Properties.of(Material.METAL).noOcclusion().strength(2f));
-	//similar to DRIPSTONE_BLOCK
-	public static final DatastoneBlock DATASTONE_BLOCK = new DatastoneBlock(Properties.of(Material.STONE, MaterialColor.QUARTZ).sound(SoundType.DRIPSTONE_BLOCK).strength(1.5F, 1.0F).noOcclusion());
-	//similar to POINTED_DRIPSTONE
-	public static final PointedDatastoneBlock POINTED_DATASTONE = new PointedDatastoneBlock(Properties.of(Material.STONE, MaterialColor.QUARTZ).noOcclusion().sound(SoundType.POINTED_DRIPSTONE).strength(1.5F, 3.0F).dynamicShape());
-	
+
 	public static void register(BiConsumer<Block, ResourceLocation> r) {
 		//assorted corporea devices
 		r.accept(CORPOREA_SOLIDIFIER, Inc.id("corporea_solidifier"));
@@ -142,11 +132,6 @@ public class IncBlocks {
 		
 		//taters
 		COMPRESSED_TATERS.forEach((level, block) -> r.accept(block, Inc.id(CompressedTaterUtil.prefix(level))));
-		
-		//computer
-		r.accept(DATA_FUNNEL, Inc.id("data_funnel"));
-		r.accept(DATASTONE_BLOCK, Inc.id("datastone_block"));
-		r.accept(POINTED_DATASTONE, Inc.id("pointed_datastone"));
 	}
 
 	private static FlowerBlock createSpecialFlowerBlock(

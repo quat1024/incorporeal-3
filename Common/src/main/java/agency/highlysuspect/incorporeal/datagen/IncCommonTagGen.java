@@ -14,11 +14,6 @@ public class IncCommonTagGen {
 	public static void doIt(DataGenerator datagen, Consumer<JsonFile> files) {
 		/// INCORPOREAL TAGS ///
 		
-		//data viewers
-		DataDsl.itemTag(IncTags.Items.DATA_VIEWERS)
-			.addItems(IncItems.DATA_MONOCLE)
-			.save(files);
-		
 		/// BOTANIA TAGS ///
 		
 		//rods
@@ -57,11 +52,6 @@ public class IncCommonTagGen {
 			IncBlocks.FLOATING_SANVOCALIA, IncBlocks.FLOATING_SANVOCALIA_SMALL
 		).save(files);
 		
-		//burst viewers (Manaseer Monocle-like items)
-		DataDsl.itemTag(BotaniaTags.Items.BURST_VIEWERS)
-			.addItems(IncItems.DATA_MONOCLE)
-			.save(files);
-		
 		/// VANILLA TAGS ///
 		
 		//carpets
@@ -82,10 +72,7 @@ public class IncCommonTagGen {
 			//natural devices -> left out (instabreak)
 			//functional flowers -> left out
 			
-			IncBlocks.CLEARLY,
-			IncBlocks.DATA_FUNNEL,
-			IncBlocks.DATASTONE_BLOCK,
-			IncBlocks.POINTED_DATASTONE
+			IncBlocks.CLEARLY
 		).addBlocks(IncBlocks.UNSTABLE_CUBES.values())
 			//tatoes -> left out because botania does too
 			//(and also because i think their long breaking times are funny)

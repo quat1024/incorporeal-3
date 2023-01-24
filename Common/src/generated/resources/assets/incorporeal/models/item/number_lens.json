@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "incorporeal:item/computer/lens_glass_dark",
-    "layer1": "incorporeal:item/computer/number_lens"
-  }
-}

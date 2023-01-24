@@ -1,6 +1,5 @@
 package agency.highlysuspect.incorporeal.datagen;
 
-import agency.highlysuspect.incorporeal.computer.types.DataTypes;
 import agency.highlysuspect.incorporeal.util.CompressedTaterUtil;
 import agency.highlysuspect.incorporeal.Inc;
 import agency.highlysuspect.incorporeal.IncBlocks;
@@ -150,46 +149,5 @@ public class IncCommonRecipeGen {
 			RecipeDsl.compress9(small, big).save(files, compressId);
 			RecipeDsl.uncompressTo9(big, small).save(files, uncompressId);
 		}
-		
-		/// Computer ///
-		
-		//Enterbrilliance
-		//idk lol!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! maybe as a mechanic instead
-		
-		//Computational lenses
-		RecipeDsl.shapeless(IncItems.COMPUTATIONAL_LENS_PATTERN)
-			.add(BotaniaItems.lensNormal)
-			.add(IncItems.ENTERBRILLIANCE)
-			.save(files);
-		RecipeDsl.stonecutting(IncItems.NUMBER_LENS).input(IncItems.COMPUTATIONAL_LENS_PATTERN).save(files);
-		RecipeDsl.stonecutting(IncItems.MATCHER_LENS).input(IncItems.COMPUTATIONAL_LENS_PATTERN).save(files);
-		RecipeDsl.stonecutting(IncItems.NEGATING_LENS).input(IncItems.COMPUTATIONAL_LENS_PATTERN).save(files);
-		
-		//Monocle
-		RecipeDsl.shapeless(IncItems.DATA_MONOCLE)
-			.add(BotaniaItems.monocle)
-			.add(IncItems.ENTERBRILLIANCE)
-			.save(files);
-		
-		//Ticket Conjurer
-		RecipeDsl.shaped(IncItems.SOLIDIFIED_REQUEST_CONJURER, "SES", "EIE", "SES")
-			.define("S", BotaniaTags.Items.INGOTS_MANASTEEL)
-			.define("E", BotaniaTags.Items.INGOTS_ELEMENTIUM)
-			.define("I", BotaniaBlocks.corporeaIndex)
-			.save(files);
-		//and a stonecutting group to convert between them, for good measure
-		RecipeDsl.stonecuttingGroup(DataTypes.allConjurerItems())
-			.group("conjurers")
-			.save(files);
-		
-		//Datastone Block
-		RecipeDsl.shapeless(IncBlocks.DATASTONE_BLOCK)
-			.add(Blocks.DRIPSTONE_BLOCK)
-			.add(IncItems.ENTERBRILLIANCE)
-			.save(files);
-		RecipeDsl.shaped(IncBlocks.DATASTONE_BLOCK, "PP", "PP")
-			.define("P", IncItems.POINTED_DATASTONE)
-			.save(files, Inc.id("datastone_block_alt"));
-		//pointed datastone itself doesnt need to be craftable because you can make it grow with the game mechanics
 	}
 }

@@ -1,6 +1,5 @@
 package agency.highlysuspect.incorporeal.mixin;
 
-import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import vazkii.botania.common.block.block_entity.corporea.CorporeaIndexBlockEntity;

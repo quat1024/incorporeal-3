@@ -67,7 +67,7 @@ public class SanvocaliaBlockEntity extends FunctionalFlowerBlockEntity {
 	@Override
 	public void tickFlower() {
 		super.tickFlower();
-		if(level == null || level.isClientSide()) return;
+		if(level == null || level.isClientSide()) return;/*
 		
 		if(cooldown > 0) {
 			cooldown--;
@@ -137,7 +137,7 @@ public class SanvocaliaBlockEntity extends FunctionalFlowerBlockEntity {
 				cooldown = 3;
 				sync();
 			}
-		}
+		}*/
 	}
 	
 	@SuppressWarnings("unused") //Working on it

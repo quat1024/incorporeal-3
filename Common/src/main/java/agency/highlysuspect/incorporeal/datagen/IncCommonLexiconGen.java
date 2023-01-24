@@ -136,23 +136,23 @@ public class IncCommonLexiconGen {
 			.relations("Corporea Soul Core?", "This block was removed in 1.18, but was replaced with a simpler method to do the same thing.", "incorporeal:misc/corporea_player_heads")
 			.save(generator, files);
 		
-		PatchouliEntryBuilder ticketConjurer = builder("ender/ticket_conjurer")
-			.name("Ticket Conjurers")
-			.icon(IncItems.SOLIDIFIED_REQUEST_CONJURER)
-			.enderCategory()
-			.elven()
-			.text("The $(item)Ticket Conjurer$(0) allows one to conveniently create $(item)Corporea Tickets$(0). Simply hold it in either hand, speak a $(thing)Corporea Request$(0) as you would when using a $(item)Corporea Index$(0), and a $(item)Ticket$(0) corresponding to the request will be left in your inventory.<br><br>The word \"this\" will refer to the item in your left hand when the Conjurer is held in your right, and vice versa.")
-			.crafting(IncItems.SOLIDIFIED_REQUEST_CONJURER, "Dying Breath of Stokesia")
-			.text("Advanced corporeticists should know: right clicking it will cycle through a couple different types of Tickets it is possible to create. $(thing)Corporea$(0) tickets are the default type, encapsulating a \"corporea matcher\" and \"count\" pair, but there are also tickets for $(thing)matchers$(0) and $(thing)numbers$(0) individually, as well as a ticket representing $(thing)nothing$(0).<br><br>They can also be $(thing)stonecut$(0) into each other.")
-			.relations0(
-				"botania:ender/corporea_index",
-				corporeaSolidifier,
-				sanvocalia
-			)
-			.extraRecipeMapping(IncItems.EMPTY_CONJURER, 2)
-			.extraRecipeMapping(IncItems.INTEGER_CONJURER, 2)
-			.extraRecipeMapping(IncItems.MATCHER_CONJURER, 2)
-			.save(generator, files);
+		// PatchouliEntryBuilder ticketConjurer = builder("ender/ticket_conjurer")
+		// 	.name("Ticket Conjurers")
+		// 	.icon(IncItems.SOLIDIFIED_REQUEST_CONJURER)
+		// 	.enderCategory()
+		// 	.elven()
+		// 	.text("The $(item)Ticket Conjurer$(0) allows one to conveniently create $(item)Corporea Tickets$(0). Simply hold it in either hand, speak a $(thing)Corporea Request$(0) as you would when using a $(item)Corporea Index$(0), and a $(item)Ticket$(0) corresponding to the request will be left in your inventory.<br><br>The word \"this\" will refer to the item in your left hand when the Conjurer is held in your right, and vice versa.")
+		// 	.crafting(IncItems.SOLIDIFIED_REQUEST_CONJURER, "Dying Breath of Stokesia")
+		// 	.text("Advanced corporeticists should know: right clicking it will cycle through a couple different types of Tickets it is possible to create. $(thing)Corporea$(0) tickets are the default type, encapsulating a \"corporea matcher\" and \"count\" pair, but there are also tickets for $(thing)matchers$(0) and $(thing)numbers$(0) individually, as well as a ticket representing $(thing)nothing$(0).<br><br>They can also be $(thing)stonecut$(0) into each other.")
+		// 	.relations0(
+		// 		"botania:ender/corporea_index",
+		// 		corporeaSolidifier,
+		// 		sanvocalia
+		// 	)
+		// 	.extraRecipeMapping(IncItems.EMPTY_CONJURER, 2)
+		// 	.extraRecipeMapping(IncItems.INTEGER_CONJURER, 2)
+		// 	.extraRecipeMapping(IncItems.MATCHER_CONJURER, 2)
+		// 	.save(generator, files);
 		
 		//Misc
 		builder("misc/corporea_player_heads")
@@ -207,7 +207,7 @@ public class IncCommonLexiconGen {
 				"botania:ender/ender_hand",
 				soulCores,
 				fracturedSpaceRod,
-				ticketConjurer,
+				// ticketConjurer,
 				sanvocalia
 			)
 			.save(generator, files);

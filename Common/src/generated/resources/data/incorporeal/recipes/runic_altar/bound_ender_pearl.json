@@ -1,9 +1,5 @@
 {
   "type": "botania:runic_altar",
-  "output": {
-    "item": "incorporeal:bound_ender_pearl"
-  },
-  "mana": 8000,
   "ingredients": [
     {
       "item": "botania:mana_pearl"
@@ -12,7 +8,11 @@
       "item": "botania:terrasteel_nugget"
     },
     {
-      "item": "incorporeal:enterbrilliance"
+      "item": "minecraft:air"
     }
-  ]
+  ],
+  "mana": 8000,
+  "output": {
+    "item": "incorporeal:bound_ender_pearl"
+  }
 }

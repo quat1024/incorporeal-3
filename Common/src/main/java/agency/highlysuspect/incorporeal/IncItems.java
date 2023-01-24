@@ -1,32 +1,23 @@
 package agency.highlysuspect.incorporeal;
 
-import agency.highlysuspect.incorporeal.computer.types.DataTypes;
-import agency.highlysuspect.incorporeal.corporea.SolidifiedRequest;
 import agency.highlysuspect.incorporeal.item.BoundEnderPearlItem;
 import agency.highlysuspect.incorporeal.item.ShinyItem;
-import agency.highlysuspect.incorporeal.item.TicketConjurerItem;
-import agency.highlysuspect.incorporeal.item.TicketItem;
-import agency.highlysuspect.incorporeal.item.NotManaLens;
-import agency.highlysuspect.incorporeal.computer.types.DataLenses;
 import agency.highlysuspect.incorporeal.item.FracturedSpaceRodItem;
 import agency.highlysuspect.incorporeal.platform.IncXplat;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Unit;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
-import vazkii.botania.api.corporea.CorporeaRequestMatcher;
 import vazkii.botania.api.item.CoordBoundItem;
 import vazkii.botania.api.mana.ManaItem;
 import vazkii.botania.common.handler.EquipmentHandler;
 import vazkii.botania.common.item.block.SpecialFlowerBlockItem;
 import vazkii.botania.common.item.block.TinyPotatoBlockItem;
 import vazkii.botania.common.item.equipment.bauble.ManaseerMonocleItem;
-import vazkii.botania.common.item.lens.LensItem;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -88,24 +79,6 @@ public class IncItems {
 	public static final ShinyItem ENTERBRILLIANCE = new ShinyItem(props().rarity(Rarity.RARE));
 	public static final Item COMPUTATIONAL_LENS_PATTERN = new Item(props().stacksTo(16));
 	public static ManaseerMonocleItem DATA_MONOCLE; //Gets constructed late, see other comment
-	
-	//tickets and conjurers
-	public static final TicketItem<Unit> EMPTY_TICKET = new TicketItem<>(DataTypes.EMPTY, props());
-	public static final TicketItem<Integer> INTEGER_TICKET = new TicketItem<>(DataTypes.INTEGER, props());
-	public static final TicketItem<CorporeaRequestMatcher> MATCHER_TICKET = new TicketItem<>(DataTypes.MATCHER, props());
-	public static final TicketItem<SolidifiedRequest> SOLIDIFIED_REQUEST_TICKET = new TicketItem<>(DataTypes.SOLIDIFIED_REQUEST, props());
-	public static final TicketConjurerItem<Unit> EMPTY_CONJURER = new TicketConjurerItem<>(DataTypes.EMPTY, props().stacksTo(1));
-	public static final TicketConjurerItem<Integer> INTEGER_CONJURER = new TicketConjurerItem<>(DataTypes.INTEGER, props().stacksTo(1));
-	public static final TicketConjurerItem<CorporeaRequestMatcher> MATCHER_CONJURER = new TicketConjurerItem<>(DataTypes.MATCHER, props().stacksTo(1));
-	public static final TicketConjurerItem<SolidifiedRequest> SOLIDIFIED_REQUEST_CONJURER = new TicketConjurerItem<>(DataTypes.SOLIDIFIED_REQUEST, props().stacksTo(1));
-	
-	//funnel and lenses
-	public static final BlockItem DATA_FUNNEL = new BlockItem(IncBlocks.DATA_FUNNEL, props());
-	public static final LensItem NUMBER_LENS = new LensItem(props().stacksTo(16), new NotManaLens(DataLenses.number), 0);
-	public static final LensItem MATCHER_LENS = new LensItem(props().stacksTo(16), new NotManaLens(DataLenses.matcher), 0);
-	public static final LensItem NEGATING_LENS = new LensItem(props().stacksTo(16), new NotManaLens(DataLenses.negating), 0);
-	public static final BlockItem DATASTONE_BLOCK = new BlockItem(IncBlocks.DATASTONE_BLOCK, props());
-	public static final BlockItem POINTED_DATASTONE = new BlockItem(IncBlocks.POINTED_DATASTONE, props());
 	
 	//Capability stuff.
 	public static final Map<Item, Function<ItemStack, CoordBoundItem>> COORD_BOUND_ITEM_MAKERS = Map.of( //(N.B: Map.of caps at 10 entries)
@@ -174,31 +147,6 @@ public class IncItems {
 		
 		//Taters
 		r.acceptBlockItems(COMPRESSED_TATERS.values());
-		
-		//Computer
-		r.accept(ENTERBRILLIANCE, Inc.id("enterbrilliance"));
-		r.accept(COMPUTATIONAL_LENS_PATTERN, Inc.id("computational_lens_pattern"));
-		
-		r.accept(EMPTY_TICKET, Inc.id("empty_ticket"));
-		r.accept(INTEGER_TICKET, Inc.id("integer_ticket"));
-		r.accept(MATCHER_TICKET, Inc.id("matcher_ticket"));
-		r.accept(SOLIDIFIED_REQUEST_TICKET, Inc.id("solidified_request_ticket"));
-		r.accept(EMPTY_CONJURER, Inc.id("empty_conjurer"));
-		r.accept(INTEGER_CONJURER, Inc.id("integer_conjurer"));
-		r.accept(MATCHER_CONJURER, Inc.id("matcher_conjurer"));
-		r.accept(SOLIDIFIED_REQUEST_CONJURER, Inc.id("solidified_request_conjurer"));
-		
-		r.acceptBlockItem(DATA_FUNNEL);
-		r.accept(NUMBER_LENS, Inc.id("number_lens"));
-		r.accept(MATCHER_LENS, Inc.id("matcher_lens"));
-		r.accept(NEGATING_LENS, Inc.id("negating_lens"));
-		
-		r.accept(DATA_MONOCLE, Inc.id("data_monocle"));
-		
-		r.acceptBlockItems(
-			DATASTONE_BLOCK,
-			POINTED_DATASTONE
-		);
 	}
 	
 	private static Item.Properties props() {
