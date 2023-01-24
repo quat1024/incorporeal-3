@@ -38,36 +38,37 @@ public class EnUsRewriter {
 	}
 	
 	public void rewrite() {
-		if(entries.isEmpty()) return;
-		Inc.LOGGER.info("Rewriting en_us.json (appending {} entries)", entries.size());
-		
-		String systemProperty = System.getProperty("incorporeal.en-us"); //see :Fabric/build.gradle.kts
-		if(systemProperty == null || systemProperty.isEmpty()) {
-			Inc.LOGGER.warn("Cannot rewrite en_us.json - Did not set incorporeal.en-us system property");
-			return;
-		}
-		Path enUsPath = Paths.get(systemProperty);
-		
-		try {
-			//Read the existing en_us file into a big string.
-			String enUs = Files.readString(enUsPath, StandardCharsets.UTF_8);
-			
-			//Truncate the file after the line containing DELIMITER.
-			int delimiterIndex = enUs.indexOf(DELIMITER);
-			int newlineAfterDelim = enUs.indexOf('\n', delimiterIndex);
-			String truncated = enUs.substring(0, newlineAfterDelim + 1); //+1 to include the newline character in the prefix
-			
-			//Splice in the new entries. This is simple string-gluing, it's not aware of anything jsonic.
-			String rewritten = truncated + entries.entrySet().stream()
-				.map(entry -> "\t\"" + escape(entry.getKey()) + "\": \"" + escape(entry.getValue()) + "\"")
-				.collect(Collectors.joining(",\n")) +
-				"\n}\n"; //And close the json file again
-			
-			//Overwrite the original file.
-			Files.writeString(enUsPath, rewritten, StandardCharsets.UTF_8);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		// temporarily turn off
+//		if(entries.isEmpty()) return;
+//		Inc.LOGGER.info("Rewriting en_us.json (appending {} entries)", entries.size());
+//
+//		String systemProperty = System.getProperty("incorporeal.en-us"); //see :Fabric/build.gradle.kts
+//		if(systemProperty == null || systemProperty.isEmpty()) {
+//			Inc.LOGGER.warn("Cannot rewrite en_us.json - Did not set incorporeal.en-us system property");
+//			return;
+//		}
+//		Path enUsPath = Paths.get(systemProperty);
+//
+//		try {
+//			//Read the existing en_us file into a big string.
+//			String enUs = Files.readString(enUsPath, StandardCharsets.UTF_8);
+//
+//			//Truncate the file after the line containing DELIMITER.
+//			int delimiterIndex = enUs.indexOf(DELIMITER);
+//			int newlineAfterDelim = enUs.indexOf('\n', delimiterIndex);
+//			String truncated = enUs.substring(0, newlineAfterDelim + 1); //+1 to include the newline character in the prefix
+//
+//			//Splice in the new entries. This is simple string-gluing, it's not aware of anything jsonic.
+//			String rewritten = truncated + entries.entrySet().stream()
+//				.map(entry -> "\t\"" + escape(entry.getKey()) + "\": \"" + escape(entry.getValue()) + "\"")
+//				.collect(Collectors.joining(",\n")) +
+//				"\n}\n"; //And close the json file again
+//
+//			//Overwrite the original file.
+//			Files.writeString(enUsPath, rewritten, StandardCharsets.UTF_8);
+//		} catch (IOException e) {
+//			throw new RuntimeException(e);
+//		}
 	}
 	
 	private static String escape(String in) {
