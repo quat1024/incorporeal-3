@@ -12,7 +12,7 @@ import vazkii.botania.api.corporea.CorporeaRequestMatcher;
 public record InvertedCorporeaRequestMatcher(CorporeaRequestMatcher inner) implements CorporeaRequestMatcher {
 	public static CorporeaRequestMatcher invert(CorporeaRequestMatcher other) {
 		//Avoid inverting twice in this simple case
-		if(other instanceof InvertedCorporeaRequestMatcher twoWrongsMakeARight) return twoWrongsMakeARight.inner;
+		if (other instanceof InvertedCorporeaRequestMatcher twoWrongsMakeARight) return twoWrongsMakeARight.inner;
 		else return new InvertedCorporeaRequestMatcher(other);
 	}
 	

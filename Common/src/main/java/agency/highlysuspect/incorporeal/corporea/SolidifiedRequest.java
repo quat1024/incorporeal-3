@@ -34,7 +34,7 @@ public final class SolidifiedRequest {
 	}
 	
 	//Convenience.
-	//For most gameplay purposes (i.e. not the corporea keybind), vanilla bota always uses matchNbt: true when making requests from itemstacks.
+	//For all(?) gameplay purposes, vanilla bota always uses matchNbt: true when making requests from itemstacks.
 	public static SolidifiedRequest create(ItemStack stack, int count) {
 		CorporeaRequestMatcher matcher = stack.isEmpty() ? EmptyCorporeaRequestMatcher.INSTANCE : CorporeaHelper.instance().createMatcher(stack, true);
 		return new SolidifiedRequest(matcher, count);
