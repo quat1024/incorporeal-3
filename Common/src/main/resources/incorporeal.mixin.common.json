@@ -17,7 +17,6 @@
 		"TileCorporeaRetainerAccessor",
 		"TileCorporeaRetainerMixin",
 		"hacky.ModTilesMixin",
-		"datagen.DataGeneratorMixin",
 		"datagen.TextureSlotAccessor",
 		"datagen.IncAccessorBlockModelGenerators"
 	],

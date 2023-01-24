@@ -1,6 +1,5 @@
 package agency.highlysuspect.incorporeal.datagen;
 
-import agency.highlysuspect.incorporeal.Inc;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.Registry;
@@ -18,7 +17,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -34,6 +32,8 @@ public class PatchouliEntryBuilder {
 		this.path = new ResourceLocation(bookId.getNamespace(), shortPath);
 		this.langBase = Stream.of(bookId.getNamespace(), bookId.getPath(), shortPath.replace('/', '.')).collect(Collectors.joining("."));
 	}
+
+	public static final EnUsWriter enUsWriter = new EnUsWriter();
 	
 	//Book's id.
 	public final ResourceLocation bookId;
@@ -69,15 +69,14 @@ public class PatchouliEntryBuilder {
 	
 	public PatchouliEntryBuilder save(DataGenerator datagen, Consumer<JsonFile> files) {
 		JsonObject json = new JsonObject();
-		EnUsRewriter rewriter = ((DatagenDuck) datagen).inc$getEnUsRewriter();
-		
+
 		//Name
 		if(addLangEntryForName) {
 			//The "name" string is a literal text. Instead of including it in the book directly,
 			//add a lang key with the value of "name", and include that instead
 			String langKey = langKey("name");
 			json.addProperty("name", langKey);
-			rewriter.associate(langKey, name);
+			enUsWriter.associate(langKey, name);
 		} else {
 			//The name string is already a lang key. Include it directly in the book.
 			json.addProperty("name", name);
@@ -101,7 +100,7 @@ public class PatchouliEntryBuilder {
 				//Prefix keySuffix with this entry's name and page number
 				String key = langKey(currentPage.intValue(), keySuffix);
 				//Add an entry in en_us.json
-				rewriter.associate(key, value);
+				enUsWriter.associate(key, value);
 				//return the prefixed key
 				return key;
 			}));
