@@ -26,14 +26,8 @@ import java.util.stream.Stream;
  * Doesn't include everything relating to bookentry json, just the things I need at the moment.
  */
 public class PatchouliEntryBuilder {
-	public PatchouliEntryBuilder(ResourceLocation bookId, String shortPath) {
-		this.bookId = bookId;
-		//pedantically, not sure if bookId.namespace is the right choice for these strings, but w/e
-		this.path = new ResourceLocation(bookId.getNamespace(), shortPath);
-		this.langBase = Stream.of(bookId.getNamespace(), bookId.getPath(), shortPath.replace('/', '.')).collect(Collectors.joining("."));
-	}
 
-	public static final EnUsWriter enUsWriter = new EnUsWriter();
+	public static final LangWriter LANG_WRITER = new LangWriter("incorporeal_patchouli_lang", "en_us");
 	
 	//Book's id.
 	public final ResourceLocation bookId;
@@ -66,6 +60,15 @@ public class PatchouliEntryBuilder {
 	
 	//Pages
 	public List<Page> pages = new ArrayList<>();
+
+	public PatchouliEntryBuilder(ResourceLocation bookId, String shortPath) {
+		this.bookId = bookId;
+		//pedantically, not sure if bookId.namespace is the right choice for these strings, but w/e
+		this.path = new ResourceLocation(bookId.getNamespace(), shortPath);
+		this.langBase = String.join(".",
+				bookId.getNamespace(), bookId.getPath(), shortPath.replace('/', '.')
+		);
+	}
 	
 	public PatchouliEntryBuilder save(DataGenerator datagen, Consumer<JsonFile> files) {
 		JsonObject json = new JsonObject();
@@ -76,7 +79,7 @@ public class PatchouliEntryBuilder {
 			//add a lang key with the value of "name", and include that instead
 			String langKey = langKey("name");
 			json.addProperty("name", langKey);
-			enUsWriter.associate(langKey, name);
+			LANG_WRITER.associate(langKey, name);
 		} else {
 			//The name string is already a lang key. Include it directly in the book.
 			json.addProperty("name", name);
@@ -100,7 +103,7 @@ public class PatchouliEntryBuilder {
 				//Prefix keySuffix with this entry's name and page number
 				String key = langKey(currentPage.intValue(), keySuffix);
 				//Add an entry in en_us.json
-				enUsWriter.associate(key, value);
+				LANG_WRITER.associate(key, value);
 				//return the prefixed key
 				return key;
 			}));

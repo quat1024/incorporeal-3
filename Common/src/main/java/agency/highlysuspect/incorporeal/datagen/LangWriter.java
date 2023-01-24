@@ -14,7 +14,16 @@ import java.util.function.Consumer;
  * Nope! you can just put it in a different namespace. We no longer need a DataGeneratorMixin. We just put an instance
  * of this class at the top of PatchouliEntryBuilder and call write at the end of the lexicon generator.
  */
-public class EnUsWriter {
+public class LangWriter {
+	private final String namespace;
+
+	private final String langFile;
+
+	public LangWriter(String namespace, String langFile) {
+		this.namespace = namespace;
+		this.langFile = langFile;
+	}
+
 	private final Map<String, String> entries = new LinkedHashMap<>(); //preserve ordering
 
 	public void associate(String key, String value) {
@@ -26,6 +35,6 @@ public class EnUsWriter {
 		for (Map.Entry<String, String> entry : entries.entrySet()) {
 			json.addProperty(entry.getKey(), entry.getValue());
 		}
-		files.accept(JsonFile.create(json, "assets", "incorporeal_datagenned_lang", "lang", "en_us"));
+		files.accept(JsonFile.create(json, "assets", namespace, "lang", langFile));
 	}
 }

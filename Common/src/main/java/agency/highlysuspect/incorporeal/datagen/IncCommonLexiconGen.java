@@ -217,6 +217,6 @@ public class IncCommonLexiconGen {
 			.challenge("Wireless Redstone", "Figure out some way to create short-range $(thing)Wireless Redstone$(0). It's possible!")
 			.save(generator, files);
 
-		PatchouliEntryBuilder.enUsWriter.write(files);
+		PatchouliEntryBuilder.LANG_WRITER.write(files);
 	}
 }
